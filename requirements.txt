@@ -1,7 +1,5 @@
 accelerate
-fastmcp
 google-genai
-gradio
 pandas
 python-dotenv
 torch
