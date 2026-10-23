@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 153619,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case implements a buffer that is used after it has been free()'d and it's memory allocated to another task. The test case takes a string as input and copies this string into an internal buffer allocated on the heap. For certain inputs (any string starting with an ASCII character with value of 'a' or higher) the buffer is then free()'d and it's memory is re allocated to a pointer to a buffer, which in tern is set to point to the input string. The original buffer is then filled with the input string again, overwriting the pointer if the memory had previously been free()'d. When this pointer is later accessed, if the use after free has occurred, a segfault will occur due to the corrupted memory the pointer references. \nMetadata\n - Base program: PostgreSQL\n - Source Taint: ENVIRONMENT_VARIABLE\n - Data Type: ARRAY\n - Data Flow: BUFFER_ADDRESS_POINTER\n - Control Flow: MACROS",
+        "state": "bad",
+        "application": "cpe:2.3:a:postgresql:postgresql:9.2.4:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "postgresql-v9.2.4"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C416A-PSQL-05-ST01-DT01-DF17-CF22-01.xml"
+          },
+          "length": 73600,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "8058b7c64333b4b4a754ef866f7ae8488ea7261fcec49035870352e1221c6854"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/src/backend/utils/resowner/resowner.c"
+          },
+          "length": 37651,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "1b185a427284e51277bb3be428d344a24048e813cee154e47cc3b5fcd9abf69b"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "416",
+              "name": "Use After Free"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-416",
+          "message": {
+            "text": "Use After Free."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/src/backend/utils/resowner/resowner.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 1127,
+                  "endLine": 1133
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "416",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

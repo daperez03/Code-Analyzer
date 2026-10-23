@@ -1,0 +1,154 @@
+io_pair:
+  description: "Read an unsigned hex int from the input.  If unsigned is > FFFF, do nothing. Otherwise, open that many files for writing, without closing the file handles.  Output if any of the opens fail. The opens will fail if we try to open more than 1021 files.\n\n"
+  exploits:
+    - inputs:
+        - value_encoding: none
+          source_enum: 2
+          name: MILKSHOP_GUAYROTO
+          stage: pre_process
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/ushering_pacian/nymphoides_tribulation.txt
+          source: env_var_input
+        - id: source
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 2
+          source: file_content_input
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/ushering_pacian/nymphoides_tribulation.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value: FFF
+          value_type_enum: 0
+    - inputs:
+        - ordinal: 1
+          value: /opt/stonesoup/workspace/testData/ushering_pacian/nymphoides_tribulation.txt
+          stage_enum: 0
+          source: env_var_input
+          source_enum: 2
+          value_encoding: none
+          value_type_enum: 0
+          name: MILKSHOP_GUAYROTO
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+        - stage: pre_process
+          source: file_content_input
+          value_encoding: none
+          value: FFFF
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/ushering_pacian/nymphoides_tribulation.txt
+          stage_enum: 0
+          ordinal: 2
+          id: source
+  benigns:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage_enum: 0
+          value_encoding: none
+          source_enum: 2
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/ushering_pacian/nymphoides_tribulation.txt
+          value_type_enum: 0
+          name: MILKSHOP_GUAYROTO
+          source: env_var_input
+        - stage: pre_process
+          value_type_enum: 0
+          source: file_content_input
+          ordinal: 2
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: FF
+          source_enum: 3
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/ushering_pacian/nymphoides_tribulation.txt
+    - inputs:
+        - source: env_var_input
+          stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/ushering_pacian/nymphoides_tribulation.txt
+          value_type_enum: 0
+          stage: pre_process
+          source_enum: 2
+          ordinal: 1
+          name: MILKSHOP_GUAYROTO
+        - value: 20
+          stage_enum: 0
+          source: file_content_input
+          value_type_enum: 0
+          id: source
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/ushering_pacian/nymphoides_tribulation.txt
+          value_encoding: none
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/ushering_pacian/nymphoides_tribulation.txt
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          source: env_var_input
+          name: MILKSHOP_GUAYROTO
+          ordinal: 1
+          value_type_enum: 0
+        - stage_enum: 0
+          stage: pre_process
+          ordinal: 2
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_encoding: none
+          value_type_enum: 0
+          value: 1
+          name: /opt/stonesoup/workspace/testData/ushering_pacian/nymphoides_tribulation.txt
+          source_enum: 3
+  base_inputs:
+    - value_encoding: none
+      value_type_enum: 0
+      name: MILKSHOP_GUAYROTO
+      value_type: USE_TEXT_DIRECTLY
+      ordinal: 1
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/ushering_pacian/nymphoides_tribulation.txt
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+    - stage_enum: 0
+      name: /opt/stonesoup/workspace/testData/ushering_pacian/nymphoides_tribulation.txt
+      stage: pre_process
+      source: file_content_input
+      source_enum: 3
+      ordinal: 2
+      id: source
+code_complexity_features:
+  - file_name: /tmp/tmpu71xkW_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpu71xkW_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    line_number: 0
+    feature_group: data_type
+    function_name: oid_hash
+    feature: typedef
+  - file_name: /tmp/tmpu71xkW_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    feature_group: data_flow
+    function_name: oid_hash
+    feature: address_as_function_return_value
+    line_number: 0
+  - line_number: 0
+    feature_group: control_flow
+    feature: pointer_to_function
+    file_name: /tmp/tmpu71xkW_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

@@ -1,0 +1,154 @@
+io_pair:
+  description: "Allocates a buffer of size 16 to copy taint source into.  Checks that the the taint source length is less than 16, but if it is not, returns a -1.  The -1 is silently converted to size_t, which is unsigned, resulting in a huge positive number.  Then copies that many bytes into the buffer of size 16, causing a seg fault. Good inputs: taint source has length less than 16Bad inputs: taint source has greater than or equal to 16\n\n"
+  benigns:
+    - inputs:
+        - source: env_var_input
+          value: /opt/stonesoup/workspace/testData/fandangos_morefold/reinstator_kolsun.txt
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          name: CHARLOCKS_LENNOACEOUS
+          value_type_enum: 0
+          stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+        - stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          value_encoding: none
+          source: file_content_input
+          value: Good_Bye_World
+          name: /opt/stonesoup/workspace/testData/fandangos_morefold/reinstator_kolsun.txt
+          stage: pre_process
+          source_enum: 3
+          value_type_enum: 0
+          id: source
+    - inputs:
+        - value_encoding: none
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/fandangos_morefold/reinstator_kolsun.txt
+          stage_enum: 0
+          ordinal: 1
+          name: CHARLOCKS_LENNOACEOUS
+          source_enum: 2
+        - value_type: USE_TEXT_DIRECTLY
+          id: source
+          stage_enum: 0
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/fandangos_morefold/reinstator_kolsun.txt
+          source_enum: 3
+          source: file_content_input
+          stage: pre_process
+          value_encoding: none
+          value: abcd
+          value_type_enum: 0
+    - inputs:
+        - source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          value_encoding: none
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/fandangos_morefold/reinstator_kolsun.txt
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          name: CHARLOCKS_LENNOACEOUS
+        - source_enum: 3
+          name: /opt/stonesoup/workspace/testData/fandangos_morefold/reinstator_kolsun.txt
+          value_type_enum: 0
+          value_encoding: none
+          ordinal: 2
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          stage: pre_process
+          value: short stmt
+          source: file_content_input
+  exploits:
+    - inputs:
+        - name: CHARLOCKS_LENNOACEOUS
+          value: /opt/stonesoup/workspace/testData/fandangos_morefold/reinstator_kolsun.txt
+          ordinal: 1
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+          value_encoding: none
+          source: env_var_input
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+        - source_enum: 3
+          stage: pre_process
+          value: Heeellllloooooo_Wooooorrrrrllllldddddd!!!!!!
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/fandangos_morefold/reinstator_kolsun.txt
+          ordinal: 2
+          id: source
+          stage_enum: 0
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/fandangos_morefold/reinstator_kolsun.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: CHARLOCKS_LENNOACEOUS
+        - stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/fandangos_morefold/reinstator_kolsun.txt
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          value: this_string_is_greater_than_16_characters
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/fandangos_morefold/reinstator_kolsun.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: CHARLOCKS_LENNOACEOUS
+    - stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/fandangos_morefold/reinstator_kolsun.txt
+      source: file_content_input
+      source_enum: 3
+      stage: pre_process
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpMRuBRW_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature: FILE_CONTENTS
+    feature_group: source_taint
+  - file_name: /tmp/tmpMRuBRW_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpMRuBRW_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_nonlinear_expression
+  - function_name: PortalDrop
+    line_number: 0
+    feature_group: control_flow
+    feature: set_jump_long_jump
+    file_name: /tmp/tmpMRuBRW_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c

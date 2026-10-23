@@ -1,0 +1,94 @@
+code_complexity_features:
+  - file_name: /tmp/tmpnurvJ3_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpnurvJ3_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpnurvJ3_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: data_flow
+    feature: address_alias_10
+  - file_name: /tmp/tmpnurvJ3_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: control_flow
+    feature: unconditional_jump
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_type_enum: 0
+          name: WAITED_SYCONIUM
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          id: source
+          stage_enum: 0
+          value_encoding: none
+          value: 2 a
+    - inputs:
+        - ordinal: 1
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          name: WAITED_SYCONIUM
+          value: 10 a b c
+          value_encoding: none
+          id: source
+  benigns:
+    - inputs:
+        - source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          value: 1 foo
+          ordinal: 1
+          id: source
+          name: WAITED_SYCONIUM
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - name: WAITED_SYCONIUM
+          value: 2 a b
+          stage: pre_process
+          source_enum: 2
+          value_type_enum: 0
+          source: env_var_input
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: env_var_input
+          value: 3 alpha bravo charlie
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          id: source
+          name: WAITED_SYCONIUM
+          value_encoding: none
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: WAITED_SYCONIUM
+  description: "Read a space-delimited string from the input.  The first element in the string is the number of elements following it.  Then read in the following elements, and output them to stderr.  If there are fewer elements than expected, a seg fault occurs.\n\n"

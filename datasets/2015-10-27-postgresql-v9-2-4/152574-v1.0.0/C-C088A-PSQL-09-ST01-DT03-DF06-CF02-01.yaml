@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - name: TRANSMITTANCE_QUINTUPLED
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          ordinal: 1
+          id: source
+          stage_enum: 0
+          value: "\"*\" -exec cat /etc/passwd \\;"
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - ordinal: 2
+          name: /opt/stonesoup/workspace/testData/temp/file.txt
+          stage: pre_process
+          stage_enum: 0
+          source: file_content_input
+          source_enum: 3
+    - inputs:
+        - ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value: "\"*\" -exec netstat -an \\;"
+          id: source
+          value_encoding: none
+          source_enum: 2
+          stage: pre_process
+          source: env_var_input
+          stage_enum: 0
+          value_type_enum: 0
+          name: TRANSMITTANCE_QUINTUPLED
+        - stage: pre_process
+          source_enum: 3
+          stage_enum: 0
+          source: file_content_input
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/temp/file.txt
+  benigns:
+    - inputs:
+        - name: TRANSMITTANCE_QUINTUPLED
+          value_encoding: none
+          id: source
+          value: "\"file.*\""
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source: env_var_input
+          ordinal: 1
+          stage_enum: 0
+          source_enum: 2
+    - inputs:
+        - source_enum: 2
+          value: filename.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: TRANSMITTANCE_QUINTUPLED
+          value_type_enum: 0
+          stage: pre_process
+          ordinal: 1
+          stage_enum: 0
+          id: source
+          source: env_var_input
+    - inputs:
+        - source_enum: 2
+          id: source
+          stage_enum: 0
+          source: env_var_input
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: TRANSMITTANCE_QUINTUPLED
+          value_encoding: none
+          value: "\"*\""
+          ordinal: 1
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      ordinal: 1
+      id: source
+      name: TRANSMITTANCE_QUINTUPLED
+  description: "Read a string from the input.  Perform a find path -iname input.If input contains arguments such as -exec with a \\; ending the command, a user can insert other commands instead of just find\n\n"
+code_complexity_features:
+  - file_name: /tmp/tmpGl01i2_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpGl01i2_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature_group: data_type
+    feature: void_pointer
+  - file_name: /tmp/tmpGl01i2_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - line_number: 0
+    file_name: /tmp/tmpGl01i2_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    feature_group: control_flow
+    feature: indirectly_recursive

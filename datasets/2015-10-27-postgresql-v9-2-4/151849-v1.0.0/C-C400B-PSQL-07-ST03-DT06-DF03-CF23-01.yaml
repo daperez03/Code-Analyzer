@@ -1,0 +1,142 @@
+io_pair:
+  description: "Runs a bunch of hashing algorithms on a files contents. If a file doesn't end, ex: '/dev/urandom', will fork and consume a lot of cpu on different cpus\n\n"
+  benigns:
+    - inputs:
+        - address: ss-localhost
+          value: /opt/stonesoup/workspace/testData/good01.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          port: 8887
+          ordinal: 1
+          source_enum: 5
+          source: socket_input
+          id: source
+          stage: co_process
+          stage_enum: 1
+    - inputs:
+        - source_enum: 5
+          stage_enum: 1
+          id: source
+          ordinal: 1
+          address: ss-localhost
+          port: 8887
+          value: /opt/stonesoup/workspace/testData/good02.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: socket_input
+          stage: co_process
+        - value_type_enum: 0
+          ordinal: 2
+          value_encoding: none
+          source: file_content_input
+          source_enum: 3
+          value: not an empty file
+          stage: pre_process
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/good02.txt
+    - inputs:
+        - source: socket_input
+          value: /opt/stonesoup/workspace/testData/good03.txt
+          address: ss-localhost
+          value_encoding: none
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_type_enum: 0
+          source_enum: 5
+          stage: co_process
+          stage_enum: 1
+          port: 8887
+        - stage_enum: 0
+          ordinal: 2
+          source_enum: 3
+          stage: pre_process
+          value: This should not be an empty file.  I really mean it.  This should definitely contain some sort of text or paragraph or something
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/good03.txt
+          source: file_content_input
+  exploits:
+    - inputs:
+        - stage: co_process
+          value_encoding: none
+          source: socket_input
+          source_enum: 5
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 1
+          value: /dev/urandom
+          id: source
+          ordinal: 1
+          value_type_enum: 0
+          address: ss-localhost
+          port: 8887
+    - inputs:
+        - stage_enum: 1
+          source_enum: 5
+          id: source
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/bad02.txt
+          port: 8887
+          stage: co_process
+          source: socket_input
+          address: ss-localhost
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+        - source: file_content_input
+          value: a
+          name: /opt/stonesoup/workspace/testData/bad02.txt
+          ordinal: 2
+          value_type_enum: 0
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage: pre_process
+          source_enum: 3
+        - stage: pre_process
+          ordinal: 3
+          stage_enum: 0
+          source_enum: 7
+          source: script_input
+          name: rm -rf /opt/stonesoup/workspace/testData/bad02.txt
+        - name: ln -s '/dev/urandom' /opt/stonesoup/workspace/testData/bad02.txt
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 7
+          source: script_input
+          ordinal: 4
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+code_complexity_features:
+  - file_name: /tmp/tmpkuOeiD_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmpkuOeiD_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpkuOeiD_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_alias_10
+  - file_name: /tmp/tmpkuOeiD_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: control_flow
+    feature: set_jump_long_jump
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"

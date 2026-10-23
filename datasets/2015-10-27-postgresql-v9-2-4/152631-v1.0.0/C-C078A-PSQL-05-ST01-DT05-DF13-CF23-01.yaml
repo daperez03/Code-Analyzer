@@ -1,0 +1,94 @@
+code_complexity_features:
+  - function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmps86u8O_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+  - file_name: /tmp/tmps86u8O_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmps86u8O_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - feature_group: control_flow
+    feature: set_jump_long_jump
+    file_name: /tmp/tmps86u8O_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: ENOUNCED_SYSSITIA
+  description: "Read a string from the input.  Do nslookup on that string, without checking first if it has any command separators.  This allows the user to run arbitrary commands.\n\n"
+  exploits:
+    - inputs:
+        - source: env_var_input
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          value: 10; ls -la
+          value_encoding: none
+          name: ENOUNCED_SYSSITIA
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source_enum: 2
+    - inputs:
+        - name: ENOUNCED_SYSSITIA
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          value_encoding: none
+          ordinal: 1
+          value: localhost; echo Hello world
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - stage: pre_process
+          ordinal: 1
+          value: 10
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: ENOUNCED_SYSSITIA
+          value_type_enum: 0
+          source: env_var_input
+          stage_enum: 0
+          source_enum: 2
+    - inputs:
+        - value_encoding: none
+          stage: pre_process
+          source_enum: 2
+          id: source
+          stage_enum: 0
+          name: ENOUNCED_SYSSITIA
+          ordinal: 1
+          value: google.com
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          value_type_enum: 0
+    - inputs:
+        - ordinal: 1
+          value_encoding: none
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          name: ENOUNCED_SYSSITIA
+          value: localhost
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0

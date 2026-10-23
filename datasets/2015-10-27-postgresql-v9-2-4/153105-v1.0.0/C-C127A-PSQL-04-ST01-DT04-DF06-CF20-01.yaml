@@ -1,0 +1,144 @@
+code_complexity_features:
+  - function_name: PortalDrop
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmpqQilE9_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+  - file_name: /tmp/tmpqQilE9_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpqQilE9_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - feature_group: control_flow
+    file_name: /tmp/tmpqQilE9_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature: sequence
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          id: source
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          value_encoding: none
+          name: WALLFLOWERS_SLOCK
+          stage: pre_process
+          source: env_var_input
+          ordinal: 1
+          source_enum: 2
+          value_type_enum: 0
+          stage_enum: 0
+        - source_enum: 2
+          ordinal: 2
+          source: env_var_input
+          name: INPUT_STRING
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+          stage: pre_process
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+    - inputs:
+        - value_encoding: none
+          source: env_var_input
+          value: This is probably not going to overflow a buffer of some sort.  Let's run it anyway and see what happens.
+          ordinal: 1
+          source_enum: 2
+          id: source
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          name: WALLFLOWERS_SLOCK
+          value_type_enum: 0
+        - source_enum: 2
+          ordinal: 2
+          name: INPUT_STRING
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+          stage: pre_process
+          value_encoding: none
+          source: env_var_input
+          stage_enum: 0
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - name: WALLFLOWERS_SLOCK
+          source_enum: 2
+          value: As long as this statement has more than 64 characters, then nothing bad should happen
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          ordinal: 1
+          value_encoding: none
+          value_type_enum: 0
+        - source_enum: 2
+          source: env_var_input
+          ordinal: 2
+          stage: pre_process
+          value_encoding: none
+          value_type_enum: 0
+          stage_enum: 0
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+          name: INPUT_STRING
+          value_type: USE_TEXT_DIRECTLY
+  description: "Has a stack buffer of size 128.  reads in an ascii string from an environmentvariable and increments the corresponding values in the stack buffer.  Then reads in an input and prints out the count of the characters from the stack buff of those in the input.  If input contains extended ascii characters, they will be wrapped around to negative values and the buffer will be under read\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: WALLFLOWERS_SLOCK
+  exploits:
+    - inputs:
+        - stage: pre_process
+          name: WALLFLOWERS_SLOCK
+          ordinal: 1
+          id: source
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          value: QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUGugIE=
+          value_encoding: base64
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+          ordinal: 2
+          name: INPUT_STRING
+          stage: pre_process
+          source: env_var_input
+          source_enum: 2
+    - inputs:
+        - stage: pre_process
+          ordinal: 1
+          stage_enum: 0
+          source_enum: 2
+          value_encoding: base64
+          name: WALLFLOWERS_SLOCK
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+          value: SGVsbKUgV6lybGSI
+        - source_enum: 2
+          stage_enum: 0
+          source: env_var_input
+          ordinal: 2
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: INPUT_STRING
+          value_encoding: none
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2

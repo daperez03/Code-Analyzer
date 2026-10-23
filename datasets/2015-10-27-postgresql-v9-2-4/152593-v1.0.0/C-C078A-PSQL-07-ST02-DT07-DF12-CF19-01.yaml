@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpoo20GS_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpoo20GS_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmpoo20GS_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - file_name: /tmp/tmpoo20GS_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: noncommendatory_aminopherase
+    line_number: 0
+    feature_group: control_flow
+    feature: recursive
+io_pair:
+  exploits:
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/demiwolf_basset/blandness_brother.txt
+          stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          name: WASTER_BERTOLD
+        - source: file_content_input
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 3
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/demiwolf_basset/blandness_brother.txt
+          value: 10; ls -la
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/demiwolf_basset/blandness_brother.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: WASTER_BERTOLD
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/demiwolf_basset/blandness_brother.txt
+          value: localhost; echo Hello world
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/demiwolf_basset/blandness_brother.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: WASTER_BERTOLD
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/demiwolf_basset/blandness_brother.txt
+  description: "Read a string from the input.  Do nslookup on that string, without checking first if it has any command separators.  This allows the user to run arbitrary commands.\n\n"
+  benigns:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 1
+          value_encoding: none
+          value_type_enum: 0
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/demiwolf_basset/blandness_brother.txt
+          name: WASTER_BERTOLD
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          source: file_content_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 2
+          id: source
+          value: 10
+          name: /opt/stonesoup/workspace/testData/demiwolf_basset/blandness_brother.txt
+          value_encoding: none
+    - inputs:
+        - value_encoding: none
+          source_enum: 2
+          ordinal: 1
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/demiwolf_basset/blandness_brother.txt
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: WASTER_BERTOLD
+        - source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          source: file_content_input
+          id: source
+          name: /opt/stonesoup/workspace/testData/demiwolf_basset/blandness_brother.txt
+          ordinal: 2
+          value: google.com
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/demiwolf_basset/blandness_brother.txt
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          name: WASTER_BERTOLD
+        - source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source_enum: 3
+          id: source
+          name: /opt/stonesoup/workspace/testData/demiwolf_basset/blandness_brother.txt
+          value: localhost
+          stage: pre_process
+          ordinal: 2
+          value_encoding: none
+          value_type_enum: 0

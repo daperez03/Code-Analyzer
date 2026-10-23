@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - size: 24
+          value: This is a bad test.
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          ordinal: 1
+          stage_enum: 0
+          id: source
+          key: 4084
+          value_type_enum: 0
+          value_encoding: none
+          source_enum: 6
+          stage: pre_process
+          flags: 950
+    - inputs:
+        - value: A NEW TEST
+          key: 4084
+          size: 24
+          value_encoding: none
+          stage: pre_process
+          source_enum: 6
+          id: source
+          stage_enum: 0
+          flags: 950
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          key: 4084
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          size: 24
+          source: shared_memory_input
+          source_enum: 6
+          value_encoding: none
+          flags: 950
+          value: aTest
+          id: source
+          stage: pre_process
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          size: 24
+          source_enum: 6
+          key: 4084
+          source: shared_memory_input
+          stage: pre_process
+          id: source
+          value_type_enum: 0
+          flags: 950
+          value: abigwordwithoutspaces
+          stage_enum: 0
+          value_encoding: none
+          ordinal: 1
+    - inputs:
+        - source: shared_memory_input
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          source_enum: 6
+          value: anotherTestWithoutSpace
+          size: 24
+          ordinal: 1
+          value_type_enum: 0
+          flags: 950
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          key: 4084
+  description: "Read a string from the input.  If the string contains any spaces, a thread isspawned that attempts to decrements a semaphore twice causing a deadlock.\n\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 4084
+      size: 24
+      flags: 950
+code_complexity_features:
+  - function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+    file_name: /tmp/tmpfZ13TI_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+  - feature: void_pointer
+    file_name: /tmp/tmpfZ13TI_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_type
+  - function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_flow
+    feature: address_alias_10
+    file_name: /tmp/tmpfZ13TI_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+  - file_name: /tmp/tmpfZ13TI_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: control_flow
+    feature: macros

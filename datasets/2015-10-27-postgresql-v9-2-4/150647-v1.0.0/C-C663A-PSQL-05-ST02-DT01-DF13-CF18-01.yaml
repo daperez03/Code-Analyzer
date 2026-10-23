@@ -1,0 +1,154 @@
+code_complexity_features:
+  - file_name: /tmp/tmpUfYvO0_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpUfYvO0_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_type
+    feature: array
+  - file_name: /tmp/tmpUfYvO0_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - file_name: /tmp/tmpUfYvO0_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: control_flow
+    feature: pointer_to_function
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/hurrahs_homoean/nonrequisition_orzo.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: MONTPARNASSE_PRESURPRISE
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/hurrahs_homoean/nonrequisition_orzo.txt
+  description: "This weakness expects a string in the form: '<qsize> <data>' where qsize is the size of the quick sort (used to delay execution), and data is a string containing no spaces.  It creates two threads which both enter a non-reentrant function and increment a static counter. This causes a buffer overflow which will overwrite the free() struct causing an error when free() is called. In order to overwrite the free() struct, qsize >= 500000 and the input string must be 14+ char long.\n\n"
+  benigns:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/hurrahs_homoean/nonrequisition_orzo.txt
+          ordinal: 1
+          source_enum: 2
+          value_type_enum: 0
+          source: env_var_input
+          stage: pre_process
+          name: MONTPARNASSE_PRESURPRISE
+        - value_encoding: none
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          ordinal: 2
+          id: source
+          name: /opt/stonesoup/workspace/testData/hurrahs_homoean/nonrequisition_orzo.txt
+          value: 3 hephalump
+          source_enum: 3
+          value_type_enum: 0
+          source: file_content_input
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_type_enum: 0
+          source: env_var_input
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/hurrahs_homoean/nonrequisition_orzo.txt
+          value_encoding: none
+          name: MONTPARNASSE_PRESURPRISE
+          ordinal: 1
+          source_enum: 2
+        - name: /opt/stonesoup/workspace/testData/hurrahs_homoean/nonrequisition_orzo.txt
+          id: source
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          ordinal: 2
+          value: 1 Sniffles_and_whiffles,_yo.
+          source_enum: 3
+          stage_enum: 0
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/hurrahs_homoean/nonrequisition_orzo.txt
+          value_encoding: none
+          stage_enum: 0
+          value_type_enum: 0
+          source_enum: 2
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage: pre_process
+          name: MONTPARNASSE_PRESURPRISE
+        - id: source
+          value: 5 Silly_rabbit,_tricks_are_for_kids!
+          value_encoding: none
+          stage_enum: 0
+          ordinal: 2
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/hurrahs_homoean/nonrequisition_orzo.txt
+  exploits:
+    - inputs:
+        - stage: pre_process
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/hurrahs_homoean/nonrequisition_orzo.txt
+          value_type_enum: 0
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          name: MONTPARNASSE_PRESURPRISE
+          ordinal: 1
+        - stage: pre_process
+          source_enum: 3
+          source: file_content_input
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/hurrahs_homoean/nonrequisition_orzo.txt
+          value: 5000000 I'm_a_poet_and_I_didn't_even_know_it.
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/hurrahs_homoean/nonrequisition_orzo.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: MONTPARNASSE_PRESURPRISE
+        - value: 6000000 But_my_toes_showed_it._Theyre_long_fellows
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/hurrahs_homoean/nonrequisition_orzo.txt

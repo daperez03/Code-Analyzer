@@ -1,0 +1,106 @@
+code_complexity_features:
+  - function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+    file_name: /tmp/tmpeae8Yg_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+  - file_name: /tmp/tmpeae8Yg_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    feature_group: data_type
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature: void_pointer
+  - file_name: /tmp/tmpeae8Yg_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - file_name: /tmp/tmpeae8Yg_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: control_flow
+    feature: recursive
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - source_enum: 6
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          ordinal: 1
+          key: 8544
+          source: shared_memory_input
+          stage_enum: 0
+          stage: pre_process
+          size: 35
+          flags: 950
+          value_encoding: none
+          value: 10%20%3B%20ls -la
+          value_type_enum: 0
+    - inputs:
+        - stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          id: source
+          source: shared_memory_input
+          value_type_enum: 0
+          source_enum: 6
+          key: 8544
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          flags: 950
+          size: 35
+          value: localhost%20%26%20echo Hello world
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 8544
+      size: 35
+      flags: 950
+  description: "Read a string from the input.  Check first if it has any command separators and then run it though a URL decoding algorithm.  Then use this string to perform an nslookup by appending it to the end of the command. This allows the user to run arbitrary commands by suplying command separators encoded in url encoding.\n\n"
+  benigns:
+    - inputs:
+        - ordinal: 1
+          flags: 950
+          stage: pre_process
+          value_encoding: none
+          size: 35
+          value: 10
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+          source: shared_memory_input
+          stage_enum: 0
+          key: 8544
+          source_enum: 6
+    - inputs:
+        - stage_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value: google.com
+          ordinal: 1
+          size: 35
+          key: 8544
+          flags: 950
+          source: shared_memory_input
+          value_type_enum: 0
+          source_enum: 6
+          stage: pre_process
+          value_encoding: none
+    - inputs:
+        - stage: pre_process
+          source_enum: 6
+          value_type_enum: 0
+          stage_enum: 0
+          ordinal: 1
+          value_encoding: none
+          size: 35
+          id: source
+          key: 8544
+          flags: 950
+          source: shared_memory_input
+          value: localhost
+          value_type: USE_TEXT_DIRECTLY

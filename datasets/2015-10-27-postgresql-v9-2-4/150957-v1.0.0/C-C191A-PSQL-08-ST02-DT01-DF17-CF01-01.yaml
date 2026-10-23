@@ -1,0 +1,154 @@
+io_pair:
+  benigns:
+    - inputs:
+        - stage: pre_process
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/mnemosyne_rhipiphorid/hedging_cosmosophy.txt
+          value_type_enum: 0
+          ordinal: 1
+          source_enum: 2
+          stage_enum: 0
+          name: DIVULSING_IRIDOMOTOR
+          source: env_var_input
+        - value: 45
+          source_enum: 3
+          ordinal: 2
+          stage_enum: 0
+          id: source
+          name: /opt/stonesoup/workspace/testData/mnemosyne_rhipiphorid/hedging_cosmosophy.txt
+          value_encoding: none
+          value_type_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+    - inputs:
+        - name: DIVULSING_IRIDOMOTOR
+          source_enum: 2
+          value_encoding: none
+          stage: pre_process
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/mnemosyne_rhipiphorid/hedging_cosmosophy.txt
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_type_enum: 0
+        - stage: pre_process
+          source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          ordinal: 2
+          id: source
+          name: /opt/stonesoup/workspace/testData/mnemosyne_rhipiphorid/hedging_cosmosophy.txt
+          value: 80
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+    - inputs:
+        - stage: pre_process
+          name: DIVULSING_IRIDOMOTOR
+          value: /opt/stonesoup/workspace/testData/mnemosyne_rhipiphorid/hedging_cosmosophy.txt
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          ordinal: 1
+          source_enum: 2
+          value_encoding: none
+          stage_enum: 0
+        - id: source
+          stage_enum: 0
+          source: file_content_input
+          source_enum: 3
+          value_type_enum: 0
+          ordinal: 2
+          stage: pre_process
+          value: 8000
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/mnemosyne_rhipiphorid/hedging_cosmosophy.txt
+          value_type: USE_TEXT_DIRECTLY
+  exploits:
+    - inputs:
+        - name: DIVULSING_IRIDOMOTOR
+          value_type_enum: 0
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_encoding: none
+          ordinal: 1
+          source_enum: 2
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/mnemosyne_rhipiphorid/hedging_cosmosophy.txt
+        - source: file_content_input
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/mnemosyne_rhipiphorid/hedging_cosmosophy.txt
+          value: 8
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 3
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/mnemosyne_rhipiphorid/hedging_cosmosophy.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: DIVULSING_IRIDOMOTOR
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/mnemosyne_rhipiphorid/hedging_cosmosophy.txt
+          value: 4
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/mnemosyne_rhipiphorid/hedging_cosmosophy.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: DIVULSING_IRIDOMOTOR
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/mnemosyne_rhipiphorid/hedging_cosmosophy.txt
+  description: "Reads in a size to use for a malloc.  The size subtracts 10 before being used, which results in an integer underflow and an attempt at allocating a very large chunk of memory\n\n"
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - function_name: StartupSUBTRANS
+    line_number: 0
+    feature_group: control_flow
+    feature: callback
+    file_name: /tmp/tmpZ1XLwW_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+  - feature_group: source_taint
+    feature: FILE_CONTENTS
+    file_name: /tmp/tmpZ1XLwW_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    function_name: edeagra_formalization
+    line_number: 0
+  - feature: buffer_address_array_index
+    file_name: /tmp/tmpZ1XLwW_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    function_name: microchaeta_gemmules
+    line_number: 0
+    feature_group: data_flow
+  - line_number: 0
+    feature_group: data_type
+    feature: array
+    file_name: /tmp/tmpZ1XLwW_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    function_name: microchaeta_gemmules

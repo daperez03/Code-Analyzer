@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 153362,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case allocates a buffer on the heap, copies the input string into it, and then capitalizes each letter in the buffer. It searches that buffer to see if it contains the letter 'E', using a while loop that increments the pointer to the buffer each time through the loop. When it finds a letter 'E', or reaches the end of the buffer, it frees the buffer, using the pointer that it may have incremented. If the input is the empty string, or has the letter 'E' (or 'e') as its first character, the free happens successfully. If the input is non-empty and does not have the letter 'E' as its first character, the free does not happen at the start of the buffer, resulting in a segfault.   \nMetadata\n - Base program: PostgreSQL\n - Source Taint: SOCKET\n - Data Type: STRUCT\n - Data Flow: BUFFER_ADDRESS_ARRAY_INDEX\n - Control Flow: UNCONDITIONAL_JUMP",
+        "state": "bad",
+        "application": "cpe:2.3:a:postgresql:postgresql:9.2.4:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "postgresql-v9.2.4"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C761A-PSQL-01-ST03-DT05-DF16-CF24-01.xml"
+          },
+          "length": 80289,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "6181020abca76d51c653b090550e678ebe4d41b0b17e9288ae4a0f0964dcc5c6"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/src/backend/storage/ipc/pmsignal.c"
+          },
+          "length": 14067,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "344d9d67861dd793eb0085e91dd4599ebef7a2e706332c96588f0d75f46268c8"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "761",
+              "name": "Free of Pointer not at Start of Buffer"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-761",
+          "message": {
+            "text": "Free of Pointer not at Start of Buffer."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/src/backend/storage/ipc/pmsignal.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 164,
+                  "endLine": 166
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "761",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

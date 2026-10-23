@@ -1,0 +1,150 @@
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+    file_name: /tmp/tmpZafX3R_ss_testcase/src-rose/src/backend/access/transam/xact.c
+  - file_name: /tmp/tmpZafX3R_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpZafX3R_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmpZafX3R_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: control_flow
+    feature: set_jump_long_jump
+io_pair:
+  exploits:
+    - inputs:
+        - port: 8887
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          source_enum: 5
+          stage: co_process
+          value_type_enum: 0
+          source: socket_input
+          stage_enum: 1
+          address: ss-localhost
+          value: 4294967291
+          ordinal: 1
+          value_encoding: none
+        - value_type_enum: 0
+          source: env_var_input
+          name: SS_BUFF
+          source_enum: 2
+          ordinal: 2
+          stage: pre_process
+          value: Good_Bye_World
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+    - inputs:
+        - stage: co_process
+          address: ss-localhost
+          source: socket_input
+          stage_enum: 1
+          source_enum: 5
+          value: 2147483650
+          ordinal: 1
+          port: 8887
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - name: SS_BUFF
+          stage_enum: 0
+          value: aaaaaaaaaaaaaaaaa
+          stage: pre_process
+          source: env_var_input
+          source_enum: 2
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - ordinal: 1
+          source_enum: 5
+          stage: co_process
+          id: source
+          value: 15
+          value_encoding: none
+          stage_enum: 1
+          port: 8887
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          address: ss-localhost
+          source: socket_input
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          value: hello
+          stage_enum: 0
+          value_type_enum: 0
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          name: SS_BUFF
+          value_encoding: none
+    - inputs:
+        - port: 8887
+          ordinal: 1
+          source_enum: 5
+          id: source
+          source: socket_input
+          address: ss-localhost
+          stage: co_process
+          stage_enum: 1
+          value: 8
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+        - value: abcdefghiklmnopqrstuvwxyz
+          ordinal: 2
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          value_type_enum: 0
+          source: env_var_input
+          value_encoding: none
+          name: SS_BUFF
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - ordinal: 1
+          source: socket_input
+          port: 8887
+          id: source
+          source_enum: 5
+          stage: co_process
+          stage_enum: 1
+          value_encoding: none
+          value: 1000
+          address: ss-localhost
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+        - stage_enum: 0
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          value: Heeellllloooooo_Wooooorrrrrllllldddddd!!!!!!
+          value_type_enum: 0
+          ordinal: 2
+          value_encoding: none
+          name: SS_BUFF
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  description: "This weakness reads a number to be used as a loop counter. The loop counter is initially read as an unsigned long, then converted to an int.  If the number read in is larger than MAX_UINT, it is silently converted to a negative number.  This breaks the loop counter logic, resulting in an infinite loop. Good inputs:  taint source is 2147483647 or less Bad inputs: taint source is 2147483648 or greater\n\n"

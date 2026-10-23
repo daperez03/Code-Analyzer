@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpaaaPbH_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpaaaPbH_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmpaaaPbH_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - feature: recursive
+    file_name: /tmp/tmpaaaPbH_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: control_flow
+io_pair:
+  exploits:
+    - inputs:
+        - value_encoding: none
+          source_enum: 6
+          flags: 950
+          value_type_enum: 0
+          size: 29
+          source: shared_memory_input
+          id: source
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          key: 2325
+          ordinal: 1
+          stage: pre_process
+          value: AAAAA.AAAAAAAA
+    - inputs:
+        - size: 29
+          flags: 950
+          ordinal: 1
+          value_encoding: none
+          id: source
+          key: 2325
+          source: shared_memory_input
+          source_enum: 6
+          value: This statement will break it
+          value_type_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+  base_inputs:
+    - stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 2325
+      size: 29
+      flags: 950
+      source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+  benigns:
+    - inputs:
+        - key: 2325
+          stage: pre_process
+          source: shared_memory_input
+          source_enum: 6
+          value_encoding: none
+          value: AAA
+          size: 29
+          value_type_enum: 0
+          id: source
+          stage_enum: 0
+          ordinal: 1
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_type_enum: 0
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          value: Hellowworld
+          size: 29
+          value_encoding: none
+          source_enum: 6
+          value_type: USE_TEXT_DIRECTLY
+          key: 2325
+          flags: 950
+          id: source
+          source: shared_memory_input
+    - inputs:
+        - value: Goodbyecruelworld
+          source_enum: 6
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          key: 2325
+          ordinal: 1
+          flags: 950
+          size: 29
+          source: shared_memory_input
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+  description: "Infinite Loop that checks each character of input and if it is ascii val 48 or higher, updates the exit counter.  Otherwise it doesn't, resulting in an infinite loop\n\n"

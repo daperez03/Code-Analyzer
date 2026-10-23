@@ -1,0 +1,154 @@
+io_pair:
+  description: "Read a string from the input.  Do nslookup on that string, without checking first if it has any command separators.  This allows the user to run arbitrary commands.\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/mood_unartistic/birotatory_bemoaned.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: HOMAGED_OOLOGY
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/mood_unartistic/birotatory_bemoaned.txt
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/mood_unartistic/birotatory_bemoaned.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 2
+          stage: pre_process
+          ordinal: 1
+          name: HOMAGED_OOLOGY
+          source: env_var_input
+          value_encoding: none
+        - stage_enum: 0
+          value_type_enum: 0
+          ordinal: 2
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/mood_unartistic/birotatory_bemoaned.txt
+          value_encoding: none
+          value: 10
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          stage: pre_process
+          id: source
+    - inputs:
+        - ordinal: 1
+          value: /opt/stonesoup/workspace/testData/mood_unartistic/birotatory_bemoaned.txt
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          name: HOMAGED_OOLOGY
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+        - source_enum: 3
+          name: /opt/stonesoup/workspace/testData/mood_unartistic/birotatory_bemoaned.txt
+          source: file_content_input
+          stage: pre_process
+          value: google.com
+          value_encoding: none
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          value_type_enum: 0
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/mood_unartistic/birotatory_bemoaned.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          name: HOMAGED_OOLOGY
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          id: source
+          ordinal: 2
+          stage_enum: 0
+          value: localhost
+          name: /opt/stonesoup/workspace/testData/mood_unartistic/birotatory_bemoaned.txt
+          stage: pre_process
+          source: file_content_input
+          value_encoding: none
+  exploits:
+    - inputs:
+        - stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/mood_unartistic/birotatory_bemoaned.txt
+          value_encoding: none
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          name: HOMAGED_OOLOGY
+          value_type_enum: 0
+          ordinal: 1
+          source_enum: 2
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/mood_unartistic/birotatory_bemoaned.txt
+          value: 10; ls -la
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/mood_unartistic/birotatory_bemoaned.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: HOMAGED_OOLOGY
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/mood_unartistic/birotatory_bemoaned.txt
+          value: localhost; echo Hello world
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpClPxDK_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpClPxDK_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpClPxDK_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - file_name: /tmp/tmpClPxDK_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    feature: interprocedural_10
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: control_flow

@@ -1,0 +1,106 @@
+io_pair:
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          value: 80
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+          stage: pre_process
+          source: shared_memory_input
+          size: 13
+          stage_enum: 0
+          ordinal: 1
+          value_encoding: none
+          key: 6419
+          id: source
+          flags: 950
+    - inputs:
+        - stage: pre_process
+          source_enum: 6
+          value: 3643
+          stage_enum: 0
+          ordinal: 1
+          id: source
+          size: 13
+          key: 6419
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: shared_memory_input
+          flags: 950
+    - inputs:
+        - flags: 950
+          source: shared_memory_input
+          stage: pre_process
+          source_enum: 6
+          stage_enum: 0
+          size: 13
+          key: 6419
+          value: 10
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          id: source
+  exploits:
+    - inputs:
+        - key: 6419
+          stage: pre_process
+          stage_enum: 0
+          value: 123451234567
+          flags: 950
+          ordinal: 1
+          size: 13
+          source_enum: 6
+          value_type_enum: 0
+          value_encoding: none
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+    - inputs:
+        - source: shared_memory_input
+          stage: pre_process
+          key: 6419
+          source_enum: 6
+          id: source
+          ordinal: 1
+          stage_enum: 0
+          flags: 950
+          value: 845633125678
+          size: 13
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 6419
+      size: 13
+      flags: 950
+  description: "Reads in a integer and uses the value to allocate memory for a string on the stack. Because the input value is unchecked can allocate arbitrarily large value, resulting in a resource drain\n\n"
+code_complexity_features:
+  - file_name: /tmp/tmpLe8S8__ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature: SHARED_MEMORY
+    feature_group: source_taint
+  - file_name: /tmp/tmpLe8S8__ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpLe8S8__ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmpLe8S8__ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: control_flow
+    feature: unconditional_jump
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

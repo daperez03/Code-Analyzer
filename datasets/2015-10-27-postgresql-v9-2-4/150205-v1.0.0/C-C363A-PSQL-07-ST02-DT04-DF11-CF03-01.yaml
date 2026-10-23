@@ -1,0 +1,271 @@
+code_complexity_features:
+  - file_name: /tmp/tmp7EDqXm_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmp7EDqXm_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmp7EDqXm_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+  - file_name: /tmp/tmp7EDqXm_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: control_flow
+    feature: infinite_loop
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/deliciate_biventral/subfactorial_dink.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: AMYGDALATE_CONTRASTING
+        - id: source
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/deliciate_biventral/subfactorial_dink.txt
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/fifo1 badfile1
+          stage_enum: 0
+          value_encoding: none
+        - source_enum: 7
+          stage: pre_process
+          stage_enum: 0
+          source: script_input
+          id: background-complex
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Replacing: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && ln -s /etc/passwd \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Replaced.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          ordinal: 2
+        - name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 --nosync
+          stage: pre_process
+          id: background
+          source: script_input
+          source_enum: 7
+          stage_enum: 0
+          ordinal: 3
+        - stage_enum: 0
+          value: This is yet another file.
+          source: file_content_input
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 4
+          name: /opt/stonesoup/workspace/testData/badfile1
+          stage: pre_process
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - source_enum: 2
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/deliciate_biventral/subfactorial_dink.txt
+          name: AMYGDALATE_CONTRASTING
+          stage: pre_process
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          ordinal: 1
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/deliciate_biventral/subfactorial_dink.txt
+          value: /opt/stonesoup/workspace/testData/fifo1 badfile2
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Replacing: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && ln -s /etc/passwd \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Replaced.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          ordinal: 2
+          id: background-complex
+          stage: pre_process
+          source_enum: 7
+          stage_enum: 0
+          source: script_input
+        - stage: pre_process
+          stage_enum: 0
+          id: background
+          source: script_input
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 --nosync
+          source_enum: 7
+          ordinal: 3
+        - stage_enum: 0
+          source_enum: 3
+          stage: pre_process
+          ordinal: 4
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          value: This is also file.
+          value_encoding: none
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/badfile2
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/deliciate_biventral/subfactorial_dink.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: AMYGDALATE_CONTRASTING
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/deliciate_biventral/subfactorial_dink.txt
+  description: "This weakness expects a string in the form: '<filename> <data>' where filename is a file that will be read to delay execution, and data is a string containing no spaces. The data string is treated as a filename in the testData directory. The weakness checks that the filename does not have any slashes in it and that it is not a symbolic link. However, there is a time of check, time of use vulnerability after the file is checked but before it is opened allowing the file to be replaced with a symbolic link to a file outside of the testData directory. The weakness notifies the test harness that the file should be replaced by a symbolic link by creating a file called testData/*.pid. \n\n"
+  benigns:
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          ordinal: 1
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/deliciate_biventral/subfactorial_dink.txt
+          value_encoding: none
+          name: AMYGDALATE_CONTRASTING
+          source: env_var_input
+        - ordinal: 2
+          source: file_content_input
+          stage: pre_process
+          source_enum: 3
+          stage_enum: 0
+          id: source
+          name: /opt/stonesoup/workspace/testData/deliciate_biventral/subfactorial_dink.txt
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/file1 goodfile1
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+        - name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Replacing: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && ln -s /etc/passwd \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Replaced.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 7
+          id: background-complex
+          ordinal: 2
+          source: script_input
+        - source_enum: 3
+          stage_enum: 0
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/file1
+          stage: pre_process
+          ordinal: 3
+        - stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: A non-empty file.
+          name: /opt/stonesoup/workspace/testData/goodfile1
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 4
+          source_enum: 3
+          stage: pre_process
+          source: file_content_input
+    - inputs:
+        - source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/deliciate_biventral/subfactorial_dink.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: AMYGDALATE_CONTRASTING
+        - value_type_enum: 0
+          source: file_content_input
+          source_enum: 3
+          value: /opt/stonesoup/workspace/testData/file1 goodfile2
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/deliciate_biventral/subfactorial_dink.txt
+          ordinal: 2
+          stage_enum: 0
+          id: source
+        - source_enum: 7
+          source: script_input
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Replacing: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && ln -s /etc/passwd \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Replaced.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          ordinal: 2
+          stage: pre_process
+          id: background-complex
+          stage_enum: 0
+        - source_enum: 3
+          ordinal: 3
+          name: /opt/stonesoup/workspace/testData/file1
+          stage_enum: 0
+          stage: pre_process
+          source: file_content_input
+        - ordinal: 4
+          stage: pre_process
+          value: This is a file.
+          source_enum: 3
+          stage_enum: 0
+          source: file_content_input
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/goodfile2
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/deliciate_biventral/subfactorial_dink.txt
+          value_type_enum: 0
+          value_encoding: none
+          ordinal: 1
+          name: AMYGDALATE_CONTRASTING
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+        - value: /opt/stonesoup/workspace/testData/file1 goodfile3
+          value_encoding: none
+          stage_enum: 0
+          source: file_content_input
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          source_enum: 3
+          value_type_enum: 0
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/deliciate_biventral/subfactorial_dink.txt
+        - stage: pre_process
+          source: script_input
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Replacing: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && ln -s /etc/passwd \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Replaced.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          ordinal: 2
+          source_enum: 7
+          id: background-complex
+          stage_enum: 0
+        - stage_enum: 0
+          stage: pre_process
+          source_enum: 3
+          ordinal: 3
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/file1
+        - ordinal: 4
+          source: file_content_input
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          stage_enum: 0
+          value_encoding: none
+          value: This is another file.
+          name: /opt/stonesoup/workspace/testData/goodfile3
+          value_type_enum: 0

@@ -1,0 +1,100 @@
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+io_pair:
+  description: "Read a string from the input.  Do nslookup on that string, without checking first if it has any command separators.  This allows the user to run arbitrary commands.\n\n"
+  exploits:
+    - inputs:
+        - source_enum: 5
+          stage: co_process
+          id: source
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          stage_enum: 1
+          address: ss-localhost
+          value: 10; ls -la
+          value_encoding: none
+          value_type_enum: 0
+          source: socket_input
+    - inputs:
+        - value_type_enum: 0
+          ordinal: 1
+          source: socket_input
+          port: 8887
+          value_encoding: none
+          source_enum: 5
+          stage: co_process
+          value: localhost; echo Hello world
+          id: source
+          stage_enum: 1
+          value_type: USE_TEXT_DIRECTLY
+          address: ss-localhost
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  benigns:
+    - inputs:
+        - source: socket_input
+          source_enum: 5
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          address: ss-localhost
+          value_type_enum: 0
+          value: 10
+          value_encoding: none
+          stage: co_process
+          id: source
+          stage_enum: 1
+          port: 8887
+    - inputs:
+        - ordinal: 1
+          value_encoding: none
+          source_enum: 5
+          source: socket_input
+          stage_enum: 1
+          stage: co_process
+          id: source
+          address: ss-localhost
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: google.com
+          port: 8887
+    - inputs:
+        - id: source
+          source_enum: 5
+          value_encoding: none
+          stage: co_process
+          source: socket_input
+          value_type_enum: 0
+          stage_enum: 1
+          ordinal: 1
+          value: localhost
+          port: 8887
+          value_type: USE_TEXT_DIRECTLY
+          address: ss-localhost
+code_complexity_features:
+  - file_name: /tmp/tmp4TdDso_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmp4TdDso_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmp4TdDso_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: address_as_function_return_value
+    feature_group: data_flow
+  - feature_group: control_flow
+    file_name: /tmp/tmp4TdDso_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: sequence

@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpCKpKaU_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpCKpKaU_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    feature_group: data_type
+    function_name: calc_bucket
+    line_number: 0
+    feature: array
+  - file_name: /tmp/tmpCKpKaU_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - file_name: /tmp/tmpCKpKaU_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence
+io_pair:
+  benigns:
+    - inputs:
+        - source_enum: 6
+          stage: pre_process
+          ordinal: 1
+          value_encoding: none
+          value: AAA
+          key: 8084
+          size: 596
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          source: shared_memory_input
+          value_type_enum: 0
+          id: source
+          stage_enum: 0
+    - inputs:
+        - size: 596
+          stage: pre_process
+          key: 8084
+          flags: 950
+          source_enum: 6
+          value_type_enum: 0
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          source: shared_memory_input
+          value: Hellow world!
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - source_enum: 6
+          value_type_enum: 0
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          value: Good-bye cruel world!
+          value_encoding: none
+          ordinal: 1
+          size: 596
+          key: 8084
+          source: shared_memory_input
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 8084
+      size: 596
+      flags: 950
+      source: shared_memory_input
+  description: "Has a fixed heap buffer of size 64.  (char [64])\n\n"
+  exploits:
+    - inputs:
+        - id: source
+          key: 8084
+          flags: 950
+          ordinal: 1
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 6
+          size: 596
+          source: shared_memory_input
+          value_encoding: none
+          value_type_enum: 0
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - stage: pre_process
+          ordinal: 1
+          value_type_enum: 0
+          source_enum: 6
+          key: 8084
+          flags: 950
+          id: source
+          stage_enum: 0
+          value_encoding: none
+          size: 596
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          value: This is probably going to overflow a buffer of some sort.  Let's run it anyway and see what happens.  I hope that everything turns out ok, because I would love to see what this looks like in all CAPS.  Converting ASCII characters to upper case is easy, you can either call a system function, or just add the standard difference between the start of the two character sets.  But, I am sure there is a reason that system functions exist for this sort of functionality.

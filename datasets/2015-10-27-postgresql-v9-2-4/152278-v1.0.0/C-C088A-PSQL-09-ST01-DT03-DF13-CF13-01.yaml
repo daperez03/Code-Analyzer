@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          id: source
+          name: MELITAEMIA_LOUDLIER
+          value_encoding: none
+          value: "\"*\" -exec cat /etc/passwd \\;"
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+          ordinal: 1
+        - source: file_content_input
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 3
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/temp/file.txt
+    - inputs:
+        - stage: pre_process
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+          value_encoding: none
+          name: MELITAEMIA_LOUDLIER
+          source: env_var_input
+          source_enum: 2
+          value: "\"*\" -exec netstat -an \\;"
+          ordinal: 1
+        - source: file_content_input
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/temp/file.txt
+          ordinal: 2
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      ordinal: 1
+      id: source
+      name: MELITAEMIA_LOUDLIER
+  description: "Read a string from the input.  Perform a find path -iname input.If input contains arguments such as -exec with a \\; ending the command, a user can insert other commands instead of just find\n\n"
+  benigns:
+    - inputs:
+        - id: source
+          ordinal: 1
+          name: MELITAEMIA_LOUDLIER
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          stage_enum: 0
+          value: "\"file.*\""
+          value_encoding: none
+    - inputs:
+        - ordinal: 1
+          stage_enum: 0
+          name: MELITAEMIA_LOUDLIER
+          id: source
+          source_enum: 2
+          value_encoding: none
+          value_type_enum: 0
+          value: filename.txt
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source: env_var_input
+    - inputs:
+        - source: env_var_input
+          value_type_enum: 0
+          value_encoding: none
+          source_enum: 2
+          name: MELITAEMIA_LOUDLIER
+          stage: pre_process
+          value: "\"*\""
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          id: source
+          ordinal: 1
+code_complexity_features:
+  - file_name: /tmp/tmpO_XGfc_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpO_XGfc_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature_group: data_type
+    feature: void_pointer
+  - file_name: /tmp/tmpO_XGfc_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - file_name: /tmp/tmpO_XGfc_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature_group: control_flow
+    feature: interprocedural_2

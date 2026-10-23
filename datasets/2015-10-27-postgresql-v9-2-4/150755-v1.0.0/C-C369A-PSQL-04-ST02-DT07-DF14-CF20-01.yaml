@@ -1,0 +1,154 @@
+code_complexity_features:
+  - file_name: /tmp/tmpytw2i3_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpytw2i3_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmpytw2i3_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_nonlinear_expression
+  - file_name: /tmp/tmpytw2i3_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  description: "Converts the input into an int using atoi.\n  Takes that number mod 4, then uses that as the divisor in another operation.  IF the original input value is 0 mod 4, this will result in a floating point error.  Good values: input mod 4 is not 0, Bad values: input mod 4 = 0\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/sober_dossal/untrumpeted_mooting.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: SATINS_CAUPONIZE
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/sober_dossal/untrumpeted_mooting.txt
+  benigns:
+    - inputs:
+        - stage: pre_process
+          value: /opt/stonesoup/workspace/testData/sober_dossal/untrumpeted_mooting.txt
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage_enum: 0
+          source_enum: 2
+          value_type_enum: 0
+          ordinal: 1
+          name: SATINS_CAUPONIZE
+        - name: /opt/stonesoup/workspace/testData/sober_dossal/untrumpeted_mooting.txt
+          value_encoding: none
+          stage_enum: 0
+          source: file_content_input
+          stage: pre_process
+          ordinal: 2
+          id: source
+          value: 99
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 3
+    - inputs:
+        - name: SATINS_CAUPONIZE
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/sober_dossal/untrumpeted_mooting.txt
+          source_enum: 2
+          value_type_enum: 0
+          source: env_var_input
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          ordinal: 1
+        - source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value: -2
+          value_encoding: none
+          ordinal: 2
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/sober_dossal/untrumpeted_mooting.txt
+          value_type_enum: 0
+          source: file_content_input
+          id: source
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/sober_dossal/untrumpeted_mooting.txt
+          stage: pre_process
+          source: env_var_input
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          ordinal: 1
+          value_encoding: none
+          value_type_enum: 0
+          name: SATINS_CAUPONIZE
+        - value_type_enum: 0
+          source_enum: 3
+          ordinal: 2
+          value: 1023
+          stage_enum: 0
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/sober_dossal/untrumpeted_mooting.txt
+          id: source
+          stage: pre_process
+  exploits:
+    - inputs:
+        - name: SATINS_CAUPONIZE
+          ordinal: 1
+          value_type_enum: 0
+          source: env_var_input
+          value_encoding: none
+          stage: pre_process
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/sober_dossal/untrumpeted_mooting.txt
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+        - stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/sober_dossal/untrumpeted_mooting.txt
+          value: 1024
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: file_content_input
+          source_enum: 3
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/sober_dossal/untrumpeted_mooting.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: SATINS_CAUPONIZE
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/sober_dossal/untrumpeted_mooting.txt
+          value: -512
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0

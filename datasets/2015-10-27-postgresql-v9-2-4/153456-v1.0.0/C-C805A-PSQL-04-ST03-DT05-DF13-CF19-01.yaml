@@ -1,0 +1,100 @@
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - stage_enum: 1
+          stage: co_process
+          address: ss-localhost
+          source: socket_input
+          source_enum: 5
+          ordinal: 1
+          id: source
+          value_encoding: none
+          port: 8887
+          value_type: USE_TEXT_DIRECTLY
+          value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          value_type_enum: 0
+    - inputs:
+        - ordinal: 1
+          id: source
+          stage_enum: 1
+          port: 8887
+          stage: co_process
+          value_type_enum: 0
+          source: socket_input
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 5
+          value_encoding: none
+          address: ss-localhost
+          value: zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  benigns:
+    - inputs:
+        - source: socket_input
+          source_enum: 5
+          id: source
+          stage: co_process
+          stage_enum: 1
+          value: Hello
+          ordinal: 1
+          port: 8887
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          address: ss-localhost
+          value_type_enum: 0
+    - inputs:
+        - source: socket_input
+          stage_enum: 1
+          value: shortst
+          source_enum: 5
+          stage: co_process
+          ordinal: 1
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          address: ss-localhost
+          value_type_enum: 0
+          port: 8887
+    - inputs:
+        - port: 8887
+          stage: co_process
+          source_enum: 5
+          source: socket_input
+          stage_enum: 1
+          value: a
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          id: source
+          address: ss-localhost
+  description: "Good inputs:1) environment variable is not set2) envrionment variable is set to a value whose length is less than or equal to 8 charactersBad inputs:1) environment variable is set to a value whose length is greater than 8 chars\n\n"
+code_complexity_features:
+  - file_name: /tmp/tmpOo0ufi_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    feature_group: source_taint
+    feature: SOCKET
+    function_name: stonesoup_handle_taint
+    line_number: 0
+  - file_name: /tmp/tmpOo0ufi_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpOo0ufi_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - file_name: /tmp/tmpOo0ufi_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: control_flow
+    feature: recursive

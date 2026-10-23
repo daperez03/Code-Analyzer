@@ -1,0 +1,166 @@
+io_pair:
+  base_inputs:
+    - value_encoding: none
+      value_type_enum: 0
+      name: SISES_MALLOWWORT
+      value_type: USE_TEXT_DIRECTLY
+      ordinal: 1
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/unnaive_moff/plounce_uncorruptly.txt
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+    - stage_enum: 0
+      name: /opt/stonesoup/workspace/testData/unnaive_moff/plounce_uncorruptly.txt
+      stage: pre_process
+      source: file_content_input
+      source_enum: 3
+      ordinal: 2
+      id: source
+  description: "Read a string from the input.  Perform a find path -iname input.If input contains arguments such as -exec with a \\; ending the command, a user can insert other commands instead of just find\n\n"
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          stage: pre_process
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          name: SISES_MALLOWWORT
+          value_type_enum: 0
+          value_encoding: none
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/unnaive_moff/plounce_uncorruptly.txt
+          source: env_var_input
+        - ordinal: 2
+          name: /opt/stonesoup/workspace/testData/unnaive_moff/plounce_uncorruptly.txt
+          source_enum: 3
+          stage: pre_process
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: "\"file.*\""
+          source: file_content_input
+          value_encoding: none
+          stage_enum: 0
+          id: source
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/unnaive_moff/plounce_uncorruptly.txt
+          source_enum: 2
+          value_encoding: none
+          stage: pre_process
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage_enum: 0
+          ordinal: 1
+          name: SISES_MALLOWWORT
+        - stage_enum: 0
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          value: filename.txt
+          value_type_enum: 0
+          id: source
+          value_encoding: none
+          ordinal: 2
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/unnaive_moff/plounce_uncorruptly.txt
+          source: file_content_input
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          name: SISES_MALLOWWORT
+          value: /opt/stonesoup/workspace/testData/unnaive_moff/plounce_uncorruptly.txt
+          ordinal: 1
+          value_encoding: none
+          stage: pre_process
+          stage_enum: 0
+          source: env_var_input
+          source_enum: 2
+          value_type_enum: 0
+        - stage: pre_process
+          source: file_content_input
+          id: source
+          ordinal: 2
+          value: "\"*\""
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source_enum: 3
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/unnaive_moff/plounce_uncorruptly.txt
+          value_encoding: none
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source: env_var_input
+          name: SISES_MALLOWWORT
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/unnaive_moff/plounce_uncorruptly.txt
+          source_enum: 2
+          ordinal: 1
+          stage: pre_process
+          value_encoding: none
+        - name: /opt/stonesoup/workspace/testData/unnaive_moff/plounce_uncorruptly.txt
+          value_type_enum: 0
+          stage_enum: 0
+          id: source
+          stage: pre_process
+          source_enum: 3
+          source: file_content_input
+          value_encoding: none
+          value: "\"*\" -exec cat /etc/passwd \\;"
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/temp/file.txt
+          ordinal: 2
+          stage_enum: 0
+    - inputs:
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: SISES_MALLOWWORT
+          ordinal: 1
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/unnaive_moff/plounce_uncorruptly.txt
+          value_encoding: none
+          stage: pre_process
+          source_enum: 2
+          source: env_var_input
+        - value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value: "\"*\" -exec netstat -an \\;"
+          ordinal: 2
+          id: source
+          value_encoding: none
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/unnaive_moff/plounce_uncorruptly.txt
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+        - source: file_content_input
+          stage_enum: 0
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/temp/file.txt
+          ordinal: 2
+          source_enum: 3
+code_complexity_features:
+  - file_name: /tmp/tmpclUb_n_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - feature_group: data_type
+    line_number: 0
+    feature: array
+    function_name: oid_hash
+    file_name: /tmp/tmpclUb_n_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+  - feature: basic
+    file_name: /tmp/tmpclUb_n_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    feature_group: data_flow
+    function_name: oid_hash
+    line_number: 0
+  - line_number: 0
+    function_name: oid_hash
+    file_name: /tmp/tmpclUb_n_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    feature_group: control_flow
+    feature: pointer_to_function
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

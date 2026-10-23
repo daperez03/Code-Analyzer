@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - id: source
+          value_type: USE_TEXT_DIRECTLY
+          value: 45
+          ordinal: 1
+          name: PROFLUENCE_THIRDBOROUGH
+          value_type_enum: 0
+          source_enum: 2
+          value_encoding: none
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: PROFLUENCE_THIRDBOROUGH
+          source: env_var_input
+          value_encoding: none
+          ordinal: 1
+          stage_enum: 0
+          source_enum: 2
+          id: source
+          value: 80
+          stage: pre_process
+    - inputs:
+        - ordinal: 1
+          value: 8000
+          id: source
+          value_type_enum: 0
+          name: PROFLUENCE_THIRDBOROUGH
+          stage_enum: 0
+          source: env_var_input
+          value_encoding: none
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+  base_inputs:
+    - id: source
+      ordinal: 1
+      stage: pre_process
+      stage_enum: 0
+      source: env_var_input
+      source_enum: 2
+      name: PROFLUENCE_THIRDBOROUGH
+  description: "Reads in a size to use for a malloc.  The size subtracts 10 before being used, which results in an integer underflow and an attempt at allocating a very large chunk of memory\n\n"
+  exploits:
+    - inputs:
+        - source_enum: 2
+          name: PROFLUENCE_THIRDBOROUGH
+          ordinal: 1
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          value_type_enum: 0
+          value: 8
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+    - inputs:
+        - value_type_enum: 0
+          name: PROFLUENCE_THIRDBOROUGH
+          ordinal: 1
+          value: 4
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          id: source
+          source: env_var_input
+          stage_enum: 0
+          value_encoding: none
+code_complexity_features:
+  - file_name: /tmp/tmphcHh9k_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - feature: void_pointer
+    line_number: 0
+    feature_group: data_type
+    file_name: /tmp/tmphcHh9k_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+  - function_name: oid_hash
+    line_number: 0
+    file_name: /tmp/tmphcHh9k_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    feature: address_as_linear_expression
+    feature_group: data_flow
+  - feature: infinite_loop
+    line_number: 0
+    function_name: oid_hash
+    file_name: /tmp/tmphcHh9k_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    feature_group: control_flow

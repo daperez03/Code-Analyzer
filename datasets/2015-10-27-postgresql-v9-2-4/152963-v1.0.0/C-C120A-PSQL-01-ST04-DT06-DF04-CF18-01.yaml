@@ -1,0 +1,106 @@
+io_pair:
+  benigns:
+    - inputs:
+        - key: 1088
+          ordinal: 1
+          size: 1001
+          value_encoding: none
+          value_type_enum: 0
+          flags: 950
+          source_enum: 6
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          value: AAA
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          id: source
+          value_type_enum: 0
+          flags: 950
+          size: 1001
+          source_enum: 6
+          key: 1088
+          ordinal: 1
+          value: Hellow world!
+          stage_enum: 0
+          source: shared_memory_input
+          value_encoding: none
+    - inputs:
+        - stage_enum: 0
+          key: 1088
+          size: 1001
+          ordinal: 1
+          flags: 950
+          source: shared_memory_input
+          stage: pre_process
+          value: Good-bye cruel world!
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_encoding: none
+          source_enum: 6
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 1088
+      size: 1001
+      flags: 950
+  description: "Has a fixed stack buffer of size 64.  (char [64])\n\n"
+  exploits:
+    - inputs:
+        - size: 1001
+          id: source
+          ordinal: 1
+          value_encoding: none
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          key: 1088
+          value_type_enum: 0
+          stage_enum: 0
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          stage: pre_process
+          source_enum: 6
+    - inputs:
+        - value_encoding: none
+          value_type_enum: 0
+          flags: 950
+          value: I've reached a point where I feel the need to express my disappointment with Gov. Common W Enumeration. There are a number of reasons Gov. Enumeration isn't telling us as to why he wants to obfuscate the issue so that one can't see what ought to be completely obvious to all. In this letter, I will expose those reasons one-by-one, on the principle that his argument that the sky is falling is hopelessly flawed and thoroughly circuitous. His cold, analytical approach to philistinism doesn't take into account the human element. In particular, those who have been hurt by philistinism know that Gov. Enumeration's jobations emblematize an increasing deturpation of cultural standards and a triumph of the meretricious. Get that straight, please. Any other thinking is blame-shoving or responsibility-dodging. Furthermore, Gov. Enumeration wants to eavesdrop on all types of private conversations. Why he wants that, I don't know, but that's what he wants.
+          stage: pre_process
+          size: 1001
+          stage_enum: 0
+          source_enum: 6
+          ordinal: 1
+          key: 1088
+          id: source
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+code_complexity_features:
+  - function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+    file_name: /tmp/tmpO89o3k_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+  - file_name: /tmp/tmpO89o3k_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - feature: address_alias_50
+    file_name: /tmp/tmpO89o3k_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: data_flow
+  - file_name: /tmp/tmpO89o3k_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    feature_group: control_flow
+    line_number: 0
+    feature: pointer_to_function
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

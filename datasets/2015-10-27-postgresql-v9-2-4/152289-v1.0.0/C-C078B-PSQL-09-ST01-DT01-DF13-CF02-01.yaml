@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: SPASMATIC_KAFILA
+  description: "Read a string from the input.  Check first if it has any command separators and then run it though a URL decoding algorithm.  Then use this string to perform an nslookup by appending it to the end of the command. This allows the user to run arbitrary commands by suplying command separators encoded in url encoding.\n\n"
+  exploits:
+    - inputs:
+        - value_encoding: none
+          id: source
+          name: SPASMATIC_KAFILA
+          source_enum: 2
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value: 10%20%3B%20ls -la
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          value_type_enum: 0
+    - inputs:
+        - id: source
+          ordinal: 1
+          name: SPASMATIC_KAFILA
+          stage: pre_process
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          value_encoding: none
+          value: localhost%20%26%20echo Hello world
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+  benigns:
+    - inputs:
+        - id: source
+          ordinal: 1
+          name: SPASMATIC_KAFILA
+          value_encoding: none
+          value: 10
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source_enum: 2
+          stage: pre_process
+          value_type_enum: 0
+    - inputs:
+        - stage: pre_process
+          source: env_var_input
+          value_encoding: none
+          value: google.com
+          id: source
+          value_type_enum: 0
+          name: SPASMATIC_KAFILA
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage_enum: 0
+    - inputs:
+        - name: SPASMATIC_KAFILA
+          value_type_enum: 0
+          stage_enum: 0
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          value_encoding: none
+          ordinal: 1
+          value: localhost
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+code_complexity_features:
+  - file_name: /tmp/tmpkBQgrE_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - feature_group: data_type
+    file_name: /tmp/tmpkBQgrE_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature: array
+  - file_name: /tmp/tmpkBQgrE_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - file_name: /tmp/tmpkBQgrE_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature_group: control_flow
+    feature: indirectly_recursive

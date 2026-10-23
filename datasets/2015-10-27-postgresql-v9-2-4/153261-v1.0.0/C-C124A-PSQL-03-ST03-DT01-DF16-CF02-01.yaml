@@ -1,0 +1,100 @@
+io_pair:
+  exploits:
+    - inputs:
+        - ordinal: 1
+          address: ss-localhost
+          port: 8887
+          value_encoding: none
+          stage: co_process
+          source: socket_input
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 1
+          id: source
+          source_enum: 5
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          value_type_enum: 0
+    - inputs:
+        - ordinal: 1
+          value_type_enum: 0
+          address: ss-localhost
+          stage_enum: 1
+          stage: co_process
+          port: 8887
+          id: source
+          source: socket_input
+          source_enum: 5
+          value_encoding: none
+          value: This is probably going to overflow a buffer of some sort.  Let's run it anyway and see what happens.  I hope that everything turns out ok, because I would love to see what this looks like in all CAPS.  Converting ASCII characters to upper case is easy, you can either call a system function, or just add the standard difference between the start of the two character sets.  But, I am sure there is a reason that system functions exist for this sort of functionality.
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+      source: socket_input
+      source_enum: 5
+  description: "Has a fixed stack buffer of size 64.  (char [64])\n\n"
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          stage_enum: 1
+          id: source
+          stage: co_process
+          port: 8887
+          ordinal: 1
+          address: ss-localhost
+          source_enum: 5
+          value_encoding: none
+          source: socket_input
+          value: AAA
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - source_enum: 5
+          stage: co_process
+          address: ss-localhost
+          ordinal: 1
+          stage_enum: 1
+          id: source
+          value: Hellow world!
+          value_type_enum: 0
+          source: socket_input
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+    - inputs:
+        - source: socket_input
+          value: Good-bye cruel world!
+          source_enum: 5
+          value_type_enum: 0
+          stage: co_process
+          stage_enum: 1
+          id: source
+          port: 8887
+          value_encoding: none
+          ordinal: 1
+          address: ss-localhost
+          value_type: USE_TEXT_DIRECTLY
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpAa7PmP_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmpAa7PmP_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: array
+  - file_name: /tmp/tmpAa7PmP_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmpAa7PmP_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: control_flow
+    feature: indirectly_recursive

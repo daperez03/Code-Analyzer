@@ -1,0 +1,146 @@
+code_complexity_features:
+  - file_name: /tmp/tmp4i2UXF_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmp4i2UXF_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmp4i2UXF_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - file_name: /tmp/tmp4i2UXF_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: control_flow
+    feature: macros
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 3857
+      size: 141
+      flags: 950
+  description: "This weakness expects a string in the form: '<qsize> <file1> <file2> <data>' where qsize is the size of the quick sort (used to delay execution on certain benign cases), file1 and file2 are files to be read (also used to delay execution) and data is a string containing no spaces.  The string is used for processing, but the contents of the string are unimportant. Two threads are created, and they fail to check for a mutex lock on a critical section, possibly causing a null pointer dereference.\n\n"
+  benigns:
+    - inputs:
+        - value: 10 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 hephalump
+          source: shared_memory_input
+          source_enum: 6
+          size: 141
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          id: source
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          key: 3857
+          value_encoding: none
+          value_type_enum: 0
+        - id: background
+          source_enum: 7
+          ordinal: 2
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          stage: pre_process
+          source: script_input
+          stage_enum: 0
+    - inputs:
+        - id: source
+          key: 3857
+          source: shared_memory_input
+          value_encoding: none
+          flags: 950
+          source_enum: 6
+          value: 1 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 Sniffles_and_whiffles
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          size: 141
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - source_enum: 7
+          stage_enum: 0
+          source: script_input
+          stage: pre_process
+          ordinal: 2
+          id: background
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+    - inputs:
+        - stage: pre_process
+          size: 141
+          id: source
+          ordinal: 1
+          source_enum: 6
+          source: shared_memory_input
+          stage_enum: 0
+          value: 5000000 /opt/stonesoup/workspace/testData/file1 /opt/stonesoup/workspace/testData/file2 sIlly_rabbit,_tricks_are_for_kids.
+          key: 3857
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+        - stage_enum: 0
+          ordinal: 2
+          stage: pre_process
+          source: file_content_input
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/file1
+        - stage: pre_process
+          stage_enum: 0
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/file2
+          source: file_content_input
+          ordinal: 3
+  exploits:
+    - inputs:
+        - value: 1 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 May_the_force_be_with_you.
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          value_type_enum: 0
+          source: shared_memory_input
+          source_enum: 6
+          key: 3857
+          ordinal: 1
+          flags: 950
+          size: 141
+          value_encoding: none
+        - id: background
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source_enum: 7
+          source: script_input
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 2
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value_type_enum: 0
+          source_enum: 6
+          stage_enum: 0
+          stage: pre_process
+          source: shared_memory_input
+          size: 141
+          value_encoding: none
+          id: source
+          key: 3857
+          ordinal: 1
+          value: 72 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 What_is_the_answer_to_life,_the_universe,_and_everything?
+        - stage: pre_process
+          source_enum: 7
+          stage_enum: 0
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          ordinal: 2
+          source: script_input
+          id: background

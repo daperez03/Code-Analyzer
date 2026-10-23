@@ -1,0 +1,106 @@
+io_pair:
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 7318
+      size: 24
+      flags: 950
+  description: "Read a string from the input.  If the string contains any spaces, a thread isspawned that attempts to decrements a semaphore twice causing a deadlock.\n\n"
+  exploits:
+    - inputs:
+        - value_encoding: none
+          stage: pre_process
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          ordinal: 1
+          value: This is a bad test.
+          key: 7318
+          value_type_enum: 0
+          source: shared_memory_input
+          size: 24
+          flags: 950
+          source_enum: 6
+    - inputs:
+        - stage_enum: 0
+          ordinal: 1
+          key: 7318
+          flags: 950
+          value_type_enum: 0
+          value: A NEW TEST
+          source: shared_memory_input
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source_enum: 6
+          size: 24
+          id: source
+  benigns:
+    - inputs:
+        - value: aTest
+          source_enum: 6
+          stage: pre_process
+          flags: 950
+          source: shared_memory_input
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          key: 7318
+          value_encoding: none
+          ordinal: 1
+          size: 24
+          value_type_enum: 0
+    - inputs:
+        - size: 24
+          value: abigwordwithoutspaces
+          source: shared_memory_input
+          source_enum: 6
+          flags: 950
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          value_type_enum: 0
+          value_encoding: none
+          key: 7318
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - stage: pre_process
+          stage_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          key: 7318
+          value: anotherTestWithoutSpace
+          size: 24
+          value_type_enum: 0
+          flags: 950
+          source: shared_memory_input
+          source_enum: 6
+          value_encoding: none
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmp0s23pr_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmp0s23pr_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: data_type
+    feature: array
+  - file_name: /tmp/tmp0s23pr_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - file_name: /tmp/tmp0s23pr_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: preeffectual_junna
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence

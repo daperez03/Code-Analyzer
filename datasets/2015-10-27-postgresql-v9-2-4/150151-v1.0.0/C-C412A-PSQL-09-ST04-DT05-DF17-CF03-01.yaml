@@ -1,0 +1,256 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  description: "During preprocessing, files are created and placed in a directory to represent a lock that is externally accessible and unrestricted The program itself reads an input string.  It will attempt to create a lock by creating a file in the testData directory named <input string>.lck.  If such a file does not exist, it will run to completion.  If such a file does exists, it will wait until it is deleted so that it can create its own file.  This results in a deadlock. testData directory.  Bad inputs: name of a file that does exist under the testData directory.\n\n"
+  exploits:
+    - inputs:
+        - key: 8391
+          size: 18
+          flags: 950
+          stage: pre_process
+          value: file1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: shared_memory_input
+          ordinal: 1
+          stage_enum: 0
+          id: source
+          source_enum: 6
+        - ordinal: 2
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/file1.lck
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          value: file1
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          source: file_content_input
+        - value: file2
+          source: file_content_input
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/sync/file2.lck
+          ordinal: 3
+          value_type_enum: 0
+          value_encoding: none
+        - value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/temp/sync/file3.lck
+          stage_enum: 0
+          source: file_content_input
+          ordinal: 4
+          source_enum: 3
+          stage: pre_process
+          value: file3
+          value_type_enum: 0
+    - inputs:
+        - size: 18
+          value: sync/file2
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          ordinal: 1
+          source: shared_memory_input
+          value_type_enum: 0
+          source_enum: 6
+          key: 8391
+          flags: 950
+          stage: pre_process
+          stage_enum: 0
+        - ordinal: 2
+          value: file1
+          source: file_content_input
+          stage: pre_process
+          source_enum: 3
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/file1.lck
+        - stage_enum: 0
+          value: file2
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 3
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/sync/file2.lck
+          ordinal: 3
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+        - source: file_content_input
+          ordinal: 4
+          value_type_enum: 0
+          value: file3
+          name: /opt/stonesoup/workspace/testData/temp/sync/file3.lck
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          source_enum: 3
+  benigns:
+    - inputs:
+        - value_encoding: none
+          size: 18
+          stage: pre_process
+          stage_enum: 0
+          key: 8391
+          id: source
+          source_enum: 6
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value: critical
+          value_type_enum: 0
+          ordinal: 1
+          source: shared_memory_input
+        - value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_encoding: none
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/file1.lck
+          source_enum: 3
+          stage: pre_process
+          value: file1
+          ordinal: 2
+          source: file_content_input
+        - value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/sync/file2.lck
+          value_type_enum: 0
+          value: file2
+          ordinal: 3
+          source: file_content_input
+          stage_enum: 0
+          source_enum: 3
+          stage: pre_process
+        - name: /opt/stonesoup/workspace/testData/temp/sync/file3.lck
+          value_encoding: none
+          ordinal: 4
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: file3
+          source: file_content_input
+          stage: pre_process
+          source_enum: 3
+          value_type_enum: 0
+    - inputs:
+        - key: 8391
+          value_type_enum: 0
+          source: shared_memory_input
+          source_enum: 6
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          size: 18
+          value: sync/noissues
+          value_encoding: none
+        - value: file1
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/file1.lck
+          value_type_enum: 0
+          ordinal: 2
+          value_encoding: none
+        - stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/sync/file2.lck
+          source_enum: 3
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: file2
+          stage: pre_process
+          value_encoding: none
+          ordinal: 3
+        - name: /opt/stonesoup/workspace/testData/temp/sync/file3.lck
+          ordinal: 4
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 3
+          source: file_content_input
+          value: file3
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - ordinal: 1
+          key: 8391
+          size: 18
+          flags: 950
+          value: temp/sync/section
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 6
+          source: shared_memory_input
+          stage: pre_process
+          stage_enum: 0
+          id: source
+        - value_encoding: none
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/file1.lck
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          value: file1
+          stage_enum: 0
+          ordinal: 2
+          source: file_content_input
+          stage: pre_process
+        - source: file_content_input
+          ordinal: 3
+          source_enum: 3
+          stage_enum: 0
+          stage: pre_process
+          value_type_enum: 0
+          value: file2
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/sync/file2.lck
+        - value_type_enum: 0
+          ordinal: 4
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/temp/sync/file3.lck
+          value: file3
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 8391
+      size: 18
+      flags: 950
+code_complexity_features:
+  - file_name: /tmp/tmpxWiDzx_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+    file_name: /tmp/tmpxWiDzx_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+  - file_name: /tmp/tmpxWiDzx_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmpxWiDzx_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    feature_group: control_flow
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature: infinite_loop

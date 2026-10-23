@@ -1,0 +1,106 @@
+code_complexity_features:
+  - feature: SHARED_MEMORY
+    file_name: /tmp/tmpMy8ZQY_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: source_taint
+  - feature_group: data_type
+    file_name: /tmp/tmpMy8ZQY_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature: union
+  - file_name: /tmp/tmpMy8ZQY_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_nonlinear_expression
+  - line_number: 0
+    feature_group: control_flow
+    feature: set_jump_long_jump
+    file_name: /tmp/tmpMy8ZQY_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 7246
+      size: 45
+      flags: 950
+      source: shared_memory_input
+  exploits:
+    - inputs:
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          size: 45
+          source_enum: 6
+          source: shared_memory_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          id: source
+          value_type_enum: 0
+          value: Heeellllloooooo_Wooooorrrrrllllldddddd!!!!!!
+          key: 7246
+          flags: 950
+    - inputs:
+        - ordinal: 1
+          value: this_string_is_greater_than_16_characters
+          flags: 950
+          value_encoding: none
+          id: source
+          key: 7246
+          value_type_enum: 0
+          source_enum: 6
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source: shared_memory_input
+          size: 45
+  benigns:
+    - inputs:
+        - source_enum: 6
+          stage: pre_process
+          key: 7246
+          flags: 950
+          value: Good_Bye_World
+          size: 45
+          source: shared_memory_input
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          id: source
+          ordinal: 1
+    - inputs:
+        - source: shared_memory_input
+          id: source
+          key: 7246
+          value_encoding: none
+          stage: pre_process
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value: abcd
+          value_type_enum: 0
+          stage_enum: 0
+          source_enum: 6
+          flags: 950
+          size: 45
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          stage: pre_process
+          key: 7246
+          source: shared_memory_input
+          value_type_enum: 0
+          ordinal: 1
+          size: 45
+          value: short stmt
+          source_enum: 6
+          flags: 950
+          value_encoding: none
+          id: source
+  description: "Allocates a buffer of size 16 to copy taint source into.  Checks that the the taint source length is less than 16, but if it is not, returns a -1.  The -1 is silently converted to size_t, which is unsigned, resulting in a huge positive number.  Then copies that many bytes into the buffer of size 16, causing a seg fault. Good inputs: taint source has length less than 16Bad inputs: taint source has greater than or equal to 16\n\n"

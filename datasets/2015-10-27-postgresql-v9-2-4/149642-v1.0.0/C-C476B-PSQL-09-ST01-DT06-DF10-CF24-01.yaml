@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmp842lTT_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+  - file_name: /tmp/tmp842lTT_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmp842lTT_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature_group: data_flow
+    feature: index_alias_50
+  - function_name: pgstat_clear_snapshot
+    line_number: 0
+    file_name: /tmp/tmp842lTT_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    feature_group: control_flow
+    feature: unconditional_jump
+io_pair:
+  benigns:
+    - inputs:
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+          source_enum: 2
+          ordinal: 1
+          name: DIV_ISHUM
+          source: env_var_input
+          value: AAAAAaba
+          id: source
+          stage: pre_process
+    - inputs:
+        - stage: pre_process
+          value: ABCabaD123
+          id: source
+          ordinal: 1
+          source_enum: 2
+          name: DIV_ISHUM
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          source: env_var_input
+          stage_enum: 0
+    - inputs:
+        - source_enum: 2
+          name: DIV_ISHUM
+          stage: pre_process
+          source: env_var_input
+          id: source
+          value_encoding: none
+          ordinal: 1
+          value: 1234564760ABCDEFGHIJKLMNOPQRSTUabaVWXYZabcdefghijklmnopqrstuvwxyz
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+  description: "If a value is seen that doesn't contain 'aba', the taint buffer gets set to null and strlen is called, causing a null pointer dereference\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: DIV_ISHUM
+  exploits:
+    - inputs:
+        - stage: pre_process
+          source: env_var_input
+          name: DIV_ISHUM
+          value_encoding: none
+          id: source
+          value: A.A
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          stage_enum: 0
+          source_enum: 2
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          name: DIV_ISHUM
+          stage_enum: 0
+          id: source
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          value: AAAAAAAHHHHHHHHHHHH!
+          value_type_enum: 0
+          ordinal: 1
+          value_encoding: none

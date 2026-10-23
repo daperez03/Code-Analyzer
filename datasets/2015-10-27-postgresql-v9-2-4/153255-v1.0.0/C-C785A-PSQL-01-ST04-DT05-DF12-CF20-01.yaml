@@ -1,0 +1,106 @@
+io_pair:
+  benigns:
+    - inputs:
+        - source: shared_memory_input
+          stage: pre_process
+          value_type_enum: 0
+          value_encoding: none
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          key: 1527
+          ordinal: 1
+          value: /etc/passwd
+          flags: 950
+          source_enum: 6
+          size: 20
+          stage_enum: 0
+    - inputs:
+        - flags: 950
+          ordinal: 1
+          stage_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          size: 20
+          source_enum: 6
+          value: /etc/ssh/ssh_config
+          value_encoding: none
+          stage: pre_process
+          value_type_enum: 0
+          key: 1527
+    - inputs:
+        - id: source
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 6
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 1
+          size: 20
+          key: 1527
+          flags: 950
+          value: /usr/bin/gcc
+          source: shared_memory_input
+  exploits:
+    - inputs:
+        - stage: pre_process
+          ordinal: 1
+          size: 20
+          source_enum: 6
+          key: 1527
+          id: source
+          source: shared_memory_input
+          value_type_enum: 0
+          stage_enum: 0
+          value: ../testData
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          size: 20
+          id: source
+          source: shared_memory_input
+          key: 1527
+          stage_enum: 0
+          flags: 950
+          source_enum: 6
+          ordinal: 1
+          value: ../testOutput
+          value_encoding: none
+          stage: pre_process
+          value_type_enum: 0
+  description: "Has a buffer declared on the stack. char[20] If input is resolved to a value larger than 20 it will overflow\n\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage_enum: 0
+      stage: pre_process
+      id: source
+      ordinal: 1
+      key: 1527
+      size: 20
+      flags: 950
+code_complexity_features:
+  - file_name: /tmp/tmpF4lG7o_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpF4lG7o_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpF4lG7o_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - file_name: /tmp/tmpF4lG7o_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: mudfat_nucule
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

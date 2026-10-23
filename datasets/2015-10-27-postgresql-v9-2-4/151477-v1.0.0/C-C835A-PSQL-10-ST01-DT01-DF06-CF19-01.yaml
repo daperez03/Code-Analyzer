@@ -1,0 +1,94 @@
+code_complexity_features:
+  - file_name: /tmp/tmpqSTGaR_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_type
+    file_name: /tmp/tmpqSTGaR_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    feature: array
+  - file_name: /tmp/tmpqSTGaR_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - function_name: ReleaseAndReadBuffer
+    line_number: 0
+    file_name: /tmp/tmpqSTGaR_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    feature_group: control_flow
+    feature: recursive
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  description: "Infinite Loop that checks each character of input and if it is ascii val 48 or higher, updates the exit counter.  Otherwise it doesn't, resulting in an infinite loop\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: RUNNELS_NIXON
+  benigns:
+    - inputs:
+        - source_enum: 2
+          ordinal: 1
+          value_encoding: none
+          value_type_enum: 0
+          name: RUNNELS_NIXON
+          source: env_var_input
+          id: source
+          value: AAA
+          stage_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_type_enum: 0
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          id: source
+          stage_enum: 0
+          name: RUNNELS_NIXON
+          value: Hellowworld
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+    - inputs:
+        - name: RUNNELS_NIXON
+          ordinal: 1
+          stage: pre_process
+          source: env_var_input
+          source_enum: 2
+          id: source
+          stage_enum: 0
+          value: Goodbyecruelworld
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+  exploits:
+    - inputs:
+        - value: AAAAA.AAAAAAAA
+          source: env_var_input
+          value_encoding: none
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          name: RUNNELS_NIXON
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          id: source
+          name: RUNNELS_NIXON
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          value_type_enum: 0
+          value: This statement will break it
+          value_encoding: none

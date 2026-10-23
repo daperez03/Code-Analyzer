@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 150121,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case implements a non-reentrant function that uses a static integer to iterate through a string setting each character to null. The test case takes a control integer and an input string. The control integer is used for timing within the test case to ensure that we hit either a good or bad case, and the input string is used as shared data for the threads to act upon. When executing, the test case spawns two threads which both in turn call a non-reentrant function that iterates through the input string using a static integer as a counter. If both threads enter the function within a significantly small time frame the static integer will get incremented twice for each position in the string overflowing the array and overwriting the free() struct causing a segfault when the memory is free()'d. \nMetadata\n - Base program: PostgreSQL\n - Source Taint: ENVIRONMENT_VARIABLE\n - Data Type: STRUCT\n - Data Flow: BUFFER_ADDRESS_ARRAY_INDEX\n - Control Flow: SEQUENCE",
+        "state": "bad",
+        "application": "cpe:2.3:a:postgresql:postgresql:9.2.4:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "postgresql-v9.2.4"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C663A-PSQL-09-ST01-DT05-DF16-CF20-01.xml"
+          },
+          "length": 75533,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "77bc10c466a5474bbfde5580a8a0e83da3bfa043b8226d38795c822d245aba43"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/src/backend/postmaster/pgstat.c"
+          },
+          "length": 142787,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "69eeb795077352b3aa3c200daec2fe0fc3c492c8f66c3c26983678252fde7ec1"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "663",
+              "name": "Use of a Non-reentrant Function in a Concurrent Context"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-663",
+          "message": {
+            "text": "Use of a Non-reentrant Function in a Concurrent Context."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/src/backend/postmaster/pgstat.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 3673,
+                  "endLine": 3674
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "663",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

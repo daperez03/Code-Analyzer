@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 153738,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case implements stack allocated buffer which, under certain inputs, gets erroneously free()'d. The test case takes a string as input and copies it to an internal array of size 64 allocated on the stack. This string is the converted to all caps and, if the resulting string's first letter \nMetadata\n - Base program: PostgreSQL\n - Source Taint: SOCKET\n - Data Type: SIMPLE\n - Data Flow: BUFFER_ADDRESS_ARRAY_INDEX\n - Control Flow: SEQUENCE",
+        "state": "bad",
+        "application": "cpe:2.3:a:postgresql:postgresql:9.2.4:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "postgresql-v9.2.4"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C590A-PSQL-07-ST03-DT02-DF16-CF20-01.xml"
+          },
+          "length": 77316,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "45af644fca75a4182df0d0d7fbcb957a9f9903e3e3ed1141fec317e0fe73049b"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/src/backend/access/heap/heapam.c"
+          },
+          "length": 215842,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "c7ad6657878d77007f0b7f64773df66bb5d68e9e0212e5043d64584ba456d22c"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "590",
+              "name": "Free of Memory not on the Heap"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-590",
+          "message": {
+            "text": "Free of Memory not on the Heap."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/src/backend/access/heap/heapam.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 158,
+                  "endLine": 160
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "590",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

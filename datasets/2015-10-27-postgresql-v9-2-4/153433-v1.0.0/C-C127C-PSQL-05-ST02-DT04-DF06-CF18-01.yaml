@@ -1,0 +1,204 @@
+io_pair:
+  description: "Has a heap buffer of size 128 within a struct.  reads in an ascii string from an environmentvariable and increments the corresponding values in the heap buffer.  Then reads in an input and prints out the count of the characters from the heap buff of those in the input.  If input contains extended ascii characters, they will be wrapped around to negative values and the buffer will be under read\n\n"
+  base_inputs:
+    - stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/amoebaean_ponent/reagency_subexcite.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: WITTE_ANAEROPLASTY
+      source: env_var_input
+      source_enum: 2
+    - ordinal: 2
+      name: /opt/stonesoup/workspace/testData/amoebaean_ponent/reagency_subexcite.txt
+      source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+  benigns:
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/amoebaean_ponent/reagency_subexcite.txt
+          name: WITTE_ANAEROPLASTY
+          source_enum: 2
+          value_type_enum: 0
+          ordinal: 1
+          value_encoding: none
+          stage_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+        - source: file_content_input
+          stage_enum: 0
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/amoebaean_ponent/reagency_subexcite.txt
+          value_type_enum: 0
+          ordinal: 2
+        - value_type_enum: 0
+          stage_enum: 0
+          value_encoding: none
+          name: INPUT_STRING
+          source_enum: 2
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+          source: env_var_input
+          ordinal: 2
+    - inputs:
+        - stage_enum: 0
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/amoebaean_ponent/reagency_subexcite.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: WITTE_ANAEROPLASTY
+          source: env_var_input
+          stage: pre_process
+          value_type_enum: 0
+          source_enum: 2
+        - stage: pre_process
+          value: This is probably not going to overflow a buffer of some sort.  Let's run it anyway and see what happens.
+          source: file_content_input
+          stage_enum: 0
+          source_enum: 3
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/amoebaean_ponent/reagency_subexcite.txt
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+        - source: env_var_input
+          value_encoding: none
+          ordinal: 2
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+          value_type: USE_TEXT_DIRECTLY
+          name: INPUT_STRING
+          stage: pre_process
+          source_enum: 2
+          stage_enum: 0
+          value_type_enum: 0
+    - inputs:
+        - stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/amoebaean_ponent/reagency_subexcite.txt
+          value_type_enum: 0
+          stage: pre_process
+          value_encoding: none
+          name: WITTE_ANAEROPLASTY
+          source: env_var_input
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+        - value_type_enum: 0
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/amoebaean_ponent/reagency_subexcite.txt
+          source_enum: 3
+          id: source
+          source: file_content_input
+          stage_enum: 0
+          value: As long as this statement has more than 64 characters, then nothing bad should happen
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 2
+        - ordinal: 2
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage: pre_process
+          value_type_enum: 0
+          name: INPUT_STRING
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+  exploits:
+    - inputs:
+        - stage: pre_process
+          value: /opt/stonesoup/workspace/testData/amoebaean_ponent/reagency_subexcite.txt
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage_enum: 0
+          value_type_enum: 0
+          name: WITTE_ANAEROPLASTY
+          value_encoding: none
+          ordinal: 1
+          source: env_var_input
+        - id: source
+          stage: pre_process
+          value_encoding: base64
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/amoebaean_ponent/reagency_subexcite.txt
+          ordinal: 2
+          source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          value: QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUGugIE=
+          value_type_enum: 0
+        - value_type_enum: 0
+          stage: pre_process
+          name: INPUT_STRING
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          source_enum: 2
+          stage_enum: 0
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+          value_encoding: none
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/amoebaean_ponent/reagency_subexcite.txt
+          name: WITTE_ANAEROPLASTY
+          ordinal: 1
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+        - ordinal: 2
+          name: /opt/stonesoup/workspace/testData/amoebaean_ponent/reagency_subexcite.txt
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          value: SGVsbKUgV6lybGSI
+          value_encoding: base64
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+          source: env_var_input
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+          value_encoding: none
+          ordinal: 2
+          name: INPUT_STRING
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+code_complexity_features:
+  - file_name: /tmp/tmpYigQY6_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - function_name: ResourceOwnerForgetCatCacheRef
+    file_name: /tmp/tmpYigQY6_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpYigQY6_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - file_name: /tmp/tmpYigQY6_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: control_flow
+    feature: pointer_to_function
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

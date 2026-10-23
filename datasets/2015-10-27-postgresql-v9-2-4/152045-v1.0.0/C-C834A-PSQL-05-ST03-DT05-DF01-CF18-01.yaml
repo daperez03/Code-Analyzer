@@ -1,0 +1,100 @@
+io_pair:
+  exploits:
+    - inputs:
+        - stage_enum: 1
+          source: socket_input
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 5
+          value_type_enum: 0
+          stage: co_process
+          ordinal: 1
+          id: source
+          port: 8887
+          value: 1073676287
+          address: ss-localhost
+          value_encoding: none
+    - inputs:
+        - value: 2147483647
+          address: ss-localhost
+          source_enum: 5
+          value_type_enum: 0
+          source: socket_input
+          stage_enum: 1
+          stage: co_process
+          ordinal: 1
+          port: 8887
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  benigns:
+    - inputs:
+        - source: socket_input
+          stage: co_process
+          stage_enum: 1
+          source_enum: 5
+          address: ss-localhost
+          value: 68718952445
+          id: source
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 5
+          stage_enum: 1
+          id: source
+          port: 8887
+          source: socket_input
+          stage: co_process
+          value_encoding: none
+          address: ss-localhost
+          value: 1301
+          ordinal: 1
+    - inputs:
+        - value_encoding: none
+          value: 1073676288
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          id: source
+          port: 8887
+          stage: co_process
+          source_enum: 5
+          stage_enum: 1
+          address: ss-localhost
+          source: socket_input
+  description: "Takes an integer as input, and determine if the integer is prime using the truly stupid method of seeing if every natural number less than it will divide into it.  If the integer is a large prime number, the program will loop excessively.\n\n"
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - function_name: stonesoup_handle_taint
+    file_name: /tmp/tmpT3pHA0_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    feature_group: source_taint
+    line_number: 0
+    feature: SOCKET
+  - file_name: /tmp/tmpT3pHA0_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpT3pHA0_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_alias_1
+  - function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: control_flow
+    feature: pointer_to_function
+    file_name: /tmp/tmpT3pHA0_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c

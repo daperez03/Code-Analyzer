@@ -1,0 +1,122 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 149965,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case implements a non-reentrant function that is called by a signal handler. The test case takes a control file and input string as input. The control file is used for timing and the input string is used as data for the test case to manipulate. The test case assigns a signal handler that calls a non-reentrant function that locks a mutex lock and manipulates the input data. If the test case is currently executing the non-reentrant function when the signal handler is called, it will re-enter the function and deadlock on the call to lock the mutex.  \nMetadata\n - Base program: PostgreSQL\n - Source Taint: SHARED_MEMORY\n - Data Type: TYPEDEF\n - Data Flow: ADDRESS_AS_VARIABLE\n - Control Flow: INFINITE_LOOP",
+        "state": "bad",
+        "application": "cpe:2.3:a:postgresql:postgresql:9.2.4:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "postgresql-v9.2.4"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C479A-PSQL-01-ST04-DT06-DF15-CF03-01.xml"
+          },
+          "length": 102036,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "f7c01d68f49689853a721d54fa0ca77a1712b2674bdc5237f7998c7fc80ce32c"
+          }
+        },
+        {
+          "location": {
+            "uri": "scripts/shm_setup.c"
+          },
+          "length": 3155,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "15d311b07d65d83f38876f4ee427c355e2048145d6db756d5d71877405f24822"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/src/backend/storage/ipc/pmsignal.c"
+          },
+          "length": 18360,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "57c2fefd0083a9fba85deb122a90ebcab854312b88ffe30e15cea49c6f2b7a83"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "479",
+              "name": "Signal Handler Use of a Non-reentrant Function"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-479",
+          "message": {
+            "text": "Signal Handler Use of a Non-reentrant Function."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/src/backend/storage/ipc/pmsignal.c",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 225,
+                  "endLine": 227
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "479",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

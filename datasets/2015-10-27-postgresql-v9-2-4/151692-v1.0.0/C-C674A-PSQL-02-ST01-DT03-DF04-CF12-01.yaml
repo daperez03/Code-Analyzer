@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpRO8tTp_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpRO8tTp_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    feature_group: data_type
+    function_name: calc_bucket
+    line_number: 0
+    feature: void_pointer
+  - file_name: /tmp/tmpRO8tTp_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: data_flow
+    feature: address_alias_50
+  - feature_group: control_flow
+    feature: interprocedural_1
+    function_name: calc_bucket
+    line_number: 0
+    file_name: /tmp/tmpRO8tTp_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+io_pair:
+  description: "Read a string from the input.  Get the first character of the string, and then search the string for another instance of that first character.If the character does not appear, go into uncontrolled recursion.\n\n"
+  base_inputs:
+    - id: source
+      ordinal: 1
+      name: JOWLIEST_SESSER
+      source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+      stage: pre_process
+  exploits:
+    - inputs:
+        - id: source
+          value_type_enum: 0
+          stage_enum: 0
+          ordinal: 1
+          source: env_var_input
+          source_enum: 2
+          name: JOWLIEST_SESSER
+          stage: pre_process
+          value_encoding: none
+          value: 1st char does not appear again
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          ordinal: 1
+          value_type_enum: 0
+          value: FEDCBA
+          stage_enum: 0
+          stage: pre_process
+          name: JOWLIEST_SESSER
+  benigns:
+    - inputs:
+        - ordinal: 1
+          source: env_var_input
+          value_encoding: none
+          value: asdfasdf
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          stage: pre_process
+          value_type_enum: 0
+          id: source
+          name: JOWLIEST_SESSER
+    - inputs:
+        - source_enum: 2
+          id: source
+          source: env_var_input
+          ordinal: 1
+          name: JOWLIEST_SESSER
+          value_type_enum: 0
+          stage: pre_process
+          stage_enum: 0
+          value: this string has an another t
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage_enum: 0
+          value_type_enum: 0
+          value_encoding: none
+          id: source
+          ordinal: 1
+          name: JOWLIEST_SESSER
+          stage: pre_process
+          source: env_var_input
+          value: 1st char is 1

@@ -1,0 +1,173 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          size: 65
+          id: source
+          ordinal: 1
+          key: 5397
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/file1 asdf
+          value_type_enum: 0
+          flags: 950
+          source: shared_memory_input
+          source_enum: 6
+        - ordinal: 2
+          id: background-complex
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then PROC_ID=\"${NEW_FILE%.pid}\"; echo \"Signaling: \" \"${PROC_ID}\" && echo \"Waiting\" && sleep 0.5 && kill -s 10 \"${PROC_ID}\" && echo \"Signaled.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 7
+          source: script_input
+        - stage: pre_process
+          name: /opt/stonesoup/workspace/testData/file1
+          ordinal: 3
+          source_enum: 3
+          stage_enum: 0
+          source: file_content_input
+    - inputs:
+        - source_enum: 6
+          ordinal: 1
+          id: source
+          stage_enum: 0
+          value_encoding: none
+          size: 65
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          source: shared_memory_input
+          value_type_enum: 0
+          stage: pre_process
+          key: 5397
+          value: /opt/stonesoup/workspace/testData/file1 fD1Sa886
+        - source_enum: 7
+          source: script_input
+          stage: pre_process
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then PROC_ID=\"${NEW_FILE%.pid}\"; echo \"Signaling: \" \"${PROC_ID}\" && echo \"Waiting\" && sleep 0.5 && kill -s 10 \"${PROC_ID}\" && echo \"Signaled.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          ordinal: 2
+          stage_enum: 0
+          id: background-complex
+        - source: file_content_input
+          source_enum: 3
+          ordinal: 3
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/file1
+          stage_enum: 0
+    - inputs:
+        - stage_enum: 0
+          id: source
+          ordinal: 1
+          key: 5397
+          size: 65
+          flags: 950
+          source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/file1 all5alpha5numeric5yo.
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage: pre_process
+          stage_enum: 0
+          id: background-complex
+          ordinal: 2
+          source_enum: 7
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then PROC_ID=\"${NEW_FILE%.pid}\"; echo \"Signaling: \" \"${PROC_ID}\" && echo \"Waiting\" && sleep 0.5 && kill -s 10 \"${PROC_ID}\" && echo \"Signaled.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          source: script_input
+        - ordinal: 3
+          name: /opt/stonesoup/workspace/testData/file1
+          stage_enum: 0
+          stage: pre_process
+          source: file_content_input
+          source_enum: 3
+  description: "This weakness expects a string in the form: '<qsize> <file1> <data>' where qsize is the size of the quick sort (used to delay execution in certain benign cases), file1 is a file that is read to delay execution, and data is a string containing no spaces. The data string is used for processing, but the contents are unimportant. The weakness calls a non-rentrent function from a signal handler causing deadlock on a mutex. While this function is executing, catching a SIGUSR1 signal will cause the signal handler to re-invoke the function leading to deadlock. The weakness notifies the test harness that it is ready for a signal by creating a file called testData/*.pid.\n\n"
+  base_inputs:
+    - stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 5397
+      size: 65
+      flags: 950
+      source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+  exploits:
+    - inputs:
+        - key: 5397
+          size: 65
+          flags: 950
+          stage_enum: 0
+          source: shared_memory_input
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          source_enum: 6
+          stage: pre_process
+          value: "/opt/stonesoup/workspace/testData/fifo1 :(){:|:&};:"
+          ordinal: 1
+          value_encoding: none
+        - source: script_input
+          id: background-complex
+          stage: pre_process
+          source_enum: 7
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then PROC_ID=\"${NEW_FILE%.pid}\"; echo \"Signaling: \" \"${PROC_ID}\" && echo \"Waiting\" && sleep 0.5 && kill -s 10 \"${PROC_ID}\" && echo \"Signaled.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          ordinal: 2
+          stage_enum: 0
+        - stage: pre_process
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 --nosync
+          source: script_input
+          id: background
+          stage_enum: 0
+          source_enum: 7
+          ordinal: 3
+    - inputs:
+        - source_enum: 6
+          stage_enum: 0
+          value_type_enum: 0
+          value_encoding: none
+          id: source
+          ordinal: 1
+          flags: 950
+          stage: pre_process
+          key: 5397
+          source: shared_memory_input
+          value: /opt/stonesoup/workspace/testData/fifo1 re-entrant,_re-smentrant
+          value_type: USE_TEXT_DIRECTLY
+          size: 65
+        - id: background-complex
+          ordinal: 2
+          stage_enum: 0
+          source: script_input
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then PROC_ID=\"${NEW_FILE%.pid}\"; echo \"Signaling: \" \"${PROC_ID}\" && echo \"Waiting\" && sleep 0.5 && kill -s 10 \"${PROC_ID}\" && echo \"Signaled.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          stage: pre_process
+          source_enum: 7
+        - ordinal: 3
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 --nosync
+          stage: pre_process
+          id: background
+          source: script_input
+          stage_enum: 0
+          source_enum: 7
+code_complexity_features:
+  - file_name: /tmp/tmpTX8aV2_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpTX8aV2_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpTX8aV2_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_flow
+    feature: address_alias_10
+  - file_name: /tmp/tmpTX8aV2_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: control_flow
+    feature: macros

@@ -1,0 +1,154 @@
+code_complexity_features:
+  - function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+    file_name: /tmp/tmpj_ZFDa_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+  - function_name: ResourceOwnerForgetCatCacheRef
+    file_name: /tmp/tmpj_ZFDa_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpj_ZFDa_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+  - file_name: /tmp/tmpj_ZFDa_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: control_flow
+    feature: macros
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - source: env_var_input
+          name: REBBA_BRACHIOTOMY
+          stage: pre_process
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/fiertz_sabula/selvedged_amman.txt
+          stage_enum: 0
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+        - stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/fiertz_sabula/selvedged_amman.txt
+          value: 0123456789
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 3
+          source: file_content_input
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/fiertz_sabula/selvedged_amman.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: REBBA_BRACHIOTOMY
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/fiertz_sabula/selvedged_amman.txt
+          value: 10 chars..
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/fiertz_sabula/selvedged_amman.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: REBBA_BRACHIOTOMY
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/fiertz_sabula/selvedged_amman.txt
+  benigns:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          name: REBBA_BRACHIOTOMY
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/fiertz_sabula/selvedged_amman.txt
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+        - source_enum: 3
+          ordinal: 2
+          value: AAAAAAAAAAA
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          id: source
+          name: /opt/stonesoup/workspace/testData/fiertz_sabula/selvedged_amman.txt
+          source: file_content_input
+          stage_enum: 0
+    - inputs:
+        - stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/fiertz_sabula/selvedged_amman.txt
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          name: REBBA_BRACHIOTOMY
+          value_type_enum: 0
+          value_encoding: none
+          ordinal: 1
+          stage: pre_process
+          source_enum: 2
+        - value: 12345 Hello world!
+          value_type_enum: 0
+          source: file_content_input
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 3
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/fiertz_sabula/selvedged_amman.txt
+    - inputs:
+        - value_encoding: none
+          source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/fiertz_sabula/selvedged_amman.txt
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          ordinal: 1
+          value_type_enum: 0
+          name: REBBA_BRACHIOTOMY
+        - stage_enum: 0
+          ordinal: 2
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/fiertz_sabula/selvedged_amman.txt
+          id: source
+          source: file_content_input
+          stage: pre_process
+          value_encoding: none
+          value_type_enum: 0
+          value: This string does not have 10 characters
+          value_type: USE_TEXT_DIRECTLY
+  description: "Malloc a function pointer.  If the input length is not equal to 10, set the function pointer to a function.  Try to use the function pointer. This will seg fault if the input length is exactly 10.\n\n"

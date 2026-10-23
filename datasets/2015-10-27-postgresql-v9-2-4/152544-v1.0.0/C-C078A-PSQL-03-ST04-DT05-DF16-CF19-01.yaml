@@ -1,0 +1,106 @@
+io_pair:
+  exploits:
+    - inputs:
+        - value_encoding: none
+          value_type_enum: 0
+          source_enum: 6
+          flags: 950
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          value: 10; ls -la
+          value_type: USE_TEXT_DIRECTLY
+          key: 4178
+          size: 28
+          source: shared_memory_input
+    - inputs:
+        - stage_enum: 0
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          flags: 950
+          key: 4178
+          source: shared_memory_input
+          size: 28
+          id: source
+          source_enum: 6
+          value: localhost; echo Hello world
+          stage: pre_process
+  description: "Read a string from the input.  Do nslookup on that string, without checking first if it has any command separators.  This allows the user to run arbitrary commands.\n\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 4178
+      size: 28
+      flags: 950
+  benigns:
+    - inputs:
+        - source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+          stage: pre_process
+          stage_enum: 0
+          key: 4178
+          ordinal: 1
+          id: source
+          flags: 950
+          value_encoding: none
+          value: 10
+          size: 28
+          value_type_enum: 0
+    - inputs:
+        - source: shared_memory_input
+          key: 4178
+          id: source
+          source_enum: 6
+          flags: 950
+          stage: pre_process
+          stage_enum: 0
+          value: google.com
+          value_type_enum: 0
+          ordinal: 1
+          value_encoding: none
+          size: 28
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_type_enum: 0
+          stage_enum: 0
+          id: source
+          value: localhost
+          ordinal: 1
+          value_encoding: none
+          key: 4178
+          size: 28
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmprydnNX_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmprydnNX_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmprydnNX_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmprydnNX_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: control_flow
+    feature: recursive

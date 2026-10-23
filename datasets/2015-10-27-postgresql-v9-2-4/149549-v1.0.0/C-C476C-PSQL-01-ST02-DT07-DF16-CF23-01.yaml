@@ -1,0 +1,154 @@
+code_complexity_features:
+  - file_name: /tmp/tmpGkjeEx_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpGkjeEx_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmpGkjeEx_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - line_number: 0
+    feature_group: control_flow
+    feature: set_jump_long_jump
+    file_name: /tmp/tmpGkjeEx_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - name: PLAUDIT_KALGAN
+          value: /opt/stonesoup/workspace/testData/diaphysis_lobelin/steroid_adumbrations.txt
+          source_enum: 2
+          value_encoding: none
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_type_enum: 0
+          stage_enum: 0
+          source: env_var_input
+        - ordinal: 2
+          name: /opt/stonesoup/workspace/testData/diaphysis_lobelin/steroid_adumbrations.txt
+          value: 1 foo
+          source: file_content_input
+          id: source
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - stage: pre_process
+          value: /opt/stonesoup/workspace/testData/diaphysis_lobelin/steroid_adumbrations.txt
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+          name: PLAUDIT_KALGAN
+          source_enum: 2
+          value_type_enum: 0
+          source: env_var_input
+        - value: 2 a b
+          source_enum: 3
+          source: file_content_input
+          id: source
+          name: /opt/stonesoup/workspace/testData/diaphysis_lobelin/steroid_adumbrations.txt
+          stage_enum: 0
+          ordinal: 2
+          stage: pre_process
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+    - inputs:
+        - source_enum: 2
+          name: PLAUDIT_KALGAN
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/diaphysis_lobelin/steroid_adumbrations.txt
+          stage_enum: 0
+          stage: pre_process
+          source: env_var_input
+        - source: file_content_input
+          stage_enum: 0
+          id: source
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/diaphysis_lobelin/steroid_adumbrations.txt
+          ordinal: 2
+          value: 3 alpha bravo charlie
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+  exploits:
+    - inputs:
+        - value_encoding: none
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          name: PLAUDIT_KALGAN
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 2
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/diaphysis_lobelin/steroid_adumbrations.txt
+          ordinal: 1
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/diaphysis_lobelin/steroid_adumbrations.txt
+          value: 2 a
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/diaphysis_lobelin/steroid_adumbrations.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: PLAUDIT_KALGAN
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/diaphysis_lobelin/steroid_adumbrations.txt
+          value: 10 a b c
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  description: "Read a space-delimited string from the input.  The first element in the string is the number of elements following it.  Then read in the following elements, and output them to stderr.  If there are fewer elements than expected, a seg fault occurs.\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/diaphysis_lobelin/steroid_adumbrations.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: PLAUDIT_KALGAN
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/diaphysis_lobelin/steroid_adumbrations.txt

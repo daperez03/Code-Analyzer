@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - feature: SHARED_MEMORY
+    file_name: /tmp/tmp7_RKKD_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    line_number: 0
+    feature_group: source_taint
+  - file_name: /tmp/tmp7_RKKD_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - line_number: 0
+    function_name: oid_hash
+    file_name: /tmp/tmp7_RKKD_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - feature: unconditional_jump
+    file_name: /tmp/tmp7_RKKD_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    line_number: 0
+    function_name: oid_hash
+    feature_group: control_flow
+io_pair:
+  base_inputs:
+    - stage_enum: 0
+      source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      id: source
+      ordinal: 1
+      key: 5575
+      size: 596
+      flags: 950
+  description: "Has a fixed heap buffer of size 64.  (malloc(64*sizeof(char))) When input has a larger size, the heap buffer will be over read\n\n"
+  exploits:
+    - inputs:
+        - key: 5575
+          stage: pre_process
+          value_type_enum: 0
+          size: 596
+          source_enum: 6
+          flags: 950
+          source: shared_memory_input
+          stage_enum: 0
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          ordinal: 1
+    - inputs:
+        - flags: 950
+          id: source
+          size: 596
+          key: 5575
+          ordinal: 1
+          stage_enum: 0
+          source: shared_memory_input
+          value_type_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value: This is probably going to overflow a buffer of some sort.  Let's run it anyway and see what happens.  I hope that everything turns out ok, because I would love to see what this looks like in all CAPS.  Converting ASCII characters to upper case is easy, you can either call a system function, or just add the standard difference between the start of the two character sets.  But, I am sure there is a reason that system functions exist for this sort of functionality.
+          source_enum: 6
+          value_encoding: none
+  benigns:
+    - inputs:
+        - ordinal: 1
+          stage_enum: 0
+          size: 596
+          value_type: USE_TEXT_DIRECTLY
+          value: AAAAAAAAAAAAAAAAAAAAAAA
+          source_enum: 6
+          source: shared_memory_input
+          value_type_enum: 0
+          stage: pre_process
+          flags: 950
+          key: 5575
+          value_encoding: none
+          id: source
+    - inputs:
+        - flags: 950
+          value_type_enum: 0
+          key: 5575
+          size: 596
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+          value: Hello World!
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          stage: pre_process
+          source: shared_memory_input
+          value_encoding: none
+    - inputs:
+        - stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: Short is good
+          flags: 950
+          source_enum: 6
+          source: shared_memory_input
+          stage: pre_process
+          key: 5575
+          size: 596
+          id: source
+          value_type_enum: 0
+          ordinal: 1
+          value_encoding: none

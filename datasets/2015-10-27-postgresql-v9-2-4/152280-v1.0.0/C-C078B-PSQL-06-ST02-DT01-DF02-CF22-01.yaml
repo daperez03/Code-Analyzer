@@ -1,0 +1,154 @@
+io_pair:
+  benigns:
+    - inputs:
+        - value_encoding: none
+          source: env_var_input
+          name: ERRORS_BREAKWATER
+          stage_enum: 0
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/grainy_zeatins/viaticum_ophthalmoscopic.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage: pre_process
+          ordinal: 1
+        - source_enum: 3
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: 10
+          name: /opt/stonesoup/workspace/testData/grainy_zeatins/viaticum_ophthalmoscopic.txt
+          stage: pre_process
+          id: source
+          ordinal: 2
+          stage_enum: 0
+          value_encoding: none
+    - inputs:
+        - value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/grainy_zeatins/viaticum_ophthalmoscopic.txt
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_encoding: none
+          stage_enum: 0
+          name: ERRORS_BREAKWATER
+        - id: source
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: google.com
+          name: /opt/stonesoup/workspace/testData/grainy_zeatins/viaticum_ophthalmoscopic.txt
+          ordinal: 2
+          stage_enum: 0
+          stage: pre_process
+          source: file_content_input
+          source_enum: 3
+    - inputs:
+        - value_encoding: none
+          source: env_var_input
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: ERRORS_BREAKWATER
+          stage_enum: 0
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/grainy_zeatins/viaticum_ophthalmoscopic.txt
+          ordinal: 1
+        - stage: pre_process
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: localhost
+          ordinal: 2
+          source: file_content_input
+          stage_enum: 0
+          id: source
+          name: /opt/stonesoup/workspace/testData/grainy_zeatins/viaticum_ophthalmoscopic.txt
+          source_enum: 3
+  exploits:
+    - inputs:
+        - source: env_var_input
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/grainy_zeatins/viaticum_ophthalmoscopic.txt
+          value_encoding: none
+          name: ERRORS_BREAKWATER
+          value_type_enum: 0
+          ordinal: 1
+        - value_encoding: none
+          value: 10%20%3B%20ls -la
+          name: /opt/stonesoup/workspace/testData/grainy_zeatins/viaticum_ophthalmoscopic.txt
+          value_type_enum: 0
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          source_enum: 3
+          ordinal: 2
+    - inputs:
+        - name: ERRORS_BREAKWATER
+          stage_enum: 0
+          value_type_enum: 0
+          source_enum: 2
+          ordinal: 1
+          stage: pre_process
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/grainy_zeatins/viaticum_ophthalmoscopic.txt
+        - stage: pre_process
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/grainy_zeatins/viaticum_ophthalmoscopic.txt
+          value: localhost%20%26%20echo Hello world
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          source_enum: 3
+          id: source
+          stage_enum: 0
+  description: "Read a string from the input.  Check first if it has any command separators and then run it though a URL decoding algorithm.  Then use this string to perform an nslookup by appending it to the end of the command. This allows the user to run arbitrary commands by suplying command separators encoded in url encoding.\n\n"
+  base_inputs:
+    - name: ERRORS_BREAKWATER
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/grainy_zeatins/viaticum_ophthalmoscopic.txt
+      value_encoding: none
+    - source: file_content_input
+      stage: pre_process
+      id: source
+      source_enum: 3
+      ordinal: 2
+      stage_enum: 0
+      name: /opt/stonesoup/workspace/testData/grainy_zeatins/viaticum_ophthalmoscopic.txt
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmphLp5k__ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - function_name: oid_hash
+    line_number: 0
+    feature: array
+    file_name: /tmp/tmphLp5k__ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    feature_group: data_type
+  - feature: address_alias_2
+    function_name: oid_hash
+    file_name: /tmp/tmphLp5k__ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    line_number: 0
+    feature_group: data_flow
+  - feature: macros
+    feature_group: control_flow
+    file_name: /tmp/tmphLp5k__ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    line_number: 0

@@ -1,0 +1,94 @@
+io_pair:
+  base_inputs:
+    - name: WRECKAGE_MAMEY
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      source: env_var_input
+      source_enum: 2
+  description: "Read a string from the input.  Check first if it has any command separators and then run it though a URL decoding algorithm.  Then use this string to perform an nslookup by appending it to the end of the command. This allows the user to run arbitrary commands by suplying command separators encoded in url encoding.\n\n"
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          name: WRECKAGE_MAMEY
+          value: 10%20%3B%20ls -la
+          source: env_var_input
+          stage: pre_process
+          value_type_enum: 0
+          ordinal: 1
+          stage_enum: 0
+          value_encoding: none
+          source_enum: 2
+          id: source
+    - inputs:
+        - ordinal: 1
+          value: localhost%20%26%20echo Hello world
+          id: source
+          value_encoding: none
+          name: WRECKAGE_MAMEY
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage_enum: 0
+          value_type_enum: 0
+          source: env_var_input
+          stage: pre_process
+  benigns:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          ordinal: 1
+          source_enum: 2
+          name: WRECKAGE_MAMEY
+          id: source
+          stage: pre_process
+          value_encoding: none
+          source: env_var_input
+          value_type_enum: 0
+          value: 10
+    - inputs:
+        - value_encoding: none
+          stage: pre_process
+          id: source
+          source_enum: 2
+          stage_enum: 0
+          value: google.com
+          source: env_var_input
+          name: WRECKAGE_MAMEY
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+    - inputs:
+        - ordinal: 1
+          name: WRECKAGE_MAMEY
+          source: env_var_input
+          value_type_enum: 0
+          stage_enum: 0
+          value: localhost
+          source_enum: 2
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          id: source
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - feature_group: source_taint
+    line_number: 0
+    file_name: /tmp/tmpQXnwgv_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    feature: ENVIRONMENT_VARIABLE
+  - function_name: oid_hash
+    file_name: /tmp/tmpQXnwgv_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    feature: heap_pointer
+    line_number: 0
+    feature_group: data_type
+  - function_name: oid_hash
+    feature_group: data_flow
+    feature: address_as_constant
+    line_number: 0
+    file_name: /tmp/tmpQXnwgv_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+  - line_number: 0
+    function_name: moff_conred
+    file_name: /tmp/tmpQXnwgv_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    feature_group: control_flow
+    feature: indirectly_recursive

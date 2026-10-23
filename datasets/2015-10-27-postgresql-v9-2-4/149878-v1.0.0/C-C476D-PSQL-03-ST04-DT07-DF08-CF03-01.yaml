@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmp3eT456_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmp3eT456_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmp3eT456_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: data_flow
+    feature: index_alias_2
+  - file_name: /tmp/tmp3eT456_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: control_flow
+    feature: infinite_loop
+io_pair:
+  benigns:
+    - inputs:
+        - value: AAAAA
+          flags: 950
+          id: source
+          source_enum: 6
+          stage: pre_process
+          size: 63
+          ordinal: 1
+          stage_enum: 0
+          key: 8569
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - source_enum: 6
+          stage_enum: 0
+          size: 63
+          source: shared_memory_input
+          value: ABCD123
+          value_type_enum: 0
+          stage: pre_process
+          value_encoding: none
+          id: source
+          flags: 950
+          ordinal: 1
+          key: 8569
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          value: 1234564760ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_type_enum: 0
+          ordinal: 1
+          flags: 950
+          key: 8569
+          size: 63
+          source: shared_memory_input
+          source_enum: 6
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 8569
+      size: 63
+      flags: 950
+  exploits:
+    - inputs:
+        - value: A.A
+          flags: 950
+          source: shared_memory_input
+          ordinal: 1
+          source_enum: 6
+          key: 8569
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+          size: 63
+          id: source
+    - inputs:
+        - stage: pre_process
+          key: 8569
+          value_type_enum: 0
+          flags: 950
+          source: shared_memory_input
+          source_enum: 6
+          value: AAAAAAAHHHHHHHHHHHH!
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage_enum: 0
+          size: 63
+          value_encoding: none
+          id: source
+  description: "If a non alphanumeric value is seen, the taint buffer gets set to null and the a strcpy is called, causing a null pointer dereference\n\n"
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

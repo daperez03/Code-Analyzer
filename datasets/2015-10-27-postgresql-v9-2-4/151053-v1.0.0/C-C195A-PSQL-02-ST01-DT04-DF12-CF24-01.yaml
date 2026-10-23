@@ -1,0 +1,94 @@
+code_complexity_features:
+  - file_name: /tmp/tmpvgv3mK_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - function_name: calc_bucket
+    line_number: 0
+    feature: heap_pointer
+    feature_group: data_type
+    file_name: /tmp/tmpvgv3mK_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+  - file_name: /tmp/tmpvgv3mK_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - line_number: 0
+    feature_group: control_flow
+    feature: unconditional_jump
+    file_name: /tmp/tmpvgv3mK_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: perplexities_doucin
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  description: "Allocates a buffer of size 16 to copy taint source into.  Checks that the the taint source length is less than 16, but if it is not, returns a -1.  The -1 is silently converted to size_t, which is unsigned, resulting in a huge positive number.  Then copies that many bytes into the buffer of size 16, causing a seg fault. Good inputs: taint source has length less than 16Bad inputs: taint source has greater than or equal to 16\n\n"
+  benigns:
+    - inputs:
+        - value_encoding: none
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          value_type_enum: 0
+          ordinal: 1
+          name: UNPUMPABLE_MARSUPIALISING
+          id: source
+          value: Good_Bye_World
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - source_enum: 2
+          name: UNPUMPABLE_MARSUPIALISING
+          value_encoding: none
+          ordinal: 1
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: abcd
+    - inputs:
+        - stage: pre_process
+          source: env_var_input
+          stage_enum: 0
+          value: short stmt
+          value_type_enum: 0
+          id: source
+          ordinal: 1
+          source_enum: 2
+          name: UNPUMPABLE_MARSUPIALISING
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: UNPUMPABLE_MARSUPIALISING
+  exploits:
+    - inputs:
+        - ordinal: 1
+          stage_enum: 0
+          source_enum: 2
+          id: source
+          source: env_var_input
+          name: UNPUMPABLE_MARSUPIALISING
+          stage: pre_process
+          value: Heeellllloooooo_Wooooorrrrrllllldddddd!!!!!!
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          id: source
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 1
+          value: this_string_is_greater_than_16_characters
+          value_type: USE_TEXT_DIRECTLY
+          name: UNPUMPABLE_MARSUPIALISING
+          value_encoding: none
+          value_type_enum: 0

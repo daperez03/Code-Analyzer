@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 149640,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case reads the taint source, and converts it to an integer, then an unsigned int. It uses a wrapped malloc to allocate a buffer of the size specified by the taint source. If the size is greater than 512, the wrapped malloc returns NULL. The program attempts to use the buffer, and if the buffer is NULL, this causes a segmentation fault.\nMetadata\n - Base program: PostgreSQL\n - Source Taint: ENVIRONMENT_VARIABLE\n - Data Type: TYPEDEF\n - Data Flow: BUFFER_ADDRESS_POINTER\n - Control Flow: INTERPROCEDURAL_10",
+        "state": "bad",
+        "application": "cpe:2.3:a:postgresql:postgresql:9.2.4:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "postgresql-v9.2.4"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C476F-PSQL-04-ST01-DT06-DF17-CF14-01.xml"
+          },
+          "length": 71790,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "4df82a78efeff84b83d7b8af155ce7606d3ca7e34f73bd1df286bb2a19671c98"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/src/backend/utils/mmgr/portalmem.c"
+          },
+          "length": 38020,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "1b08f9535d25f837ce15cab353639d6be8d359e38f0f503d93177d964a3a44d1"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "476",
+              "name": "NULL Pointer Dereference"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-476",
+          "message": {
+            "text": "NULL Pointer Dereference."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/src/backend/utils/mmgr/portalmem.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 1064,
+                  "endLine": 1067
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "476",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

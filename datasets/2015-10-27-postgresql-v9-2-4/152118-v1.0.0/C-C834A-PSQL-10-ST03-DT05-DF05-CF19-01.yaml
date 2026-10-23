@@ -1,0 +1,100 @@
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpA16a5G_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: SOCKET
+    feature_group: source_taint
+  - file_name: /tmp/tmpA16a5G_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpA16a5G_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - file_name: /tmp/tmpA16a5G_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: neukam_flocculous
+    line_number: 0
+    feature_group: control_flow
+    feature: recursive
+io_pair:
+  description: "Takes an integer as input, and determine if the integer is prime using the truly stupid method of seeing if every natural number less than it will divide into it.  If the integer is a large prime number, the program will loop excessively.\n\n"
+  base_inputs:
+    - stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+      source: socket_input
+      source_enum: 5
+  benigns:
+    - inputs:
+        - stage_enum: 1
+          source: socket_input
+          value: 68718952445
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage: co_process
+          value_type_enum: 0
+          source_enum: 5
+          ordinal: 1
+          id: source
+          port: 8887
+          address: ss-localhost
+    - inputs:
+        - port: 8887
+          source: socket_input
+          source_enum: 5
+          stage: co_process
+          id: source
+          stage_enum: 1
+          address: ss-localhost
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          value: 1301
+    - inputs:
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage: co_process
+          ordinal: 1
+          stage_enum: 1
+          id: source
+          port: 8887
+          address: ss-localhost
+          source_enum: 5
+          source: socket_input
+          value: 1073676288
+  exploits:
+    - inputs:
+        - value: 1073676287
+          source: socket_input
+          id: source
+          stage: co_process
+          stage_enum: 1
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          address: ss-localhost
+          port: 8887
+          source_enum: 5
+          value_encoding: none
+    - inputs:
+        - value_type_enum: 0
+          value: 2147483647
+          value_type: USE_TEXT_DIRECTLY
+          stage: co_process
+          source_enum: 5
+          id: source
+          stage_enum: 1
+          address: ss-localhost
+          ordinal: 1
+          source: socket_input
+          port: 8887
+          value_encoding: none

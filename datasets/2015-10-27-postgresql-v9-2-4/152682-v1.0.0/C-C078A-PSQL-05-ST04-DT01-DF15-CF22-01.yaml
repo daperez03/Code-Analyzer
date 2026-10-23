@@ -1,0 +1,106 @@
+io_pair:
+  benigns:
+    - inputs:
+        - id: source
+          key: 5897
+          value: 10
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value_type_enum: 0
+          value_encoding: none
+          size: 28
+          ordinal: 1
+          source: shared_memory_input
+          source_enum: 6
+          stage_enum: 0
+          stage: pre_process
+    - inputs:
+        - key: 5897
+          source_enum: 6
+          stage: pre_process
+          source: shared_memory_input
+          value_encoding: none
+          ordinal: 1
+          stage_enum: 0
+          value_type_enum: 0
+          size: 28
+          id: source
+          value: google.com
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - key: 5897
+          id: source
+          stage: pre_process
+          stage_enum: 0
+          size: 28
+          value: localhost
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 6
+          ordinal: 1
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+  exploits:
+    - inputs:
+        - flags: 950
+          stage: pre_process
+          source_enum: 6
+          id: source
+          stage_enum: 0
+          key: 5897
+          value: 10; ls -la
+          ordinal: 1
+          value_encoding: none
+          value_type_enum: 0
+          size: 28
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - flags: 950
+          key: 5897
+          ordinal: 1
+          source_enum: 6
+          stage_enum: 0
+          source: shared_memory_input
+          id: source
+          stage: pre_process
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: localhost; echo Hello world
+          size: 28
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 5897
+      size: 28
+      flags: 950
+  description: "Read a string from the input.  Do nslookup on that string, without checking first if it has any command separators.  This allows the user to run arbitrary commands.\n\n"
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - feature_group: source_taint
+    file_name: /tmp/tmpPiUZfI_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature: SHARED_MEMORY
+  - function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_type
+    feature: array
+    file_name: /tmp/tmpPiUZfI_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+  - file_name: /tmp/tmpPiUZfI_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - feature_group: control_flow
+    file_name: /tmp/tmpPiUZfI_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature: macros

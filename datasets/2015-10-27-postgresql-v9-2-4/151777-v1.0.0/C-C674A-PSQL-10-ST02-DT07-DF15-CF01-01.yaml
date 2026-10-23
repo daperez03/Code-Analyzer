@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpldgzTG_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: control_flow
+    feature: callback
+  - file_name: /tmp/tmpldgzTG_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: archegoniatae_subarytenoidal
+    line_number: 0
+    feature: FILE_CONTENTS
+    feature_group: source_taint
+  - file_name: /tmp/tmpldgzTG_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: archegoniatae_subarytenoidal
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmpldgzTG_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: segs_snap
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+io_pair:
+  description: "Read a string from the input.  Get the first character of the string, and then search the string for another instance of that first character.If the character does not appear, go into uncontrolled recursion.\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/extasie_moocha/nonreceivable_fallibility.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: TOCCATAS_PRECOUNSELLOR
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/extasie_moocha/nonreceivable_fallibility.txt
+  exploits:
+    - inputs:
+        - ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          name: TOCCATAS_PRECOUNSELLOR
+          value: /opt/stonesoup/workspace/testData/extasie_moocha/nonreceivable_fallibility.txt
+          value_encoding: none
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          value_type_enum: 0
+        - stage: pre_process
+          source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/extasie_moocha/nonreceivable_fallibility.txt
+          value: 1st char does not appear again
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/extasie_moocha/nonreceivable_fallibility.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: TOCCATAS_PRECOUNSELLOR
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/extasie_moocha/nonreceivable_fallibility.txt
+          value: FEDCBA
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - stage: pre_process
+          value: /opt/stonesoup/workspace/testData/extasie_moocha/nonreceivable_fallibility.txt
+          value_encoding: none
+          stage_enum: 0
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: TOCCATAS_PRECOUNSELLOR
+          source_enum: 2
+          source: env_var_input
+        - name: /opt/stonesoup/workspace/testData/extasie_moocha/nonreceivable_fallibility.txt
+          source_enum: 3
+          stage: pre_process
+          value: asdfasdf
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_encoding: none
+          value_type_enum: 0
+          id: source
+          source: file_content_input
+    - inputs:
+        - stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/extasie_moocha/nonreceivable_fallibility.txt
+          source_enum: 2
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: TOCCATAS_PRECOUNSELLOR
+          ordinal: 1
+          source: env_var_input
+          stage: pre_process
+        - stage_enum: 0
+          source_enum: 3
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/extasie_moocha/nonreceivable_fallibility.txt
+          stage: pre_process
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value: this string has an another t
+          value_encoding: none
+          value_type_enum: 0
+          source: file_content_input
+    - inputs:
+        - source: env_var_input
+          value_encoding: none
+          value_type_enum: 0
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/extasie_moocha/nonreceivable_fallibility.txt
+          name: TOCCATAS_PRECOUNSELLOR
+          ordinal: 1
+          stage: pre_process
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+        - stage: pre_process
+          id: source
+          ordinal: 2
+          source: file_content_input
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          value: 1st char is 1
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/extasie_moocha/nonreceivable_fallibility.txt
+          value_encoding: none
+          value_type_enum: 0

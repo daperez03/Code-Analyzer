@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 151401,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This weakness reads a number and attempts to modify the two high bytes of it, if it is greater than 65535. If the calculation to modify the two high bytes is performed, it will happen incorrectly due to the placement of the pointer modification and it instead changes the bytes on function pointers within a struct that were created instead. When these function pointers are then called, it results in an error. If the calculation doesn't take place, then the function calls will execute without a problem. \nMetadata\n - Base program: PostgreSQL\n - Source Taint: SOCKET\n - Data Type: STRUCT\n - Data Flow: VAR_ARG_LIST\n - Control Flow: SEQUENCE",
+        "state": "bad",
+        "application": "cpe:2.3:a:postgresql:postgresql:9.2.4:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "postgresql-v9.2.4"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C682B-PSQL-06-ST03-DT05-DF12-CF20-01.xml"
+          },
+          "length": 81956,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "6aabc0f2529b80f4b37f6ad91a0a24feb8a902e39bdf572f295ef9f4005e529e"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/src/backend/utils/hash/hashfn.c"
+          },
+          "length": 8214,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "051726e5efc6fe6815c4a43056a5825ed775db00f2870176a4534c7d839db51d"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "682",
+              "name": "Incorrect Calculation"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-682",
+          "message": {
+            "text": "Incorrect Calculation."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/src/backend/utils/hash/hashfn.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 216,
+                  "endLine": 217
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "682",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

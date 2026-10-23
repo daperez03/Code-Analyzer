@@ -1,0 +1,124 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpjahSA5_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - feature_group: data_type
+    file_name: /tmp/tmpjahSA5_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    feature: heap_pointer
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+  - file_name: /tmp/tmpjahSA5_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+  - file_name: /tmp/tmpjahSA5_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: control_flow
+    feature: pointer_to_function
+io_pair:
+  benigns:
+    - inputs:
+        - ordinal: 1
+          value: 50
+          value_encoding: none
+          value_type_enum: 0
+          stage: pre_process
+          source_enum: 2
+          id: source
+          source: env_var_input
+          stage_enum: 0
+          name: LITHOCLASTIC_MATTRESS
+          value_type: USE_TEXT_DIRECTLY
+        - source_enum: 7
+          source: script_input
+          stage: pre_process
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          ordinal: 2
+          stage_enum: 0
+    - inputs:
+        - value_encoding: none
+          value_type_enum: 0
+          value: 1000
+          name: LITHOCLASTIC_MATTRESS
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+        - name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          ordinal: 2
+          source: script_input
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 7
+    - inputs:
+        - source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          id: source
+          value_type_enum: 0
+          stage_enum: 0
+          name: LITHOCLASTIC_MATTRESS
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value: 20000
+          value_encoding: none
+        - stage_enum: 0
+          source_enum: 7
+          source: script_input
+          stage: pre_process
+          ordinal: 2
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+  description: "Converting a short to a unsigned int produces an incorrect value when the short is negative.  This causes a buffer overflow which seg faults.  Good inputs: 0 or greater.  Bad inputs: -1 or less\n\n"
+  exploits:
+    - inputs:
+        - name: LITHOCLASTIC_MATTRESS
+          source_enum: 2
+          ordinal: 1
+          value_encoding: none
+          value: -5
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+          source: env_var_input
+          id: source
+        - source_enum: 7
+          ordinal: 2
+          stage: pre_process
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          stage_enum: 0
+          source: script_input
+    - inputs:
+        - value_encoding: none
+          value_type_enum: 0
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value: -10
+          name: LITHOCLASTIC_MATTRESS
+          source_enum: 2
+        - source_enum: 7
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 2
+          source: script_input
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: LITHOCLASTIC_MATTRESS

@@ -1,0 +1,106 @@
+io_pair:
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 6866
+      size: 5
+      flags: 950
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          source_enum: 6
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          size: 5
+          source: shared_memory_input
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 1
+          id: source
+          flags: 950
+          value: 1000
+          key: 6866
+    - inputs:
+        - ordinal: 1
+          value: 5000
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          key: 6866
+          size: 5
+          id: source
+          value_type_enum: 0
+          stage_enum: 0
+          source_enum: 6
+          source: shared_memory_input
+          stage: pre_process
+          flags: 950
+  benigns:
+    - inputs:
+        - size: 5
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          key: 6866
+          value: 20
+          id: source
+          value_type_enum: 0
+          value_encoding: none
+          ordinal: 1
+          source: shared_memory_input
+          stage_enum: 0
+          source_enum: 6
+          stage: pre_process
+    - inputs:
+        - value_type_enum: 0
+          ordinal: 1
+          value_encoding: none
+          key: 6866
+          source_enum: 6
+          source: shared_memory_input
+          size: 5
+          id: source
+          stage: pre_process
+          value: 511
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          stage_enum: 0
+    - inputs:
+        - stage_enum: 0
+          stage: pre_process
+          source: shared_memory_input
+          value: 1
+          value_encoding: none
+          source_enum: 6
+          value_type_enum: 0
+          id: source
+          ordinal: 1
+          key: 6866
+          size: 5
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+  description: "Good inputs: 1) environment variable contains any number <= 511,2) Environment variable contains string that is not a number Bad input: 1) environment variable not set 2) environment variable contains any number >= 512\n\n"
+code_complexity_features:
+  - file_name: /tmp/tmpdqRQ4c_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature_group: control_flow
+    feature: callback
+  - function_name: rupturing_masurium
+    line_number: 0
+    feature_group: source_taint
+    file_name: /tmp/tmpdqRQ4c_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpdqRQ4c_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: rupturing_masurium
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - feature_group: data_flow
+    file_name: /tmp/tmpdqRQ4c_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: hexactinelline_prosector
+    line_number: 0
+    feature: basic
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

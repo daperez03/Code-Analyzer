@@ -1,0 +1,271 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - feature: callback
+    file_name: /tmp/tmpfLThIm_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature_group: control_flow
+  - file_name: /tmp/tmpfLThIm_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    feature_group: source_taint
+    function_name: retrolingual_mysterious
+    line_number: 0
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpfLThIm_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    feature: void_pointer
+    function_name: retrolingual_mysterious
+    line_number: 0
+    feature_group: data_type
+  - file_name: /tmp/tmpfLThIm_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pedicellation_azoxybenzoic
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+io_pair:
+  benigns:
+    - inputs:
+        - source_enum: 2
+          value_encoding: none
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/mpt_porkier/seesawing_polystichum.txt
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_type_enum: 0
+          ordinal: 1
+          name: NICKNEVEN_PANSPERMATIST
+          source: env_var_input
+        - source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/mpt_porkier/seesawing_polystichum.txt
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/file1 goodfile1
+          value_encoding: none
+          value_type_enum: 0
+        - id: background-complex
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Deleting: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Deleted.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          stage_enum: 0
+          source_enum: 7
+          ordinal: 2
+          stage: pre_process
+          source: script_input
+        - stage_enum: 0
+          ordinal: 3
+          name: /opt/stonesoup/workspace/testData/file1
+          source_enum: 3
+          stage: pre_process
+          source: file_content_input
+        - value: A non-empty file.
+          stage: pre_process
+          source_enum: 3
+          stage_enum: 0
+          source: file_content_input
+          ordinal: 4
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/goodfile1
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/mpt_porkier/seesawing_polystichum.txt
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          name: NICKNEVEN_PANSPERMATIST
+        - stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/mpt_porkier/seesawing_polystichum.txt
+          value: /opt/stonesoup/workspace/testData/file1 goodfile2
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 3
+          source: file_content_input
+        - id: background-complex
+          stage: pre_process
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Deleting: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Deleted.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          stage_enum: 0
+          source: script_input
+          source_enum: 7
+          ordinal: 2
+        - stage: pre_process
+          name: /opt/stonesoup/workspace/testData/file1
+          source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          ordinal: 3
+        - source: file_content_input
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 4
+          value: This is a file.
+          name: /opt/stonesoup/workspace/testData/goodfile2
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 3
+          value_encoding: none
+    - inputs:
+        - source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/mpt_porkier/seesawing_polystichum.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: NICKNEVEN_PANSPERMATIST
+        - stage_enum: 0
+          id: source
+          ordinal: 2
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/mpt_porkier/seesawing_polystichum.txt
+          value: /opt/stonesoup/workspace/testData/file1 goodfile3
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          value_type_enum: 0
+          source: file_content_input
+        - id: background-complex
+          stage_enum: 0
+          ordinal: 2
+          source_enum: 7
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Deleting: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Deleted.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          stage: pre_process
+          source: script_input
+        - stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/file1
+          source: file_content_input
+          ordinal: 3
+          stage: pre_process
+          source_enum: 3
+        - value_encoding: none
+          ordinal: 4
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/goodfile3
+          value: This is another file.
+          stage: pre_process
+          source: file_content_input
+          stage_enum: 0
+          source_enum: 3
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/mpt_porkier/seesawing_polystichum.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: NICKNEVEN_PANSPERMATIST
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/mpt_porkier/seesawing_polystichum.txt
+  description: "This weakness expects a string in the form: '<file> <data>' where file is the name of a file that will be read to delay execution, and data is a string containing no spaces. The data string is treated as a filename in the testData directory. The weakness checks that the filename does not have any slashes in it and that it is a valid file. However, there is a time of check, time of use vulnerability after the file is checked but before it is opened allowing the file to be deleted. The weakness notifies the test harness that the that the file should be deleted by creating a file called testData/*.pid.\n\n"
+  exploits:
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/mpt_porkier/seesawing_polystichum.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: NICKNEVEN_PANSPERMATIST
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+        - source: file_content_input
+          source_enum: 3
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/mpt_porkier/seesawing_polystichum.txt
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/fifo1 badfile1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - id: background-complex
+          stage_enum: 0
+          ordinal: 2
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Deleting: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Deleted.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          source_enum: 7
+          source: script_input
+          stage: pre_process
+        - name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 --nosync
+          stage_enum: 0
+          source: script_input
+          stage: pre_process
+          id: background
+          source_enum: 7
+          ordinal: 3
+        - stage: pre_process
+          ordinal: 4
+          name: /opt/stonesoup/workspace/testData/badfile1
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value: This is yet another file.
+          source: file_content_input
+          value_type_enum: 0
+          value_encoding: none
+    - inputs:
+        - source: env_var_input
+          value_type_enum: 0
+          ordinal: 1
+          name: NICKNEVEN_PANSPERMATIST
+          stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/mpt_porkier/seesawing_polystichum.txt
+        - stage_enum: 0
+          source: file_content_input
+          ordinal: 2
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/mpt_porkier/seesawing_polystichum.txt
+          id: source
+          value_type_enum: 0
+          stage: pre_process
+          source_enum: 3
+          value: /opt/stonesoup/workspace/testData/fifo1 badfile2
+          value_type: USE_TEXT_DIRECTLY
+        - ordinal: 2
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Deleting: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Deleted.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          source: script_input
+          source_enum: 7
+          stage_enum: 0
+          stage: pre_process
+          id: background-complex
+        - stage: pre_process
+          source: script_input
+          id: background
+          stage_enum: 0
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 --nosync
+          source_enum: 7
+          ordinal: 3
+        - stage_enum: 0
+          source: file_content_input
+          source_enum: 3
+          value_type_enum: 0
+          value_encoding: none
+          stage: pre_process
+          value: This is also file.
+          name: /opt/stonesoup/workspace/testData/badfile2
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 4

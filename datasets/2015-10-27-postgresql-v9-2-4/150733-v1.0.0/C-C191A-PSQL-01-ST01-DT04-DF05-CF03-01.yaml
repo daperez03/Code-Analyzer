@@ -1,0 +1,94 @@
+io_pair:
+  base_inputs:
+    - stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: UNDISJOINTED_ISSUE
+      source: env_var_input
+      source_enum: 2
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          name: UNDISJOINTED_ISSUE
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          ordinal: 1
+          value_encoding: none
+          source: env_var_input
+          value: 8
+    - inputs:
+        - name: UNDISJOINTED_ISSUE
+          value_encoding: none
+          source_enum: 2
+          value: 4
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+          ordinal: 1
+          id: source
+  benigns:
+    - inputs:
+        - source_enum: 2
+          value: 45
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage: pre_process
+          value_type_enum: 0
+          ordinal: 1
+          id: source
+          stage_enum: 0
+          name: UNDISJOINTED_ISSUE
+          source: env_var_input
+    - inputs:
+        - value: 80
+          stage_enum: 0
+          ordinal: 1
+          id: source
+          source: env_var_input
+          name: UNDISJOINTED_ISSUE
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+          stage: pre_process
+    - inputs:
+        - value: 8000
+          name: UNDISJOINTED_ISSUE
+          value_type_enum: 0
+          stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          id: source
+          ordinal: 1
+          source: env_var_input
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+  description: "Reads in a size to use for a malloc.  The size subtracts 10 before being used, which results in an integer underflow and an attempt at allocating a very large chunk of memory\n\n"
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpl2mM5q_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - function_name: PMSignalShmemSize
+    feature_group: data_type
+    line_number: 0
+    feature: heap_pointer
+    file_name: /tmp/tmpl2mM5q_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+  - file_name: /tmp/tmpl2mM5q_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - line_number: 0
+    feature_group: control_flow
+    feature: infinite_loop
+    file_name: /tmp/tmpl2mM5q_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: ixodian_adenous

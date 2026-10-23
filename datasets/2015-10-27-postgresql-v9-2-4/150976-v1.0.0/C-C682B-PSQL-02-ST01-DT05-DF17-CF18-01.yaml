@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmp8XjW0f_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmp8XjW0f_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmp8XjW0f_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmp8XjW0f_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    feature_group: control_flow
+    function_name: calc_bucket
+    line_number: 0
+    feature: pointer_to_function
+io_pair:
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source: env_var_input
+          name: NONSUBJUGATION_SPOLIATORY
+          stage_enum: 0
+          value: 10
+          ordinal: 1
+          source_enum: 2
+          id: source
+          value_encoding: none
+    - inputs:
+        - value_encoding: none
+          value: 0
+          stage: pre_process
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          source_enum: 2
+          id: source
+          ordinal: 1
+          stage_enum: 0
+          name: NONSUBJUGATION_SPOLIATORY
+    - inputs:
+        - source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          ordinal: 1
+          value: FFFF
+          id: source
+          value_encoding: none
+          name: NONSUBJUGATION_SPOLIATORY
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+  description: "Read a hex integer from the input.  If hexinteger is negative, ignore.  If hexinteger < 0x0000FFFF, do nothing.  If hexinteger >= 0x0000FFFF try to zero-out the upper two bytes using char pointers.  Perform an incorrect calculation, and rather than zero-ing out the upper two bytes, zero out two different bytes, which corrupts pointers on the stack and results in a seg fault.\n\n"
+  exploits:
+    - inputs:
+        - id: source
+          ordinal: 1
+          name: NONSUBJUGATION_SPOLIATORY
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          value: 10000
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+    - inputs:
+        - stage: pre_process
+          stage_enum: 0
+          ordinal: 1
+          source: env_var_input
+          id: source
+          source_enum: 2
+          name: NONSUBJUGATION_SPOLIATORY
+          value_encoding: none
+          value_type_enum: 0
+          value: FFFFFF
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: NONSUBJUGATION_SPOLIATORY

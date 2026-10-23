@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpDwDoQv_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpDwDoQv_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpDwDoQv_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - file_name: /tmp/tmpDwDoQv_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: gattamelata_likeliness
+    line_number: 0
+    feature_group: control_flow
+    feature: infinite_loop
+io_pair:
+  description: "Read a string from the input.  Do nslookup on that string, without checking first if it has any command separators.  This allows the user to run arbitrary commands.\n\n"
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          source_enum: 2
+          source: env_var_input
+          value_encoding: none
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/faitour_moocher/paloverde_sicily.txt
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: SUPERNATURALLY_SUTO
+          ordinal: 1
+        - source_enum: 3
+          stage: pre_process
+          source: file_content_input
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/faitour_moocher/paloverde_sicily.txt
+          value: 10; ls -la
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/faitour_moocher/paloverde_sicily.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: SUPERNATURALLY_SUTO
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/faitour_moocher/paloverde_sicily.txt
+          value: localhost; echo Hello world
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/faitour_moocher/paloverde_sicily.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: SUPERNATURALLY_SUTO
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/faitour_moocher/paloverde_sicily.txt
+  benigns:
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/faitour_moocher/paloverde_sicily.txt
+          source: env_var_input
+          ordinal: 1
+          value_type_enum: 0
+          name: SUPERNATURALLY_SUTO
+        - value_encoding: none
+          stage_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          source: file_content_input
+          value_type_enum: 0
+          stage: pre_process
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/faitour_moocher/paloverde_sicily.txt
+          value: 10
+    - inputs:
+        - source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          name: SUPERNATURALLY_SUTO
+          stage_enum: 0
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/faitour_moocher/paloverde_sicily.txt
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+        - stage_enum: 0
+          source_enum: 3
+          source: file_content_input
+          stage: pre_process
+          ordinal: 2
+          value: google.com
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/faitour_moocher/paloverde_sicily.txt
+          value_type_enum: 0
+    - inputs:
+        - source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/faitour_moocher/paloverde_sicily.txt
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: SUPERNATURALLY_SUTO
+          ordinal: 1
+        - ordinal: 2
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/faitour_moocher/paloverde_sicily.txt
+          value_type_enum: 0
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          value: localhost
+          value_encoding: none

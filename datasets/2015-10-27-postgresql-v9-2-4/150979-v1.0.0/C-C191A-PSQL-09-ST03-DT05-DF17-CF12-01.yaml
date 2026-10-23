@@ -1,0 +1,100 @@
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source_enum: 5
+          source: socket_input
+          stage_enum: 1
+          id: source
+          stage: co_process
+          address: ss-localhost
+          value: 8
+          ordinal: 1
+          port: 8887
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - source_enum: 5
+          source: socket_input
+          value: 4
+          ordinal: 1
+          address: ss-localhost
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          stage: co_process
+          value_type_enum: 0
+          stage_enum: 1
+          id: source
+  benigns:
+    - inputs:
+        - value: 45
+          source: socket_input
+          source_enum: 5
+          stage_enum: 1
+          value_type_enum: 0
+          value_encoding: none
+          stage: co_process
+          ordinal: 1
+          id: source
+          address: ss-localhost
+          port: 8887
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - id: source
+          value: 80
+          value_type_enum: 0
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          source: socket_input
+          source_enum: 5
+          stage_enum: 1
+          stage: co_process
+          port: 8887
+          value_encoding: none
+          address: ss-localhost
+    - inputs:
+        - id: source
+          stage: co_process
+          ordinal: 1
+          source: socket_input
+          stage_enum: 1
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          address: ss-localhost
+          value_encoding: none
+          value: 8000
+          value_type_enum: 0
+          source_enum: 5
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage_enum: 1
+      stage: co_process
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  description: "Reads in a size to use for a malloc.  The size subtracts 10 before being used, which results in an integer underflow and an attempt at allocating a very large chunk of memory\n\n"
+code_complexity_features:
+  - feature_group: source_taint
+    file_name: /tmp/tmp1SNt_7_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: SOCKET
+  - file_name: /tmp/tmp1SNt_7_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmp1SNt_7_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmp1SNt_7_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    feature_group: control_flow
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: interprocedural_1

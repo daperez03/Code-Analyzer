@@ -1,0 +1,94 @@
+code_complexity_features:
+  - file_name: /tmp/tmpj5zwh5_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpj5zwh5_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpj5zwh5_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: data_flow
+    feature: index_alias_1
+  - file_name: /tmp/tmpj5zwh5_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    feature_group: control_flow
+    function_name: PortalDrop
+    line_number: 0
+    feature: indirectly_recursive
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  description: "Takes an integer as input, and determine if the integer is prime using the truly stupid method of seeing if every natural number less than it will divide into it.  If the integer is a large prime number, the program will loop excessively.\n\n"
+  exploits:
+    - inputs:
+        - stage: pre_process
+          source_enum: 2
+          value: 1073676287
+          stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          ordinal: 1
+          id: source
+          name: CHLORHYDRATE_SANGSUE
+          value_type_enum: 0
+    - inputs:
+        - stage: pre_process
+          ordinal: 1
+          value_type_enum: 0
+          source_enum: 2
+          id: source
+          value: 2147483647
+          source: env_var_input
+          stage_enum: 0
+          name: CHLORHYDRATE_SANGSUE
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: CHLORHYDRATE_SANGSUE
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value: 68718952445
+          value_type_enum: 0
+          stage: pre_process
+          source: env_var_input
+          value_encoding: none
+          ordinal: 1
+          name: CHLORHYDRATE_SANGSUE
+          id: source
+    - inputs:
+        - id: source
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage_enum: 0
+          value: 1301
+          source_enum: 2
+          ordinal: 1
+          value_type_enum: 0
+          name: CHLORHYDRATE_SANGSUE
+          value_encoding: none
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value: 1073676288
+          source_enum: 2
+          id: source
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          name: CHLORHYDRATE_SANGSUE
+          value_type_enum: 0
+          value_encoding: none
+          source: env_var_input

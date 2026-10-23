@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmp3RbHNd_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmp3RbHNd_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    feature_group: data_type
+    feature: union
+    line_number: 0
+    function_name: oid_hash
+  - line_number: 0
+    feature_group: data_flow
+    feature: address_as_nonlinear_expression
+    function_name: oid_hash
+    file_name: /tmp/tmp3RbHNd_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+  - function_name: oid_hash
+    feature: infinite_loop
+    line_number: 0
+    file_name: /tmp/tmp3RbHNd_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    feature_group: control_flow
+io_pair:
+  exploits:
+    - inputs:
+        - value: A.A
+          stage_enum: 0
+          ordinal: 1
+          size: 63
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_encoding: none
+          key: 1313
+          source_enum: 6
+          source: shared_memory_input
+          flags: 950
+          id: source
+    - inputs:
+        - value_type_enum: 0
+          stage: pre_process
+          value: AAAAAAAHHHHHHHHHHHH!
+          stage_enum: 0
+          source_enum: 6
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          key: 1313
+          source: shared_memory_input
+          size: 63
+          flags: 950
+          ordinal: 1
+          value_encoding: none
+  description: "If a non alphanumeric value is seen, the taint buffer gets set to null and the a strcpy is called, causing a null pointer dereference\n\n"
+  base_inputs:
+    - stage: pre_process
+      stage_enum: 0
+      flags: 950
+      key: 1313
+      size: 63
+      id: source
+      ordinal: 1
+      source_enum: 6
+      source: shared_memory_input
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          id: source
+          key: 1313
+          source_enum: 6
+          stage: pre_process
+          ordinal: 1
+          value: AAAAA
+          flags: 950
+          value_type_enum: 0
+          source: shared_memory_input
+          size: 63
+    - inputs:
+        - stage_enum: 0
+          value: ABCD123
+          stage: pre_process
+          key: 1313
+          source_enum: 6
+          ordinal: 1
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_encoding: none
+          flags: 950
+          size: 63
+          source: shared_memory_input
+    - inputs:
+        - value_type_enum: 0
+          flags: 950
+          value_encoding: none
+          id: source
+          stage_enum: 0
+          ordinal: 1
+          size: 63
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source: shared_memory_input
+          value: 1234564760ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+          source_enum: 6
+          key: 1313
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

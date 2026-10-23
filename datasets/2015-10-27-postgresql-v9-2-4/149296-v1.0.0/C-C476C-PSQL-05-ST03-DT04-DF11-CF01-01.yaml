@@ -1,0 +1,100 @@
+io_pair:
+  exploits:
+    - inputs:
+        - value_encoding: none
+          value: 2 a
+          source: socket_input
+          stage: co_process
+          source_enum: 5
+          id: source
+          stage_enum: 1
+          ordinal: 1
+          port: 8887
+          address: ss-localhost
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - port: 8887
+          source: socket_input
+          id: source
+          source_enum: 5
+          ordinal: 1
+          stage_enum: 1
+          value: 10 a b c
+          address: ss-localhost
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage: co_process
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - value: 1 foo
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 1
+          stage: co_process
+          source_enum: 5
+          source: socket_input
+          address: ss-localhost
+          ordinal: 1
+          id: source
+          port: 8887
+          value_encoding: none
+    - inputs:
+        - source: socket_input
+          ordinal: 1
+          port: 8887
+          value_encoding: none
+          value: 2 a b
+          address: ss-localhost
+          value_type: USE_TEXT_DIRECTLY
+          stage: co_process
+          id: source
+          stage_enum: 1
+          value_type_enum: 0
+          source_enum: 5
+    - inputs:
+        - source_enum: 5
+          source: socket_input
+          port: 8887
+          value_encoding: none
+          stage: co_process
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          stage_enum: 1
+          address: ss-localhost
+          ordinal: 1
+          value_type_enum: 0
+          value: 3 alpha bravo charlie
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  description: "Read a space-delimited string from the input.  The first element in the string is the number of elements following it.  Then read in the following elements, and output them to stderr.  If there are fewer elements than expected, a seg fault occurs.\n\n"
+code_complexity_features:
+  - feature: callback
+    file_name: /tmp/tmpKdPOgD_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: control_flow
+  - file_name: /tmp/tmpKdPOgD_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmpKdPOgD_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpKdPOgD_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"

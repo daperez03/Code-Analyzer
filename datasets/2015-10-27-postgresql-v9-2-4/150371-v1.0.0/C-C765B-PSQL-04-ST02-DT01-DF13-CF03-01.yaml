@@ -1,0 +1,194 @@
+code_complexity_features:
+  - file_name: /tmp/tmpkkcIem_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpkkcIem_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    feature_group: data_type
+    function_name: PortalDrop
+    line_number: 0
+    feature: array
+  - file_name: /tmp/tmpkkcIem_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - file_name: /tmp/tmpkkcIem_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: control_flow
+    feature: infinite_loop
+io_pair:
+  benigns:
+    - inputs:
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage_enum: 0
+          ordinal: 1
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/monsieurship_underward/unwoundableness_papermaker.txt
+          value_type_enum: 0
+          name: MULTILAMELLOUS_ULMIN
+          source: env_var_input
+        - source_enum: 3
+          value_type_enum: 0
+          source: file_content_input
+          ordinal: 2
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/monsieurship_underward/unwoundableness_papermaker.txt
+          value_type: USE_TEXT_DIRECTLY
+          value: 1 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 hephalump!
+          stage_enum: 0
+          id: source
+          stage: pre_process
+        - source: script_input
+          ordinal: 2
+          stage_enum: 0
+          id: background
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          stage: pre_process
+          source_enum: 7
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/monsieurship_underward/unwoundableness_papermaker.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: MULTILAMELLOUS_ULMIN
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          value_type_enum: 0
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/monsieurship_underward/unwoundableness_papermaker.txt
+          value: 60 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 Sniffles_and_whiffles
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+        - stage: pre_process
+          id: background
+          ordinal: 2
+          stage_enum: 0
+          source: script_input
+          source_enum: 7
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+    - inputs:
+        - stage: pre_process
+          ordinal: 1
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/monsieurship_underward/unwoundableness_papermaker.txt
+          value_encoding: none
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: MULTILAMELLOUS_ULMIN
+          source: env_var_input
+        - value: 6000000 /opt/stonesoup/workspace/testData/file1 /opt/stonesoup/workspace/testData/file2 sIllyrabbittricksareforkids
+          ordinal: 2
+          source_enum: 3
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/monsieurship_underward/unwoundableness_papermaker.txt
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          id: source
+          source: file_content_input
+          value_encoding: none
+        - stage_enum: 0
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/file1
+          source: file_content_input
+          stage: pre_process
+          ordinal: 2
+        - ordinal: 3
+          stage: pre_process
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/file2
+          stage_enum: 0
+          source: file_content_input
+  description: "This weakness expects a string in the form: '<qsize> <file1> <file2> <data>' where qsize is the size of the quick sort (used to delay execution in certain benign cases), file1 and file2 are names of either FIFO files or regular files, and data is a string containing no spaces. If the data string contains non alpha-numeric characters, spawn two threads underscores, spawn two threads.  Using a sem_post before ever calling sem_wait causes the counting semaphore to allow two processes into the critical section instead of just one when the previous process unblocks. In order to hit the weakness, qsize >= 5000000, and the data string must have non-alphanumeric characters it.\n\n"
+  exploits:
+    - inputs:
+        - ordinal: 1
+          source: env_var_input
+          name: MULTILAMELLOUS_ULMIN
+          value_encoding: none
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/monsieurship_underward/unwoundableness_papermaker.txt
+          value_type_enum: 0
+        - stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+          source: file_content_input
+          id: source
+          source_enum: 3
+          value: 508 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 May_the_force_be_with_you.
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/monsieurship_underward/unwoundableness_papermaker.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage_enum: 0
+          id: background
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source: script_input
+          stage: pre_process
+          ordinal: 2
+          source_enum: 7
+    - inputs:
+        - stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/monsieurship_underward/unwoundableness_papermaker.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: MULTILAMELLOUS_ULMIN
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/monsieurship_underward/unwoundableness_papermaker.txt
+          value: 99 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 What_is_the_answer_to_life,_the_universe,_and_everything?
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - source: script_input
+          stage: pre_process
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          ordinal: 2
+          stage_enum: 0
+          id: background
+          source_enum: 7
+  base_inputs:
+    - name: MULTILAMELLOUS_ULMIN
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/monsieurship_underward/unwoundableness_papermaker.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/monsieurship_underward/unwoundableness_papermaker.txt
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

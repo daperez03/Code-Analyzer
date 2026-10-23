@@ -1,0 +1,100 @@
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - feature: callback
+    file_name: /tmp/tmpzhqi0w_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    function_name: StartupSUBTRANS
+    line_number: 0
+    feature_group: control_flow
+  - file_name: /tmp/tmpzhqi0w_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmpzhqi0w_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    feature_group: data_type
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: void_pointer
+  - file_name: /tmp/tmpzhqi0w_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+io_pair:
+  exploits:
+    - inputs:
+        - address: ss-localhost
+          id: source
+          value: 65538
+          stage_enum: 1
+          source: socket_input
+          source_enum: 5
+          stage: co_process
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          port: 8887
+    - inputs:
+        - source_enum: 5
+          value: 131074
+          value_encoding: none
+          address: ss-localhost
+          source: socket_input
+          port: 8887
+          stage_enum: 1
+          value_type: USE_TEXT_DIRECTLY
+          stage: co_process
+          id: source
+          ordinal: 1
+          value_type_enum: 0
+  base_inputs:
+    - address: ss-localhost
+      port: 8887
+      source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+  benigns:
+    - inputs:
+        - stage_enum: 1
+          value: 1
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 5
+          address: ss-localhost
+          stage: co_process
+          value_encoding: none
+          id: source
+          port: 8887
+          source: socket_input
+    - inputs:
+        - source_enum: 5
+          value_type_enum: 0
+          value_encoding: none
+          source: socket_input
+          stage: co_process
+          stage_enum: 1
+          address: ss-localhost
+          port: 8887
+          value_type: USE_TEXT_DIRECTLY
+          value: 10
+          ordinal: 1
+          id: source
+    - inputs:
+        - address: ss-localhost
+          port: 8887
+          source: socket_input
+          stage: co_process
+          source_enum: 5
+          id: source
+          stage_enum: 1
+          value_type_enum: 0
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value: 1000
+          value_encoding: none
+  description: "Read a number from the input.  Create a struct with two fields: size (unsigned short) and buffer (char*).  Initialize the struct using the unsigned short value as a size, and malloc the unsigned short value worth of bytes.  Later, memset the buffer in the struct using the number passed in as input.  Since the input is a long, and we only allocated an unsigned short amount, we will corrupt the heap, leading to seg fault or glib error. Good inputs: 65535 or less. Bad inputs: more than 65535\n\n"

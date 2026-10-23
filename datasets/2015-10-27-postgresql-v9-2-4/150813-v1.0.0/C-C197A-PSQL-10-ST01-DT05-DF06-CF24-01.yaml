@@ -1,0 +1,94 @@
+code_complexity_features:
+  - file_name: /tmp/tmpWDRJIx_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpWDRJIx_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpWDRJIx_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - file_name: /tmp/tmpWDRJIx_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: control_flow
+    feature: unconditional_jump
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  description: "Read a number from the input.  Create a struct with two fields: size (unsigned short) and buffer (char*).  Initialize the struct using the unsigned short value as a size, and malloc the unsigned short value worth of bytes.  Later, memset the buffer in the struct using the number passed in as input.  Since the input is a long, and we only allocated an unsigned short amount, we will corrupt the heap, leading to seg fault or glib error. Good inputs: 65535 or less. Bad inputs: more than 65535\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: BRANCHIOSAURIA_SWEVEN
+  benigns:
+    - inputs:
+        - value_encoding: none
+          stage_enum: 0
+          ordinal: 1
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          source: env_var_input
+          name: BRANCHIOSAURIA_SWEVEN
+          source_enum: 2
+          stage: pre_process
+          value: 1
+    - inputs:
+        - stage_enum: 0
+          source: env_var_input
+          value_encoding: none
+          value: 10
+          ordinal: 1
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          id: source
+          name: BRANCHIOSAURIA_SWEVEN
+          source_enum: 2
+    - inputs:
+        - id: source
+          ordinal: 1
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          name: BRANCHIOSAURIA_SWEVEN
+          value: 1000
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          stage_enum: 0
+  exploits:
+    - inputs:
+        - name: BRANCHIOSAURIA_SWEVEN
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          value: 65538
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 2
+          id: source
+          ordinal: 1
+    - inputs:
+        - id: source
+          source: env_var_input
+          source_enum: 2
+          name: BRANCHIOSAURIA_SWEVEN
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 1
+          value: 131074
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0

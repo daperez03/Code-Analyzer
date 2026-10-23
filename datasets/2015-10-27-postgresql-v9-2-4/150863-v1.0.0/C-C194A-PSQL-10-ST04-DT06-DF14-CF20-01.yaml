@@ -1,0 +1,136 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpFxms6g_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpFxms6g_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpFxms6g_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_nonlinear_expression
+  - function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence
+    file_name: /tmp/tmpFxms6g_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+io_pair:
+  description: "Converting a short to a unsigned int produces an incorrect value when the short is negative.  This causes a buffer overflow which seg faults.  Good inputs: 0 or greater.  Bad inputs: -1 or less\n\n"
+  base_inputs:
+    - stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 7248
+      size: 6
+      flags: 950
+      source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+  exploits:
+    - inputs:
+        - size: 6
+          key: 7248
+          source: shared_memory_input
+          source_enum: 6
+          id: source
+          stage_enum: 0
+          flags: 950
+          ordinal: 1
+          stage: pre_process
+          value: -5
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+        - source: script_input
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 7
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          ordinal: 2
+    - inputs:
+        - size: 6
+          id: source
+          stage_enum: 0
+          ordinal: 1
+          key: 7248
+          flags: 950
+          source: shared_memory_input
+          stage: pre_process
+          source_enum: 6
+          value: -10
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+        - source_enum: 7
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 2
+          source: script_input
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+  benigns:
+    - inputs:
+        - value_encoding: none
+          stage: pre_process
+          size: 6
+          source_enum: 6
+          source: shared_memory_input
+          flags: 950
+          value: 50
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          key: 7248
+          stage_enum: 0
+          id: source
+          ordinal: 1
+        - stage: pre_process
+          ordinal: 2
+          source_enum: 7
+          stage_enum: 0
+          source: script_input
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+    - inputs:
+        - ordinal: 1
+          source_enum: 6
+          stage_enum: 0
+          size: 6
+          key: 7248
+          flags: 950
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          stage: pre_process
+          value: 1000
+          id: source
+        - source_enum: 7
+          stage: pre_process
+          source: script_input
+          stage_enum: 0
+          ordinal: 2
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+    - inputs:
+        - stage_enum: 0
+          size: 6
+          source: shared_memory_input
+          value_encoding: none
+          value: 20000
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_type_enum: 0
+          key: 7248
+          ordinal: 1
+          source_enum: 6
+          flags: 950
+          id: source
+        - name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          stage_enum: 0
+          source: script_input
+          source_enum: 7
+          stage: pre_process
+          ordinal: 2

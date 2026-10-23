@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmpf7kogS_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpf7kogS_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpf7kogS_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - feature: infinite_loop
+    function_name: enfilading_bumptious
+    line_number: 0
+    feature_group: control_flow
+    file_name: /tmp/tmpf7kogS_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+io_pair:
+  description: "Read a string from the input.  Get the first character of the string, and then search the string for another instance of that first character.If the character does not appear, go into uncontrolled recursion.\n\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 6046
+      size: 31
+      flags: 950
+  exploits:
+    - inputs:
+        - flags: 950
+          size: 31
+          key: 6046
+          stage_enum: 0
+          source_enum: 6
+          ordinal: 1
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          id: source
+          value: 1st char does not appear again
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          source_enum: 6
+          stage_enum: 0
+          value_type_enum: 0
+          ordinal: 1
+          stage: pre_process
+          id: source
+          size: 31
+          value: FEDCBA
+          key: 6046
+          value_encoding: none
+          flags: 950
+  benigns:
+    - inputs:
+        - ordinal: 1
+          value: asdfasdf
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          size: 31
+          stage: pre_process
+          key: 6046
+          flags: 950
+          value_type_enum: 0
+          source: shared_memory_input
+          id: source
+          source_enum: 6
+          stage_enum: 0
+    - inputs:
+        - key: 6046
+          value_type_enum: 0
+          source: shared_memory_input
+          source_enum: 6
+          size: 31
+          flags: 950
+          stage_enum: 0
+          stage: pre_process
+          value: this string has an another t
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          id: source
+          ordinal: 1
+    - inputs:
+        - source: shared_memory_input
+          source_enum: 6
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          value: 1st char is 1
+          ordinal: 1
+          flags: 950
+          key: 6046
+          size: 31
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

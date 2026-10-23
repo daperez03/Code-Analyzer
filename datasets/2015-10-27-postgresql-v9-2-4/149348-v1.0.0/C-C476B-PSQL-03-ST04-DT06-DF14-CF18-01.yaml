@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmpc1as17_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpc1as17_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpc1as17_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_nonlinear_expression
+  - file_name: /tmp/tmpc1as17_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: control_flow
+    feature: pointer_to_function
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - source_enum: 6
+          id: source
+          ordinal: 1
+          key: 6775
+          source: shared_memory_input
+          stage_enum: 0
+          stage: pre_process
+          size: 66
+          flags: 950
+          value_encoding: none
+          value: A.A
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - stage_enum: 0
+          stage: pre_process
+          id: source
+          source: shared_memory_input
+          source_enum: 6
+          key: 6775
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          flags: 950
+          size: 66
+          value: AAAAAAAHHHHHHHHHHHH!
+          value_encoding: none
+          ordinal: 1
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 6775
+      size: 66
+      flags: 950
+  description: "If a value is seen that doesn't contain 'aba', the taint buffer gets set to null and strlen is called, causing a null pointer dereference\n\n"
+  benigns:
+    - inputs:
+        - source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+          stage: pre_process
+          stage_enum: 0
+          key: 6775
+          ordinal: 1
+          id: source
+          flags: 950
+          value_encoding: none
+          value: AAAAAaba
+          size: 66
+          value_type_enum: 0
+    - inputs:
+        - ordinal: 1
+          id: source
+          key: 6775
+          source_enum: 6
+          stage: pre_process
+          source: shared_memory_input
+          stage_enum: 0
+          value_encoding: none
+          size: 66
+          value: ABCabaD123
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value_type_enum: 0
+    - inputs:
+        - flags: 950
+          key: 6775
+          stage_enum: 0
+          id: source
+          source_enum: 6
+          source: shared_memory_input
+          ordinal: 1
+          stage: pre_process
+          value_encoding: none
+          value: 1234564760ABCDEFGHIJKLMNOPQRSTUabaVWXYZabcdefghijklmnopqrstuvwxyz
+          size: 66
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY

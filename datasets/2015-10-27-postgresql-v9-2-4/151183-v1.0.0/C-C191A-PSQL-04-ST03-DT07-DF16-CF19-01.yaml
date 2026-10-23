@@ -1,0 +1,100 @@
+code_complexity_features:
+  - file_name: /tmp/tmpuq8q4P_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    feature_group: source_taint
+    feature: SOCKET
+    function_name: stonesoup_handle_taint
+    line_number: 0
+  - file_name: /tmp/tmpuq8q4P_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmpuq8q4P_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmpuq8q4P_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: control_flow
+    feature: recursive
+io_pair:
+  benigns:
+    - inputs:
+        - stage: co_process
+          id: source
+          address: ss-localhost
+          value_type_enum: 0
+          value: 45
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 1
+          source: socket_input
+          value_encoding: none
+          ordinal: 1
+          source_enum: 5
+          port: 8887
+    - inputs:
+        - value_encoding: none
+          stage_enum: 1
+          address: ss-localhost
+          source: socket_input
+          source_enum: 5
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value: 80
+          value_type_enum: 0
+          id: source
+          stage: co_process
+          port: 8887
+    - inputs:
+        - stage: co_process
+          stage_enum: 1
+          source_enum: 5
+          source: socket_input
+          value: 8000
+          ordinal: 1
+          id: source
+          address: ss-localhost
+          port: 8887
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value: 8
+          port: 8887
+          source: socket_input
+          stage: co_process
+          source_enum: 5
+          id: source
+          stage_enum: 1
+          address: ss-localhost
+          ordinal: 1
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - value_encoding: none
+          value: 4
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          port: 8887
+          source_enum: 5
+          stage_enum: 1
+          source: socket_input
+          stage: co_process
+          id: source
+          address: ss-localhost
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  description: "Reads in a size to use for a malloc.  The size subtracts 10 before being used, which results in an integer underflow and an attempt at allocating a very large chunk of memory\n\n"
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"

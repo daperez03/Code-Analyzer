@@ -1,0 +1,184 @@
+code_complexity_features:
+  - file_name: /tmp/tmpvHgfIf_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature: FILE_CONTENTS
+    feature_group: source_taint
+  - file_name: /tmp/tmpvHgfIf_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpvHgfIf_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - file_name: /tmp/tmpvHgfIf_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature: infinite_loop
+    feature_group: control_flow
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  description: "Converting a short to a unsigned int produces an incorrect value when the short is negative.  This causes a buffer overflow which seg faults.  Good inputs: 0 or greater.  Bad inputs: -1 or less\n\n"
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          source_enum: 2
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/heracliteanism_khitmatgar/undercrop_jones.txt
+          stage: pre_process
+          name: GRANITITE_HYPERCRITICAL
+        - source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          id: source
+          name: /opt/stonesoup/workspace/testData/heracliteanism_khitmatgar/undercrop_jones.txt
+          value_encoding: none
+          ordinal: 2
+          value: 50
+          source_enum: 3
+          stage: pre_process
+          value_type_enum: 0
+        - name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          source_enum: 7
+          source: script_input
+          stage: pre_process
+          ordinal: 2
+          stage_enum: 0
+    - inputs:
+        - value_encoding: none
+          source_enum: 2
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: GRANITITE_HYPERCRITICAL
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/heracliteanism_khitmatgar/undercrop_jones.txt
+          ordinal: 1
+          source: env_var_input
+        - value: 1000
+          ordinal: 2
+          stage: pre_process
+          source: file_content_input
+          stage_enum: 0
+          source_enum: 3
+          id: source
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/heracliteanism_khitmatgar/undercrop_jones.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+        - stage: pre_process
+          source: script_input
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          ordinal: 2
+          source_enum: 7
+          stage_enum: 0
+    - inputs:
+        - value_encoding: none
+          value: /opt/stonesoup/workspace/testData/heracliteanism_khitmatgar/undercrop_jones.txt
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          value_type_enum: 0
+          ordinal: 1
+          name: GRANITITE_HYPERCRITICAL
+        - value_type_enum: 0
+          source_enum: 3
+          stage_enum: 0
+          ordinal: 2
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/heracliteanism_khitmatgar/undercrop_jones.txt
+          stage: pre_process
+          value: 20000
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_encoding: none
+        - name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          source: script_input
+          stage_enum: 0
+          ordinal: 2
+          source_enum: 7
+          stage: pre_process
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/heracliteanism_khitmatgar/undercrop_jones.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: GRANITITE_HYPERCRITICAL
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/heracliteanism_khitmatgar/undercrop_jones.txt
+  exploits:
+    - inputs:
+        - stage: pre_process
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/heracliteanism_khitmatgar/undercrop_jones.txt
+          name: GRANITITE_HYPERCRITICAL
+          value_type_enum: 0
+          ordinal: 1
+        - value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          value_type_enum: 0
+          value: -5
+          id: source
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/heracliteanism_khitmatgar/undercrop_jones.txt
+          stage: pre_process
+          ordinal: 2
+          source_enum: 3
+          value_encoding: none
+        - source: script_input
+          source_enum: 7
+          stage: pre_process
+          stage_enum: 0
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          ordinal: 2
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/heracliteanism_khitmatgar/undercrop_jones.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: GRANITITE_HYPERCRITICAL
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/heracliteanism_khitmatgar/undercrop_jones.txt
+          value: -10
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage: pre_process
+          stage_enum: 0
+          source: script_input
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          ordinal: 2
+          source_enum: 7

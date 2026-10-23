@@ -1,0 +1,154 @@
+code_complexity_features:
+  - feature: FILE_CONTENTS
+    file_name: /tmp/tmp1utDYe_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: source_taint
+  - function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: data_type
+    feature: void_pointer
+    file_name: /tmp/tmp1utDYe_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+  - file_name: /tmp/tmp1utDYe_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - file_name: /tmp/tmp1utDYe_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: antes_mime
+    line_number: 0
+    feature_group: control_flow
+    feature: unconditional_jump
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          value_encoding: none
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/connexiva_derp/undecisiveness_hypocenters.txt
+          value_type_enum: 0
+          ordinal: 1
+          name: RICHER_EMBRYOPLASTIC
+        - source: file_content_input
+          value: 10
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 2
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/connexiva_derp/undecisiveness_hypocenters.txt
+          value_encoding: none
+          id: source
+    - inputs:
+        - name: RICHER_EMBRYOPLASTIC
+          source: env_var_input
+          stage: pre_process
+          value_type_enum: 0
+          stage_enum: 0
+          value_encoding: none
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/connexiva_derp/undecisiveness_hypocenters.txt
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+        - name: /opt/stonesoup/workspace/testData/connexiva_derp/undecisiveness_hypocenters.txt
+          source: file_content_input
+          stage: pre_process
+          source_enum: 3
+          stage_enum: 0
+          value: 0
+          id: source
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 2
+    - inputs:
+        - stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source: env_var_input
+          source_enum: 2
+          value_encoding: none
+          name: RICHER_EMBRYOPLASTIC
+          value_type_enum: 0
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/connexiva_derp/undecisiveness_hypocenters.txt
+        - source: file_content_input
+          stage_enum: 0
+          value_type_enum: 0
+          source_enum: 3
+          ordinal: 2
+          id: source
+          name: /opt/stonesoup/workspace/testData/connexiva_derp/undecisiveness_hypocenters.txt
+          value: FFFF
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage: pre_process
+  exploits:
+    - inputs:
+        - ordinal: 1
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          name: RICHER_EMBRYOPLASTIC
+          source_enum: 2
+          stage: pre_process
+          value_encoding: none
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/connexiva_derp/undecisiveness_hypocenters.txt
+        - source_enum: 3
+          source: file_content_input
+          id: source
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/connexiva_derp/undecisiveness_hypocenters.txt
+          value: 10000
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - name: RICHER_EMBRYOPLASTIC
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/connexiva_derp/undecisiveness_hypocenters.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/connexiva_derp/undecisiveness_hypocenters.txt
+          value: FFFFFF
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  description: "Read a hex integer from the input.  If hexinteger is negative, ignore.  If hexinteger < 0x0000FFFF, do nothing.  If hexinteger >= 0x0000FFFF try to zero-out the upper two bytes using char pointers.  Perform an incorrect calculation, and rather than zero-ing out the upper two bytes, zero out two different bytes, which corrupts pointers on the stack and results in a seg fault.\n\n"
+  base_inputs:
+    - name: RICHER_EMBRYOPLASTIC
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/connexiva_derp/undecisiveness_hypocenters.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/connexiva_derp/undecisiveness_hypocenters.txt

@@ -1,0 +1,113 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 149014,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2014-08-01",
+        "language": "java",
+        "author": "Ignite Realtime",
+        "description": "CVE-2008-6509",
+        "state": "bad",
+        "cves": [
+          "CVE-2008-6509"
+        ],
+        "application": "cpe:2.3:a:igniterealtime:openfire:3.6.0:-:*:*:*:*:*:*",
+        "dependencies": [
+          "openfire-v3.6.0"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "src/plugins/sip/src/java/org/jivesoftware/openfire/sip/calllog/CallLogDAO.java"
+          },
+          "length": 7185,
+          "sourceLanguage": "java",
+          "hashes": {
+            "sha-256": "26cff9f16165a811379eed06d181b36cce473bd9665633e13605e89fe557a8c3"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/plugins/sip/src/web/sipark-log-summary.jsp"
+          },
+          "length": 19760,
+          "sourceLanguage": "jsp",
+          "hashes": {
+            "sha-256": "d0a3287d1c169dc90dcb56d9822bd1fca84aa6afe1a80ac2df07f97d3e1094c0"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "89",
+              "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-89",
+          "message": {
+            "text": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/plugins/sip/src/java/org/jivesoftware/openfire/sip/calllog/CallLogDAO.java",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 49
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "89",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

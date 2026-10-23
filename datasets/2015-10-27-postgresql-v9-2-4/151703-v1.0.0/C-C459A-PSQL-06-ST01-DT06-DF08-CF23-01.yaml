@@ -1,0 +1,94 @@
+io_pair:
+  base_inputs:
+    - name: CAKCHIKEL_WOOLSHEARER
+      stage: pre_process
+      id: source
+      ordinal: 1
+      source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+  description: "Takes an input integer and creates temporary files, filling them with a large string. It then attempts cleanup, but if more than 50 files were created, then only the last 50 will be cleaned up. Given a large enough input the program will use up a significant ammount of disk space creating temporary files and not cleaning them up.\n\n"
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          source_enum: 2
+          name: CAKCHIKEL_WOOLSHEARER
+          value_encoding: none
+          value: 20000
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: env_var_input
+    - inputs:
+        - ordinal: 1
+          source_enum: 2
+          stage_enum: 0
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value: 6000
+          stage: pre_process
+          value_encoding: none
+          value_type_enum: 0
+          name: CAKCHIKEL_WOOLSHEARER
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          stage: pre_process
+          source_enum: 2
+          ordinal: 1
+          value: 10
+          id: source
+          name: CAKCHIKEL_WOOLSHEARER
+          value_encoding: none
+          value_type_enum: 0
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - stage_enum: 0
+          value_type_enum: 0
+          id: source
+          value: 42
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          name: CAKCHIKEL_WOOLSHEARER
+          value_encoding: none
+          ordinal: 1
+    - inputs:
+        - source: env_var_input
+          stage_enum: 0
+          value: 37
+          source_enum: 2
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          name: CAKCHIKEL_WOOLSHEARER
+          value_encoding: none
+          stage: pre_process
+          id: source
+          value_type_enum: 0
+code_complexity_features:
+  - feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmpe7MK4h_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    feature_group: source_taint
+    line_number: 0
+  - feature: typedef
+    file_name: /tmp/tmpe7MK4h_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    line_number: 0
+    feature_group: data_type
+  - feature: index_alias_2
+    feature_group: data_flow
+    file_name: /tmp/tmpe7MK4h_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    line_number: 0
+    function_name: oid_hash
+  - line_number: 0
+    function_name: oid_hash
+    feature: set_jump_long_jump
+    file_name: /tmp/tmpe7MK4h_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    feature_group: control_flow
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpY8rIoY_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpY8rIoY_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpY8rIoY_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: data_flow
+    feature: address_alias_2
+  - file_name: /tmp/tmpY8rIoY_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: control_flow
+    feature: interprocedural_1
+io_pair:
+  exploits:
+    - inputs:
+        - flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          value: 100000
+          value_type_enum: 0
+          stage_enum: 0
+          source_enum: 6
+          stage: pre_process
+          ordinal: 1
+          id: source
+          size: 7
+          key: 4826
+          value_encoding: none
+    - inputs:
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          size: 7
+          flags: 950
+          source: shared_memory_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          id: source
+          key: 4826
+          source_enum: 6
+          value: 250052
+          value_encoding: none
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 4826
+      size: 7
+      flags: 950
+  description: "Read an int from the input.  If < 0, or bigger than 0xFFFFFFFF/4, do nothing.  Otherwise, malloc that many 100,000 int buffers. If memory cannot all be allocated, output 'Out of memory' then exit. This condition occurs if int > about 30000 \n\n"
+  benigns:
+    - inputs:
+        - source: shared_memory_input
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          ordinal: 1
+          size: 7
+          flags: 950
+          key: 4826
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: 0
+          value_type_enum: 0
+          source_enum: 6
+    - inputs:
+        - source: shared_memory_input
+          id: source
+          stage_enum: 0
+          value_type_enum: 0
+          source_enum: 6
+          key: 4826
+          ordinal: 1
+          flags: 950
+          value_encoding: none
+          value: 1
+          size: 7
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+    - inputs:
+        - value_type_enum: 0
+          value_encoding: none
+          source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          key: 4826
+          ordinal: 1
+          flags: 950
+          size: 7
+          value: 1000
+          value_type: USE_TEXT_DIRECTLY

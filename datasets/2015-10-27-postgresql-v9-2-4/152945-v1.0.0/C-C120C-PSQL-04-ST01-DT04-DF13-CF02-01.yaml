@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - stage_enum: 0
+      ordinal: 1
+      name: TERNAR_REFINDS
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      id: source
+  benigns:
+    - inputs:
+        - ordinal: 1
+          value: AAA
+          value_encoding: none
+          name: TERNAR_REFINDS
+          source_enum: 2
+          stage: pre_process
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          id: source
+          value_type_enum: 0
+    - inputs:
+        - source_enum: 2
+          stage_enum: 0
+          name: TERNAR_REFINDS
+          ordinal: 1
+          source: env_var_input
+          value: Hellow world!
+          id: source
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+    - inputs:
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source_enum: 2
+          name: TERNAR_REFINDS
+          value: Good-bye cruel world!
+          value_encoding: none
+          ordinal: 1
+          id: source
+          stage: pre_process
+          source: env_var_input
+  exploits:
+    - inputs:
+        - ordinal: 1
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source: env_var_input
+          source_enum: 2
+          name: TERNAR_REFINDS
+          value_type_enum: 0
+          stage: pre_process
+    - inputs:
+        - source: env_var_input
+          ordinal: 1
+          stage_enum: 0
+          source_enum: 2
+          value_encoding: none
+          stage: pre_process
+          id: source
+          name: TERNAR_REFINDS
+          value: This is probably going to overflow a buffer of some sort.  Let's run it anyway and see what happens.  I hope that everything turns out ok, because I would love to see what this looks like in all CAPS.  Converting ASCII characters to upper case is easy, you can either call a system function, or just add the standard difference between the start of the two character sets.  But, I am sure there is a reason that system functions exist for this sort of functionality.
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+  description: "Has a fixed heap buffer of size 64, allocated within a struct (char [64])\n\n"
+code_complexity_features:
+  - function_name: PortalDrop
+    file_name: /tmp/tmpMNNp0L_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpMNNp0L_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    feature_group: data_type
+    function_name: PortalDrop
+    line_number: 0
+    feature: heap_pointer
+  - file_name: /tmp/tmpMNNp0L_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature: address_as_linear_expression
+    feature_group: data_flow
+  - function_name: PortalDrop
+    line_number: 0
+    feature: indirectly_recursive
+    file_name: /tmp/tmpMNNp0L_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    feature_group: control_flow

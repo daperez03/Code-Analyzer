@@ -1,0 +1,106 @@
+io_pair:
+  description: "Good inputs: 1) taintvar is less than 64 characters long.Bad input: 1) taintvar is greater than or equal to 64 characters long.\n\n"
+  exploits:
+    - inputs:
+        - value_encoding: base64
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          source_enum: 6
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          value_type_enum: 0
+          ordinal: 1
+          value: TmFoIG5haCBuYWggbmFoIG5haCBuYWgsIG5haCBuYWggbmFoLCBoZXkgSnVkZQpOYWggbmFoIG5haCBuYWggbmFoIG5haCwgbmFoIG5haCBuYWgsIGhleSBKdWRl
+          source: shared_memory_input
+          key: 1902
+          size: 125
+    - inputs:
+        - ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          source_enum: 6
+          value: this string is more than sixty four characters long, so it should mess some stuff up
+          stage: pre_process
+          size: 125
+          source: shared_memory_input
+          key: 1902
+          stage_enum: 0
+          value_type_enum: 0
+          id: source
+          value_encoding: none
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 1902
+      size: 125
+      flags: 950
+  benigns:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+          stage_enum: 0
+          key: 1902
+          ordinal: 1
+          id: source
+          value_encoding: none
+          flags: 950
+          size: 125
+          value: brah
+          value_type_enum: 0
+    - inputs:
+        - key: 1902
+          ordinal: 1
+          stage_enum: 0
+          source_enum: 6
+          value_encoding: none
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          id: source
+          value: dude
+          flags: 950
+          value_type_enum: 0
+          size: 125
+    - inputs:
+        - stage_enum: 0
+          id: source
+          ordinal: 1
+          key: 1902
+          value: bromigo
+          value_encoding: none
+          size: 125
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value_type_enum: 0
+          source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+code_complexity_features:
+  - file_name: /tmp/tmpOZrXA5_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpOZrXA5_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpOZrXA5_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - file_name: /tmp/tmpOZrXA5_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: rainlessness_immunochemical
+    line_number: 0
+    feature_group: control_flow
+    feature: indirectly_recursive
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

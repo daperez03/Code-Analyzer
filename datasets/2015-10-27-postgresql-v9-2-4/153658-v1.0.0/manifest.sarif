@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 153658,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case creates two buffers on the stack, one of 64 bytes and one of 1024 bytes. It copies the taint source into the larger buffer. It checks if the length of the taint source is less than the length of the shorter buffer. If it is, it uses strncpy to copy the taint source into the shorter buffer, with a maximum value of 1024 bytes. However, strncpy always writes the maximum number of bytes, and so writes 1024 bytes. This overflows the short buffer, and corrupts other data on the stack. The %eip is corrupted, resulting in a segmentation fault at function return. \nMetadata\n - Base program: PostgreSQL\n - Source Taint: FILE_CONTENTS\n - Data Type: ARRAY\n - Data Flow: VAR_ARG_LIST\n - Control Flow: MACROS",
+        "state": "bad",
+        "application": "cpe:2.3:a:postgresql:postgresql:9.2.4:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "postgresql-v9.2.4"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C806A-PSQL-03-ST02-DT01-DF12-CF22-01.xml"
+          },
+          "length": 76615,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "68be20e75f0eb0571b74ca096312f2f21cc1fd2c1afbd71378598902e7dd5e6f"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/src/backend/access/transam/xact.c"
+          },
+          "length": 156769,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "bbcd27f4f2e1b8287fc52eb9fbdd7bace31c5aed201e645199bcd316ff8c61be"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "806",
+              "name": "Buffer Access Using Size of Source Buffer"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-806",
+          "message": {
+            "text": "Buffer Access Using Size of Source Buffer."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/src/backend/access/transam/xact.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 5012,
+                  "endLine": 5016
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "806",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

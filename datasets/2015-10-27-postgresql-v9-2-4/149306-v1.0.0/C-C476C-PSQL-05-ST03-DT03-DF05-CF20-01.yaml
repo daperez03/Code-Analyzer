@@ -1,0 +1,100 @@
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmphL8m_q_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmphL8m_q_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    feature_group: data_type
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: void_pointer
+  - file_name: /tmp/tmphL8m_q_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - feature: sequence
+    file_name: /tmp/tmphL8m_q_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: hamleteer_unmetalized
+    line_number: 0
+    feature_group: control_flow
+io_pair:
+  exploits:
+    - inputs:
+        - port: 8887
+          value: 2 a
+          address: ss-localhost
+          source_enum: 5
+          source: socket_input
+          stage_enum: 1
+          stage: co_process
+          ordinal: 1
+          id: source
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+    - inputs:
+        - source_enum: 5
+          source: socket_input
+          stage_enum: 1
+          stage: co_process
+          id: source
+          address: ss-localhost
+          ordinal: 1
+          value: 10 a b c
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+  benigns:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          port: 8887
+          stage_enum: 1
+          ordinal: 1
+          address: ss-localhost
+          id: source
+          value_encoding: none
+          value: 1 foo
+          stage: co_process
+          source: socket_input
+          source_enum: 5
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source: socket_input
+          source_enum: 5
+          stage: co_process
+          stage_enum: 1
+          value: 2 a b
+          address: ss-localhost
+          ordinal: 1
+          port: 8887
+          id: source
+          value_type_enum: 0
+    - inputs:
+        - source_enum: 5
+          source: socket_input
+          value_encoding: none
+          id: source
+          ordinal: 1
+          stage: co_process
+          port: 8887
+          address: ss-localhost
+          value: 3 alpha bravo charlie
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 1
+  description: "Read a space-delimited string from the input.  The first element in the string is the number of elements following it.  Then read in the following elements, and output them to stderr.  If there are fewer elements than expected, a seg fault occurs.\n\n"
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887

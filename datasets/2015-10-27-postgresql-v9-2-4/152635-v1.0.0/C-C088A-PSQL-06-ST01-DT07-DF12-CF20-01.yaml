@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmpfbpCfQ_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    line_number: 0
+  - feature: union
+    feature_group: data_type
+    line_number: 0
+    function_name: oid_hash
+    file_name: /tmp/tmpfbpCfQ_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+  - function_name: oid_hash
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+    file_name: /tmp/tmpfbpCfQ_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+  - file_name: /tmp/tmpfbpCfQ_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    feature: sequence
+    feature_group: control_flow
+    line_number: 0
+    function_name: redshift_whiggish
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - id: source
+      ordinal: 1
+      name: HALFPENCE_FESTA
+      source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+      stage: pre_process
+  benigns:
+    - inputs:
+        - value_encoding: none
+          value_type_enum: 0
+          name: HALFPENCE_FESTA
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          id: source
+          stage_enum: 0
+          stage: pre_process
+          value: "\"file.*\""
+          source_enum: 2
+    - inputs:
+        - value: filename.txt
+          id: source
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          value_encoding: none
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          name: HALFPENCE_FESTA
+          value_type_enum: 0
+    - inputs:
+        - stage: pre_process
+          id: source
+          value: "\"*\""
+          source_enum: 2
+          value_encoding: none
+          ordinal: 1
+          name: HALFPENCE_FESTA
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: env_var_input
+          stage_enum: 0
+  exploits:
+    - inputs:
+        - name: HALFPENCE_FESTA
+          id: source
+          value: "\"*\" -exec cat /etc/passwd \\;"
+          source: env_var_input
+          value_encoding: none
+          ordinal: 1
+          stage_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 2
+        - source_enum: 3
+          ordinal: 2
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/temp/file.txt
+          stage_enum: 0
+          source: file_content_input
+    - inputs:
+        - value: "\"*\" -exec netstat -an \\;"
+          name: HALFPENCE_FESTA
+          stage_enum: 0
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          stage: pre_process
+          source_enum: 2
+          id: source
+        - name: /opt/stonesoup/workspace/testData/temp/file.txt
+          stage: pre_process
+          source_enum: 3
+          source: file_content_input
+          ordinal: 2
+          stage_enum: 0
+  description: "Read a string from the input.  Perform a find path -iname input.If input contains arguments such as -exec with a \\; ending the command, a user can insert other commands instead of just find\n\n"

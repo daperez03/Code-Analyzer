@@ -1,0 +1,982 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project base_program="C-PSQL" language="C" name="C-C805D-PSQL-08-ST02-DT03-DF05-CF14-01" targeted_architecture="ANY" targeted_os="LINUX" test_case_type="ALL" xmlns="urn:stonesoup:project">
+    <description>Creating test case using base program.
+Added an environment variable read to get a filename to read in the file contents using an fread operation within the function
+Completed injection.
+</description>
+    <additional_information>
+        <keyvalue key="kill_command">TRUE</keyvalue>
+        <keyvalue key="algorithmic_variant_name">UNSPECIFIED</keyvalue>
+        <keyvalue key="root_cause">UNSPECIFIED</keyvalue>
+    </additional_information>
+    <structure install="install" iodata="testData" scoredata="testOutput" scripts="scripts" source="src"/>
+    <run_command>$SS_TC_ROOT/$SS_TC_INSTALL/bin/postgres -p 8432 </run_command>
+    <weakness generation_method="FAULT_INJECTED">
+        <variant cwe="CWE-805" name="CWE-805-D"/>
+        <features>
+            <taint_source file_name="/src/backend/access/transam/subtrans.c" line_number="0" type="FILE_CONTENTS">
+                <method name="StartupSUBTRANS"/>
+            </taint_source>
+            <data_type file_name="/src/backend/access/transam/subtrans.c" line_number="0" type="VOID_POINTER">
+                <method name="StartupSUBTRANS"/>
+            </data_type>
+            <data_flow file_name="/src/backend/access/transam/subtrans.c" line_number="0" type="ADDRESS_AS_CONSTANT">
+                <method name="StartupSUBTRANS"/>
+            </data_flow>
+            <control_flow file_name="/src/backend/access/transam/subtrans.c" line_number="0" type="INTERPROCEDURAL_10">
+                <method name="impetrated_ossicular"/>
+            </control_flow>
+        </features>
+    </weakness>
+    <build_commands cppflags="-DSTONESOUP_TRACE=1" libs="-ldl">
+        <command>./configure --prefix=&quot;$SS_TC_ROOT/$SS_TC_INSTALL&quot; --with-pgport=8432 --with-libraries=&quot;$SS_TC_DEPS/lib&quot; --with-includes=&quot;$SS_TC_DEPS/include&quot; --with-openssl --with-libxml --with-libxslt --without-selinux --with-readline --without-tcl --without-perl --without-python --without-gssapi --without-pam --without-krb5 --with-ldap --without-bonjour --with-zlib --disable-thread-safety</command>
+        <command>make CC=&quot;$SS_CC&quot; CCLD=&quot;$SS_LNK&quot;</command>
+        <command>make install CC=&quot;$SS_CC&quot; CCLD=&quot;$SS_LNK&quot;</command>
+    </build_commands>
+    <iopairs>
+        <iopair name="C-C805D-PSQL-08-ST02-DT03-DF05-CF14-01-GOOD-01" reset_scheme="NONE" timeout="300" type="GOOD">
+            <description>initalize a database
+Good inputs:1) envrionment variable is set to a value whose length is less than or equal to 8 charsBad inputs:1) environment variable is not set2) environment variable is set to a value whose length is greater than 8 chars
+
+</description>
+            <technical_impact>NONE</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env UNQUALIFIABLE_BILLITON;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p &quot;$SS_TC_ROOT/testData/good-01/psqldb&quot; &amp;&amp; chown -R postgres:postgres &quot;$SS_TC_ROOT/testData&quot;</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="UNQUALIFIABLE_BILLITON" type="USE_TEXT">/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt</environment_variable>
+                </process>
+                <process>
+                    <file encoding="STRING" path="/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt" type="USE_TEXT">Hello</file>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="MALLOC_CHECK_" type="USE_TEXT">0</environment_variable>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="false" type="USE_TEXT">sudo -E -u postgres $SS_TC_ROOT/$SS_TC_INSTALL/bin/initdb $SS_TC_ROOT/testData/good-01/psqldb</run_command>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_SjES5B8WdI" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="GOOD-01-Default">
+                <formula name="GOOD-01-Default">(UTF8 OR ASCII) AND NOT TIMEOUT AND NOT CONTROLLED_EXIT</formula>
+            </scoring_formula>
+            <output_checks>
+                <compare_check check_type="CONTAINS" name="UTF8">
+                    <actual output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_FILE_CONTENTS">good-01/good-01-UTF8.out</expected>
+                </compare_check>
+                <compare_check check_type="CONTAINS" name="ASCII">
+                    <actual output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_FILE_CONTENTS">good-01/good-01-ASCII.out</expected>
+                </compare_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="TIMEOUT" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="CONTROLLED_EXIT" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+            </output_checks>
+        </iopair>
+        <iopair name="C-C805D-PSQL-08-ST02-DT03-DF05-CF14-01-GOOD-02" reset_scheme="NONE" timeout="300" type="GOOD">
+            <description>perform a select
+Good inputs:1) envrionment variable is set to a value whose length is less than or equal to 8 charsBad inputs:1) environment variable is not set2) environment variable is set to a value whose length is greater than 8 chars
+
+</description>
+            <technical_impact>NONE</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env UNQUALIFIABLE_BILLITON;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p &quot;$SS_TC_ROOT/testData/good-02&quot; &amp;&amp; tar -xpzof &quot;$SS_TC_ROOT/testData/booktown-imported-db.tar.gz&quot; -C &quot;$SS_TC_ROOT/testData/good-02&quot; &amp;&amp; chown -R root:root $SS_TC_ROOT/testData/good-02 &amp;&amp; chmod -R 700 $SS_TC_ROOT/testData/good-02</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="UNQUALIFIABLE_BILLITON" type="USE_TEXT">/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt</environment_variable>
+                </process>
+                <process>
+                    <file encoding="STRING" path="/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt" type="USE_TEXT">a</file>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="MALLOC_CHECK_" type="USE_TEXT">0</environment_variable>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT">-D $SS_TC_ROOT/testData/good-02/psql</run_command>
+            <co_processes scheme="SEQUENCE">
+                <process_group scheme="PARALLEL">
+                    <process_group scheme="SEQUENCE">
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_ROOT/scripts/service_mon.sh ss-localhost 8432</script>
+                        </process>
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" input_id="client-command" type="USE_TEXT">sleep 22 &amp;&amp; $SS_TC_DEPS/bin/psql -h ss-localhost -d booktown -p 8432 -c &quot;SELECT * FROM books WHERE title = 'Dune'&quot;</script>
+                        </process>
+                    </process_group>
+                    <process_group scheme="SEQUENCE"/>
+                </process_group>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">if [[ -s &quot;$SS_TC_ROOT/$SS_TC_INSTALL/postgres.pid&quot; ]]; then kill $(cat &quot;$SS_TC_ROOT/$SS_TC_INSTALL/postgres.pid&quot;); else echo &quot;Skipping postgres kill, no PID file.&quot;; fi;</script>
+                </process>
+            </co_processes>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_kRPlY9Nf6H" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="GOOD-02-Default">
+                <formula name="GOOD-02-Default">GOOD-02 AND NOT TIMEOUT AND NOT CONTROLLED_EXIT</formula>
+            </scoring_formula>
+            <output_checks>
+                <compare_check check_type="CONTAINS" name="GOOD-02">
+                    <actual input_id_ref="client-command" output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_FILE_CONTENTS">good-02/good-02.out</expected>
+                </compare_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="TIMEOUT" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="CONTROLLED_EXIT" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+            </output_checks>
+        </iopair>
+        <iopair name="C-C805D-PSQL-08-ST02-DT03-DF05-CF14-01-GOOD-03" reset_scheme="NONE" timeout="300" type="GOOD">
+            <description>perform an insert
+Good inputs:1) envrionment variable is set to a value whose length is less than or equal to 8 charsBad inputs:1) environment variable is not set2) environment variable is set to a value whose length is greater than 8 chars
+
+</description>
+            <technical_impact>NONE</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env UNQUALIFIABLE_BILLITON;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p &quot;$SS_TC_ROOT/testData/good-03&quot; &amp;&amp; tar -xpzof &quot;$SS_TC_ROOT/testData/booktown-imported-db.tar.gz&quot; -C &quot;$SS_TC_ROOT/testData/good-03&quot; &amp;&amp; chown -R root:root $SS_TC_ROOT/testData/good-03 &amp;&amp; chmod -R 700 $SS_TC_ROOT/testData/good-03</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="UNQUALIFIABLE_BILLITON" type="USE_TEXT">/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt</environment_variable>
+                </process>
+                <process>
+                    <file encoding="STRING" path="/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt" type="USE_TEXT">ok_str</file>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="MALLOC_CHECK_" type="USE_TEXT">0</environment_variable>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT"> -D $SS_TC_ROOT/testData/good-03/psql</run_command>
+            <co_processes scheme="SEQUENCE">
+                <process_group scheme="PARALLEL">
+                    <process_group scheme="SEQUENCE">
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_ROOT/scripts/service_mon.sh ss-localhost 8432</script>
+                        </process>
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" input_id="client-command" type="USE_TEXT">sleep 22 &amp;&amp; $SS_TC_DEPS/bin/psql -d booktown -h ss-localhost -p 8432 -c &quot;insert into books values ('12345','Good Oh Three')&quot;</script>
+                        </process>
+                    </process_group>
+                    <process_group scheme="SEQUENCE"/>
+                </process_group>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">if [[ -s &quot;$SS_TC_ROOT/$SS_TC_INSTALL/postgres.pid&quot; ]]; then kill $(cat &quot;$SS_TC_ROOT/$SS_TC_INSTALL/postgres.pid&quot;); else echo &quot;Skipping postgres kill, no PID file.&quot;; fi;</script>
+                </process>
+            </co_processes>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_4EUCSAxEpn" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="GOOD-03-Default">
+                <formula name="GOOD-03-Default">GOOD-03 AND NOT TIMEOUT AND NOT CONTROLLED_EXIT</formula>
+            </scoring_formula>
+            <output_checks>
+                <compare_check check_type="CONTAINS" name="GOOD-03">
+                    <actual input_id_ref="client-command" output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_FILE_CONTENTS">good-03/good-03.out</expected>
+                </compare_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="TIMEOUT" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="CONTROLLED_EXIT" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+            </output_checks>
+        </iopair>
+        <iopair name="C-C805D-PSQL-08-ST02-DT03-DF05-CF14-01-GOOD-04" reset_scheme="NONE" timeout="300" type="GOOD">
+            <description>perform a create
+Good inputs:1) envrionment variable is set to a value whose length is less than or equal to 8 charsBad inputs:1) environment variable is not set2) environment variable is set to a value whose length is greater than 8 chars
+
+</description>
+            <technical_impact>NONE</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env UNQUALIFIABLE_BILLITON;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p &quot;$SS_TC_ROOT/testData/good-04&quot; &amp;&amp; tar -xpzof &quot;$SS_TC_ROOT/testData/booktown-imported-db.tar.gz&quot; -C &quot;$SS_TC_ROOT/testData/good-04&quot; &amp;&amp; chown -R root:root $SS_TC_ROOT/testData/good-04 &amp;&amp; chmod -R 700 $SS_TC_ROOT/testData/good-04</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="UNQUALIFIABLE_BILLITON" type="USE_TEXT">/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt</environment_variable>
+                </process>
+                <process>
+                    <file encoding="STRING" path="/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt" type="USE_TEXT">Hello</file>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="MALLOC_CHECK_" type="USE_TEXT">0</environment_variable>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT"> -D $SS_TC_ROOT/testData/good-04/psql</run_command>
+            <co_processes scheme="SEQUENCE">
+                <process_group scheme="PARALLEL">
+                    <process_group scheme="SEQUENCE">
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_ROOT/scripts/service_mon.sh ss-localhost 8432</script>
+                        </process>
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" input_id="client-command" type="USE_TEXT">sleep 22 &amp;&amp; $SS_TC_DEPS/bin/psql -d booktown -h ss-localhost -p 8432 -c &quot;CREATE TABLE stonesoup ( cwe varchar(6), progress varchar(12), UNIQUE(cwe) )&quot;</script>
+                        </process>
+                    </process_group>
+                    <process_group scheme="SEQUENCE"/>
+                </process_group>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">if [[ -s &quot;$SS_TC_ROOT/$SS_TC_INSTALL/postgres.pid&quot; ]]; then kill $(cat &quot;$SS_TC_ROOT/$SS_TC_INSTALL/postgres.pid&quot;); else echo &quot;Skipping postgres kill, no PID file.&quot;; fi;</script>
+                </process>
+            </co_processes>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_jqH44iuyUF" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="GOOD-04-Default">
+                <formula name="GOOD-04-Default">GOOD-04 AND NOT TIMEOUT AND NOT CONTROLLED_EXIT</formula>
+            </scoring_formula>
+            <output_checks>
+                <compare_check check_type="CONTAINS" name="GOOD-04">
+                    <actual input_id_ref="client-command" output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_FILE_CONTENTS">good-04/good-04.out</expected>
+                </compare_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="TIMEOUT" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="CONTROLLED_EXIT" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+            </output_checks>
+        </iopair>
+        <iopair name="C-C805D-PSQL-08-ST02-DT03-DF05-CF14-01-GOOD-05" reset_scheme="NONE" timeout="300" type="GOOD">
+            <description>perform a delete
+Good inputs:1) envrionment variable is set to a value whose length is less than or equal to 8 charsBad inputs:1) environment variable is not set2) environment variable is set to a value whose length is greater than 8 chars
+
+</description>
+            <technical_impact>NONE</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env UNQUALIFIABLE_BILLITON;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p &quot;$SS_TC_ROOT/testData/good-05&quot; &amp;&amp; tar -xpzof &quot;$SS_TC_ROOT/testData/booktown-imported-db.tar.gz&quot; -C &quot;$SS_TC_ROOT/testData/good-05&quot; &amp;&amp; chown -R root:root $SS_TC_ROOT/testData/good-05 &amp;&amp; chmod -R 700 $SS_TC_ROOT/testData/good-05</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="UNQUALIFIABLE_BILLITON" type="USE_TEXT">/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt</environment_variable>
+                </process>
+                <process>
+                    <file encoding="STRING" path="/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt" type="USE_TEXT">a</file>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="MALLOC_CHECK_" type="USE_TEXT">0</environment_variable>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT"> -D $SS_TC_ROOT/testData/good-05/psql</run_command>
+            <co_processes scheme="SEQUENCE">
+                <process_group scheme="PARALLEL">
+                    <process_group scheme="SEQUENCE">
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_ROOT/scripts/service_mon.sh ss-localhost 8432</script>
+                        </process>
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" input_id="client-command" type="USE_TEXT">sleep 22 &amp;&amp; $SS_TC_DEPS/bin/psql -d booktown -h ss-localhost -p 8432 -c &quot;DELETE FROM books WHERE id = '190'&quot;</script>
+                        </process>
+                    </process_group>
+                    <process_group scheme="SEQUENCE"/>
+                </process_group>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">if [[ -s &quot;$SS_TC_ROOT/$SS_TC_INSTALL/postgres.pid&quot; ]]; then kill $(cat &quot;$SS_TC_ROOT/$SS_TC_INSTALL/postgres.pid&quot;); else echo &quot;Skipping postgres kill, no PID file.&quot;; fi;</script>
+                </process>
+            </co_processes>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_VQ4wl59y2F" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="GOOD-05-Default">
+                <formula name="GOOD-05-Default">GOOD-05 AND NOT TIMEOUT AND NOT CONTROLLED_EXIT</formula>
+            </scoring_formula>
+            <output_checks>
+                <compare_check check_type="CONTAINS" name="GOOD-05">
+                    <actual input_id_ref="client-command" output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_FILE_CONTENTS">good-05/good-05.out</expected>
+                </compare_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="TIMEOUT" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="CONTROLLED_EXIT" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+            </output_checks>
+        </iopair>
+        <iopair name="C-C805D-PSQL-08-ST02-DT03-DF05-CF14-01-GOOD-06" reset_scheme="NONE" timeout="300" type="GOOD">
+            <description>perform a drop
+Good inputs:1) envrionment variable is set to a value whose length is less than or equal to 8 charsBad inputs:1) environment variable is not set2) environment variable is set to a value whose length is greater than 8 chars
+
+</description>
+            <technical_impact>NONE</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env UNQUALIFIABLE_BILLITON;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p &quot;$SS_TC_ROOT/testData/good-06&quot; &amp;&amp; tar -xpzof &quot;$SS_TC_ROOT/testData/booktown-imported-db.tar.gz&quot; -C &quot;$SS_TC_ROOT/testData/good-06&quot; &amp;&amp; chown -R root:root $SS_TC_ROOT/testData/good-06 &amp;&amp; chmod -R 700 $SS_TC_ROOT/testData/good-06</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="UNQUALIFIABLE_BILLITON" type="USE_TEXT">/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt</environment_variable>
+                </process>
+                <process>
+                    <file encoding="STRING" path="/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt" type="USE_TEXT">ok_str</file>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="MALLOC_CHECK_" type="USE_TEXT">0</environment_variable>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT"> -D $SS_TC_ROOT/testData/good-06/psql</run_command>
+            <co_processes scheme="SEQUENCE">
+                <process_group scheme="PARALLEL">
+                    <process_group scheme="SEQUENCE">
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_ROOT/scripts/service_mon.sh ss-localhost 8432</script>
+                        </process>
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" input_id="client-command" type="USE_TEXT">sleep 22 &amp;&amp; $SS_TC_DEPS/bin/psql -d booktown -h ss-localhost -p 8432 -c &quot;DROP TABLE my_list&quot;</script>
+                        </process>
+                    </process_group>
+                    <process_group scheme="SEQUENCE"/>
+                </process_group>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">if [[ -s &quot;$SS_TC_ROOT/$SS_TC_INSTALL/postgres.pid&quot; ]]; then kill $(cat &quot;$SS_TC_ROOT/$SS_TC_INSTALL/postgres.pid&quot;); else echo &quot;Skipping postgres kill, no PID file.&quot;; fi;</script>
+                </process>
+            </co_processes>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_eQVyw4BJeJ" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="GOOD-06-Default">
+                <formula name="GOOD-06-Default">GOOD-06 AND NOT TIMEOUT AND NOT CONTROLLED_EXIT</formula>
+            </scoring_formula>
+            <output_checks>
+                <compare_check check_type="CONTAINS" name="GOOD-06">
+                    <actual input_id_ref="client-command" output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_FILE_CONTENTS">good-06/good-06.out</expected>
+                </compare_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="TIMEOUT" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="CONTROLLED_EXIT" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+            </output_checks>
+        </iopair>
+        <iopair name="C-C805D-PSQL-08-ST02-DT03-DF05-CF14-01-GOOD-07" reset_scheme="NONE" timeout="300" type="GOOD">
+            <description>import a .sql file
+Good inputs:1) envrionment variable is set to a value whose length is less than or equal to 8 charsBad inputs:1) environment variable is not set2) environment variable is set to a value whose length is greater than 8 chars
+
+</description>
+            <technical_impact>NONE</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env UNQUALIFIABLE_BILLITON;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p &quot;$SS_TC_ROOT/testData/good-07&quot; &amp;&amp; tar -xpzof &quot;$SS_TC_ROOT/testData/emptyinitdb.tar.gz&quot; -C &quot;$SS_TC_ROOT/testData/good-07&quot; &amp;&amp; chown -R root:root $SS_TC_ROOT/testData/good-07 &amp;&amp; chmod -R 700 $SS_TC_ROOT/testData/good-07</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="UNQUALIFIABLE_BILLITON" type="USE_TEXT">/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt</environment_variable>
+                </process>
+                <process>
+                    <file encoding="STRING" path="/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt" type="USE_TEXT">Hello</file>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="MALLOC_CHECK_" type="USE_TEXT">0</environment_variable>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT"> -D $SS_TC_ROOT/testData/good-07/psql</run_command>
+            <co_processes scheme="SEQUENCE">
+                <process_group scheme="PARALLEL">
+                    <process_group scheme="SEQUENCE">
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_ROOT/scripts/service_mon.sh ss-localhost 8432</script>
+                        </process>
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" input_id="client-command" type="USE_TEXT">sleep 22 &amp;&amp; $SS_TC_DEPS/bin/psql -h ss-localhost -p 8432  -d template1 &lt; booktown.sql</script>
+                        </process>
+                    </process_group>
+                    <process_group scheme="SEQUENCE"/>
+                </process_group>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">if [[ -s &quot;$SS_TC_ROOT/$SS_TC_INSTALL/postgres.pid&quot; ]]; then kill $(cat &quot;$SS_TC_ROOT/$SS_TC_INSTALL/postgres.pid&quot;); else echo &quot;Skipping postgres kill, no PID file.&quot;; fi;</script>
+                </process>
+            </co_processes>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_cuCRTVSKVQ" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="GOOD-07-Default">
+                <formula name="GOOD-07-Default">GOOD-07 AND NOT TIMEOUT AND NOT CONTROLLED_EXIT</formula>
+            </scoring_formula>
+            <output_checks>
+                <compare_check check_type="CONTAINS" name="GOOD-07">
+                    <actual input_id_ref="client-command" output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_FILE_CONTENTS">good-07/good-07.out</expected>
+                </compare_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="TIMEOUT" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="CONTROLLED_EXIT" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+            </output_checks>
+        </iopair>
+        <iopair name="C-C805D-PSQL-08-ST02-DT03-DF05-CF14-01-GOOD-08" reset_scheme="NONE" timeout="300" type="GOOD">
+            <description>perform an alter
+Good inputs:1) envrionment variable is set to a value whose length is less than or equal to 8 charsBad inputs:1) environment variable is not set2) environment variable is set to a value whose length is greater than 8 chars
+
+</description>
+            <technical_impact>NONE</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env UNQUALIFIABLE_BILLITON;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p &quot;$SS_TC_ROOT/testData/good-08&quot; &amp;&amp; tar -xpzof &quot;$SS_TC_ROOT/testData/booktown-imported-db.tar.gz&quot; -C &quot;$SS_TC_ROOT/testData/good-08&quot; &amp;&amp; chown -R root:root $SS_TC_ROOT/testData/good-08 &amp;&amp; chmod -R 700 $SS_TC_ROOT/testData/good-08</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="UNQUALIFIABLE_BILLITON" type="USE_TEXT">/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt</environment_variable>
+                </process>
+                <process>
+                    <file encoding="STRING" path="/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt" type="USE_TEXT">a</file>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="MALLOC_CHECK_" type="USE_TEXT">0</environment_variable>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT"> -D $SS_TC_ROOT/testData/good-08/psql</run_command>
+            <co_processes scheme="SEQUENCE">
+                <process_group scheme="PARALLEL">
+                    <process_group scheme="SEQUENCE">
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_ROOT/scripts/service_mon.sh ss-localhost 8432</script>
+                        </process>
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" input_id="client-command" type="USE_TEXT">sleep 22 &amp;&amp; $SS_TC_DEPS/bin/psql -d booktown -h ss-localhost -p 8432 -c &quot;ALTER TABLE customers ALTER COLUMN id TYPE integer USING (id::integer);&quot;</script>
+                        </process>
+                    </process_group>
+                    <process_group scheme="SEQUENCE"/>
+                </process_group>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">if [[ -s &quot;$SS_TC_ROOT/$SS_TC_INSTALL/postgres.pid&quot; ]]; then kill $(cat &quot;$SS_TC_ROOT/$SS_TC_INSTALL/postgres.pid&quot;); else echo &quot;Skipping postgres kill, no PID file.&quot;; fi;</script>
+                </process>
+            </co_processes>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_TWz278fJBH" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="GOOD-08-Default">
+                <formula name="GOOD-08-Default">GOOD-08 AND NOT TIMEOUT AND NOT CONTROLLED_EXIT</formula>
+            </scoring_formula>
+            <output_checks>
+                <compare_check check_type="CONTAINS" name="GOOD-08">
+                    <actual input_id_ref="client-command" output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_FILE_CONTENTS">good-08/good-08.out</expected>
+                </compare_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="TIMEOUT" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="CONTROLLED_EXIT" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+            </output_checks>
+        </iopair>
+        <iopair name="C-C805D-PSQL-08-ST02-DT03-DF05-CF14-01-GOOD-09" reset_scheme="NONE" timeout="300" type="GOOD">
+            <description>see who's logged in
+Good inputs:1) envrionment variable is set to a value whose length is less than or equal to 8 charsBad inputs:1) environment variable is not set2) environment variable is set to a value whose length is greater than 8 chars
+
+</description>
+            <technical_impact>NONE</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env UNQUALIFIABLE_BILLITON;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p &quot;$SS_TC_ROOT/testData/good-09&quot; &amp;&amp; tar -xpzof &quot;$SS_TC_ROOT/testData/booktown-imported-db.tar.gz&quot; -C &quot;$SS_TC_ROOT/testData/good-09&quot; &amp;&amp; chown -R root:root $SS_TC_ROOT/testData/good-09 &amp;&amp; chmod -R 700 $SS_TC_ROOT/testData/good-09</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="UNQUALIFIABLE_BILLITON" type="USE_TEXT">/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt</environment_variable>
+                </process>
+                <process>
+                    <file encoding="STRING" path="/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt" type="USE_TEXT">ok_str</file>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="MALLOC_CHECK_" type="USE_TEXT">0</environment_variable>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT"> -D $SS_TC_ROOT/testData/good-09/psql</run_command>
+            <co_processes scheme="SEQUENCE">
+                <process_group scheme="PARALLEL">
+                    <process_group scheme="SEQUENCE">
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_ROOT/scripts/service_mon.sh ss-localhost 8432</script>
+                        </process>
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" input_id="client-command" type="USE_TEXT">sleep 22 &amp;&amp; $SS_TC_DEPS/bin/psql -d booktown -h ss-localhost -p 8432 -c &quot;SELECT datname,usename,client_addr FROM pg_stat_activity ;&quot;</script>
+                        </process>
+                    </process_group>
+                    <process_group scheme="SEQUENCE"/>
+                </process_group>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">if [[ -s &quot;$SS_TC_ROOT/$SS_TC_INSTALL/postgres.pid&quot; ]]; then kill $(cat &quot;$SS_TC_ROOT/$SS_TC_INSTALL/postgres.pid&quot;); else echo &quot;Skipping postgres kill, no PID file.&quot;; fi;</script>
+                </process>
+            </co_processes>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_MixxluxLfD" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="GOOD-09-Default">
+                <formula name="GOOD-09-Default">GOOD-09 AND NOT TIMEOUT AND NOT CONTROLLED_EXIT</formula>
+            </scoring_formula>
+            <output_checks>
+                <compare_check check_type="REGEX" name="GOOD-09">
+                    <actual input_id_ref="client-command" output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_TEXT">\s*booktown\s*\|\s*root\s*\|\s*([0-9]{1,3}\.){3}[0-9]{1,3}\s*</expected>
+                </compare_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="TIMEOUT" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="CONTROLLED_EXIT" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+            </output_checks>
+        </iopair>
+        <iopair name="C-C805D-PSQL-08-ST02-DT03-DF05-CF14-01-GOOD-10" reset_scheme="NONE" timeout="300" type="GOOD">
+            <description>perform a select using LIKE
+Good inputs:1) envrionment variable is set to a value whose length is less than or equal to 8 charsBad inputs:1) environment variable is not set2) environment variable is set to a value whose length is greater than 8 chars
+
+</description>
+            <technical_impact>NONE</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env UNQUALIFIABLE_BILLITON;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p &quot;$SS_TC_ROOT/testData/good-10&quot; &amp;&amp; tar -xpzof &quot;$SS_TC_ROOT/testData/booktown-imported-db.tar.gz&quot; -C &quot;$SS_TC_ROOT/testData/good-10&quot; &amp;&amp; chown -R root:root $SS_TC_ROOT/testData/good-10 &amp;&amp; chmod -R 700 $SS_TC_ROOT/testData/good-10</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="UNQUALIFIABLE_BILLITON" type="USE_TEXT">/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt</environment_variable>
+                </process>
+                <process>
+                    <file encoding="STRING" path="/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt" type="USE_TEXT">Hello</file>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="MALLOC_CHECK_" type="USE_TEXT">0</environment_variable>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT"> -D $SS_TC_ROOT/testData/good-10/psql</run_command>
+            <co_processes scheme="SEQUENCE">
+                <process_group scheme="PARALLEL">
+                    <process_group scheme="SEQUENCE">
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_ROOT/scripts/service_mon.sh ss-localhost 8432</script>
+                        </process>
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" input_id="client-command" type="USE_TEXT">sleep 22 &amp;&amp; $SS_TC_DEPS/bin/psql -d booktown -h ss-localhost -p 8432 -c &quot;SELECT * FROM books where title LIKE 'P%' ;&quot;</script>
+                        </process>
+                    </process_group>
+                    <process_group scheme="SEQUENCE"/>
+                </process_group>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">if [[ -s &quot;$SS_TC_ROOT/$SS_TC_INSTALL/postgres.pid&quot; ]]; then kill $(cat &quot;$SS_TC_ROOT/$SS_TC_INSTALL/postgres.pid&quot;); else echo &quot;Skipping postgres kill, no PID file.&quot;; fi;</script>
+                </process>
+            </co_processes>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_UR9o0fdlK1" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="GOOD-10-Default">
+                <formula name="GOOD-10-Default">GOOD-10 AND NOT TIMEOUT AND NOT CONTROLLED_EXIT</formula>
+            </scoring_formula>
+            <output_checks>
+                <compare_check check_type="CONTAINS" name="GOOD-10">
+                    <actual input_id_ref="client-command" output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_FILE_CONTENTS">good-10/good-10.out</expected>
+                </compare_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="TIMEOUT" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="CONTROLLED_EXIT" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+            </output_checks>
+        </iopair>
+        <iopair name="C-C805D-PSQL-08-ST02-DT03-DF05-CF14-01-BAD-01" reset_scheme="NONE" timeout="300" type="BAD">
+            <description>Good inputs:1) envrionment variable is set to a value whose length is less than or equal to 8 charsBad inputs:1) environment variable is not set2) environment variable is set to a value whose length is greater than 8 chars
+
+</description>
+            <technical_impact>DOS_UNCONTROLLED_EXIT</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env UNQUALIFIABLE_BILLITON;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p &quot;$SS_TC_ROOT/testData/good-05&quot; &amp;&amp; tar -xpzof &quot;$SS_TC_ROOT/testData/booktown-imported-db.tar.gz&quot; -C &quot;$SS_TC_ROOT/testData/good-05&quot; &amp;&amp; chown -R root:root $SS_TC_ROOT/testData/good-05 &amp;&amp; chmod -R 700 $SS_TC_ROOT/testData/good-05</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="UNQUALIFIABLE_BILLITON" type="USE_TEXT">/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt</environment_variable>
+                </process>
+                <process>
+                    <file encoding="STRING" path="/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt" type="USE_TEXT">This_input_is_too_long_to_be_contained_in_buffer</file>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="MALLOC_CHECK_" type="USE_TEXT">0</environment_variable>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT"> -D $SS_TC_ROOT/testData/good-05/psql</run_command>
+            <co_processes scheme="SEQUENCE">
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_ROOT/scripts/service_mon.sh ss-localhost 8432</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" input_id="client-command9CKzc8oaej" type="USE_TEXT">sleep 22 &amp;&amp; $SS_TC_DEPS/bin/psql -d booktown -h ss-localhost -p 8432 -c &quot;DELETE FROM books WHERE id = '190'&quot;</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">if [[ -s &quot;$SS_TC_ROOT/$SS_TC_INSTALL/postgres.pid&quot; ]]; then kill $(cat &quot;$SS_TC_ROOT/$SS_TC_INSTALL/postgres.pid&quot;); else echo &quot;Skipping postgres kill, no PID file.&quot;; fi;</script>
+                </process>
+            </co_processes>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_Xjts8DL6CZiZ0cFZrFZY" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="segfault_formula_OmyVgFfgS7">
+                <formula name="segfault_formula_OmyVgFfgS7">weakness_started_91gt0gyU62Nx8NjuzSDG AND ((NOT PERFORMER AND (segfault_code_8XPaobh1xO OR segfault_code_eBfpkvc0Cs OR segfault_code_9ydWhnU95Q OR segfault_code_tywcpR8adu OR segfault_code_s9jm3uwicl OR segfault_code_6ft459NlPM OR segfault_msg_8uMj1GXh8X OR illegal_inst_msg_GjIEXPF1YV) AND NOT timeout_FN8Or47gu3) or (PERFORMER AND NOT ((segfault_code_8XPaobh1xO OR segfault_code_eBfpkvc0Cs OR segfault_code_9ydWhnU95Q OR segfault_code_tywcpR8adu OR segfault_code_s9jm3uwicl OR segfault_code_6ft459NlPM OR segfault_msg_8uMj1GXh8X OR illegal_inst_msg_GjIEXPF1YV) OR timeout_FN8Or47gu3 OR controlled_exit_2AyJKZEe1t)))</formula>
+                <formula name="no_weakness_started_formula_CsgCW3pfHT">(NOT PERFORMER AND (segfault_code_8XPaobh1xO OR segfault_code_eBfpkvc0Cs OR segfault_code_9ydWhnU95Q OR segfault_code_tywcpR8adu OR segfault_code_s9jm3uwicl OR segfault_code_6ft459NlPM OR segfault_msg_8uMj1GXh8X OR illegal_inst_msg_GjIEXPF1YV) AND NOT timeout_FN8Or47gu3) or (PERFORMER AND NOT ((segfault_code_8XPaobh1xO OR segfault_code_eBfpkvc0Cs OR segfault_code_9ydWhnU95Q OR segfault_code_tywcpR8adu OR segfault_code_s9jm3uwicl OR segfault_code_6ft459NlPM OR segfault_msg_8uMj1GXh8X OR illegal_inst_msg_GjIEXPF1YV) OR timeout_FN8Or47gu3 OR controlled_exit_2AyJKZEe1t))</formula>
+            </scoring_formula>
+            <output_checks>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="timeout_FN8Or47gu3" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="controlled_exit_2AyJKZEe1t" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="continued_execution_ju1fBkQvGe" type="USE_TEXT">CONTINUED_EXECUTION</simple_check>
+                <compare_check check_type="EXACT_MATCH" name="segfault_code_8XPaobh1xO">
+                    <actual encoding="STRING" output_type="RETURN_CODE">None</actual>
+                    <expected encoding="STRING" type="USE_TEXT">132</expected>
+                </compare_check>
+                <compare_check check_type="EXACT_MATCH" name="segfault_code_eBfpkvc0Cs">
+                    <actual encoding="STRING" output_type="RETURN_CODE">None</actual>
+                    <expected encoding="STRING" type="USE_TEXT">134</expected>
+                </compare_check>
+                <compare_check check_type="EXACT_MATCH" name="segfault_code_9ydWhnU95Q">
+                    <actual encoding="STRING" output_type="RETURN_CODE">None</actual>
+                    <expected encoding="STRING" type="USE_TEXT">135</expected>
+                </compare_check>
+                <compare_check check_type="EXACT_MATCH" name="segfault_code_tywcpR8adu">
+                    <actual encoding="STRING" output_type="RETURN_CODE">None</actual>
+                    <expected encoding="STRING" type="USE_TEXT">136</expected>
+                </compare_check>
+                <compare_check check_type="EXACT_MATCH" name="segfault_code_s9jm3uwicl">
+                    <actual encoding="STRING" output_type="RETURN_CODE">None</actual>
+                    <expected encoding="STRING" type="USE_TEXT">139</expected>
+                </compare_check>
+                <compare_check check_type="EXACT_MATCH" name="segfault_code_6ft459NlPM">
+                    <actual encoding="STRING" output_type="RETURN_CODE">None</actual>
+                    <expected encoding="STRING" type="USE_TEXT">1</expected>
+                </compare_check>
+                <compare_check check_type="CONTAINS" name="segfault_msg_8uMj1GXh8X">
+                    <actual encoding="STRING" output_type="STANDARD_ERROR">None</actual>
+                    <expected encoding="STRING" type="USE_TEXT">Segmentation fault</expected>
+                </compare_check>
+                <compare_check check_type="CONTAINS" name="illegal_inst_msg_GjIEXPF1YV">
+                    <actual encoding="STRING" output_type="STANDARD_ERROR">None</actual>
+                    <expected encoding="STRING" type="USE_TEXT">Illegal instruction</expected>
+                </compare_check>
+                <compare_check check_type="CONTAINS" name="weakness_started_91gt0gyU62Nx8NjuzSDG">
+                    <actual encoding="STRING" input_id_ref="lttng_output_Xjts8DL6CZiZ0cFZrFZY" output_type="STANDARD_OUT">None</actual>
+                    <expected encoding="STRING" type="USE_TEXT">stonesoup_trace:weakness_start</expected>
+                </compare_check>
+            </output_checks>
+        </iopair>
+        <iopair name="C-C805D-PSQL-08-ST02-DT03-DF05-CF14-01-BAD-02" reset_scheme="NONE" timeout="300" type="BAD">
+            <description>Good inputs:1) envrionment variable is set to a value whose length is less than or equal to 8 charsBad inputs:1) environment variable is not set2) environment variable is set to a value whose length is greater than 8 chars
+
+</description>
+            <technical_impact>DOS_UNCONTROLLED_EXIT</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env UNQUALIFIABLE_BILLITON;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p &quot;$SS_TC_ROOT/testData/good-04&quot; &amp;&amp; tar -xpzof &quot;$SS_TC_ROOT/testData/booktown-imported-db.tar.gz&quot; -C &quot;$SS_TC_ROOT/testData/good-04&quot; &amp;&amp; chown -R root:root $SS_TC_ROOT/testData/good-04 &amp;&amp; chmod -R 700 $SS_TC_ROOT/testData/good-04</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="UNQUALIFIABLE_BILLITON" type="USE_TEXT">/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt</environment_variable>
+                </process>
+                <process>
+                    <file encoding="STRING" path="/opt/stonesoup/workspace/testData/strewn_baccalaureates/grimaces_parode.txt" type="USE_TEXT">abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz</file>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="MALLOC_CHECK_" type="USE_TEXT">0</environment_variable>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT"> -D $SS_TC_ROOT/testData/good-04/psql</run_command>
+            <co_processes scheme="SEQUENCE">
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_ROOT/scripts/service_mon.sh ss-localhost 8432</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" input_id="client-commandINpkHNcAjw" type="USE_TEXT">sleep 22 &amp;&amp; $SS_TC_DEPS/bin/psql -d booktown -h ss-localhost -p 8432 -c &quot;CREATE TABLE stonesoup ( cwe varchar(6), progress varchar(12), UNIQUE(cwe) )&quot;</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">if [[ -s &quot;$SS_TC_ROOT/$SS_TC_INSTALL/postgres.pid&quot; ]]; then kill $(cat &quot;$SS_TC_ROOT/$SS_TC_INSTALL/postgres.pid&quot;); else echo &quot;Skipping postgres kill, no PID file.&quot;; fi;</script>
+                </process>
+            </co_processes>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_5aUIo5qGqM2fqzsNk8lu" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="segfault_formula_bwiwiU4pgR">
+                <formula name="segfault_formula_bwiwiU4pgR">weakness_started_skrjaaQK0aX3YZPjdw8d AND ((NOT PERFORMER AND (segfault_code_CMDGgghURZ OR segfault_code_U1lev4CUvj OR segfault_code_QEWMGeUHag OR segfault_code_vsK12ZZy9A OR segfault_code_9SjFTe3m21 OR segfault_code_ZWCCZuvjtd OR segfault_msg_0B71mF7Hwh OR illegal_inst_msg_tJ5UP8efDN) AND NOT timeout_kmE32Xh8tw) or (PERFORMER AND NOT ((segfault_code_CMDGgghURZ OR segfault_code_U1lev4CUvj OR segfault_code_QEWMGeUHag OR segfault_code_vsK12ZZy9A OR segfault_code_9SjFTe3m21 OR segfault_code_ZWCCZuvjtd OR segfault_msg_0B71mF7Hwh OR illegal_inst_msg_tJ5UP8efDN) OR timeout_kmE32Xh8tw OR controlled_exit_73urKy2O1r)))</formula>
+                <formula name="no_weakness_started_formula_pDZethhBgv">(NOT PERFORMER AND (segfault_code_CMDGgghURZ OR segfault_code_U1lev4CUvj OR segfault_code_QEWMGeUHag OR segfault_code_vsK12ZZy9A OR segfault_code_9SjFTe3m21 OR segfault_code_ZWCCZuvjtd OR segfault_msg_0B71mF7Hwh OR illegal_inst_msg_tJ5UP8efDN) AND NOT timeout_kmE32Xh8tw) or (PERFORMER AND NOT ((segfault_code_CMDGgghURZ OR segfault_code_U1lev4CUvj OR segfault_code_QEWMGeUHag OR segfault_code_vsK12ZZy9A OR segfault_code_9SjFTe3m21 OR segfault_code_ZWCCZuvjtd OR segfault_msg_0B71mF7Hwh OR illegal_inst_msg_tJ5UP8efDN) OR timeout_kmE32Xh8tw OR controlled_exit_73urKy2O1r))</formula>
+            </scoring_formula>
+            <output_checks>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="timeout_kmE32Xh8tw" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="controlled_exit_73urKy2O1r" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="continued_execution_rfuRpONfWT" type="USE_TEXT">CONTINUED_EXECUTION</simple_check>
+                <compare_check check_type="EXACT_MATCH" name="segfault_code_CMDGgghURZ">
+                    <actual encoding="STRING" output_type="RETURN_CODE">None</actual>
+                    <expected encoding="STRING" type="USE_TEXT">132</expected>
+                </compare_check>
+                <compare_check check_type="EXACT_MATCH" name="segfault_code_U1lev4CUvj">
+                    <actual encoding="STRING" output_type="RETURN_CODE">None</actual>
+                    <expected encoding="STRING" type="USE_TEXT">134</expected>
+                </compare_check>
+                <compare_check check_type="EXACT_MATCH" name="segfault_code_QEWMGeUHag">
+                    <actual encoding="STRING" output_type="RETURN_CODE">None</actual>
+                    <expected encoding="STRING" type="USE_TEXT">135</expected>
+                </compare_check>
+                <compare_check check_type="EXACT_MATCH" name="segfault_code_vsK12ZZy9A">
+                    <actual encoding="STRING" output_type="RETURN_CODE">None</actual>
+                    <expected encoding="STRING" type="USE_TEXT">136</expected>
+                </compare_check>
+                <compare_check check_type="EXACT_MATCH" name="segfault_code_9SjFTe3m21">
+                    <actual encoding="STRING" output_type="RETURN_CODE">None</actual>
+                    <expected encoding="STRING" type="USE_TEXT">139</expected>
+                </compare_check>
+                <compare_check check_type="EXACT_MATCH" name="segfault_code_ZWCCZuvjtd">
+                    <actual encoding="STRING" output_type="RETURN_CODE">None</actual>
+                    <expected encoding="STRING" type="USE_TEXT">1</expected>
+                </compare_check>
+                <compare_check check_type="CONTAINS" name="segfault_msg_0B71mF7Hwh">
+                    <actual encoding="STRING" output_type="STANDARD_ERROR">None</actual>
+                    <expected encoding="STRING" type="USE_TEXT">Segmentation fault</expected>
+                </compare_check>
+                <compare_check check_type="CONTAINS" name="illegal_inst_msg_tJ5UP8efDN">
+                    <actual encoding="STRING" output_type="STANDARD_ERROR">None</actual>
+                    <expected encoding="STRING" type="USE_TEXT">Illegal instruction</expected>
+                </compare_check>
+                <compare_check check_type="CONTAINS" name="weakness_started_skrjaaQK0aX3YZPjdw8d">
+                    <actual encoding="STRING" input_id_ref="lttng_output_5aUIo5qGqM2fqzsNk8lu" output_type="STANDARD_OUT">None</actual>
+                    <expected encoding="STRING" type="USE_TEXT">stonesoup_trace:weakness_start</expected>
+                </compare_check>
+            </output_checks>
+        </iopair>
+    </iopairs>
+</project>

@@ -1,0 +1,217 @@
+io_pair:
+  exploits:
+    - inputs:
+        - ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          port: 8887
+          value: /opt/stonesoup/workspace/testData/fifo1 badfile1
+          source: socket_input
+          address: ss-localhost
+          source_enum: 5
+          stage: co_process
+          stage_enum: 1
+          id: source
+          value_encoding: none
+        - stage_enum: 0
+          id: background-complex
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Replacing: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && ln -s /etc/passwd \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Replaced.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          stage: pre_process
+          source: script_input
+          ordinal: 2
+          source_enum: 7
+        - stage: pre_process
+          id: background
+          source_enum: 7
+          ordinal: 3
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 --nosync
+          source: script_input
+          stage_enum: 0
+        - value_encoding: none
+          name: /opt/stonesoup/workspace/testData/badfile1
+          source_enum: 3
+          value: This is yet another file.
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 4
+          source: file_content_input
+          stage_enum: 0
+    - inputs:
+        - source_enum: 5
+          source: socket_input
+          stage: co_process
+          value: /opt/stonesoup/workspace/testData/fifo1 badfile2
+          stage_enum: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          id: source
+          ordinal: 1
+          address: ss-localhost
+          value_type_enum: 0
+          port: 8887
+        - stage: pre_process
+          stage_enum: 0
+          source: script_input
+          ordinal: 2
+          source_enum: 7
+          id: background-complex
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Replacing: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && ln -s /etc/passwd \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Replaced.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+        - source: script_input
+          id: background
+          stage: pre_process
+          source_enum: 7
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 --nosync
+          stage_enum: 0
+          ordinal: 3
+        - value: This is also file.
+          name: /opt/stonesoup/workspace/testData/badfile2
+          value_encoding: none
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          value_type_enum: 0
+          ordinal: 4
+          stage: pre_process
+          stage_enum: 0
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  description: "This weakness expects a string in the form: '<filename> <data>' where filename is a file that will be read to delay execution, and data is a string containing no spaces. The data string is treated as a filename in the testData directory. The weakness checks that the filename does not have any slashes in it and that it is not a symbolic link. However, there is a time of check, time of use vulnerability after the file is checked but before it is opened allowing the file to be replaced with a symbolic link to a file outside of the testData directory. The weakness notifies the test harness that the file should be replaced by a symbolic link by creating a file called testData/*.pid. \n\n"
+  benigns:
+    - inputs:
+        - id: source
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/file1 goodfile1
+          address: ss-localhost
+          value_encoding: none
+          port: 8887
+          source: socket_input
+          stage: co_process
+          stage_enum: 1
+          source_enum: 5
+        - source: script_input
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Replacing: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && ln -s /etc/passwd \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Replaced.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          ordinal: 2
+          source_enum: 7
+          stage_enum: 0
+          id: background-complex
+          stage: pre_process
+        - stage: pre_process
+          source: file_content_input
+          ordinal: 3
+          stage_enum: 0
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/file1
+        - value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          ordinal: 4
+          name: /opt/stonesoup/workspace/testData/goodfile1
+          value_type_enum: 0
+          value_encoding: none
+          value: A non-empty file.
+          source_enum: 3
+          stage_enum: 0
+          source: file_content_input
+    - inputs:
+        - stage_enum: 1
+          ordinal: 1
+          port: 8887
+          address: ss-localhost
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/file1 goodfile2
+          value_type_enum: 0
+          value_encoding: none
+          stage: co_process
+          id: source
+          source: socket_input
+          source_enum: 5
+        - source_enum: 7
+          ordinal: 2
+          stage: pre_process
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Replacing: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && ln -s /etc/passwd \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Replaced.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          source: script_input
+          stage_enum: 0
+          id: background-complex
+        - stage: pre_process
+          ordinal: 3
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/file1
+          source_enum: 3
+          source: file_content_input
+        - value_type_enum: 0
+          stage: pre_process
+          value: This is a file.
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/goodfile2
+          stage_enum: 0
+          ordinal: 4
+          source: file_content_input
+    - inputs:
+        - source: socket_input
+          source_enum: 5
+          stage: co_process
+          stage_enum: 1
+          id: source
+          ordinal: 1
+          address: ss-localhost
+          port: 8887
+          value: /opt/stonesoup/workspace/testData/file1 goodfile3
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - source_enum: 7
+          source: script_input
+          id: background-complex
+          stage_enum: 0
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Replacing: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && ln -s /etc/passwd \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Replaced.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          stage: pre_process
+          ordinal: 2
+        - name: /opt/stonesoup/workspace/testData/file1
+          source: file_content_input
+          stage: pre_process
+          ordinal: 3
+          stage_enum: 0
+          source_enum: 3
+        - value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/goodfile3
+          value: This is another file.
+          stage: pre_process
+          source: file_content_input
+          stage_enum: 0
+          value_encoding: none
+          source_enum: 3
+          ordinal: 4
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpCn4CS6_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmpCn4CS6_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    feature_group: data_type
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: array
+  - file_name: /tmp/tmpCn4CS6_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - file_name: /tmp/tmpCn4CS6_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    line_number: 0
+    feature_group: control_flow
+    function_name: anatifer_overdesirous
+    feature: recursive

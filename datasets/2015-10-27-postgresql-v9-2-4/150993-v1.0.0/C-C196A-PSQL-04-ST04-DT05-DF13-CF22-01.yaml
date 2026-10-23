@@ -1,0 +1,156 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - value_encoding: none
+          value: 15
+          key: 7889
+          size: 11
+          value_type_enum: 0
+          stage_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          flags: 950
+          source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+        - value_type_enum: 0
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          name: SS_BUFF
+          source: env_var_input
+          stage_enum: 0
+          value_encoding: none
+          value: hello
+          stage: pre_process
+    - inputs:
+        - id: source
+          source: shared_memory_input
+          value_encoding: none
+          size: 11
+          key: 7889
+          flags: 950
+          value_type_enum: 0
+          value: 8
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 6
+        - value_type_enum: 0
+          ordinal: 2
+          value: abcdefghiklmnopqrstuvwxyz
+          value_encoding: none
+          name: SS_BUFF
+          stage_enum: 0
+          source: env_var_input
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          ordinal: 1
+          source: shared_memory_input
+          source_enum: 6
+          key: 7889
+          value_type_enum: 0
+          id: source
+          stage: pre_process
+          flags: 950
+          size: 11
+          value_encoding: none
+          value: 1000
+        - value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          value_type_enum: 0
+          value_encoding: none
+          source: env_var_input
+          name: SS_BUFF
+          value: Heeellllloooooo_Wooooorrrrrllllldddddd!!!!!!
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+  description: "This weakness reads a number to be used as a loop counter. The loop counter is initially read as an unsigned long, then converted to an int.  If the number read in is larger than MAX_UINT, it is silently converted to a negative number.  This breaks the loop counter logic, resulting in an infinite loop. Good inputs:  taint source is 2147483647 or less Bad inputs: taint source is 2147483648 or greater\n\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 7889
+      size: 11
+      flags: 950
+  exploits:
+    - inputs:
+        - value_encoding: none
+          stage: pre_process
+          source_enum: 6
+          id: source
+          source: shared_memory_input
+          stage_enum: 0
+          value_type_enum: 0
+          key: 7889
+          ordinal: 1
+          size: 11
+          value: 4294967291
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+        - value: Good_Bye_World
+          value_encoding: none
+          stage_enum: 0
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          source_enum: 2
+          stage: pre_process
+          name: SS_BUFF
+          source: env_var_input
+    - inputs:
+        - source_enum: 6
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 1
+          value_type_enum: 0
+          key: 7889
+          value: 2147483650
+          value_encoding: none
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          size: 11
+          flags: 950
+          source: shared_memory_input
+        - value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 2
+          stage_enum: 0
+          name: SS_BUFF
+          ordinal: 2
+          value: aaaaaaaaaaaaaaaaa
+          stage: pre_process
+code_complexity_features:
+  - file_name: /tmp/tmpgdZGqW_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - function_name: PortalDrop
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+    file_name: /tmp/tmpgdZGqW_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+  - file_name: /tmp/tmpgdZGqW_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - function_name: PortalDrop
+    line_number: 0
+    feature_group: control_flow
+    file_name: /tmp/tmpgdZGqW_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    feature: macros

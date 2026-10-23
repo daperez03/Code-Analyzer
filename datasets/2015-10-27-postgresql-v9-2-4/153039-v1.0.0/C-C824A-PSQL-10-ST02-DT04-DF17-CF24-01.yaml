@@ -1,0 +1,154 @@
+code_complexity_features:
+  - file_name: /tmp/tmpNgbo7Y_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpNgbo7Y_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpNgbo7Y_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: control_flow
+    file_name: /tmp/tmpNgbo7Y_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    feature: unconditional_jump
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  description: "Create a function pointer on the stack.  If the input length is not equal to 10, set the function pointer to a function.  Try to use the function pointer. This will seg fault if the input length is exactly 10.\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/promemorial_fumid/arene_thompson.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: UNLEARNABLENESS_AMERINDIAN
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/promemorial_fumid/arene_thompson.txt
+      id: source
+  benigns:
+    - inputs:
+        - source_enum: 2
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_type_enum: 0
+          name: UNLEARNABLENESS_AMERINDIAN
+          value: /opt/stonesoup/workspace/testData/promemorial_fumid/arene_thompson.txt
+          value_encoding: none
+          source: env_var_input
+          stage: pre_process
+        - source_enum: 3
+          stage: pre_process
+          ordinal: 2
+          stage_enum: 0
+          id: source
+          name: /opt/stonesoup/workspace/testData/promemorial_fumid/arene_thompson.txt
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          value_encoding: none
+          value: AAAAAAAAAAA
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source_enum: 2
+          value_type_enum: 0
+          name: UNLEARNABLENESS_AMERINDIAN
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/promemorial_fumid/arene_thompson.txt
+          value_encoding: none
+        - ordinal: 2
+          value_type_enum: 0
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/promemorial_fumid/arene_thompson.txt
+          value: 12345 Hello world!
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+    - inputs:
+        - stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/promemorial_fumid/arene_thompson.txt
+          value_encoding: none
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_type_enum: 0
+          name: UNLEARNABLENESS_AMERINDIAN
+        - stage_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value: This string does not have 10 characters
+          source_enum: 3
+          source: file_content_input
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/promemorial_fumid/arene_thompson.txt
+          value_encoding: none
+          stage: pre_process
+          value_type_enum: 0
+  exploits:
+    - inputs:
+        - source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 2
+          value_encoding: none
+          name: UNLEARNABLENESS_AMERINDIAN
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/promemorial_fumid/arene_thompson.txt
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/promemorial_fumid/arene_thompson.txt
+          id: source
+          value: 0123456789
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/promemorial_fumid/arene_thompson.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: UNLEARNABLENESS_AMERINDIAN
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/promemorial_fumid/arene_thompson.txt
+          id: source
+          value: 10 chars..
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0

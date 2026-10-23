@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmpqGhjxR_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpqGhjxR_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpqGhjxR_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: data_flow
+    feature: address_alias_10
+  - file_name: /tmp/tmpqGhjxR_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: control_flow
+    feature: unconditional_jump
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 4297
+      size: 10
+      flags: 950
+      source: shared_memory_input
+  exploits:
+    - inputs:
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: -8000000
+          source_enum: 6
+          flags: 950
+          source: shared_memory_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          id: source
+          size: 10
+          key: 4297
+          value_type_enum: 0
+    - inputs:
+        - key: 4297
+          size: 10
+          source_enum: 6
+          stage: pre_process
+          id: source
+          value_encoding: none
+          stage_enum: 0
+          ordinal: 1
+          flags: 950
+          value: -16777215
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+  description: "Read an integer from the input.  If integer >= 4096, do nothing.Else malloc a buffer of 4096 bytes.  Memset the buffer to 'a'. Memset bytes of buffer from input_integer to 4095 to 'b'. Print the buffer.  This all works correctly if the input_integer is 0 or greater.  If input_integer is negative, we will try to memset a random place in memory.  If the input_integer is sufficiently large, this is unaddressable, and we get a segfault.\n\n"
+  benigns:
+    - inputs:
+        - flags: 950
+          value: 10
+          stage: pre_process
+          stage_enum: 0
+          source: shared_memory_input
+          id: source
+          size: 10
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+          ordinal: 1
+          key: 4297
+          source_enum: 6
+    - inputs:
+        - stage: pre_process
+          source: shared_memory_input
+          key: 4297
+          ordinal: 1
+          source_enum: 6
+          stage_enum: 0
+          size: 10
+          value_type_enum: 0
+          id: source
+          value: 1000
+          value_encoding: none
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          size: 10
+          key: 4297
+          source: shared_memory_input
+          value: 20
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6

@@ -1,0 +1,254 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpvobXcN_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpvobXcN_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature: void_pointer
+    feature_group: data_type
+  - feature_group: data_flow
+    file_name: /tmp/tmpvobXcN_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature: address_as_variable
+  - feature: indirectly_recursive
+    file_name: /tmp/tmpvobXcN_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: control_flow
+io_pair:
+  base_inputs:
+    - value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: ROUGES_STATEHOUSE
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value_encoding: none
+      value: /opt/stonesoup/workspace/testData/protoprotestant_concocter/precontrivance_telekinetically.txt
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/protoprotestant_concocter/precontrivance_telekinetically.txt
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: ROUGES_STATEHOUSE
+          source: env_var_input
+          ordinal: 1
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 2
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/protoprotestant_concocter/precontrivance_telekinetically.txt
+        - value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage: pre_process
+          value: --cmd 'silent !cat /etc/passwd' /opt/stonesoup/workspace/testData/vim_inputs/sample1.txt
+          source: file_content_input
+          ordinal: 2
+          source_enum: 3
+          id: source
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/protoprotestant_concocter/precontrivance_telekinetically.txt
+          value_type_enum: 0
+        - stage_enum: 0
+          value_encoding: none
+          source_enum: 3
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          value_type: USE_TEXT_DIRECTLY
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          value_type_enum: 0
+          source: file_content_input
+          stage: pre_process
+          ordinal: 1
+        - source_enum: 3
+          ordinal: 2
+          stage: pre_process
+          stage_enum: 0
+          source: file_content_input
+          value_type_enum: 0
+          value_encoding: none
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample1.txt
+          value: !<!> hello World!
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: ROUGES_STATEHOUSE
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/protoprotestant_concocter/precontrivance_telekinetically.txt
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/protoprotestant_concocter/precontrivance_telekinetically.txt
+          value: --cmd 'silent !ls -la .' /opt/stonesoup/workspace/testData/vim_inputs/sample2.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - value_type_enum: 0
+          ordinal: 1
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          value_encoding: none
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          stage: pre_process
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          source: file_content_input
+        - value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+          source: file_content_input
+          value: !<!> "hello?\nhello.\nhello!\nhello..."
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample2.txt
+          value_encoding: none
+          ordinal: 2
+          source_enum: 3
+  description: "This weakness takes a filename from an untrusted source and uses a subprocess (via popen) to perform a search and replace of the text \"hello\" with \"Hello\".  The untrusted input is not properly sanitized, and may be used to perform an argument injection on the base command in order to run additional commands or functions.\n"
+  benigns:
+    - inputs:
+        - source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          source: env_var_input
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/protoprotestant_concocter/precontrivance_telekinetically.txt
+          stage: pre_process
+          ordinal: 1
+          name: ROUGES_STATEHOUSE
+        - name: /opt/stonesoup/workspace/testData/protoprotestant_concocter/precontrivance_telekinetically.txt
+          source: file_content_input
+          value_type_enum: 0
+          ordinal: 2
+          id: source
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/vim_inputs/sample1.txt
+          source_enum: 3
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+        - ordinal: 1
+          stage: pre_process
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          stage_enum: 0
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          source_enum: 3
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          value_encoding: none
+        - value: !<!> hello World!
+          source: file_content_input
+          value_type_enum: 0
+          ordinal: 2
+          source_enum: 3
+          stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample1.txt
+    - inputs:
+        - source_enum: 2
+          value_encoding: none
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_type_enum: 0
+          name: ROUGES_STATEHOUSE
+          source: env_var_input
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/protoprotestant_concocter/precontrivance_telekinetically.txt
+        - value_type_enum: 0
+          ordinal: 2
+          value: /opt/stonesoup/workspace/testData/vim_inputs/sample2.txt
+          source: file_content_input
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/protoprotestant_concocter/precontrivance_telekinetically.txt
+          stage: pre_process
+          source_enum: 3
+          id: source
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+        - stage: pre_process
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source_enum: 3
+          stage_enum: 0
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          value_type_enum: 0
+          ordinal: 1
+        - value: !<!> "hello?\nhello.\nhello!\nhello..."
+          ordinal: 2
+          source: file_content_input
+          stage: pre_process
+          value_encoding: none
+          source_enum: 3
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample2.txt
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+    - inputs:
+        - value_type_enum: 0
+          source_enum: 2
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage: pre_process
+          name: ROUGES_STATEHOUSE
+          stage_enum: 0
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/protoprotestant_concocter/precontrivance_telekinetically.txt
+        - stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+          id: source
+          source_enum: 3
+          source: file_content_input
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/protoprotestant_concocter/precontrivance_telekinetically.txt
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/vim_inputs/sample3.txt
+        - stage: pre_process
+          source: file_content_input
+          value_encoding: none
+          stage_enum: 0
+          ordinal: 1
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - value: !<!> "Hello again, hello.  Just called to say hello.\n\nYou had me at \"hello\".\n\n"
+          stage: pre_process
+          ordinal: 2
+          value_type_enum: 0
+          source: file_content_input
+          source_enum: 3
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample3.txt
+          stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY

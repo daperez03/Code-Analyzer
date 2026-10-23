@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmp7Ro_P5_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - feature: array
+    file_name: /tmp/tmp7Ro_P5_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_type
+  - file_name: /tmp/tmp7Ro_P5_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - feature_group: control_flow
+    feature: sequence
+    file_name: /tmp/tmp7Ro_P5_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+io_pair:
+  description: "Read a string from the input.  Do nslookup on that string, without checking first if it has any command separators.  This allows the user to run arbitrary commands.\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/azoblack_colligated/epicheirema_lamebrain.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: UNOBSCURENESS_WAVES
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/azoblack_colligated/epicheirema_lamebrain.txt
+  exploits:
+    - inputs:
+        - name: UNOBSCURENESS_WAVES
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/azoblack_colligated/epicheirema_lamebrain.txt
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+        - source_enum: 3
+          stage: pre_process
+          source: file_content_input
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/azoblack_colligated/epicheirema_lamebrain.txt
+          value: 10; ls -la
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/azoblack_colligated/epicheirema_lamebrain.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: UNOBSCURENESS_WAVES
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/azoblack_colligated/epicheirema_lamebrain.txt
+          value: localhost; echo Hello world
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          value_encoding: none
+          source_enum: 2
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/azoblack_colligated/epicheirema_lamebrain.txt
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage_enum: 0
+          name: UNOBSCURENESS_WAVES
+          ordinal: 1
+        - value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          source: file_content_input
+          stage: pre_process
+          ordinal: 2
+          value_type_enum: 0
+          value_encoding: none
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/azoblack_colligated/epicheirema_lamebrain.txt
+          value: 10
+          id: source
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          name: UNOBSCURENESS_WAVES
+          stage: pre_process
+          value_encoding: none
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          ordinal: 1
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/azoblack_colligated/epicheirema_lamebrain.txt
+        - source_enum: 3
+          stage: pre_process
+          value: google.com
+          value_encoding: none
+          source: file_content_input
+          ordinal: 2
+          stage_enum: 0
+          id: source
+          name: /opt/stonesoup/workspace/testData/azoblack_colligated/epicheirema_lamebrain.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - stage_enum: 0
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/azoblack_colligated/epicheirema_lamebrain.txt
+          value_type_enum: 0
+          name: UNOBSCURENESS_WAVES
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/azoblack_colligated/epicheirema_lamebrain.txt
+          ordinal: 2
+          value: localhost
+          value_encoding: none

@@ -1,0 +1,94 @@
+io_pair:
+  description: "Malloc a buffer.  Copy the input string to the buffer.  If the first character is 'a' or higher, free the buffer. Use the buffer.  This will cause a seg fault if the buffer was previously freed.\n\n"
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          name: MERMIS_DILATOMETRY
+          value_encoding: none
+          stage_enum: 0
+          stage: pre_process
+          value_type_enum: 0
+          ordinal: 1
+          id: source
+          value: abc
+          source_enum: 2
+    - inputs:
+        - source: env_var_input
+          name: MERMIS_DILATOMETRY
+          source_enum: 2
+          ordinal: 1
+          value: this string begins with a lower-case letter
+          stage: pre_process
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_encoding: none
+          value_type_enum: 0
+  base_inputs:
+    - name: MERMIS_DILATOMETRY
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      ordinal: 1
+      id: source
+  benigns:
+    - inputs:
+        - value: AAA
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          source: env_var_input
+          id: source
+          value_encoding: none
+          value_type_enum: 0
+          name: MERMIS_DILATOMETRY
+    - inputs:
+        - ordinal: 1
+          name: MERMIS_DILATOMETRY
+          source_enum: 2
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          id: source
+          value: 12345 Hello world!
+          stage: pre_process
+          source: env_var_input
+    - inputs:
+        - name: MERMIS_DILATOMETRY
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          value: "[Good-bye cruel world!]"
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 1
+          source: env_var_input
+code_complexity_features:
+  - file_name: /tmp/tmpreMJf6_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpreMJf6_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    feature_group: data_type
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature: array
+  - file_name: /tmp/tmpreMJf6_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature: macros
+    feature_group: control_flow
+    file_name: /tmp/tmpreMJf6_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

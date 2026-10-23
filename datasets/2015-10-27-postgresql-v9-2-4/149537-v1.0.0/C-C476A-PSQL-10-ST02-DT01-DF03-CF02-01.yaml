@@ -1,0 +1,204 @@
+code_complexity_features:
+  - line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+    file_name: /tmp/tmptcSpTy_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+  - feature_group: data_type
+    feature: array
+    file_name: /tmp/tmptcSpTy_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+  - file_name: /tmp/tmptcSpTy_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_flow
+    feature: address_alias_10
+  - file_name: /tmp/tmptcSpTy_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: control_flow
+    feature: indirectly_recursive
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/mesole_hoplomachist/pseudomaniac_hut.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: MAREOGRAPH_TRADEFUL
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/mesole_hoplomachist/pseudomaniac_hut.txt
+  description: "Reads file name of a csv containing 3, fully quoted, comma separated, columns.Opens file and reads each value and sets it to index in array. If a value isn'tfully quoted program will skip that value and eventually seg fault when dereferencingarray index for printing\n\n"
+  exploits:
+    - inputs:
+        - value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/mesole_hoplomachist/pseudomaniac_hut.txt
+          name: MAREOGRAPH_TRADEFUL
+          value_type: USE_TEXT_DIRECTLY
+        - stage_enum: 0
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/bad01.csv
+          ordinal: 2
+          source_enum: 3
+          id: source
+          stage: pre_process
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/mesole_hoplomachist/pseudomaniac_hut.txt
+          value_encoding: none
+        - source: file_content_input
+          name: /opt/stonesoup/workspace/testData/bad01.csv
+          value_type: USE_TEXT_DIRECTLY
+          value: !<!> "\"this\",\"is\",data"
+          source_enum: 3
+          value_encoding: none
+          stage_enum: 0
+          value_type_enum: 0
+          stage: pre_process
+          ordinal: 2
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/mesole_hoplomachist/pseudomaniac_hut.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: MAREOGRAPH_TRADEFUL
+          source: env_var_input
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/mesole_hoplomachist/pseudomaniac_hut.txt
+          value: /opt/stonesoup/workspace/testData/bad02.csv
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - ordinal: 2
+          value_type_enum: 0
+          source_enum: 3
+          stage_enum: 0
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage: pre_process
+          value: !<!> "\"malformed values with spaces\",\"because no\",quotes"
+          name: /opt/stonesoup/workspace/testData/bad02.csv
+  benigns:
+    - inputs:
+        - ordinal: 1
+          source: env_var_input
+          value_type_enum: 0
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          name: MAREOGRAPH_TRADEFUL
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/mesole_hoplomachist/pseudomaniac_hut.txt
+          value_encoding: none
+          stage: pre_process
+        - name: /opt/stonesoup/workspace/testData/mesole_hoplomachist/pseudomaniac_hut.txt
+          value: /opt/stonesoup/workspace/testData/good01.csv
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 2
+          source: file_content_input
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          source_enum: 3
+        - source: file_content_input
+          stage_enum: 0
+          value_type_enum: 0
+          stage: pre_process
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          value: !<!> "\"this\",\"is\",\"data\""
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/good01.csv
+    - inputs:
+        - value_encoding: none
+          value: /opt/stonesoup/workspace/testData/mesole_hoplomachist/pseudomaniac_hut.txt
+          source: env_var_input
+          stage_enum: 0
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          name: MAREOGRAPH_TRADEFUL
+          source_enum: 2
+          stage: pre_process
+        - source_enum: 3
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/good02.csv
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/mesole_hoplomachist/pseudomaniac_hut.txt
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_type_enum: 0
+          stage: pre_process
+          value: !<!> "\"hello\",\"world\",\"!!!!\""
+          source: file_content_input
+          ordinal: 2
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/good02.csv
+    - inputs:
+        - ordinal: 1
+          name: MAREOGRAPH_TRADEFUL
+          source_enum: 2
+          value_encoding: none
+          stage: pre_process
+          value_type_enum: 0
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/mesole_hoplomachist/pseudomaniac_hut.txt
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+        - source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source_enum: 3
+          value_type_enum: 0
+          value_encoding: none
+          stage: pre_process
+          id: source
+          name: /opt/stonesoup/workspace/testData/mesole_hoplomachist/pseudomaniac_hut.txt
+          ordinal: 2
+          value: /opt/stonesoup/workspace/testData/good03.csv
+        - value_type: USE_TEXT_DIRECTLY
+          value: !<!> "\"one\",\"two\",\"three\""
+          value_encoding: none
+          value_type_enum: 0
+          stage_enum: 0
+          source_enum: 3
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/good03.csv
+          ordinal: 2
+          source: file_content_input

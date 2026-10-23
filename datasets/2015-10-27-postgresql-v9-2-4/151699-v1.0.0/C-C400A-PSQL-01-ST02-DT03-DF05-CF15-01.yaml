@@ -1,0 +1,154 @@
+code_complexity_features:
+  - line_number: 0
+    feature: FILE_CONTENTS
+    feature_group: source_taint
+    file_name: /tmp/tmp8t9YP7_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+  - file_name: /tmp/tmp8t9YP7_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature: void_pointer
+    feature_group: data_type
+  - feature_group: data_flow
+    file_name: /tmp/tmp8t9YP7_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature: address_as_constant
+  - file_name: /tmp/tmp8t9YP7_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: bilineated_pedule
+    line_number: 0
+    feature_group: control_flow
+    feature: interprocedural_50
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  description: "Read an int from the input.  If < 0, or bigger than 0xFFFFFFFF/4, do nothing.  Otherwise, malloc that many 100,000 int buffers. If memory cannot all be allocated, output 'Out of memory' then exit. This condition occurs if int > about 30000 \n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/predetail_coapprover/jugheads_pistachios.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: ARCHAPOSTATE_EYRE
+    - stage: pre_process
+      source: file_content_input
+      source_enum: 3
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/predetail_coapprover/jugheads_pistachios.txt
+  benigns:
+    - inputs:
+        - source_enum: 2
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          name: ARCHAPOSTATE_EYRE
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/predetail_coapprover/jugheads_pistachios.txt
+          value_type: USE_TEXT_DIRECTLY
+        - stage: pre_process
+          source_enum: 3
+          value_type_enum: 0
+          source: file_content_input
+          id: source
+          value: 0
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/predetail_coapprover/jugheads_pistachios.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage_enum: 0
+    - inputs:
+        - source: env_var_input
+          value_type_enum: 0
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/predetail_coapprover/jugheads_pistachios.txt
+          name: ARCHAPOSTATE_EYRE
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+          stage: pre_process
+        - value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source: file_content_input
+          source_enum: 3
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/predetail_coapprover/jugheads_pistachios.txt
+          value: 1
+          id: source
+          stage_enum: 0
+    - inputs:
+        - source: env_var_input
+          value_encoding: none
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/predetail_coapprover/jugheads_pistachios.txt
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: ARCHAPOSTATE_EYRE
+          ordinal: 1
+          stage_enum: 0
+          source_enum: 2
+        - id: source
+          value: 1000
+          value_type_enum: 0
+          source: file_content_input
+          stage_enum: 0
+          ordinal: 2
+          stage: pre_process
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/predetail_coapprover/jugheads_pistachios.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/predetail_coapprover/jugheads_pistachios.txt
+          value_type_enum: 0
+          value_encoding: none
+          name: ARCHAPOSTATE_EYRE
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage: pre_process
+          source: env_var_input
+          source_enum: 2
+        - stage: pre_process
+          source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/predetail_coapprover/jugheads_pistachios.txt
+          value: 100000
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/predetail_coapprover/jugheads_pistachios.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: ARCHAPOSTATE_EYRE
+          source: env_var_input
+        - stage: pre_process
+          source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/predetail_coapprover/jugheads_pistachios.txt
+          value: 250052
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0

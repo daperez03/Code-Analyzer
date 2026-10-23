@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmpX_Lf1t_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - line_number: 0
+    feature_group: data_type
+    feature: void_pointer
+    file_name: /tmp/tmpX_Lf1t_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+  - feature_group: data_flow
+    line_number: 0
+    file_name: /tmp/tmpX_Lf1t_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    feature: address_as_constant
+  - function_name: magbie_nasrol
+    file_name: /tmp/tmpX_Lf1t_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    line_number: 0
+    feature_group: control_flow
+    feature: interprocedural_1
+io_pair:
+  description: "Good inputs: 1) taintvar is less than 64 characters long.Bad input: 1) taintvar is greater than or equal to 64 characters long.\n\n"
+  base_inputs:
+    - key: 8317
+      size: 125
+      flags: 950
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      source_enum: 6
+      source: shared_memory_input
+  benigns:
+    - inputs:
+        - ordinal: 1
+          source_enum: 6
+          value: brah
+          source: shared_memory_input
+          value_type_enum: 0
+          key: 8317
+          flags: 950
+          size: 125
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_encoding: none
+          stage_enum: 0
+          stage: pre_process
+    - inputs:
+        - source_enum: 6
+          size: 125
+          key: 8317
+          source: shared_memory_input
+          value_encoding: none
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value: dude
+          id: source
+          ordinal: 1
+          stage: pre_process
+          value_type_enum: 0
+    - inputs:
+        - value: bromigo
+          flags: 950
+          value_encoding: none
+          stage: pre_process
+          key: 8317
+          value_type_enum: 0
+          size: 125
+          ordinal: 1
+          stage_enum: 0
+          id: source
+          source_enum: 6
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          ordinal: 1
+          id: source
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: base64
+          size: 125
+          source: shared_memory_input
+          source_enum: 6
+          value: TmFoIG5haCBuYWggbmFoIG5haCBuYWgsIG5haCBuYWggbmFoLCBoZXkgSnVkZQpOYWggbmFoIG5haCBuYWggbmFoIG5haCwgbmFoIG5haCBuYWgsIGhleSBKdWRl
+          key: 8317
+          stage: pre_process
+    - inputs:
+        - value: this string is more than sixty four characters long, so it should mess some stuff up
+          flags: 950
+          size: 125
+          ordinal: 1
+          source: shared_memory_input
+          value_encoding: none
+          key: 8317
+          stage_enum: 0
+          stage: pre_process
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+          id: source
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

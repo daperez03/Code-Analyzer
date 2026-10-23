@@ -1,0 +1,154 @@
+code_complexity_features:
+  - file_name: /tmp/tmpumAcLy_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+    function_name: pgstat_clear_snapshot
+  - file_name: /tmp/tmpumAcLy_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpumAcLy_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature_group: data_flow
+    feature: index_alias_50
+  - file_name: /tmp/tmpumAcLy_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    feature_group: control_flow
+    feature: sequence
+    line_number: 0
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  description: "Has a fixed stack buffer of size 64.  (char [64]) When input has a larger size, the stack buffer will be over read\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/interpretate_blandishing/amphissa_exarchic.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: SOODLE_ORTHOCEPHALY
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/interpretate_blandishing/amphissa_exarchic.txt
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          value_encoding: none
+          name: SOODLE_ORTHOCEPHALY
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/interpretate_blandishing/amphissa_exarchic.txt
+        - id: source
+          source_enum: 3
+          source: file_content_input
+          stage_enum: 0
+          stage: pre_process
+          value_type_enum: 0
+          value: AAAAAAAAAAAAAAAAAAAAAAA
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/interpretate_blandishing/amphissa_exarchic.txt
+    - inputs:
+        - value_encoding: none
+          value: /opt/stonesoup/workspace/testData/interpretate_blandishing/amphissa_exarchic.txt
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          name: SOODLE_ORTHOCEPHALY
+        - value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          ordinal: 2
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/interpretate_blandishing/amphissa_exarchic.txt
+          value: Hello World!
+          source_enum: 3
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/interpretate_blandishing/amphissa_exarchic.txt
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_type_enum: 0
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          value_encoding: none
+          stage_enum: 0
+          name: SOODLE_ORTHOCEPHALY
+        - ordinal: 2
+          id: source
+          value: Short is good
+          source: file_content_input
+          stage: pre_process
+          source_enum: 3
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/interpretate_blandishing/amphissa_exarchic.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          source: env_var_input
+          value_encoding: none
+          source_enum: 2
+          ordinal: 1
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/interpretate_blandishing/amphissa_exarchic.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: SOODLE_ORTHOCEPHALY
+        - source: file_content_input
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/interpretate_blandishing/amphissa_exarchic.txt
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 3
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/interpretate_blandishing/amphissa_exarchic.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: SOODLE_ORTHOCEPHALY
+        - stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/interpretate_blandishing/amphissa_exarchic.txt
+          value: This is probably going to overflow a buffer of some sort.  Let's run it anyway and see what happens.  I hope that everything turns out ok, because I would love to see what this looks like in all CAPS.  Converting ASCII characters to upper case is easy, you can either call a system function, or just add the standard difference between the start of the two character sets.  But, I am sure there is a reason that system functions exist for this sort of functionality.
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: file_content_input
+          source_enum: 3

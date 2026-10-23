@@ -1,0 +1,106 @@
+io_pair:
+  description: "Read a string from the input.  Perform a find path -iname input.If input contains arguments such as -exec with a \\; ending the command, a user can insert other commands instead of just find\n\n"
+  exploits:
+    - inputs:
+        - ordinal: 1
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 2
+          source: env_var_input
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: "\"*\" -exec cat /etc/passwd \\;"
+          name: SWACKING_BAYERN
+        - source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 2
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/temp/file.txt
+    - inputs:
+        - value: "\"*\" -exec netstat -an \\;"
+          name: SWACKING_BAYERN
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: env_var_input
+          stage_enum: 0
+          id: source
+          stage: pre_process
+          ordinal: 1
+          value_encoding: none
+        - ordinal: 2
+          stage_enum: 0
+          source_enum: 3
+          source: file_content_input
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/temp/file.txt
+  benigns:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          value_encoding: none
+          value: "\"file.*\""
+          id: source
+          ordinal: 1
+          stage: pre_process
+          name: SWACKING_BAYERN
+    - inputs:
+        - id: source
+          source_enum: 2
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: filename.txt
+          ordinal: 1
+          name: SWACKING_BAYERN
+          stage: pre_process
+          source: env_var_input
+          stage_enum: 0
+          value_encoding: none
+    - inputs:
+        - id: source
+          source_enum: 2
+          name: SWACKING_BAYERN
+          stage_enum: 0
+          ordinal: 1
+          source: env_var_input
+          stage: pre_process
+          value: "\"*\""
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: SWACKING_BAYERN
+code_complexity_features:
+  - file_name: /tmp/tmpR4HGFL_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: control_flow
+    feature: callback
+  - file_name: /tmp/tmpR4HGFL_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: wean_albumenizer
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpR4HGFL_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: wean_albumenizer
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+    file_name: /tmp/tmpR4HGFL_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: toepiece_ginglymostomoid
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

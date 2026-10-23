@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 151004,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case converts a user string to a short, and then converts that short to an unsigned int. If the short is negative, this will result in unexpected sign extension. The unsigned int value is used to determine how much data to read from a file, resulting in massive buffer overwrite if the file is large and the original input was negative. \nMetadata\n - Base program: PostgreSQL\n - Source Taint: ENVIRONMENT_VARIABLE\n - Data Type: STRUCT\n - Data Flow: ADDRESS_AS_CONSTANT\n - Control Flow: MACROS",
+        "state": "bad",
+        "application": "cpe:2.3:a:postgresql:postgresql:9.2.4:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "postgresql-v9.2.4"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C194A-PSQL-03-ST01-DT05-DF05-CF22-01.xml"
+          },
+          "length": 76042,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "ea81b8e4d043449f7912d727083c8a036f891dcdae4e9f8ccbc4ca7b73831315"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/src/backend/access/transam/xact.c"
+          },
+          "length": 156371,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "f948846ee770eb616c52738814233fc02b4ab02d44d11c255e629d960dfae8c9"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "194",
+              "name": "Unexpected Sign Extension"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-194",
+          "message": {
+            "text": "Unexpected Sign Extension."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/src/backend/access/transam/xact.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 5004,
+                  "endLine": 5012
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "194",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

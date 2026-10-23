@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpxztyKr_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpxztyKr_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpxztyKr_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - file_name: /tmp/tmpxztyKr_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: chalutz_concentus
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence
+io_pair:
+  benigns:
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/diplohedron_zees/outserve_collectioner.txt
+          stage: pre_process
+          source_enum: 2
+          ordinal: 1
+          value_encoding: none
+          stage_enum: 0
+          value_type_enum: 0
+          name: PENETRATIVELY_JOYPOPPER
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+        - ordinal: 2
+          stage: pre_process
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/diplohedron_zees/outserve_collectioner.txt
+          source_enum: 3
+          id: source
+          value_encoding: none
+          value: brah
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+    - inputs:
+        - source: env_var_input
+          value: /opt/stonesoup/workspace/testData/diplohedron_zees/outserve_collectioner.txt
+          ordinal: 1
+          value_type_enum: 0
+          name: PENETRATIVELY_JOYPOPPER
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+        - source: file_content_input
+          id: source
+          stage_enum: 0
+          ordinal: 2
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_encoding: none
+          value: dude
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/diplohedron_zees/outserve_collectioner.txt
+    - inputs:
+        - source: env_var_input
+          stage: pre_process
+          name: PENETRATIVELY_JOYPOPPER
+          value_type_enum: 0
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/diplohedron_zees/outserve_collectioner.txt
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+        - value_type_enum: 0
+          source: file_content_input
+          source_enum: 3
+          value_encoding: none
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          name: /opt/stonesoup/workspace/testData/diplohedron_zees/outserve_collectioner.txt
+          ordinal: 2
+          value: bromigo
+          value_type: USE_TEXT_DIRECTLY
+  description: "Good inputs: 1) taintvar is less than 64 characters long.Bad input: 1) taintvar is greater than or equal to 64 characters long.\n\n"
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          value_encoding: none
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/diplohedron_zees/outserve_collectioner.txt
+          value_type_enum: 0
+          ordinal: 1
+          name: PENETRATIVELY_JOYPOPPER
+        - source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/diplohedron_zees/outserve_collectioner.txt
+          value: TmFoIG5haCBuYWggbmFoIG5haCBuYWgsIG5haCBuYWggbmFoLCBoZXkgSnVkZQpOYWggbmFoIG5haCBuYWggbmFoIG5haCwgbmFoIG5haCBuYWgsIGhleSBKdWRl
+          value_encoding: base64
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: file_content_input
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/diplohedron_zees/outserve_collectioner.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: PENETRATIVELY_JOYPOPPER
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/diplohedron_zees/outserve_collectioner.txt
+          value: this string is more than sixty four characters long, so it should mess some stuff up
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/diplohedron_zees/outserve_collectioner.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: PENETRATIVELY_JOYPOPPER
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/diplohedron_zees/outserve_collectioner.txt

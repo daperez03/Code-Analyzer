@@ -1,0 +1,142 @@
+io_pair:
+  exploits:
+    - inputs:
+        - stage_enum: 1
+          ordinal: 1
+          source: socket_input
+          stage: co_process
+          id: source
+          port: 8887
+          source_enum: 5
+          address: ss-localhost
+          value_encoding: none
+          value: /dev/urandom
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - ordinal: 1
+          stage_enum: 1
+          source_enum: 5
+          port: 8887
+          stage: co_process
+          id: source
+          address: ss-localhost
+          value: /opt/stonesoup/workspace/testData/bad02.txt
+          source: socket_input
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - value: a
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/bad02.txt
+          value_type_enum: 0
+        - source_enum: 7
+          ordinal: 3
+          stage_enum: 0
+          name: rm -rf /opt/stonesoup/workspace/testData/bad02.txt
+          stage: pre_process
+          source: script_input
+        - source: script_input
+          source_enum: 7
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 4
+          name: ln -s '/dev/urandom' /opt/stonesoup/workspace/testData/bad02.txt
+  base_inputs:
+    - source_enum: 5
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+      source: socket_input
+      stage: co_process
+  description: "Runs a bunch of hashing algorithms on a files contents. If a file doesn't end, ex: '/dev/urandom', will fork and consume a lot of cpu on different cpus\n\n"
+  benigns:
+    - inputs:
+        - address: ss-localhost
+          source_enum: 5
+          id: source
+          value_type_enum: 0
+          stage_enum: 1
+          source: socket_input
+          value: /opt/stonesoup/workspace/testData/good01.txt
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          stage: co_process
+          value_encoding: none
+          ordinal: 1
+    - inputs:
+        - source: socket_input
+          id: source
+          stage: co_process
+          value_encoding: none
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/good02.txt
+          stage_enum: 1
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          source_enum: 5
+          address: ss-localhost
+        - stage: pre_process
+          stage_enum: 0
+          source_enum: 3
+          value_type_enum: 0
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 2
+          value: not an empty file
+          name: /opt/stonesoup/workspace/testData/good02.txt
+    - inputs:
+        - source_enum: 5
+          stage_enum: 1
+          address: ss-localhost
+          ordinal: 1
+          port: 8887
+          id: source
+          source: socket_input
+          value: /opt/stonesoup/workspace/testData/good03.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage: co_process
+          value_type_enum: 0
+        - value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 3
+          source: file_content_input
+          ordinal: 2
+          value: This should not be an empty file.  I really mean it.  This should definitely contain some sort of text or paragraph or something
+          stage: pre_process
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/good03.txt
+          stage_enum: 0
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpp_D0kv_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: stonesoup_handle_taint
+    feature_group: source_taint
+    line_number: 0
+    feature: SOCKET
+  - function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+    file_name: /tmp/tmpp_D0kv_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+  - file_name: /tmp/tmpp_D0kv_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_alias_10
+  - file_name: /tmp/tmpp_D0kv_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence

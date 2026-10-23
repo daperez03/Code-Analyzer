@@ -1,0 +1,94 @@
+io_pair:
+  description: "Has a buffer declared on the stack. char[20] If input is resolved to a value larger than 20 it will overflow\n\n"
+  benigns:
+    - inputs:
+        - ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          value_type_enum: 0
+          value: /etc/passwd
+          stage_enum: 0
+          name: RIVERWAY_ROSSEN
+          value_encoding: none
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          id: source
+          stage: pre_process
+          value_type_enum: 0
+          ordinal: 1
+          value: /etc/ssh/ssh_config
+          source_enum: 2
+          value_encoding: none
+          name: RIVERWAY_ROSSEN
+          stage_enum: 0
+          source: env_var_input
+    - inputs:
+        - value: /usr/bin/gcc
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          id: source
+          stage_enum: 0
+          ordinal: 1
+          name: RIVERWAY_ROSSEN
+          value_type_enum: 0
+          stage: pre_process
+          source_enum: 2
+  exploits:
+    - inputs:
+        - id: source
+          name: RIVERWAY_ROSSEN
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          ordinal: 1
+          source_enum: 2
+          value_type_enum: 0
+          stage: pre_process
+          value: ../testData
+          stage_enum: 0
+          value_encoding: none
+    - inputs:
+        - stage: pre_process
+          value: ../testOutput
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          name: RIVERWAY_ROSSEN
+          value_type_enum: 0
+          source_enum: 2
+          value_encoding: none
+          ordinal: 1
+          id: source
+  base_inputs:
+    - id: source
+      source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+      ordinal: 1
+      name: RIVERWAY_ROSSEN
+      stage: pre_process
+code_complexity_features:
+  - feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmp7S58t1_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    line_number: 0
+    feature_group: source_taint
+  - line_number: 0
+    function_name: oid_hash
+    feature: typedef
+    file_name: /tmp/tmp7S58t1_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    feature_group: data_type
+  - file_name: /tmp/tmp7S58t1_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    line_number: 0
+    function_name: oid_hash
+    feature: var_arg_list
+    feature_group: data_flow
+  - feature: sequence
+    line_number: 0
+    file_name: /tmp/tmp7S58t1_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: hanley_memorate
+    feature_group: control_flow
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

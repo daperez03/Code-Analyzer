@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmpFEyJBD_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: pgstat_clear_snapshot
+    line_number: 0
+    feature_group: control_flow
+    feature: callback
+  - file_name: /tmp/tmpFEyJBD_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: candystick_tibiotarsi
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpFEyJBD_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: candystick_tibiotarsi
+    line_number: 0
+    feature_group: data_type
+    feature: void_pointer
+  - feature_group: data_flow
+    file_name: /tmp/tmpFEyJBD_ss_testcase/src-rose/src/backend/postmaster/pgstat.c
+    function_name: landfolk_weet
+    line_number: 0
+    feature: basic
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 2271
+      size: 5
+      flags: 950
+  benigns:
+    - inputs:
+        - key: 2271
+          ordinal: 1
+          value_encoding: none
+          size: 5
+          value: 99
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          source: shared_memory_input
+          value_type_enum: 0
+          id: source
+          source_enum: 6
+          stage: pre_process
+          stage_enum: 0
+    - inputs:
+        - key: 2271
+          stage_enum: 0
+          value_type_enum: 0
+          source_enum: 6
+          source: shared_memory_input
+          size: 5
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value: -2
+          stage: pre_process
+          ordinal: 1
+          flags: 950
+    - inputs:
+        - value: 1023
+          id: source
+          value_encoding: none
+          flags: 950
+          ordinal: 1
+          key: 2271
+          size: 5
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 6
+          stage: pre_process
+          source: shared_memory_input
+          stage_enum: 0
+  exploits:
+    - inputs:
+        - source: shared_memory_input
+          value: 1024
+          stage: pre_process
+          key: 2271
+          id: source
+          source_enum: 6
+          size: 5
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          flags: 950
+          stage_enum: 0
+          value_type_enum: 0
+    - inputs:
+        - size: 5
+          key: 2271
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          source_enum: 6
+          source: shared_memory_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          flags: 950
+          value_encoding: none
+          value: -512
+          value_type_enum: 0
+  description: "Converts the input into an int using atoi.\n  Takes that number mod 4, then uses that as the divisor in another operation.  IF the original input value is 0 mod 4, this will result in a floating point error.  Good values: input mod 4 is not 0, Bad values: input mod 4 = 0\n\n"

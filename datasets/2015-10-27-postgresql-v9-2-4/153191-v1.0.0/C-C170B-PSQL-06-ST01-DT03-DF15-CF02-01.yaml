@@ -1,0 +1,134 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpza_4kQ_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    function_name: oid_hash
+    line_number: 0
+  - line_number: 0
+    feature_group: data_type
+    feature: void_pointer
+    function_name: oid_hash
+    file_name: /tmp/tmpza_4kQ_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+  - file_name: /tmp/tmpza_4kQ_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - feature: indirectly_recursive
+    feature_group: control_flow
+    file_name: /tmp/tmpza_4kQ_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    line_number: 0
+io_pair:
+  benigns:
+    - inputs:
+        - ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: COUNTERROUND_GASWORKER
+          source: env_var_input
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/good01.txt
+          id: source
+          source_enum: 2
+          value_encoding: none
+          stage_enum: 0
+        - ordinal: 2
+          name: /opt/stonesoup/workspace/testData/good01.txt
+          source_enum: 3
+          stage: pre_process
+          source: file_content_input
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: Hello World
+          value_encoding: none
+          stage_enum: 0
+    - inputs:
+        - source: env_var_input
+          name: COUNTERROUND_GASWORKER
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/good02.txt
+          value_type_enum: 0
+          stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+          id: source
+          source_enum: 2
+        - value_encoding: none
+          source_enum: 3
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/good02.txt
+          value_type_enum: 0
+          value: This
+          ordinal: 2
+          stage_enum: 0
+    - inputs:
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          id: source
+          value: /opt/stonesoup/workspace/testData/badfilename.txt
+          stage: pre_process
+          source: env_var_input
+          name: COUNTERROUND_GASWORKER
+          value_encoding: none
+          stage_enum: 0
+          ordinal: 1
+  exploits:
+    - inputs:
+        - ordinal: 1
+          name: COUNTERROUND_GASWORKER
+          value_encoding: none
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/bad01.txt
+          value_type_enum: 0
+          source_enum: 2
+          source: env_var_input
+          id: source
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+        - value_encoding: none
+          value: abcdefghijklmnopqrstuvwxyz
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          stage: pre_process
+          source: file_content_input
+          stage_enum: 0
+          value_type_enum: 0
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/bad01.txt
+    - inputs:
+        - id: source
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          ordinal: 1
+          name: COUNTERROUND_GASWORKER
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/bad02.txt
+          value_encoding: none
+          source_enum: 2
+          stage: pre_process
+        - stage_enum: 0
+          value: this string is really long and does not contain a null char soon enough
+          source: file_content_input
+          source_enum: 3
+          value_type_enum: 0
+          stage: pre_process
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/bad02.txt
+          ordinal: 2
+  description: "Good inputs: 1) environment variable is not set. 2) environment variable is set to a filename that exists and whose    contents contain a null character in first 16 bytes.3) environment variable is set to a filename that does not exist.Bad input: 1) environment variable is set to a file that does not contain a    null character in first 16 bytes.\n\n"
+  base_inputs:
+    - source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      source: env_var_input
+      id: source
+      ordinal: 1
+      name: COUNTERROUND_GASWORKER

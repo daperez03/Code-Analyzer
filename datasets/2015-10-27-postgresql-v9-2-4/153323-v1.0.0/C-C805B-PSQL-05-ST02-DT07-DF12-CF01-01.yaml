@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: control_flow
+    file_name: /tmp/tmpjXGhjG_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    feature: callback
+  - file_name: /tmp/tmpjXGhjG_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: emmetropy_changteh
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpjXGhjG_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: emmetropy_changteh
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmpjXGhjG_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: hyposensitivity_polychromize
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/delubra_truced/scrutable_xenophobian.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: CANUTE_PUTTING
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/delubra_truced/scrutable_xenophobian.txt
+  description: "Good inputs:1) envrionment variable is set to a value whose length is less than or equal to 8 charsBad inputs:1) environment variable is not set2) environment variable is set to a value whose length is greater than 8 chars\n\n"
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/delubra_truced/scrutable_xenophobian.txt
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          name: CANUTE_PUTTING
+          source_enum: 2
+          source: env_var_input
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          stage: pre_process
+          id: source
+          name: /opt/stonesoup/workspace/testData/delubra_truced/scrutable_xenophobian.txt
+          stage_enum: 0
+          ordinal: 2
+          source_enum: 3
+          value_type_enum: 0
+          value: Hello
+    - inputs:
+        - source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/delubra_truced/scrutable_xenophobian.txt
+          value_encoding: none
+          name: CANUTE_PUTTING
+          value_type_enum: 0
+        - id: source
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/delubra_truced/scrutable_xenophobian.txt
+          stage: pre_process
+          source_enum: 3
+          stage_enum: 0
+          value: a
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 2
+    - inputs:
+        - ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/delubra_truced/scrutable_xenophobian.txt
+          name: CANUTE_PUTTING
+        - source: file_content_input
+          name: /opt/stonesoup/workspace/testData/delubra_truced/scrutable_xenophobian.txt
+          source_enum: 3
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          id: source
+          value: ok_str
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  exploits:
+    - inputs:
+        - name: CANUTE_PUTTING
+          value: /opt/stonesoup/workspace/testData/delubra_truced/scrutable_xenophobian.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          value_type_enum: 0
+          ordinal: 1
+        - stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/delubra_truced/scrutable_xenophobian.txt
+          value: This_input_is_too_long_to_be_contained_in_buffer
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 3
+          source: file_content_input
+    - inputs:
+        - stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/delubra_truced/scrutable_xenophobian.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: CANUTE_PUTTING
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/delubra_truced/scrutable_xenophobian.txt
+          value: abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0

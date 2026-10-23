@@ -1,0 +1,94 @@
+code_complexity_features:
+  - file_name: /tmp/tmpGjoHRp_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpGjoHRp_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmpGjoHRp_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: data_flow
+    feature: index_alias_50
+  - function_name: heapgettup
+    file_name: /tmp/tmpGjoHRp_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    line_number: 0
+    feature_group: control_flow
+    feature: macros
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: INFRALAPSARIAN_UPSETTINGLY
+  exploits:
+    - inputs:
+        - source: env_var_input
+          stage_enum: 0
+          id: source
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          stage: pre_process
+          value_encoding: none
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          name: INFRALAPSARIAN_UPSETTINGLY
+          value_type_enum: 0
+    - inputs:
+        - value_type_enum: 0
+          ordinal: 1
+          source_enum: 2
+          stage: pre_process
+          name: INFRALAPSARIAN_UPSETTINGLY
+          stage_enum: 0
+          source: env_var_input
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: This is probably going to overflow a buffer of some sort.  Let's run it anyway and see what happens.  I hope that everything turns out ok, because I would love to see what this looks like in all CAPS.  Converting ASCII characters to upper case is easy, you can either call a system function, or just add the standard difference between the start of the two character sets.  But, I am sure there is a reason that system functions exist for this sort of functionality.
+  description: "Has a fixed stack buffer of size 64, allocated within a struct (char [64])\n\n"
+  benigns:
+    - inputs:
+        - id: source
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          name: INFRALAPSARIAN_UPSETTINGLY
+          source: env_var_input
+          value: AAA
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+    - inputs:
+        - source: env_var_input
+          ordinal: 1
+          source_enum: 2
+          value_type_enum: 0
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          value: Hellow world!
+          name: INFRALAPSARIAN_UPSETTINGLY
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          value: Good-bye cruel world!
+          ordinal: 1
+          name: INFRALAPSARIAN_UPSETTINGLY
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

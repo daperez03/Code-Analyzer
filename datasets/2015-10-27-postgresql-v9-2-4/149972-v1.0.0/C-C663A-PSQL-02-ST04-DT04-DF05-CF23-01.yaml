@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - function_name: calc_bucket
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+    file_name: /tmp/tmpuKcVAC_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+  - file_name: /tmp/tmpuKcVAC_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    feature_group: data_type
+    function_name: calc_bucket
+    line_number: 0
+    feature: heap_pointer
+  - file_name: /tmp/tmpuKcVAC_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - function_name: nebulation_eagle
+    line_number: 0
+    feature_group: control_flow
+    feature: set_jump_long_jump
+    file_name: /tmp/tmpuKcVAC_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+io_pair:
+  benigns:
+    - inputs:
+        - source_enum: 6
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+          value: 3 hephalump
+          id: source
+          value_encoding: none
+          ordinal: 1
+          size: 51
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          key: 6464
+    - inputs:
+        - ordinal: 1
+          key: 6464
+          size: 51
+          source_enum: 6
+          source: shared_memory_input
+          flags: 950
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: 1 Sniffles_and_whiffles,_yo.
+          stage: pre_process
+          value_encoding: none
+          id: source
+    - inputs:
+        - source: shared_memory_input
+          flags: 950
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          ordinal: 1
+          source_enum: 6
+          key: 6464
+          size: 51
+          value: 5 Silly_rabbit,_tricks_are_for_kids!
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+  description: "This weakness expects a string in the form: '<qsize> <data>' where qsize is the size of the quick sort (used to delay execution), and data is a string containing no spaces.  It creates two threads which both enter a non-reentrant function and increment a static counter. This causes a buffer overflow which will overwrite the free() struct causing an error when free() is called. In order to overwrite the free() struct, qsize >= 500000 and the input string must be 14+ char long.\n\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 6464
+      size: 51
+      flags: 950
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value: 5000000 I'm_a_poet_and_I_didn't_even_know_it.
+          source: shared_memory_input
+          source_enum: 6
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          id: source
+          size: 51
+          key: 6464
+          flags: 950
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - value_encoding: none
+          source_enum: 6
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+          value: 6000000 But_my_toes_showed_it._Theyre_long_fellows
+          ordinal: 1
+          stage: pre_process
+          source: shared_memory_input
+          stage_enum: 0
+          size: 51
+          key: 6464

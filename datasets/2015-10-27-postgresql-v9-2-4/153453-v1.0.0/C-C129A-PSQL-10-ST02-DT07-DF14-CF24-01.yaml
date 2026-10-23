@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+    file_name: /tmp/tmp855j6k_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+  - file_name: /tmp/tmp855j6k_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmp855j6k_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_nonlinear_expression
+  - file_name: /tmp/tmp855j6k_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: control_flow
+    feature: unconditional_jump
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/whaup_unforeign/reproaches_indeposable.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: GUMI_DUNSTONE
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/whaup_unforeign/reproaches_indeposable.txt
+  description: "Good input:1) environment variable contains only alphanumeric charactersBad input:1) environment variable contains * or -.  + causes infinte loop\n\n"
+  benigns:
+    - inputs:
+        - value_encoding: none
+          stage_enum: 0
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: GUMI_DUNSTONE
+          stage: pre_process
+          source_enum: 2
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/whaup_unforeign/reproaches_indeposable.txt
+        - value_type_enum: 0
+          stage: pre_process
+          ordinal: 2
+          value: exampleofgoodinput
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          id: source
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/whaup_unforeign/reproaches_indeposable.txt
+          source_enum: 3
+    - inputs:
+        - source_enum: 2
+          stage_enum: 0
+          value_encoding: none
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/whaup_unforeign/reproaches_indeposable.txt
+          value_type_enum: 0
+          name: GUMI_DUNSTONE
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage: pre_process
+        - stage_enum: 0
+          value: abcd12345ABCDE
+          source_enum: 3
+          source: file_content_input
+          stage: pre_process
+          ordinal: 2
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          name: /opt/stonesoup/workspace/testData/whaup_unforeign/reproaches_indeposable.txt
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          ordinal: 1
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/whaup_unforeign/reproaches_indeposable.txt
+          value_encoding: none
+          name: GUMI_DUNSTONE
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - name: /opt/stonesoup/workspace/testData/whaup_unforeign/reproaches_indeposable.txt
+          stage: pre_process
+          id: source
+          ordinal: 2
+          value_type_enum: 0
+          stage_enum: 0
+          source_enum: 3
+          value_encoding: none
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          value: R0G3RR4881T
+  exploits:
+    - inputs:
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          name: GUMI_DUNSTONE
+          value: /opt/stonesoup/workspace/testData/whaup_unforeign/reproaches_indeposable.txt
+          stage_enum: 0
+          source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          value_type_enum: 0
+          ordinal: 1
+        - stage: pre_process
+          source_enum: 3
+          source: file_content_input
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/whaup_unforeign/reproaches_indeposable.txt
+          value: "{a+b|c+d}"
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/whaup_unforeign/reproaches_indeposable.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: GUMI_DUNSTONE
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/whaup_unforeign/reproaches_indeposable.txt
+          value: "!a*b(c*d-1)"
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0

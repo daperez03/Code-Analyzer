@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 152135,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "Metadata\n - Base program: PostgreSQL\n - Source Taint: ENVIRONMENT_VARIABLE\n - Data Type: TYPEDEF\n - Data Flow: INDEX_ALIAS_1\n - Control Flow: INDIRECTLY_RECURSIVE",
+        "state": "bad",
+        "application": "cpe:2.3:a:postgresql:postgresql:9.2.4:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "postgresql-v9.2.4"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C834A-PSQL-04-ST01-DT06-DF07-CF02-01.xml"
+          },
+          "length": 64809,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "d7a836cc48eb59d168a7faddeb2e91529b3ac2ac3fb0861c1a5cd4c2f18fece0"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/src/backend/utils/mmgr/portalmem.c"
+          },
+          "length": 36732,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "cb8efb46edcfee965746b08ec31cf613af769ee0bca4a894f18d7dfbe8fa2107"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "834",
+              "name": "Excessive Iteration"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-834",
+          "message": {
+            "text": "Excessive Iteration."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/src/backend/utils/mmgr/portalmem.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 997,
+                  "endLine": 1005
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "834",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

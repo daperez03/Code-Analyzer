@@ -1,0 +1,106 @@
+code_complexity_features:
+  - feature_group: source_taint
+    feature: SHARED_MEMORY
+    function_name: PMSignalShmemSize
+    line_number: 0
+    file_name: /tmp/tmpQjE_z8_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+  - file_name: /tmp/tmpQjE_z8_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpQjE_z8_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+  - file_name: /tmp/tmpQjE_z8_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: control_flow
+    feature: recursive
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 7868
+      size: 66
+      flags: 950
+  description: "If a value is seen that doesn't contain 'aba', the taint buffer gets set to null and strlen is called, causing a null pointer dereference\n\n"
+  exploits:
+    - inputs:
+        - key: 7868
+          ordinal: 1
+          flags: 950
+          value_type_enum: 0
+          value: A.A
+          size: 66
+          value_encoding: none
+          source: shared_memory_input
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+    - inputs:
+        - id: source
+          source: shared_memory_input
+          key: 7868
+          source_enum: 6
+          stage: pre_process
+          ordinal: 1
+          stage_enum: 0
+          flags: 950
+          size: 66
+          value_encoding: none
+          value: AAAAAAAHHHHHHHHHHHH!
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          source: shared_memory_input
+          stage: pre_process
+          key: 7868
+          id: source
+          source_enum: 6
+          value_type: USE_TEXT_DIRECTLY
+          size: 66
+          value_type_enum: 0
+          value: AAAAAaba
+          flags: 950
+          ordinal: 1
+          value_encoding: none
+    - inputs:
+        - source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          size: 66
+          source_enum: 6
+          value: ABCabaD123
+          key: 7868
+          stage: pre_process
+          ordinal: 1
+          flags: 950
+          stage_enum: 0
+          id: source
+          value_type_enum: 0
+    - inputs:
+        - value_encoding: none
+          source_enum: 6
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          id: source
+          key: 7868
+          flags: 950
+          value_type_enum: 0
+          source: shared_memory_input
+          size: 66
+          value_type: USE_TEXT_DIRECTLY
+          value: 1234564760ABCDEFGHIJKLMNOPQRSTUabaVWXYZabcdefghijklmnopqrstuvwxyz

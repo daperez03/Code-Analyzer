@@ -1,0 +1,100 @@
+code_complexity_features:
+  - file_name: /tmp/tmpjnghfj_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmpjnghfj_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpjnghfj_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmpjnghfj_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence
+io_pair:
+  description: "Has a buffer declared on the stack and populated from input data via strncpy.  If input begins with a lower case letter oor a higher ascii value, it will crash\n\n"
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  exploits:
+    - inputs:
+        - stage: co_process
+          value: starting with an s is bad
+          stage_enum: 1
+          value_encoding: none
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source: socket_input
+          address: ss-localhost
+          value_type_enum: 0
+          source_enum: 5
+          port: 8887
+    - inputs:
+        - value_encoding: none
+          stage: co_process
+          stage_enum: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: socket_input
+          id: source
+          port: 8887
+          source_enum: 5
+          ordinal: 1
+          value: zebras have stripes
+          address: ss-localhost
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          source_enum: 5
+          stage_enum: 1
+          stage: co_process
+          id: source
+          address: ss-localhost
+          ordinal: 1
+          port: 8887
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: AAAAAAAAAAAAAAAAAAAAAAA
+          source: socket_input
+    - inputs:
+        - stage_enum: 1
+          stage: co_process
+          port: 8887
+          source: socket_input
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 5
+          value: Hello World!
+          id: source
+          address: ss-localhost
+          value_type_enum: 0
+          ordinal: 1
+          value_encoding: none
+    - inputs:
+        - value: many characters are good, but most are bad
+          ordinal: 1
+          address: ss-localhost
+          port: 8887
+          value_type_enum: 0
+          value_encoding: none
+          source: socket_input
+          source_enum: 5
+          stage: co_process
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 1
+          id: source
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"

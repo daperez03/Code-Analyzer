@@ -1,0 +1,100 @@
+io_pair:
+  description: "Allocates a buffer of size 16 to copy taint source into.  Checks that the the taint source length is less than 16, but if it is not, returns a -1.  The -1 is silently converted to size_t, which is unsigned, resulting in a huge positive number.  Then copies that many bytes into the buffer of size 16, causing a seg fault. Good inputs: taint source has length less than 16Bad inputs: taint source has greater than or equal to 16\n\n"
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          stage: co_process
+          ordinal: 1
+          address: ss-localhost
+          value: Good_Bye_World
+          source_enum: 5
+          port: 8887
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 1
+          id: source
+          source: socket_input
+    - inputs:
+        - value: abcd
+          ordinal: 1
+          source_enum: 5
+          stage: co_process
+          stage_enum: 1
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          value_encoding: none
+          source: socket_input
+          address: ss-localhost
+          id: source
+          value_type_enum: 0
+    - inputs:
+        - source_enum: 5
+          stage_enum: 1
+          value_type: USE_TEXT_DIRECTLY
+          value: short stmt
+          source: socket_input
+          value_type_enum: 0
+          ordinal: 1
+          id: source
+          value_encoding: none
+          address: ss-localhost
+          stage: co_process
+          port: 8887
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  exploits:
+    - inputs:
+        - source_enum: 5
+          value_type: USE_TEXT_DIRECTLY
+          source: socket_input
+          stage: co_process
+          stage_enum: 1
+          value_type_enum: 0
+          ordinal: 1
+          id: source
+          port: 8887
+          value_encoding: none
+          address: ss-localhost
+          value: Heeellllloooooo_Wooooorrrrrllllldddddd!!!!!!
+    - inputs:
+        - source: socket_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage: co_process
+          id: source
+          source_enum: 5
+          stage_enum: 1
+          address: ss-localhost
+          ordinal: 1
+          value: this_string_is_greater_than_16_characters
+          port: 8887
+          value_type_enum: 0
+code_complexity_features:
+  - file_name: /tmp/tmpeXJ2n1_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: array
+    file_name: /tmp/tmpeXJ2n1_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+  - file_name: /tmp/tmpeXJ2n1_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: control_flow
+    file_name: /tmp/tmpeXJ2n1_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    feature: interprocedural_50
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"

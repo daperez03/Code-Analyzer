@@ -1,0 +1,118 @@
+code_complexity_features:
+  - line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+    function_name: StartupSUBTRANS
+    file_name: /tmp/tmpicx2BZ_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+  - file_name: /tmp/tmpicx2BZ_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    function_name: StartupSUBTRANS
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpicx2BZ_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    function_name: StartupSUBTRANS
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - function_name: fourhanded_notogaea
+    line_number: 0
+    feature: pointer_to_function
+    feature_group: control_flow
+    file_name: /tmp/tmpicx2BZ_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+io_pair:
+  description: "Read a string from the input.  Perform a find path -iname input.If input contains arguments such as -exec with a \\; ending the command, a user can insert other commands instead of just find\n\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 2521
+      size: 29
+      flags: 950
+  benigns:
+    - inputs:
+        - value: "\"file.*\""
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          flags: 950
+          id: source
+          ordinal: 1
+          size: 29
+          key: 2521
+          source_enum: 6
+          stage_enum: 0
+          source: shared_memory_input
+          stage: pre_process
+    - inputs:
+        - source: shared_memory_input
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 1
+          stage_enum: 0
+          stage: pre_process
+          size: 29
+          key: 2521
+          flags: 950
+          source_enum: 6
+          value: filename.txt
+    - inputs:
+        - source_enum: 6
+          source: shared_memory_input
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          key: 2521
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value_type_enum: 0
+          value_encoding: none
+          size: 29
+          value: "\"*\""
+  exploits:
+    - inputs:
+        - source_enum: 6
+          source: shared_memory_input
+          stage: pre_process
+          key: 2521
+          value: "\"*\" -exec cat /etc/passwd \\;"
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value_encoding: none
+          value_type_enum: 0
+          size: 29
+          stage_enum: 0
+          id: source
+          ordinal: 1
+        - stage: pre_process
+          ordinal: 2
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/temp/file.txt
+          source: file_content_input
+          stage_enum: 0
+    - inputs:
+        - value_encoding: none
+          source_enum: 6
+          flags: 950
+          source: shared_memory_input
+          stage: pre_process
+          stage_enum: 0
+          value: "\"*\" -exec netstat -an \\;"
+          key: 2521
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          id: source
+          value_type_enum: 0
+          size: 29
+        - ordinal: 2
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/temp/file.txt
+          source: file_content_input
+          stage: pre_process
+          source_enum: 3
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

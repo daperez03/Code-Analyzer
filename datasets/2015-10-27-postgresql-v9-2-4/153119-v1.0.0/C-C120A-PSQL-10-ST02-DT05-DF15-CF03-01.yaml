@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+    file_name: /tmp/tmpcUqCzq_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+  - file_name: /tmp/tmpcUqCzq_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpcUqCzq_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - file_name: /tmp/tmpcUqCzq_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: control_flow
+    feature: infinite_loop
+io_pair:
+  description: "Has a fixed stack buffer of size 64.  (char [64])\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/repugnancy_beduck/skeined_booster.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: PROMISE_UNTRIUMPHANTLY
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/repugnancy_beduck/skeined_booster.txt
+  exploits:
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/repugnancy_beduck/skeined_booster.txt
+          stage_enum: 0
+          source: env_var_input
+          source_enum: 2
+          name: PROMISE_UNTRIUMPHANTLY
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          stage: pre_process
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/repugnancy_beduck/skeined_booster.txt
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/repugnancy_beduck/skeined_booster.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: PROMISE_UNTRIUMPHANTLY
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/repugnancy_beduck/skeined_booster.txt
+          value: I've reached a point where I feel the need to express my disappointment with Gov. Common W Enumeration. There are a number of reasons Gov. Enumeration isn't telling us as to why he wants to obfuscate the issue so that one can't see what ought to be completely obvious to all. In this letter, I will expose those reasons one-by-one, on the principle that his argument that the sky is falling is hopelessly flawed and thoroughly circuitous. His cold, analytical approach to philistinism doesn't take into account the human element. In particular, those who have been hurt by philistinism know that Gov. Enumeration's jobations emblematize an increasing deturpation of cultural standards and a triumph of the meretricious. Get that straight, please. Any other thinking is blame-shoving or responsibility-dodging. Furthermore, Gov. Enumeration wants to eavesdrop on all types of private conversations. Why he wants that, I don't know, but that's what he wants.
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - source_enum: 2
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/repugnancy_beduck/skeined_booster.txt
+          value_type_enum: 0
+          ordinal: 1
+          name: PROMISE_UNTRIUMPHANTLY
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+        - source: file_content_input
+          value_encoding: none
+          source_enum: 3
+          id: source
+          ordinal: 2
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/repugnancy_beduck/skeined_booster.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: AAA
+          stage: pre_process
+    - inputs:
+        - source: env_var_input
+          value_type_enum: 0
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/repugnancy_beduck/skeined_booster.txt
+          name: PROMISE_UNTRIUMPHANTLY
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+        - value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/repugnancy_beduck/skeined_booster.txt
+          ordinal: 2
+          stage: pre_process
+          value: Hellow world!
+          id: source
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 3
+    - inputs:
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          name: PROMISE_UNTRIUMPHANTLY
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/repugnancy_beduck/skeined_booster.txt
+          ordinal: 1
+        - stage: pre_process
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/repugnancy_beduck/skeined_booster.txt
+          value: Good-bye cruel world!
+          value_encoding: none
+          value_type_enum: 0

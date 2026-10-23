@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - value_encoding: none
+      value_type_enum: 0
+      name: REPULSES_SQUISHIER
+      value_type: USE_TEXT_DIRECTLY
+      ordinal: 1
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/finically_photoelectronic/frammit_miscoinage.txt
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+    - stage_enum: 0
+      name: /opt/stonesoup/workspace/testData/finically_photoelectronic/frammit_miscoinage.txt
+      stage: pre_process
+      source: file_content_input
+      source_enum: 3
+      ordinal: 2
+      id: source
+  benigns:
+    - inputs:
+        - stage: pre_process
+          value_type_enum: 0
+          source: env_var_input
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          name: REPULSES_SQUISHIER
+          value: /opt/stonesoup/workspace/testData/finically_photoelectronic/frammit_miscoinage.txt
+          stage_enum: 0
+          value_encoding: none
+        - id: source
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/finically_photoelectronic/frammit_miscoinage.txt
+          stage: pre_process
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          value_encoding: none
+          source: file_content_input
+          stage_enum: 0
+          value: 10
+    - inputs:
+        - stage: pre_process
+          ordinal: 1
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/finically_photoelectronic/frammit_miscoinage.txt
+          source_enum: 2
+          name: REPULSES_SQUISHIER
+          source: env_var_input
+          value_type_enum: 0
+          value_encoding: none
+        - ordinal: 2
+          id: source
+          source_enum: 3
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/finically_photoelectronic/frammit_miscoinage.txt
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: 1000
+          source: file_content_input
+          stage: pre_process
+    - inputs:
+        - source: env_var_input
+          name: REPULSES_SQUISHIER
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/finically_photoelectronic/frammit_miscoinage.txt
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source_enum: 2
+          value_encoding: none
+          stage: pre_process
+          value_type_enum: 0
+        - ordinal: 2
+          value: 20
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/finically_photoelectronic/frammit_miscoinage.txt
+          value_type_enum: 0
+          stage_enum: 0
+          value_encoding: none
+          id: source
+  description: "Read an integer from the input.  If integer >= 4096, do nothing.Else malloc a buffer of 4096 bytes.  Memset the buffer to 'a'. Memset bytes of buffer from input_integer to 4095 to 'b'. Print the buffer.  This all works correctly if the input_integer is 0 or greater.  If input_integer is negative, we will try to memset a random place in memory.  If the input_integer is sufficiently large, this is unaddressable, and we get a segfault.\n\n"
+  exploits:
+    - inputs:
+        - stage: pre_process
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/finically_photoelectronic/frammit_miscoinage.txt
+          source: env_var_input
+          source_enum: 2
+          value_type_enum: 0
+          name: REPULSES_SQUISHIER
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+        - source_enum: 3
+          id: source
+          ordinal: 2
+          value: -8000000
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/finically_photoelectronic/frammit_miscoinage.txt
+          stage: pre_process
+          source: file_content_input
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - source: env_var_input
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/finically_photoelectronic/frammit_miscoinage.txt
+          stage: pre_process
+          source_enum: 2
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: REPULSES_SQUISHIER
+        - value_encoding: none
+          source_enum: 3
+          id: source
+          name: /opt/stonesoup/workspace/testData/finically_photoelectronic/frammit_miscoinage.txt
+          ordinal: 2
+          value: -16777215
+          value_type_enum: 0
+          stage_enum: 0
+          source: file_content_input
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+code_complexity_features:
+  - file_name: /tmp/tmpDnQG2w_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - feature_group: data_type
+    line_number: 0
+    feature: array
+    function_name: oid_hash
+    file_name: /tmp/tmpDnQG2w_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+  - feature: address_as_function_return_value
+    file_name: /tmp/tmpDnQG2w_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    feature_group: data_flow
+    function_name: oid_hash
+    line_number: 0
+  - file_name: /tmp/tmpDnQG2w_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    line_number: 0
+    feature_group: control_flow
+    feature: infinite_loop

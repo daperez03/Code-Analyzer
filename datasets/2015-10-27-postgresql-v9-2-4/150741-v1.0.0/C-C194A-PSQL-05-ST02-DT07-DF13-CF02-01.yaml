@@ -1,0 +1,184 @@
+io_pair:
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          name: INDIRECTED_SPOLIATING
+          value_encoding: none
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source_enum: 2
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/cowlick_mtf/operabilities_thoughtfree.txt
+          ordinal: 1
+        - value_type_enum: 0
+          source: file_content_input
+          stage_enum: 0
+          source_enum: 3
+          value: -5
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          ordinal: 2
+          id: source
+          name: /opt/stonesoup/workspace/testData/cowlick_mtf/operabilities_thoughtfree.txt
+          value_encoding: none
+        - stage: pre_process
+          source_enum: 7
+          ordinal: 2
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          source: script_input
+          stage_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/cowlick_mtf/operabilities_thoughtfree.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: INDIRECTED_SPOLIATING
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/cowlick_mtf/operabilities_thoughtfree.txt
+          value: -10
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage: pre_process
+          stage_enum: 0
+          source: script_input
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          ordinal: 2
+          source_enum: 7
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/cowlick_mtf/operabilities_thoughtfree.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: INDIRECTED_SPOLIATING
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/cowlick_mtf/operabilities_thoughtfree.txt
+  description: "Converting a short to a unsigned int produces an incorrect value when the short is negative.  This causes a buffer overflow which seg faults.  Good inputs: 0 or greater.  Bad inputs: -1 or less\n\n"
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          name: INDIRECTED_SPOLIATING
+          source: env_var_input
+          source_enum: 2
+          ordinal: 1
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/cowlick_mtf/operabilities_thoughtfree.txt
+          value_type_enum: 0
+        - id: source
+          source: file_content_input
+          stage: pre_process
+          source_enum: 3
+          value_type_enum: 0
+          value: 50
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/cowlick_mtf/operabilities_thoughtfree.txt
+          value_encoding: none
+          ordinal: 2
+          stage_enum: 0
+        - source: script_input
+          stage_enum: 0
+          source_enum: 7
+          ordinal: 2
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          stage: pre_process
+    - inputs:
+        - stage: pre_process
+          value: /opt/stonesoup/workspace/testData/cowlick_mtf/operabilities_thoughtfree.txt
+          source: env_var_input
+          name: INDIRECTED_SPOLIATING
+          source_enum: 2
+          ordinal: 1
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+        - stage_enum: 0
+          source_enum: 3
+          source: file_content_input
+          id: source
+          ordinal: 2
+          stage: pre_process
+          value_type_enum: 0
+          value: 1000
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/cowlick_mtf/operabilities_thoughtfree.txt
+        - name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          source: script_input
+          source_enum: 7
+          ordinal: 2
+          stage_enum: 0
+          stage: pre_process
+    - inputs:
+        - ordinal: 1
+          source_enum: 2
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/cowlick_mtf/operabilities_thoughtfree.txt
+          stage_enum: 0
+          name: INDIRECTED_SPOLIATING
+          source: env_var_input
+          value_encoding: none
+        - source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          stage_enum: 0
+          value: 20000
+          id: source
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/cowlick_mtf/operabilities_thoughtfree.txt
+          value_encoding: none
+          ordinal: 2
+          value_type_enum: 0
+        - stage_enum: 0
+          source_enum: 7
+          ordinal: 2
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          stage: pre_process
+          source: script_input
+code_complexity_features:
+  - function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+    file_name: /tmp/tmpRFCGKe_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+  - file_name: /tmp/tmpRFCGKe_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmpRFCGKe_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - line_number: 0
+    feature_group: control_flow
+    feature: indirectly_recursive
+    file_name: /tmp/tmpRFCGKe_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

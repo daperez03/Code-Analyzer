@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpM7jutd_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: control_flow
+    feature: callback
+  - file_name: /tmp/tmpM7jutd_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: phiz_overcram
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpM7jutd_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: phiz_overcram
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpM7jutd_ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: scypha_hut
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: UZZIAL_SYNCEPHALIC
+  description: "Read a string from the input.  Do nslookup on that string, without checking first if it has any command separators.  This allows the user to run arbitrary commands.\n\n"
+  benigns:
+    - inputs:
+        - value: 10
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage: pre_process
+          source: env_var_input
+          stage_enum: 0
+          value_type_enum: 0
+          value_encoding: none
+          id: source
+          name: UZZIAL_SYNCEPHALIC
+          ordinal: 1
+    - inputs:
+        - source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          value: google.com
+          id: source
+          value_encoding: none
+          name: UZZIAL_SYNCEPHALIC
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          value: localhost
+          id: source
+          name: UZZIAL_SYNCEPHALIC
+          value_type_enum: 0
+          value_encoding: none
+  exploits:
+    - inputs:
+        - source_enum: 2
+          name: UZZIAL_SYNCEPHALIC
+          value_encoding: none
+          value_type_enum: 0
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value: 10; ls -la
+          source: env_var_input
+          ordinal: 1
+    - inputs:
+        - source: env_var_input
+          ordinal: 1
+          stage: pre_process
+          source_enum: 2
+          id: source
+          stage_enum: 0
+          value_encoding: none
+          value: localhost; echo Hello world
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: UZZIAL_SYNCEPHALIC

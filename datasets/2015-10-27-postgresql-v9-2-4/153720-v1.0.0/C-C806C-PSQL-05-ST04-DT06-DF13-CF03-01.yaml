@@ -1,0 +1,106 @@
+io_pair:
+  benigns:
+    - inputs:
+        - ordinal: 1
+          size: 91
+          flags: 950
+          value_encoding: none
+          source_enum: 6
+          value_type: USE_TEXT_DIRECTLY
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAA
+          source: shared_memory_input
+          value_type_enum: 0
+          id: source
+          key: 7533
+          stage_enum: 0
+          stage: pre_process
+    - inputs:
+        - value_encoding: none
+          value_type_enum: 0
+          ordinal: 1
+          stage_enum: 0
+          id: source
+          size: 91
+          key: 7533
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          value: Hello World!  If this statement isn't more than 64 characters, it will go badly
+          source: shared_memory_input
+          stage: pre_process
+          source_enum: 6
+    - inputs:
+        - value_encoding: none
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source_enum: 6
+          ordinal: 1
+          stage_enum: 0
+          key: 7533
+          value: Short is good for buffer overflows, unless you make a mistake and get it wrong
+          value_type_enum: 0
+          size: 91
+          flags: 950
+          id: source
+  exploits:
+    - inputs:
+        - id: source
+          value: AAAAAAAAAAAAAAA
+          value_type_enum: 0
+          size: 91
+          flags: 950
+          value_encoding: none
+          stage_enum: 0
+          stage: pre_process
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source_enum: 6
+          key: 7533
+    - inputs:
+        - ordinal: 1
+          id: source
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 6
+          value: Short is now bad
+          size: 91
+          source: shared_memory_input
+          key: 7533
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value_type_enum: 0
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      ordinal: 1
+      id: source
+      key: 7533
+      size: 91
+      flags: 950
+  description: "Has a buffer declared on the heap. malloc(64*sizeOf(char)) If input is shorter than 64 it will overflowdue to using improper sizeof and strlen checking\n\n"
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmp1ZAxs5_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature: SHARED_MEMORY
+    feature_group: source_taint
+  - file_name: /tmp/tmp1ZAxs5_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmp1ZAxs5_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - file_name: /tmp/tmp1ZAxs5_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature: infinite_loop
+    feature_group: control_flow

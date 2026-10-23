@@ -1,0 +1,106 @@
+code_complexity_features:
+  - line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+    file_name: /tmp/tmpE42sUA_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    function_name: StartupSUBTRANS
+  - file_name: /tmp/tmpE42sUA_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    function_name: StartupSUBTRANS
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmpE42sUA_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    function_name: StartupSUBTRANS
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - line_number: 0
+    feature_group: control_flow
+    feature: pointer_to_function
+    function_name: StartupSUBTRANS
+    file_name: /tmp/tmpE42sUA_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+io_pair:
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 3928
+      size: 125
+      flags: 950
+  exploits:
+    - inputs:
+        - size: 125
+          ordinal: 1
+          value_encoding: base64
+          id: source
+          source_enum: 6
+          value: TmFoIG5haCBuYWggbmFoIG5haCBuYWgsIG5haCBuYWggbmFoLCBoZXkgSnVkZQpOYWggbmFoIG5haCBuYWggbmFoIG5haCwgbmFoIG5haCBuYWgsIGhleSBKdWRl
+          stage: pre_process
+          key: 3928
+          value_type_enum: 0
+          stage_enum: 0
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+    - inputs:
+        - stage: pre_process
+          source: shared_memory_input
+          id: source
+          stage_enum: 0
+          key: 3928
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          size: 125
+          flags: 950
+          value_encoding: none
+          value_type_enum: 0
+          value: this string is more than sixty four characters long, so it should mess some stuff up
+          source_enum: 6
+  benigns:
+    - inputs:
+        - flags: 950
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          value: brah
+          value_encoding: none
+          size: 125
+          value_type: USE_TEXT_DIRECTLY
+          key: 3928
+          ordinal: 1
+          value_type_enum: 0
+          source_enum: 6
+          source: shared_memory_input
+    - inputs:
+        - source_enum: 6
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          key: 3928
+          flags: 950
+          value_encoding: none
+          value: dude
+          value_type_enum: 0
+          ordinal: 1
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          size: 125
+    - inputs:
+        - size: 125
+          value_encoding: none
+          key: 3928
+          stage_enum: 0
+          ordinal: 1
+          source_enum: 6
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value: bromigo
+          flags: 950
+          source: shared_memory_input
+          value_type_enum: 0
+          id: source
+  description: "Good inputs: 1) taintvar is less than 64 characters long.Bad input: 1) taintvar is greater than or equal to 64 characters long.\n\n"
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

@@ -1,0 +1,106 @@
+io_pair:
+  exploits:
+    - inputs:
+        - flags: 950
+          value: 5000000 I'm_a_poet_and_I_didn't_even_know_it.
+          ordinal: 1
+          key: 1885
+          stage_enum: 0
+          source: shared_memory_input
+          id: source
+          source_enum: 6
+          stage: pre_process
+          size: 51
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - value_encoding: none
+          value_type_enum: 0
+          value: 6000000 But_my_toes_showed_it._Theyre_long_fellows
+          source_enum: 6
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          size: 51
+          flags: 950
+          stage_enum: 0
+          key: 1885
+          ordinal: 1
+          stage: pre_process
+          id: source
+  base_inputs:
+    - key: 1885
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      source: shared_memory_input
+      size: 51
+      flags: 950
+      source_enum: 6
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          value_encoding: none
+          stage: pre_process
+          size: 51
+          key: 1885
+          ordinal: 1
+          id: source
+          value_type_enum: 0
+          source_enum: 6
+          flags: 950
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          value: 3 hephalump
+    - inputs:
+        - value_encoding: none
+          ordinal: 1
+          source_enum: 6
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          flags: 950
+          id: source
+          source: shared_memory_input
+          value_type_enum: 0
+          stage_enum: 0
+          size: 51
+          value: 1 Sniffles_and_whiffles,_yo.
+          key: 1885
+    - inputs:
+        - id: source
+          value_encoding: none
+          stage_enum: 0
+          value_type_enum: 0
+          ordinal: 1
+          size: 51
+          value: 5 Silly_rabbit,_tricks_are_for_kids!
+          source_enum: 6
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          key: 1885
+          flags: 950
+  description: "This weakness expects a string in the form: '<qsize> <data>' where qsize is the size of the quick sort (used to delay execution), and data is a string containing no spaces.  It creates two threads which both enter a non-reentrant function and increment a static counter. This causes a buffer overflow which will overwrite the free() struct causing an error when free() is called. In order to overwrite the free() struct, qsize >= 500000 and the input string must be 14+ char long.\n\n"
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpucZ8Nr_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    feature: SHARED_MEMORY
+    line_number: 0
+    feature_group: source_taint
+  - file_name: /tmp/tmpucZ8Nr_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    feature: simple
+    function_name: oid_hash
+    feature_group: data_type
+    line_number: 0
+  - feature: basic
+    function_name: oid_hash
+    file_name: /tmp/tmpucZ8Nr_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    line_number: 0
+    feature_group: data_flow
+  - file_name: /tmp/tmpucZ8Nr_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    feature_group: control_flow
+    line_number: 0
+    feature: pointer_to_function

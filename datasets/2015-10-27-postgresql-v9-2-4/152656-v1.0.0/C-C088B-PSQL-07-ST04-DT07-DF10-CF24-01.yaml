@@ -1,0 +1,206 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmp84CvWY_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmp84CvWY_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmp84CvWY_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: data_flow
+    feature: index_alias_50
+  - file_name: /tmp/tmp84CvWY_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: control_flow
+    feature: unconditional_jump
+io_pair:
+  description: "This weakness takes a filename from an untrusted source and uses a subprocess (via popen) to perform a search and replace of the text \"hello\" with \"Hello\".  The untrusted input is not properly sanitized, and may be used to perform an argument injection on the base command in order to run additional commands or functions.\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 4761
+      size: 89
+      flags: 950
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          source_enum: 6
+          ordinal: 1
+          stage: pre_process
+          id: source
+          source: shared_memory_input
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          key: 4761
+          size: 89
+          flags: 950
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/vim_inputs/sample1.txt
+        - stage: pre_process
+          source: file_content_input
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          ordinal: 1
+          stage_enum: 0
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+        - stage_enum: 0
+          source_enum: 3
+          stage: pre_process
+          ordinal: 2
+          value: !<!> hello World!
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample1.txt
+          value_type_enum: 0
+          value_encoding: none
+    - inputs:
+        - stage: pre_process
+          source: shared_memory_input
+          source_enum: 6
+          stage_enum: 0
+          size: 89
+          id: source
+          ordinal: 1
+          flags: 950
+          key: 4761
+          value: /opt/stonesoup/workspace/testData/vim_inputs/sample2.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+        - value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          stage: pre_process
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 1
+          stage_enum: 0
+        - name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample2.txt
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          value_type_enum: 0
+          value_encoding: none
+          ordinal: 2
+          value: !<!> "hello?\nhello.\nhello!\nhello..."
+          source: file_content_input
+          stage_enum: 0
+    - inputs:
+        - source_enum: 6
+          source: shared_memory_input
+          key: 4761
+          size: 89
+          id: source
+          value: /opt/stonesoup/workspace/testData/vim_inputs/sample3.txt
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage_enum: 0
+          stage: pre_process
+          value_type_enum: 0
+          flags: 950
+          value_encoding: none
+        - value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage: pre_process
+          source: file_content_input
+          value_type_enum: 0
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          source_enum: 3
+          stage_enum: 0
+          value_encoding: none
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+        - source: file_content_input
+          value_encoding: none
+          ordinal: 2
+          stage_enum: 0
+          source_enum: 3
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample3.txt
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value: !<!> "Hello again, hello.  Just called to say hello.\n\nYou had me at \"hello\".\n\n"
+          value_type_enum: 0
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          value_encoding: none
+          id: source
+          stage: pre_process
+          stage_enum: 0
+          value: --cmd 'silent !cat /etc/passwd' /opt/stonesoup/workspace/testData/vim_inputs/sample1.txt
+          ordinal: 1
+          size: 89
+          source_enum: 6
+          key: 4761
+          flags: 950
+        - stage: pre_process
+          stage_enum: 0
+          ordinal: 1
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          source: file_content_input
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          value_type_enum: 0
+          value_encoding: none
+        - name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample1.txt
+          stage_enum: 0
+          source_enum: 3
+          ordinal: 2
+          source: file_content_input
+          stage: pre_process
+          value_encoding: none
+          value: !<!> hello World!
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source_enum: 6
+          flags: 950
+          stage: pre_process
+          source: shared_memory_input
+          stage_enum: 0
+          ordinal: 1
+          id: source
+          size: 89
+          key: 4761
+          value: --cmd 'silent !ls -la .' /opt/stonesoup/workspace/testData/vim_inputs/sample2.txt
+          value_type_enum: 0
+        - source_enum: 3
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          stage: pre_process
+          stage_enum: 0
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          value_type_enum: 0
+        - value_type: USE_TEXT_DIRECTLY
+          value: !<!> "hello?\nhello.\nhello!\nhello..."
+          value_encoding: none
+          ordinal: 2
+          source_enum: 3
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample2.txt
+          stage_enum: 0
+          stage: pre_process
+          value_type_enum: 0
+          source: file_content_input

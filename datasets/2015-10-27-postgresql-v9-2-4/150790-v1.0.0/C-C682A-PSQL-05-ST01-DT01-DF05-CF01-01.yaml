@@ -1,0 +1,94 @@
+code_complexity_features:
+  - file_name: /tmp/tmptJzpuE_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    line_number: 0
+    feature: callback
+    feature_group: control_flow
+    function_name: ResourceOwnerForgetCatCacheRef
+  - function_name: scissions_interolivary
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmptJzpuE_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+  - file_name: /tmp/tmptJzpuE_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: stowball_slopmaking
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - function_name: agni_reverbrate
+    line_number: 0
+    feature_group: data_type
+    feature: array
+    file_name: /tmp/tmptJzpuE_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - value: 10
+          id: source
+          value_encoding: none
+          name: UNREGARDABLE_MOREFOLD
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage: pre_process
+          value_type_enum: 0
+          ordinal: 1
+          source: env_var_input
+          stage_enum: 0
+    - inputs:
+        - value_encoding: none
+          source: env_var_input
+          ordinal: 1
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source_enum: 2
+          id: source
+          stage_enum: 0
+          name: UNREGARDABLE_MOREFOLD
+          value: 0
+    - inputs:
+        - id: source
+          source_enum: 2
+          value_type_enum: 0
+          source: env_var_input
+          value: FFFF
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          ordinal: 1
+          stage: pre_process
+          value_encoding: none
+          name: UNREGARDABLE_MOREFOLD
+  exploits:
+    - inputs:
+        - ordinal: 1
+          value: 10000
+          id: source
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          stage_enum: 0
+          name: UNREGARDABLE_MOREFOLD
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - value_type_enum: 0
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          ordinal: 1
+          id: source
+          value: FFFFFF
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: UNREGARDABLE_MOREFOLD
+          value_encoding: none
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: UNREGARDABLE_MOREFOLD
+  description: "Read a hex integer from the input.  If hexinteger is negative, ignore.  If hexinteger < 0x0000FFFF, do nothing.  If hexinteger >= 0x0000FFFF try to zero-out the upper two bytes using char pointers.  Perform an incorrect calculation, and rather than zero-ing out the upper two bytes, zero out two different bytes, which corrupts pointers on the stack and results in a seg fault.\n\n"

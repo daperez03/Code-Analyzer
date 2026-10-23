@@ -1,0 +1,154 @@
+io_pair:
+  description: "INT_MAX=2147483647  Any input that is more than the square root of INT_MAX will cause an integer overflow.  Good inputs are any number less than or equal to 46340.  Bad inputs are greater than 46341.  If an overflow occurs, it will result in an infinite loop\n\n"
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          name: FRANKFORTERS_PLACUNTOMA
+          value_type_enum: 0
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/guards_redemptor/supersensualism_nonmatter.txt
+          source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 1
+        - source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/guards_redemptor/supersensualism_nonmatter.txt
+          value: 46400
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: file_content_input
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/guards_redemptor/supersensualism_nonmatter.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: FRANKFORTERS_PLACUNTOMA
+          ordinal: 1
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/guards_redemptor/supersensualism_nonmatter.txt
+          value: 55000
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - value_encoding: none
+          stage: pre_process
+          value_type_enum: 0
+          name: FRANKFORTERS_PLACUNTOMA
+          value: /opt/stonesoup/workspace/testData/guards_redemptor/supersensualism_nonmatter.txt
+          source_enum: 2
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage_enum: 0
+        - source: file_content_input
+          ordinal: 2
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 3
+          id: source
+          name: /opt/stonesoup/workspace/testData/guards_redemptor/supersensualism_nonmatter.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          value: 50
+    - inputs:
+        - source: env_var_input
+          name: FRANKFORTERS_PLACUNTOMA
+          stage: pre_process
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/guards_redemptor/supersensualism_nonmatter.txt
+          stage_enum: 0
+          value_type_enum: 0
+          value_encoding: none
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+        - value: 100
+          source: file_content_input
+          source_enum: 3
+          value_type_enum: 0
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 2
+          id: source
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/guards_redemptor/supersensualism_nonmatter.txt
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - source_enum: 2
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/guards_redemptor/supersensualism_nonmatter.txt
+          stage: pre_process
+          name: FRANKFORTERS_PLACUNTOMA
+          ordinal: 1
+          stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+        - id: source
+          stage_enum: 0
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/guards_redemptor/supersensualism_nonmatter.txt
+          value: 10000
+          value_type_enum: 0
+          ordinal: 2
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/guards_redemptor/supersensualism_nonmatter.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      name: FRANKFORTERS_PLACUNTOMA
+      ordinal: 1
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/guards_redemptor/supersensualism_nonmatter.txt
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmp92lPHt_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmp92lPHt_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmp92lPHt_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmp92lPHt_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: control_flow
+    feature: unconditional_jump

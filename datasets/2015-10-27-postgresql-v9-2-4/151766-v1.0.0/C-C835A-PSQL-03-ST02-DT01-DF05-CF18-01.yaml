@@ -1,0 +1,154 @@
+code_complexity_features:
+  - file_name: /tmp/tmpaYlaJK_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - feature_group: data_type
+    file_name: /tmp/tmpaYlaJK_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature: array
+  - file_name: /tmp/tmpaYlaJK_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - file_name: /tmp/tmpaYlaJK_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: superelastic_unsentimentally
+    line_number: 0
+    feature_group: control_flow
+    feature: pointer_to_function
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/harmfulness_lub/standpoint_culloden.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: ENCIPHER_SUPPRESSANT
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/harmfulness_lub/standpoint_culloden.txt
+  description: "Infinite Loop that checks each character of input and if it is ascii val 48 or higher, updates the exit counter.  Otherwise it doesn't, resulting in an infinite loop\n\n"
+  benigns:
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/harmfulness_lub/standpoint_culloden.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          name: ENCIPHER_SUPPRESSANT
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 2
+          source: env_var_input
+        - source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          value: AAA
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          source: file_content_input
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/harmfulness_lub/standpoint_culloden.txt
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/harmfulness_lub/standpoint_culloden.txt
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 1
+          name: ENCIPHER_SUPPRESSANT
+          source: env_var_input
+        - value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_type_enum: 0
+          value_encoding: none
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/harmfulness_lub/standpoint_culloden.txt
+          source_enum: 3
+          stage: pre_process
+          source: file_content_input
+          stage_enum: 0
+          value: Hellowworld
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/harmfulness_lub/standpoint_culloden.txt
+          name: ENCIPHER_SUPPRESSANT
+          value_encoding: none
+          ordinal: 1
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          value_type_enum: 0
+          stage: pre_process
+          stage_enum: 0
+        - source_enum: 3
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/harmfulness_lub/standpoint_culloden.txt
+          value_type_enum: 0
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          value: Goodbyecruelworld
+          value_encoding: none
+  exploits:
+    - inputs:
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source: env_var_input
+          source_enum: 2
+          name: ENCIPHER_SUPPRESSANT
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/harmfulness_lub/standpoint_culloden.txt
+          stage: pre_process
+          stage_enum: 0
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/harmfulness_lub/standpoint_culloden.txt
+          value: AAAAA.AAAAAAAA
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/harmfulness_lub/standpoint_culloden.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: ENCIPHER_SUPPRESSANT
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/harmfulness_lub/standpoint_culloden.txt
+          value: This statement will break it
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

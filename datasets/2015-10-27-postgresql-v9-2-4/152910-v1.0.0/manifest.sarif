@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 152910,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case checks if the taint source is less than 20 characters, and if so, allocates a buffer on the heap with 20 characters. It sets the buffer to all 0's, then calls realpath on the taint source, with the destination being the 20-character heap buffer. If realpath evaluates to more than 20 characters, it will over-write memory reserved for the memory manager, resulting in a glibc error when the heap buffer is freed. \nMetadata\n - Base program: PostgreSQL\n - Source Taint: SOCKET\n - Data Type: SIMPLE\n - Data Flow: ADDRESS_AS_VARIABLE\n - Control Flow: SET_JUMP_LONG_JUMP",
+        "state": "bad",
+        "application": "cpe:2.3:a:postgresql:postgresql:9.2.4:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "postgresql-v9.2.4"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C785B-PSQL-10-ST03-DT02-DF15-CF23-01.xml"
+          },
+          "length": 76696,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "b296a84b863d326f70def15fcae2ad12c98f431f23b87d4c07cf94471ce23bc0"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/src/backend/storage/buffer/bufmgr.c"
+          },
+          "length": 98188,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "cf0516f34a6cfa6cd0ec202a9725ec26a894e1fcd40e8230c0c2e2ed16efe533"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "785",
+              "name": "Use of Path Manipulation Function without Maximum-sized Buffer"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-785",
+          "message": {
+            "text": "Use of Path Manipulation Function without Maximum-sized Buffer."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/src/backend/storage/buffer/bufmgr.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 2706,
+                  "endLine": 2715
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "785",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

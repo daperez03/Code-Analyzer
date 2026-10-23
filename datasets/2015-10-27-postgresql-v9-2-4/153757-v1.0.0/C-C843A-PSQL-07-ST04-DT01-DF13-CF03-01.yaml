@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpsG87GG_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - feature_group: data_type
+    file_name: /tmp/tmpsG87GG_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature: array
+  - file_name: /tmp/tmpsG87GG_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - file_name: /tmp/tmpsG87GG_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: control_flow
+    feature: infinite_loop
+io_pair:
+  description: "Creates a union that can be either an int or a char *.\n  If input is a non-zero number, set union to that number, else set union to the input string.\n  Try to access the union as a string, regardless of how it is set.\nSeg fault if the input is a non-zero number.\n\n"
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          ordinal: 1
+          value: 012
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          size: 39
+          source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          key: 1311
+    - inputs:
+        - value_encoding: none
+          flags: 950
+          key: 1311
+          ordinal: 1
+          source: shared_memory_input
+          stage: pre_process
+          source_enum: 6
+          id: source
+          size: 39
+          stage_enum: 0
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: 40000
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 1311
+      size: 39
+      flags: 950
+  benigns:
+    - inputs:
+        - source: shared_memory_input
+          size: 39
+          source_enum: 6
+          stage: pre_process
+          flags: 950
+          value_type_enum: 0
+          ordinal: 1
+          stage_enum: 0
+          key: 1311
+          id: source
+          value: AAA
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - id: source
+          value_type_enum: 0
+          stage: pre_process
+          source: shared_memory_input
+          stage_enum: 0
+          key: 1311
+          ordinal: 1
+          flags: 950
+          value_encoding: none
+          value: This is not a number
+          size: 39
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+    - inputs:
+        - value_encoding: none
+          source: shared_memory_input
+          stage: pre_process
+          source_enum: 6
+          value_type_enum: 0
+          stage_enum: 0
+          value: not a number not a number not a number
+          ordinal: 1
+          id: source
+          size: 39
+          key: 1311
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950

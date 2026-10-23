@@ -1,0 +1,194 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpH6MMR4_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpH6MMR4_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpH6MMR4_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - function_name: sepiae_hortensia
+    line_number: 0
+    feature: set_jump_long_jump
+    file_name: /tmp/tmpH6MMR4_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    feature_group: control_flow
+io_pair:
+  benigns:
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/fightings_sldney/carnosity_szeged.txt
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_type_enum: 0
+          name: AUGIER_AMAETHON
+          source: env_var_input
+        - source_enum: 3
+          stage_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          name: /opt/stonesoup/workspace/testData/fightings_sldney/carnosity_szeged.txt
+          ordinal: 2
+          value: 5 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 hephalump
+          value_encoding: none
+          value_type_enum: 0
+          source: file_content_input
+        - id: background
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source_enum: 7
+          stage_enum: 0
+          stage: pre_process
+          source: script_input
+          ordinal: 2
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 1
+          name: AUGIER_AMAETHON
+          value: /opt/stonesoup/workspace/testData/fightings_sldney/carnosity_szeged.txt
+        - name: /opt/stonesoup/workspace/testData/fightings_sldney/carnosity_szeged.txt
+          value: 60 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 Sniffles_and_whiffles
+          ordinal: 2
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_type_enum: 0
+        - id: background
+          source_enum: 7
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 2
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source: script_input
+    - inputs:
+        - stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/fightings_sldney/carnosity_szeged.txt
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          name: AUGIER_AMAETHON
+          value_encoding: none
+        - value_encoding: none
+          id: source
+          name: /opt/stonesoup/workspace/testData/fightings_sldney/carnosity_szeged.txt
+          value: 6000000 /opt/stonesoup/workspace/testData/file1 /opt/stonesoup/workspace/testData/file2 sIlly_rabbit,_tricks_are_for_kids.
+          source_enum: 3
+          stage: pre_process
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: file_content_input
+          stage_enum: 0
+        - source_enum: 3
+          name: /opt/stonesoup/workspace/testData/file1
+          stage_enum: 0
+          stage: pre_process
+          source: file_content_input
+          ordinal: 2
+        - source_enum: 3
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/file2
+          source: file_content_input
+          ordinal: 3
+          stage_enum: 0
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          source: env_var_input
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage: pre_process
+          stage_enum: 0
+          name: AUGIER_AMAETHON
+          value: /opt/stonesoup/workspace/testData/fightings_sldney/carnosity_szeged.txt
+          value_encoding: none
+        - value: 508 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 May_the_force_be_with_you.
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/fightings_sldney/carnosity_szeged.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 2
+          stage_enum: 0
+          id: source
+          source_enum: 3
+          stage: pre_process
+        - stage_enum: 0
+          source_enum: 7
+          stage: pre_process
+          ordinal: 2
+          id: background
+          source: script_input
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/fightings_sldney/carnosity_szeged.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: AUGIER_AMAETHON
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/fightings_sldney/carnosity_szeged.txt
+          value: 99 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 What_is_the_answer_to_life,_the_universe,_and_everything?
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage_enum: 0
+          source_enum: 7
+          source: script_input
+          stage: pre_process
+          id: background
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          ordinal: 2
+  description: "This weakness expects a string in the form: '<qsize> <file1> <file2> <data>' where qsize is the size of the quick sort (used to delay execution in certain benign cases), file1 and file2 are names of either FIFO files or regular files, and data is a string containing no spaces. Using a second sem_post after a single sem_wait causes the counting semaphore to allow two proccess into the critical section instead of just one when the critical resource is unlocked, leading to a null pointer dereference. This behavior is triggered by providing two FIFO files <file1 file2> controlled by the runFifos.py script in order, and an input string containing any capitalized alpha character (A-Z). Providing this weakness with two FIFO files <file2 file1> (reverse order) controlled by runFifos.py will prevent the weakness from occuring. Providing this weakness with two regular files is nondeterministic, however a larger qsize will increase the likelyhood that the weakness will not occure.\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/fightings_sldney/carnosity_szeged.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: AUGIER_AMAETHON
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/fightings_sldney/carnosity_szeged.txt

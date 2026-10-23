@@ -1,0 +1,140 @@
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+io_pair:
+  description: "This weakness expects a string in the form: '<qsize> <data>' where qsize is the size of the quick sort (used to delay execution), and data is a string containing no spaces.  If the data string contains underscores, spawn two threads - one to replace the underscores with hyphens, and one to capitalize it. The two threads get two separate locks, but they try to obtain them in reverse order.  If the qsort is large enough, these attempts to get the locks will interleave, resulting in deadlock.  In order to hit the weakness, qsize >= 5000000, and the data string must have underscores in it.\n\n"
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  exploits:
+    - inputs:
+        - value_encoding: none
+          address: ss-localhost
+          value: 508 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 This_is_a_bad_test.
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source: socket_input
+          value_type_enum: 0
+          source_enum: 5
+          port: 8887
+          stage: co_process
+          stage_enum: 1
+        - id: background
+          stage_enum: 0
+          stage: pre_process
+          source: script_input
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          ordinal: 2
+          source_enum: 7
+    - inputs:
+        - value_encoding: none
+          source_enum: 5
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage: co_process
+          stage_enum: 1
+          address: ss-localhost
+          value_type_enum: 0
+          port: 8887
+          value: 99 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 A_NEW_TEST
+          source: socket_input
+          id: source
+        - stage: pre_process
+          source_enum: 7
+          id: background
+          source: script_input
+          ordinal: 2
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          stage_enum: 0
+  benigns:
+    - inputs:
+        - source: socket_input
+          source_enum: 5
+          value_encoding: none
+          id: source
+          ordinal: 1
+          port: 8887
+          address: ss-localhost
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 1
+          stage: co_process
+          value: 1 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 a_test
+        - stage_enum: 0
+          source: script_input
+          stage: pre_process
+          ordinal: 2
+          source_enum: 7
+          id: background
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+    - inputs:
+        - address: ss-localhost
+          stage_enum: 1
+          value: 60 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 abigwordwithoutunderscores
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          ordinal: 1
+          id: source
+          stage: co_process
+          source_enum: 5
+          source: socket_input
+        - ordinal: 2
+          source: script_input
+          source_enum: 7
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          stage: pre_process
+          stage_enum: 0
+          id: background
+    - inputs:
+        - source: socket_input
+          source_enum: 5
+          stage: co_process
+          stage_enum: 1
+          id: source
+          ordinal: 1
+          address: ss-localhost
+          port: 8887
+          value: 6000000 /opt/stonesoup/workspace/testData/file1 /opt/stonesoup/workspace/testData/file2 another_test
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - ordinal: 2
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/file1
+          stage_enum: 0
+          source_enum: 3
+          source: file_content_input
+        - ordinal: 3
+          name: /opt/stonesoup/workspace/testData/file2
+          source_enum: 3
+          stage: pre_process
+          source: file_content_input
+          stage_enum: 0
+code_complexity_features:
+  - file_name: /tmp/tmpgu5enD_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    feature_group: source_taint
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: SOCKET
+  - file_name: /tmp/tmpgu5enD_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    feature_group: data_type
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: array
+  - file_name: /tmp/tmpgu5enD_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: index_alias_2
+  - file_name: /tmp/tmpgu5enD_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: control_flow
+    feature: macros

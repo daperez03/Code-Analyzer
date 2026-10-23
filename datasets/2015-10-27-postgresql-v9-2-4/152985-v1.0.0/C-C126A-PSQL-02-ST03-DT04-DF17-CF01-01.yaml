@@ -1,0 +1,100 @@
+code_complexity_features:
+  - function_name: calc_bucket
+    line_number: 0
+    feature_group: control_flow
+    feature: callback
+    file_name: /tmp/tmpUaw27G_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+  - function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+    file_name: /tmp/tmpUaw27G_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+  - feature_group: data_type
+    file_name: /tmp/tmpUaw27G_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: heap_pointer
+  - feature_group: data_flow
+    file_name: /tmp/tmpUaw27G_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: buffer_address_array_index
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - source_enum: 5
+          value_encoding: none
+          value_type_enum: 0
+          value: AAAAAAAAAAAAAAAAAAAAAAA
+          value_type: USE_TEXT_DIRECTLY
+          stage: co_process
+          ordinal: 1
+          source: socket_input
+          address: ss-localhost
+          id: source
+          stage_enum: 1
+          port: 8887
+    - inputs:
+        - stage_enum: 1
+          source: socket_input
+          stage: co_process
+          port: 8887
+          address: ss-localhost
+          value: Hello World!
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          source_enum: 5
+          ordinal: 1
+          value_type_enum: 0
+    - inputs:
+        - source_enum: 5
+          source: socket_input
+          id: source
+          stage_enum: 1
+          stage: co_process
+          value_encoding: none
+          value: Short is good
+          port: 8887
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          address: ss-localhost
+  description: "Has a fixed stack buffer of size 64.  (char [64]) When input has a larger size, the stack buffer will be over read\n\n"
+  base_inputs:
+    - stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+      source: socket_input
+      source_enum: 5
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          id: source
+          stage_enum: 1
+          value_encoding: none
+          ordinal: 1
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          stage: co_process
+          port: 8887
+          address: ss-localhost
+          source: socket_input
+          source_enum: 5
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - address: ss-localhost
+          value_encoding: none
+          stage: co_process
+          ordinal: 1
+          source: socket_input
+          stage_enum: 1
+          port: 8887
+          source_enum: 5
+          id: source
+          value: This is probably going to overflow a buffer of some sort.  Let's run it anyway and see what happens.  I hope that everything turns out ok, because I would love to see what this looks like in all CAPS.  Converting ASCII characters to upper case is easy, you can either call a system function, or just add the standard difference between the start of the two character sets.  But, I am sure there is a reason that system functions exist for this sort of functionality.
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY

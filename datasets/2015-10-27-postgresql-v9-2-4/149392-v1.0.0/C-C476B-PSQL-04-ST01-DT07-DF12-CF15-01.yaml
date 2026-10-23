@@ -1,0 +1,94 @@
+io_pair:
+  base_inputs:
+    - source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: SUBQUADRANGULAR_HECTARES
+      source: env_var_input
+  description: "If a value is seen that doesn't contain 'aba', the taint buffer gets set to null and strlen is called, causing a null pointer dereference\n\n"
+  benigns:
+    - inputs:
+        - value: AAAAAaba
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source_enum: 2
+          id: source
+          stage: pre_process
+          ordinal: 1
+          stage_enum: 0
+          value_type_enum: 0
+          source: env_var_input
+          name: SUBQUADRANGULAR_HECTARES
+    - inputs:
+        - value_encoding: none
+          value: ABCabaD123
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 2
+          stage_enum: 0
+          id: source
+          stage: pre_process
+          name: SUBQUADRANGULAR_HECTARES
+          source: env_var_input
+    - inputs:
+        - name: SUBQUADRANGULAR_HECTARES
+          stage_enum: 0
+          value: 1234564760ABCDEFGHIJKLMNOPQRSTUabaVWXYZabcdefghijklmnopqrstuvwxyz
+          source_enum: 2
+          id: source
+          stage: pre_process
+          value_encoding: none
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          value_type_enum: 0
+  exploits:
+    - inputs:
+        - stage: pre_process
+          value: A.A
+          stage_enum: 0
+          source_enum: 2
+          ordinal: 1
+          name: SUBQUADRANGULAR_HECTARES
+          value_type_enum: 0
+          source: env_var_input
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+    - inputs:
+        - stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          source_enum: 2
+          name: SUBQUADRANGULAR_HECTARES
+          value_encoding: none
+          value: AAAAAAAHHHHHHHHHHHH!
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          value_type_enum: 0
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpShdxf4_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpShdxf4_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature: union
+    feature_group: data_type
+  - file_name: /tmp/tmpShdxf4_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - line_number: 0
+    feature_group: control_flow
+    feature: interprocedural_50
+    file_name: /tmp/tmpShdxf4_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: photographs_barrelmaking

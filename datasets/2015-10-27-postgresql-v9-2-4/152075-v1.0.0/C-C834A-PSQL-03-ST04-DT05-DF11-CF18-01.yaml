@@ -1,0 +1,106 @@
+code_complexity_features:
+  - function_name: AtStart_Cache
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+    file_name: /tmp/tmp_1Hmeq_ss_testcase/src-rose/src/backend/access/transam/xact.c
+  - file_name: /tmp/tmp_1Hmeq_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmp_1Hmeq_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+  - file_name: /tmp/tmp_1Hmeq_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: control_flow
+    feature: pointer_to_function
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          value: 1073676287
+          value_type_enum: 0
+          stage_enum: 0
+          source_enum: 6
+          stage: pre_process
+          ordinal: 1
+          id: source
+          size: 12
+          key: 9251
+          value_encoding: none
+    - inputs:
+        - value_encoding: none
+          key: 9251
+          size: 12
+          source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+          id: source
+          value_type_enum: 0
+          stage_enum: 0
+          ordinal: 1
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          value: 2147483647
+  description: "Takes an integer as input, and determine if the integer is prime using the truly stupid method of seeing if every natural number less than it will divide into it.  If the integer is a large prime number, the program will loop excessively.\n\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 9251
+      size: 12
+      flags: 950
+  benigns:
+    - inputs:
+        - ordinal: 1
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          size: 12
+          flags: 950
+          source: shared_memory_input
+          source_enum: 6
+          key: 9251
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: 68718952445
+          value_type_enum: 0
+    - inputs:
+        - source: shared_memory_input
+          ordinal: 1
+          stage_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          key: 9251
+          size: 12
+          source_enum: 6
+          flags: 950
+          value_encoding: none
+          value: 1301
+          value_type_enum: 0
+          stage: pre_process
+    - inputs:
+        - value_type_enum: 0
+          source: shared_memory_input
+          value_encoding: none
+          stage: pre_process
+          source_enum: 6
+          id: source
+          stage_enum: 0
+          key: 9251
+          ordinal: 1
+          flags: 950
+          value: 1073676288
+          size: 12
+          value_type: USE_TEXT_DIRECTLY

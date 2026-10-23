@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmpWfp6ua_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - feature_group: data_type
+    file_name: /tmp/tmpWfp6ua_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature: heap_pointer
+  - file_name: /tmp/tmpWfp6ua_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - file_name: /tmp/tmpWfp6ua_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: control_flow
+    feature: indirectly_recursive
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - ordinal: 1
+          id: source
+          source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+          size: 7
+          stage_enum: 0
+          value: 10000
+          key: 2428
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - value_type_enum: 0
+          source_enum: 6
+          stage: pre_process
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          stage_enum: 0
+          ordinal: 1
+          key: 2428
+          size: 7
+          flags: 950
+          value: FFFFFF
+          value_encoding: none
+  description: "Read a hex integer from the input.  If hexinteger is negative, ignore.  If hexinteger < 0x0000FFFF, do nothing.  If hexinteger >= 0x0000FFFF try to zero-out the upper two bytes using char pointers.  Perform an incorrect calculation, and rather than zero-ing out the upper two bytes, zero out two different bytes, which corrupts pointers on the stack and results in a seg fault.\n\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 2428
+      size: 7
+      flags: 950
+  benigns:
+    - inputs:
+        - value_encoding: none
+          source_enum: 6
+          size: 7
+          stage: pre_process
+          stage_enum: 0
+          source: shared_memory_input
+          flags: 950
+          ordinal: 1
+          id: source
+          value_type_enum: 0
+          value: 10
+          key: 2428
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - key: 2428
+          size: 7
+          source: shared_memory_input
+          value: 0
+          ordinal: 1
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 6
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - size: 7
+          id: source
+          ordinal: 1
+          stage: pre_process
+          source_enum: 6
+          key: 2428
+          stage_enum: 0
+          source: shared_memory_input
+          value: FFFF
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          flags: 950
+          value_type_enum: 0

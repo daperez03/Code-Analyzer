@@ -1,0 +1,106 @@
+io_pair:
+  benigns:
+    - inputs:
+        - source: shared_memory_input
+          stage_enum: 0
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value: 1 foo
+          id: source
+          size: 22
+          stage: pre_process
+          key: 4523
+          flags: 950
+          source_enum: 6
+    - inputs:
+        - ordinal: 1
+          flags: 950
+          source_enum: 6
+          key: 4523
+          source: shared_memory_input
+          stage_enum: 0
+          value: 2 a b
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          id: source
+          value_type_enum: 0
+          size: 22
+    - inputs:
+        - key: 4523
+          id: source
+          value_encoding: none
+          value: 3 alpha bravo charlie
+          stage_enum: 0
+          size: 22
+          flags: 950
+          source_enum: 6
+          stage: pre_process
+          source: shared_memory_input
+          ordinal: 1
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - ordinal: 1
+      key: 4523
+      size: 22
+      flags: 950
+      source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+  description: "Read a space-delimited string from the input.  The first element in the string is the number of elements following it.  Then read in the following elements, and output them to stderr.  If there are fewer elements than expected, a seg fault occurs.\n\n"
+  exploits:
+    - inputs:
+        - flags: 950
+          ordinal: 1
+          key: 4523
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          size: 22
+          source_enum: 6
+          id: source
+          value_encoding: none
+          stage_enum: 0
+          value: 2 a
+          value_type_enum: 0
+    - inputs:
+        - key: 4523
+          flags: 950
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          size: 22
+          value_type_enum: 0
+          source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+          stage_enum: 0
+          value: 10 a b c
+          id: source
+          value_encoding: none
+code_complexity_features:
+  - file_name: /tmp/tmpvYr1n__ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpvYr1n__ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmpvYr1n__ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - feature: sequence
+    function_name: ReleaseAndReadBuffer
+    line_number: 0
+    feature_group: control_flow
+    file_name: /tmp/tmpvYr1n__ss_testcase/src-rose/src/backend/storage/buffer/bufmgr.c
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

@@ -1,0 +1,154 @@
+code_complexity_features:
+  - file_name: /tmp/tmpO_77BC_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - feature: typedef
+    feature_group: data_type
+    line_number: 0
+    function_name: oid_hash
+    file_name: /tmp/tmpO_77BC_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+  - file_name: /tmp/tmpO_77BC_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - feature: interprocedural_2
+    file_name: /tmp/tmpO_77BC_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    feature_group: control_flow
+    line_number: 0
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          name: NECKLACED_ACTINOBACILLI
+          ordinal: 1
+          stage: pre_process
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/repadding_alloclase/passaggi_hait.txt
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+        - value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          stage_enum: 0
+          value_encoding: none
+          value: AAAAAaba
+          source_enum: 3
+          stage: pre_process
+          source: file_content_input
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/repadding_alloclase/passaggi_hait.txt
+          id: source
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/repadding_alloclase/passaggi_hait.txt
+          value_encoding: none
+          ordinal: 1
+          stage: pre_process
+          value_type_enum: 0
+          source: env_var_input
+          source_enum: 2
+          name: NECKLACED_ACTINOBACILLI
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+        - value_encoding: none
+          stage: pre_process
+          source_enum: 3
+          ordinal: 2
+          value_type_enum: 0
+          value: ABCabaD123
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source: file_content_input
+          id: source
+          name: /opt/stonesoup/workspace/testData/repadding_alloclase/passaggi_hait.txt
+    - inputs:
+        - source: env_var_input
+          value: /opt/stonesoup/workspace/testData/repadding_alloclase/passaggi_hait.txt
+          value_type_enum: 0
+          value_encoding: none
+          stage: pre_process
+          name: NECKLACED_ACTINOBACILLI
+          stage_enum: 0
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+        - source: file_content_input
+          name: /opt/stonesoup/workspace/testData/repadding_alloclase/passaggi_hait.txt
+          value: 1234564760ABCDEFGHIJKLMNOPQRSTUabaVWXYZabcdefghijklmnopqrstuvwxyz
+          value_encoding: none
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 3
+          value_type_enum: 0
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+  exploits:
+    - inputs:
+        - stage: pre_process
+          value_type_enum: 0
+          source: env_var_input
+          name: NECKLACED_ACTINOBACILLI
+          value: /opt/stonesoup/workspace/testData/repadding_alloclase/passaggi_hait.txt
+          source_enum: 2
+          stage_enum: 0
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+        - source: file_content_input
+          stage_enum: 0
+          ordinal: 2
+          stage: pre_process
+          value_type_enum: 0
+          value: A.A
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/repadding_alloclase/passaggi_hait.txt
+          source_enum: 3
+          id: source
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          ordinal: 1
+          name: NECKLACED_ACTINOBACILLI
+          value_encoding: none
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/repadding_alloclase/passaggi_hait.txt
+        - value_encoding: none
+          id: source
+          stage: pre_process
+          value_type_enum: 0
+          stage_enum: 0
+          ordinal: 2
+          value: AAAAAAAHHHHHHHHHHHH!
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/repadding_alloclase/passaggi_hait.txt
+          source: file_content_input
+          source_enum: 3
+  base_inputs:
+    - ordinal: 1
+      name: NECKLACED_ACTINOBACILLI
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/repadding_alloclase/passaggi_hait.txt
+      value_encoding: none
+    - id: source
+      source: file_content_input
+      source_enum: 3
+      name: /opt/stonesoup/workspace/testData/repadding_alloclase/passaggi_hait.txt
+      stage_enum: 0
+      ordinal: 2
+      stage: pre_process
+  description: "If a value is seen that doesn't contain 'aba', the taint buffer gets set to null and strlen is called, causing a null pointer dereference\n\n"

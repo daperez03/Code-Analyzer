@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmpXPAQSG_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+  - file_name: /tmp/tmpXPAQSG_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpXPAQSG_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: data_flow
+    feature: index_alias_10
+  - file_name: /tmp/tmpXPAQSG_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: control_flow
+    feature: set_jump_long_jump
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: FOOTED_FELSOPHYRE
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          value: 10
+          ordinal: 1
+          value_encoding: none
+          id: source
+          name: FOOTED_FELSOPHYRE
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+    - inputs:
+        - source_enum: 2
+          stage_enum: 0
+          value: 1000
+          name: FOOTED_FELSOPHYRE
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          ordinal: 1
+          source: env_var_input
+          stage: pre_process
+          value_encoding: none
+    - inputs:
+        - ordinal: 1
+          stage: pre_process
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          value: 20
+          name: FOOTED_FELSOPHYRE
+          source_enum: 2
+          stage_enum: 0
+          source: env_var_input
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: -8000000
+          value_encoding: none
+          source_enum: 2
+          name: FOOTED_FELSOPHYRE
+          id: source
+          stage: pre_process
+          ordinal: 1
+          source: env_var_input
+    - inputs:
+        - name: FOOTED_FELSOPHYRE
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          value: -16777215
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          id: source
+  description: "Read an integer from the input.  If integer >= 4096, do nothing.Else malloc a buffer of 4096 bytes.  Memset the buffer to 'a'. Memset bytes of buffer from input_integer to 4095 to 'b'. Print the buffer.  This all works correctly if the input_integer is 0 or greater.  If input_integer is negative, we will try to memset a random place in memory.  If the input_integer is sufficiently large, this is unaddressable, and we get a segfault.\n\n"

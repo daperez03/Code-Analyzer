@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 152467,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "Metadata\n - Base program: PostgreSQL\n - Source Taint: ENVIRONMENT_VARIABLE\n - Data Type: HEAP_POINTER\n - Data Flow: BUFFER_ADDRESS_POINTER\n - Control Flow: SET_JUMP_LONG_JUMP",
+        "state": "bad",
+        "application": "cpe:2.3:a:postgresql:postgresql:9.2.4:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "postgresql-v9.2.4"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C088A-PSQL-08-ST01-DT04-DF17-CF23-01.xml"
+          },
+          "length": 70744,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "93ca598dd910429bc9f85fe4d6687b3511daa8b73ca9864731c44f9c8251d558"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/src/backend/access/transam/subtrans.c"
+          },
+          "length": 15805,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "b0a9996e7a0ad70b5b54cef77579529adb4d75141fcb5cc1ed6de0d2eaea73c2"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "88",
+              "name": "Improper Neutralization of Argument Delimiters in a Command ('Argument Injection')"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-88",
+          "message": {
+            "text": "Improper Neutralization of Argument Delimiters in a Command ('Argument Injection')."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/src/backend/access/transam/subtrans.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 306,
+                  "endLine": 313
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "88",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

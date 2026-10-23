@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - name: TIGGER_ORRIN
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/polyedral_ischiotibial/sen_nubbier.txt
+          source: env_var_input
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage: pre_process
+        - ordinal: 2
+          source: file_content_input
+          value_type_enum: 0
+          source_enum: 3
+          id: source
+          value_encoding: none
+          value: 1
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/polyedral_ischiotibial/sen_nubbier.txt
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - source_enum: 2
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/polyedral_ischiotibial/sen_nubbier.txt
+          stage_enum: 0
+          name: TIGGER_ORRIN
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          stage: pre_process
+          source: env_var_input
+        - id: source
+          value_encoding: none
+          source_enum: 3
+          value_type_enum: 0
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source: file_content_input
+          ordinal: 2
+          value: 10
+          name: /opt/stonesoup/workspace/testData/polyedral_ischiotibial/sen_nubbier.txt
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: TIGGER_ORRIN
+          value_type_enum: 0
+          source: env_var_input
+          ordinal: 1
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/polyedral_ischiotibial/sen_nubbier.txt
+        - ordinal: 2
+          value: 1000
+          name: /opt/stonesoup/workspace/testData/polyedral_ischiotibial/sen_nubbier.txt
+          stage_enum: 0
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          source_enum: 3
+          value_type_enum: 0
+          stage: pre_process
+  base_inputs:
+    - value_encoding: none
+      value_type_enum: 0
+      name: TIGGER_ORRIN
+      value_type: USE_TEXT_DIRECTLY
+      ordinal: 1
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/polyedral_ischiotibial/sen_nubbier.txt
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+    - stage_enum: 0
+      name: /opt/stonesoup/workspace/testData/polyedral_ischiotibial/sen_nubbier.txt
+      stage: pre_process
+      source: file_content_input
+      source_enum: 3
+      ordinal: 2
+      id: source
+  exploits:
+    - inputs:
+        - source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/polyedral_ischiotibial/sen_nubbier.txt
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_encoding: none
+          name: TIGGER_ORRIN
+          source_enum: 2
+        - source: file_content_input
+          name: /opt/stonesoup/workspace/testData/polyedral_ischiotibial/sen_nubbier.txt
+          stage: pre_process
+          value: 65538
+          value_type_enum: 0
+          value_encoding: none
+          stage_enum: 0
+          source_enum: 3
+          ordinal: 2
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_encoding: none
+          value_type_enum: 0
+          name: TIGGER_ORRIN
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/polyedral_ischiotibial/sen_nubbier.txt
+          ordinal: 1
+          stage_enum: 0
+          source: env_var_input
+          stage: pre_process
+        - value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/polyedral_ischiotibial/sen_nubbier.txt
+          stage_enum: 0
+          stage: pre_process
+          source: file_content_input
+          source_enum: 3
+          ordinal: 2
+          id: source
+          value: 131074
+  description: "Read a number from the input.  Create a struct with two fields: size (unsigned short) and buffer (char*).  Initialize the struct using the unsigned short value as a size, and malloc the unsigned short value worth of bytes.  Later, memset the buffer in the struct using the number passed in as input.  Since the input is a long, and we only allocated an unsigned short amount, we will corrupt the heap, leading to seg fault or glib error. Good inputs: 65535 or less. Bad inputs: more than 65535\n\n"
+code_complexity_features:
+  - file_name: /tmp/tmpT2mrJC_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - feature_group: data_type
+    function_name: oid_hash
+    line_number: 0
+    feature: simple
+    file_name: /tmp/tmpT2mrJC_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+  - file_name: /tmp/tmpT2mrJC_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    line_number: 0
+    feature_group: data_flow
+    function_name: oid_hash
+    feature: index_alias_50
+  - feature_group: control_flow
+    feature: macros
+    function_name: oid_hash
+    line_number: 0
+    file_name: /tmp/tmpT2mrJC_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c

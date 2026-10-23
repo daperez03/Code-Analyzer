@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  description: "Read an unsigned hex int from the input.  If unsigned is > FFFF, do nothing. Otherwise, open that many files for writing, without closing the file handles.  Output if any of the opens fail. The opens will fail if we try to open more than 1021 files.\n\n"
+  exploits:
+    - inputs:
+        - ordinal: 1
+          stage_enum: 0
+          source: env_var_input
+          source_enum: 2
+          value: FFF
+          value_encoding: none
+          name: CRUDEST_PACKERS
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage: pre_process
+          id: source
+    - inputs:
+        - id: source
+          value: FFFF
+          ordinal: 1
+          name: CRUDEST_PACKERS
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage: pre_process
+          source: env_var_input
+          value_encoding: none
+          stage_enum: 0
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - ordinal: 1
+          value: FF
+          name: CRUDEST_PACKERS
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          id: source
+          stage: pre_process
+    - inputs:
+        - source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          value_encoding: none
+          value_type_enum: 0
+          name: CRUDEST_PACKERS
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value: 20
+    - inputs:
+        - source_enum: 2
+          value: 1
+          name: CRUDEST_PACKERS
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 1
+          id: source
+          value_type_enum: 0
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: CRUDEST_PACKERS
+code_complexity_features:
+  - feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmpNS0kT8_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+  - line_number: 0
+    feature_group: data_type
+    feature: struct
+    function_name: ResourceOwnerForgetCatCacheRef
+    file_name: /tmp/tmpNS0kT8_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+  - file_name: /tmp/tmpNS0kT8_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - feature_group: control_flow
+    file_name: /tmp/tmpNS0kT8_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature: pointer_to_function

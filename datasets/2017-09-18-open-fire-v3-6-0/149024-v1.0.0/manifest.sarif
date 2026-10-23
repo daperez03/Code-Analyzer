@@ -1,0 +1,330 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 149024,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "deprecated",
+        "submissionDate": "2014-08-01",
+        "language": "java",
+        "author": "Ignite Realtime",
+        "description": "openfire-3.6.0",
+        "state": "bad",
+        "application": "cpe:2.3:a:igniterealtime:openfire:3.6.0:-:*:*:*:*:*:*",
+        "dependencies": [
+          "openfire-v3.6.0"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "src/java/org/jivesoftware/admin/AuthCheckFilter.java"
+          },
+          "length": 4154,
+          "sourceLanguage": "java",
+          "hashes": {
+            "sha-256": "47c65a0580e6e7026082667ee709bdd32d63e2d102cfa8229fae0dc04af9d561"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/java/org/jivesoftware/openfire/handler/IQAuthHandler.java"
+          },
+          "length": 16062,
+          "sourceLanguage": "java",
+          "hashes": {
+            "sha-256": "5c0be431810ad4d046d5eb8a2ebd4a6b9c0eedc91a9f809ebcb9136d1906d06d"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/plugins/sip/src/java/org/jivesoftware/openfire/sip/calllog/CallLogDAO.java"
+          },
+          "length": 7185,
+          "sourceLanguage": "java",
+          "hashes": {
+            "sha-256": "26cff9f16165a811379eed06d181b36cce473bd9665633e13605e89fe557a8c3"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/plugins/sip/src/web/sipark-log-summary.jsp"
+          },
+          "length": 19760,
+          "sourceLanguage": "jsp",
+          "hashes": {
+            "sha-256": "d0a3287d1c169dc90dcb56d9822bd1fca84aa6afe1a80ac2df07f97d3e1094c0"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/web/WEB-INF/web.xml"
+          },
+          "length": 4811,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "c33140e5ab23f33e50472d6e062099f90851ae7230fef8a7d6520ed2a57f8957"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/web/audit-policy.jsp"
+          },
+          "length": 12769,
+          "sourceLanguage": "jsp",
+          "hashes": {
+            "sha-256": "8504b1764b5d57e696a0e13c34e1003b94f31825659522b1765f3f99d8bbc752"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/web/group-summary.jsp"
+          },
+          "length": 7347,
+          "sourceLanguage": "jsp",
+          "hashes": {
+            "sha-256": "b5469ea5eea32b5a9231202ff074a89c0ce0e2c885c65f03ea3976e45bb35baf"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/web/log.jsp"
+          },
+          "length": 6218,
+          "sourceLanguage": "jsp",
+          "hashes": {
+            "sha-256": "1ce3ab20b15c5bba24952d1f7c22a32f490b47ff64b1fdf91c4962067b6ce5fa"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/web/login.jsp"
+          },
+          "length": 12125,
+          "sourceLanguage": "jsp",
+          "hashes": {
+            "sha-256": "52226600208bf95527f3b46d37a6d1fd48c5f583bb4f3af72388b1092b03fc6e"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/web/logviewer.jsp"
+          },
+          "length": 17439,
+          "sourceLanguage": "jsp",
+          "hashes": {
+            "sha-256": "897fe8464c3dd0d3c10f6cdcc7e5dc99f56179411383deceb3777086cd59c8a8"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/web/muc-room-edit-form.jsp"
+          },
+          "length": 29226,
+          "sourceLanguage": "jsp",
+          "hashes": {
+            "sha-256": "e6c0eb627611f431f3a721f5af42524c4e433001f276f223c35b538ca148125e"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/web/server-properties.jsp"
+          },
+          "length": 11394,
+          "sourceLanguage": "jsp",
+          "hashes": {
+            "sha-256": "89774837b6a9ecbdf26c6eb8a76056dee9a40d881248f9cf15e269af3c8893fb"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/web/user-properties.jsp"
+          },
+          "length": 10649,
+          "sourceLanguage": "jsp",
+          "hashes": {
+            "sha-256": "7839193fcaf9f5762ed13034f061e43682bf582b79c8371869f9060280e7fa4d"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "22",
+              "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+            },
+            {
+              "id": "79",
+              "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+            },
+            {
+              "id": "862",
+              "name": "Missing Authorization"
+            },
+            {
+              "id": "89",
+              "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-862",
+          "message": {
+            "text": "Missing Authorization."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/java/org/jivesoftware/openfire/handler/IQAuthHandler.java",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 142
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "862",
+              "index": 2
+            }
+          ]
+        },
+        {
+          "ruleId": "CWE-89",
+          "message": {
+            "text": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/plugins/sip/src/java/org/jivesoftware/openfire/sip/calllog/CallLogDAO.java",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 49
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "89",
+              "index": 3
+            }
+          ]
+        },
+        {
+          "ruleId": "CWE-22",
+          "message": {
+            "text": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/web/WEB-INF/web.xml",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 27
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "22",
+              "index": 0
+            }
+          ]
+        },
+        {
+          "ruleId": "CWE-79",
+          "message": {
+            "text": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/web/user-properties.jsp",
+                  "index": 12
+                },
+                "region": {
+                  "startLine": 35
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/web/user-properties.jsp",
+                  "index": 12
+                },
+                "region": {
+                  "startLine": 149
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "79",
+              "index": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

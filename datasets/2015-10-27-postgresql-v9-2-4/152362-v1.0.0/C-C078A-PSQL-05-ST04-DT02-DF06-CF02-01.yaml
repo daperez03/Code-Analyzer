@@ -1,0 +1,106 @@
+io_pair:
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          key: 9046
+          size: 28
+          ordinal: 1
+          flags: 950
+          id: source
+          source: shared_memory_input
+          value_encoding: none
+          stage: pre_process
+          value_type_enum: 0
+          value: 10
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+    - inputs:
+        - value_encoding: none
+          flags: 950
+          source: shared_memory_input
+          id: source
+          stage: pre_process
+          ordinal: 1
+          size: 28
+          value: google.com
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source_enum: 6
+          key: 9046
+    - inputs:
+        - source_enum: 6
+          source: shared_memory_input
+          id: source
+          stage: pre_process
+          ordinal: 1
+          flags: 950
+          value_encoding: none
+          size: 28
+          value: localhost
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          key: 9046
+          stage_enum: 0
+  exploits:
+    - inputs:
+        - ordinal: 1
+          source_enum: 6
+          source: shared_memory_input
+          key: 9046
+          value: 10; ls -la
+          flags: 950
+          id: source
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          size: 28
+          stage: pre_process
+    - inputs:
+        - source_enum: 6
+          stage_enum: 0
+          id: source
+          flags: 950
+          size: 28
+          source: shared_memory_input
+          key: 9046
+          stage: pre_process
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: localhost; echo Hello world
+          value_type_enum: 0
+  description: "Read a string from the input.  Do nslookup on that string, without checking first if it has any command separators.  This allows the user to run arbitrary commands.\n\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 9046
+      size: 28
+      flags: 950
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmp6oU6bX_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmp6oU6bX_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmp6oU6bX_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - file_name: /tmp/tmp6oU6bX_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: control_flow
+    feature: indirectly_recursive

@@ -1,0 +1,154 @@
+io_pair:
+  benigns:
+    - inputs:
+        - stage: pre_process
+          value: /opt/stonesoup/workspace/testData/sleeve_abettors/mycomycete_b911.txt
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: COMANAGEMENT_TWEE
+          ordinal: 1
+          source: env_var_input
+          stage_enum: 0
+          source_enum: 2
+          value_encoding: none
+        - source: file_content_input
+          id: source
+          value: 10
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/sleeve_abettors/mycomycete_b911.txt
+          ordinal: 2
+          stage_enum: 0
+          source_enum: 3
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          value_type_enum: 0
+          name: COMANAGEMENT_TWEE
+          ordinal: 1
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/sleeve_abettors/mycomycete_b911.txt
+        - name: /opt/stonesoup/workspace/testData/sleeve_abettors/mycomycete_b911.txt
+          source_enum: 3
+          value_encoding: none
+          source: file_content_input
+          stage: pre_process
+          ordinal: 2
+          value: 42
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+          id: source
+    - inputs:
+        - ordinal: 1
+          value_type_enum: 0
+          name: COMANAGEMENT_TWEE
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/sleeve_abettors/mycomycete_b911.txt
+          source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+        - source: file_content_input
+          stage: pre_process
+          source_enum: 3
+          id: source
+          stage_enum: 0
+          ordinal: 2
+          value_encoding: none
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/sleeve_abettors/mycomycete_b911.txt
+          value_type: USE_TEXT_DIRECTLY
+          value: 37
+  exploits:
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/sleeve_abettors/mycomycete_b911.txt
+          value_encoding: none
+          ordinal: 1
+          stage_enum: 0
+          value_type_enum: 0
+          name: COMANAGEMENT_TWEE
+        - stage_enum: 0
+          id: source
+          ordinal: 2
+          stage: pre_process
+          source: file_content_input
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/sleeve_abettors/mycomycete_b911.txt
+          value: 20000
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/sleeve_abettors/mycomycete_b911.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: COMANAGEMENT_TWEE
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/sleeve_abettors/mycomycete_b911.txt
+          value: 6000
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  description: "Takes an input integer and creates temporary files, filling them with a large string. It then attempts cleanup, but if more than 50 files were created, then only the last 50 will be cleaned up. Given a large enough input the program will use up a significant ammount of disk space creating temporary files and not cleaning them up.\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/sleeve_abettors/mycomycete_b911.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: COMANAGEMENT_TWEE
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/sleeve_abettors/mycomycete_b911.txt
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpJWwc78_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: control_flow
+    feature: callback
+  - file_name: /tmp/tmpJWwc78_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: grinter_lausanne
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpJWwc78_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: grinter_lausanne
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - feature: index_alias_10
+    file_name: /tmp/tmpJWwc78_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: decanol_chorisos
+    line_number: 0
+    feature_group: data_flow

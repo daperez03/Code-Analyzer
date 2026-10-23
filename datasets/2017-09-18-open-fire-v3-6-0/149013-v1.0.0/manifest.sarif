@@ -1,0 +1,103 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 149013,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2014-08-01",
+        "language": "java",
+        "author": "Ignite Realtime",
+        "description": "CVE-2009-1596",
+        "state": "bad",
+        "cves": [
+          "CVE-2009-1596"
+        ],
+        "application": "cpe:2.3:a:igniterealtime:openfire:3.6.0:-:*:*:*:*:*:*",
+        "dependencies": [
+          "openfire-v3.6.0"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "src/java/org/jivesoftware/openfire/handler/IQAuthHandler.java"
+          },
+          "length": 16062,
+          "sourceLanguage": "java",
+          "hashes": {
+            "sha-256": "5c0be431810ad4d046d5eb8a2ebd4a6b9c0eedc91a9f809ebcb9136d1906d06d"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "862",
+              "name": "Missing Authorization"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-862",
+          "message": {
+            "text": "Missing Authorization."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/java/org/jivesoftware/openfire/handler/IQAuthHandler.java",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 142
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "862",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

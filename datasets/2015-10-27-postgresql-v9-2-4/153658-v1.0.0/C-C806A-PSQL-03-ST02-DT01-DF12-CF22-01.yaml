@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpFsvY0u_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpFsvY0u_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: data_type
+    feature: array
+  - file_name: /tmp/tmpFsvY0u_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - file_name: /tmp/tmpFsvY0u_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: kairos_bassine
+    line_number: 0
+    feature_group: control_flow
+    feature: macros
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/mustees_liwan/sans_rechose.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: MOROCAIN_AUBREE
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/mustees_liwan/sans_rechose.txt
+  exploits:
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/mustees_liwan/sans_rechose.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          name: MOROCAIN_AUBREE
+        - id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/mustees_liwan/sans_rechose.txt
+          value: Short is now bad
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+          stage: pre_process
+          source: file_content_input
+          source_enum: 3
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/mustees_liwan/sans_rechose.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: MOROCAIN_AUBREE
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/mustees_liwan/sans_rechose.txt
+          value: AAAAAAAAAAAA
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          name: MOROCAIN_AUBREE
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/mustees_liwan/sans_rechose.txt
+        - stage: pre_process
+          stage_enum: 0
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAA
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 3
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/mustees_liwan/sans_rechose.txt
+          source: file_content_input
+    - inputs:
+        - value_encoding: none
+          stage_enum: 0
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/mustees_liwan/sans_rechose.txt
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: MOROCAIN_AUBREE
+          ordinal: 1
+          stage: pre_process
+          source: env_var_input
+        - stage: pre_process
+          ordinal: 2
+          stage_enum: 0
+          source_enum: 3
+          source: file_content_input
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/mustees_liwan/sans_rechose.txt
+          value_encoding: none
+          value: Hello World!  If this statement isn't more than 64 characters, it will go badly
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          ordinal: 1
+          name: MOROCAIN_AUBREE
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/mustees_liwan/sans_rechose.txt
+          value_encoding: none
+          value_type_enum: 0
+        - value_type_enum: 0
+          stage: pre_process
+          id: source
+          source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/mustees_liwan/sans_rechose.txt
+          value: Short is good for buffer overflows, unless you make a mistake and get it wrong
+          ordinal: 2
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+  description: "Has a buffer declared on the stack. char[64] If input is shorter than 64 it will overflow,due to using improper sizeof and strlen checking\n\n"

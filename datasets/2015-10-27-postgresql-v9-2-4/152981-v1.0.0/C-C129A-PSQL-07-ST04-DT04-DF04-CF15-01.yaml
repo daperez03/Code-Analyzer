@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmp9rqnwW_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - feature_group: data_type
+    file_name: /tmp/tmp9rqnwW_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature: heap_pointer
+  - file_name: /tmp/tmp9rqnwW_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: data_flow
+    feature: address_alias_50
+  - file_name: /tmp/tmp9rqnwW_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: control_flow
+    feature: interprocedural_50
+io_pair:
+  exploits:
+    - inputs:
+        - key: 3073
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_type_enum: 0
+          size: 19
+          source: shared_memory_input
+          stage: pre_process
+          source_enum: 6
+          id: source
+          stage_enum: 0
+          flags: 950
+          value: "{a+b|c+d}"
+    - inputs:
+        - ordinal: 1
+          value_encoding: none
+          value: "!a*b(c*d-1)"
+          stage_enum: 0
+          id: source
+          stage: pre_process
+          flags: 950
+          source_enum: 6
+          key: 3073
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          size: 19
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 3073
+      size: 19
+      flags: 950
+  description: "Good input:1) environment variable contains only alphanumeric charactersBad input:1) environment variable contains * or -.  + causes infinte loop\n\n"
+  benigns:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          id: source
+          source_enum: 6
+          stage_enum: 0
+          stage: pre_process
+          value_type_enum: 0
+          key: 3073
+          size: 19
+          source: shared_memory_input
+          ordinal: 1
+          flags: 950
+          value: exampleofgoodinput
+          value_encoding: none
+    - inputs:
+        - source: shared_memory_input
+          value: abcd12345ABCDE
+          stage: pre_process
+          size: 19
+          source_enum: 6
+          id: source
+          stage_enum: 0
+          key: 3073
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 1
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          value_type_enum: 0
+          value: R0G3RR4881T
+          stage: pre_process
+          ordinal: 1
+          id: source
+          source_enum: 6
+          size: 19
+          key: 3073
+          stage_enum: 0
+          flags: 950
+          value_encoding: none

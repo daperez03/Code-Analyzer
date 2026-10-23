@@ -1,0 +1,196 @@
+io_pair:
+  base_inputs:
+    - value: /opt/stonesoup/workspace/testData/fichtean_meadowsweet/marmennill_hoya.txt
+      stage_enum: 0
+      name: KANAE_ZOONOSIS
+      source: env_var_input
+      source_enum: 2
+      ordinal: 1
+      value_type: USE_TEXT_DIRECTLY
+      value_encoding: none
+      value_type_enum: 0
+      stage: pre_process
+    - stage_enum: 0
+      stage: pre_process
+      source: file_content_input
+      name: /opt/stonesoup/workspace/testData/fichtean_meadowsweet/marmennill_hoya.txt
+      source_enum: 3
+      ordinal: 2
+      id: source
+  benigns:
+    - inputs:
+        - ordinal: 1
+          value: /opt/stonesoup/workspace/testData/fichtean_meadowsweet/marmennill_hoya.txt
+          value_type_enum: 0
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage: pre_process
+          name: KANAE_ZOONOSIS
+          value_encoding: none
+          stage_enum: 0
+        - source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/fichtean_meadowsweet/marmennill_hoya.txt
+          value_encoding: none
+          stage: pre_process
+          source_enum: 3
+          ordinal: 2
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/good01.txt
+          id: source
+    - inputs:
+        - name: KANAE_ZOONOSIS
+          source_enum: 2
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/fichtean_meadowsweet/marmennill_hoya.txt
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+          stage_enum: 0
+          ordinal: 1
+        - stage: pre_process
+          id: source
+          source: file_content_input
+          value: /opt/stonesoup/workspace/testData/good02.txt
+          stage_enum: 0
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/fichtean_meadowsweet/marmennill_hoya.txt
+          ordinal: 2
+          value_encoding: none
+          source_enum: 3
+        - value_encoding: none
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/good02.txt
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          value: not an empty file
+          stage_enum: 0
+          value_type_enum: 0
+          source: file_content_input
+    - inputs:
+        - ordinal: 1
+          value: /opt/stonesoup/workspace/testData/fichtean_meadowsweet/marmennill_hoya.txt
+          source: env_var_input
+          stage_enum: 0
+          name: KANAE_ZOONOSIS
+          value_encoding: none
+          stage: pre_process
+          source_enum: 2
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+        - value_encoding: none
+          stage_enum: 0
+          id: source
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/good03.txt
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source: file_content_input
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/fichtean_meadowsweet/marmennill_hoya.txt
+          source_enum: 3
+        - stage: pre_process
+          source: file_content_input
+          value: This should not be an empty file.  I really mean it.  This should definitely contain some sort of text or paragraph or something
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/good03.txt
+          ordinal: 2
+          stage_enum: 0
+          value_encoding: none
+  description: "Runs a bunch of hashing algorithms on a files contents. If a file doesn't end, ex: '/dev/urandom', will fork and consume a lot of cpu on different cpus\n\n"
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/fichtean_meadowsweet/marmennill_hoya.txt
+          ordinal: 1
+          source_enum: 2
+          name: KANAE_ZOONOSIS
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          value: /dev/urandom
+          id: source
+          name: /opt/stonesoup/workspace/testData/fichtean_meadowsweet/marmennill_hoya.txt
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          ordinal: 2
+          source: file_content_input
+    - inputs:
+        - name: KANAE_ZOONOSIS
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/fichtean_meadowsweet/marmennill_hoya.txt
+          source_enum: 2
+          source: env_var_input
+          value_encoding: none
+          stage: pre_process
+        - stage_enum: 0
+          stage: pre_process
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/fichtean_meadowsweet/marmennill_hoya.txt
+          source_enum: 3
+          ordinal: 2
+          id: source
+          value: /opt/stonesoup/workspace/testData/bad02.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage: pre_process
+          value_encoding: none
+          source_enum: 3
+          value: a
+          stage_enum: 0
+          value_type_enum: 0
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/bad02.txt
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+        - source_enum: 7
+          stage_enum: 0
+          name: rm -rf /opt/stonesoup/workspace/testData/bad02.txt
+          stage: pre_process
+          ordinal: 3
+          source: script_input
+        - ordinal: 4
+          stage: pre_process
+          name: ln -s '/dev/urandom' /opt/stonesoup/workspace/testData/bad02.txt
+          source: script_input
+          stage_enum: 0
+          source_enum: 7
+code_complexity_features:
+  - feature_group: source_taint
+    feature: FILE_CONTENTS
+    file_name: /tmp/tmpLhtxkk_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    function_name: StartupSUBTRANS
+    line_number: 0
+  - line_number: 0
+    file_name: /tmp/tmpLhtxkk_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    function_name: StartupSUBTRANS
+    feature: struct
+    feature_group: data_type
+  - line_number: 0
+    function_name: StartupSUBTRANS
+    file_name: /tmp/tmpLhtxkk_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    feature_group: data_flow
+    feature: address_as_constant
+  - line_number: 0
+    function_name: brainge_reavails
+    file_name: /tmp/tmpLhtxkk_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    feature_group: control_flow
+    feature: set_jump_long_jump
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

@@ -1,0 +1,94 @@
+io_pair:
+  exploits:
+    - inputs:
+        - id: source
+          name: POLYSORBATE_EUNOMY
+          value_encoding: base64
+          value_type_enum: 0
+          source_enum: 2
+          stage_enum: 0
+          value: TmFoIG5haCBuYWggbmFoIG5haCBuYWgsIG5haCBuYWggbmFoLCBoZXkgSnVkZQpOYWggbmFoIG5haCBuYWggbmFoIG5haCwgbmFoIG5haCBuYWgsIGhleSBKdWRl
+          source: env_var_input
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+    - inputs:
+        - stage: pre_process
+          value_encoding: none
+          name: POLYSORBATE_EUNOMY
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage_enum: 0
+          source: env_var_input
+          value_type_enum: 0
+          id: source
+          ordinal: 1
+          value: this string is more than sixty four characters long, so it should mess some stuff up
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          source: env_var_input
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source_enum: 2
+          ordinal: 1
+          name: POLYSORBATE_EUNOMY
+          value: brah
+          value_type_enum: 0
+          stage: pre_process
+    - inputs:
+        - stage_enum: 0
+          value_encoding: none
+          stage: pre_process
+          name: POLYSORBATE_EUNOMY
+          source_enum: 2
+          value_type_enum: 0
+          ordinal: 1
+          value: dude
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+    - inputs:
+        - stage: pre_process
+          ordinal: 1
+          value_type_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          value_encoding: none
+          stage_enum: 0
+          value: bromigo
+          name: POLYSORBATE_EUNOMY
+          source_enum: 2
+  description: "Good inputs: 1) taintvar is less than 64 characters long.Bad input: 1) taintvar is greater than or equal to 64 characters long.\n\n"
+  base_inputs:
+    - name: POLYSORBATE_EUNOMY
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      source: env_var_input
+code_complexity_features:
+  - line_number: 0
+    feature_group: source_taint
+    file_name: /tmp/tmpQCt1yp_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpQCt1yp_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    feature_group: data_type
+    line_number: 0
+    feature: simple
+    function_name: oid_hash
+  - feature: address_as_function_return_value
+    file_name: /tmp/tmpQCt1yp_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    feature_group: data_flow
+    function_name: oid_hash
+    line_number: 0
+  - file_name: /tmp/tmpQCt1yp_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    line_number: 0
+    function_name: oid_hash
+    feature_group: control_flow
+    feature: set_jump_long_jump
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

@@ -1,0 +1,304 @@
+io_pair:
+  exploits:
+    - inputs:
+        - ordinal: 1
+          name: SOAPLESS_ELATIVES
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/cutlerr_ipse/bilaan_macomber.txt
+          source: env_var_input
+          source_enum: 2
+          value_encoding: none
+        - ordinal: 2
+          name: /opt/stonesoup/workspace/testData/cutlerr_ipse/bilaan_macomber.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: file1
+          source: file_content_input
+          source_enum: 3
+          value_type_enum: 0
+          stage: pre_process
+          stage_enum: 0
+          id: source
+        - name: /opt/stonesoup/workspace/testData/file1.lck
+          stage_enum: 0
+          value: file1
+          stage: pre_process
+          source_enum: 3
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          source: file_content_input
+          value_type_enum: 0
+        - stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/sync/file2.lck
+          ordinal: 3
+          value_type_enum: 0
+          value_encoding: none
+          source: file_content_input
+          value: file2
+        - value: file3
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/temp/sync/file3.lck
+          ordinal: 4
+          source_enum: 3
+          stage: pre_process
+          value_type_enum: 0
+          stage_enum: 0
+          source: file_content_input
+    - inputs:
+        - value_encoding: none
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          source_enum: 2
+          name: SOAPLESS_ELATIVES
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/cutlerr_ipse/bilaan_macomber.txt
+        - value: sync/file2
+          source_enum: 3
+          value_encoding: none
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/cutlerr_ipse/bilaan_macomber.txt
+          source: file_content_input
+        - value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/file1.lck
+          ordinal: 2
+          stage: pre_process
+          stage_enum: 0
+          value: file1
+          source: file_content_input
+          source_enum: 3
+        - value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/sync/file2.lck
+          value: file2
+          value_encoding: none
+          stage_enum: 0
+          value_type_enum: 0
+          ordinal: 3
+          stage: pre_process
+          source_enum: 3
+          source: file_content_input
+        - source: file_content_input
+          ordinal: 4
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/temp/sync/file3.lck
+          stage: pre_process
+          source_enum: 3
+          stage_enum: 0
+          value_type_enum: 0
+          value: file3
+  description: "During preprocessing, files are created and placed in a directory to represent a lock that is externally accessible and unrestricted The program itself reads an input string.  It will attempt to create a lock by creating a file in the testData directory named <input string>.lck.  If such a file does not exist, it will run to completion.  If such a file does exists, it will wait until it is deleted so that it can create its own file.  This results in a deadlock. testData directory.  Bad inputs: name of a file that does exist under the testData directory.\n\n"
+  benigns:
+    - inputs:
+        - stage: pre_process
+          name: SOAPLESS_ELATIVES
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: env_var_input
+          source_enum: 2
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/cutlerr_ipse/bilaan_macomber.txt
+          stage_enum: 0
+        - source: file_content_input
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/cutlerr_ipse/bilaan_macomber.txt
+          source_enum: 3
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          value: critical
+          value_encoding: none
+          value_type_enum: 0
+        - value_type_enum: 0
+          value_encoding: none
+          stage_enum: 0
+          source_enum: 3
+          ordinal: 2
+          value: file1
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/file1.lck
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+        - ordinal: 3
+          name: /opt/stonesoup/workspace/testData/sync/file2.lck
+          source: file_content_input
+          value_type_enum: 0
+          stage: pre_process
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage_enum: 0
+          value: file2
+        - stage: pre_process
+          source: file_content_input
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: file3
+          source_enum: 3
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/temp/sync/file3.lck
+          ordinal: 4
+          stage_enum: 0
+    - inputs:
+        - value_type_enum: 0
+          source: env_var_input
+          name: SOAPLESS_ELATIVES
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/cutlerr_ipse/bilaan_macomber.txt
+          source_enum: 2
+          ordinal: 1
+        - source: file_content_input
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+          source_enum: 3
+          ordinal: 2
+          id: source
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/cutlerr_ipse/bilaan_macomber.txt
+          value: sync/noissues
+        - stage_enum: 0
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 2
+          value: file1
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/file1.lck
+          source: file_content_input
+          value_encoding: none
+        - value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          ordinal: 3
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/sync/file2.lck
+          source_enum: 3
+          stage: pre_process
+          value_type_enum: 0
+          value: file2
+          value_encoding: none
+        - stage: pre_process
+          name: /opt/stonesoup/workspace/testData/temp/sync/file3.lck
+          ordinal: 4
+          source_enum: 3
+          stage_enum: 0
+          source: file_content_input
+          value: file3
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/cutlerr_ipse/bilaan_macomber.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: SOAPLESS_ELATIVES
+        - name: /opt/stonesoup/workspace/testData/cutlerr_ipse/bilaan_macomber.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: temp/sync/section
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+          id: source
+          ordinal: 2
+        - source: file_content_input
+          stage: pre_process
+          value_encoding: none
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/file1.lck
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          value: file1
+          stage_enum: 0
+          ordinal: 2
+        - ordinal: 3
+          source_enum: 3
+          stage_enum: 0
+          stage: pre_process
+          source: file_content_input
+          value_type_enum: 0
+          value: file2
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/sync/file2.lck
+        - stage_enum: 0
+          ordinal: 4
+          source: file_content_input
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_type_enum: 0
+          value_encoding: none
+          value: file3
+          name: /opt/stonesoup/workspace/testData/temp/sync/file3.lck
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/cutlerr_ipse/bilaan_macomber.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: SOAPLESS_ELATIVES
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/cutlerr_ipse/bilaan_macomber.txt
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - feature: FILE_CONTENTS
+    file_name: /tmp/tmp3Ys7Ma_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: source_taint
+  - file_name: /tmp/tmp3Ys7Ma_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature: void_pointer
+    feature_group: data_type
+  - feature_group: data_flow
+    file_name: /tmp/tmp3Ys7Ma_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature: address_as_constant
+  - line_number: 0
+    feature: interprocedural_1
+    feature_group: control_flow
+    file_name: /tmp/tmp3Ys7Ma_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: profitless_soinski

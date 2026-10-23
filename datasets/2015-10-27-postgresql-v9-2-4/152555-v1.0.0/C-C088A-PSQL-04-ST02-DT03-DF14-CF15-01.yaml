@@ -1,0 +1,166 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpRibCpY_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpRibCpY_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature: void_pointer
+    feature_group: data_type
+  - feature_group: data_flow
+    file_name: /tmp/tmpRibCpY_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature: address_as_nonlinear_expression
+  - file_name: /tmp/tmpRibCpY_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: control_flow
+    feature: interprocedural_50
+io_pair:
+  description: "Read a string from the input.  Perform a find path -iname input.If input contains arguments such as -exec with a \\; ending the command, a user can insert other commands instead of just find\n\n"
+  exploits:
+    - inputs:
+        - source: env_var_input
+          value_encoding: none
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/argyranthous_dolorousness/wishek_makars.txt
+          value_type_enum: 0
+          stage_enum: 0
+          ordinal: 1
+          name: OVERRESPOND_WAYNETOWN
+        - name: /opt/stonesoup/workspace/testData/argyranthous_dolorousness/wishek_makars.txt
+          stage: pre_process
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          value_encoding: none
+          ordinal: 2
+          value_type_enum: 0
+          value: "\"*\" -exec cat /etc/passwd \\;"
+        - stage_enum: 0
+          ordinal: 2
+          stage: pre_process
+          source: file_content_input
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/temp/file.txt
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/argyranthous_dolorousness/wishek_makars.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: OVERRESPOND_WAYNETOWN
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/argyranthous_dolorousness/wishek_makars.txt
+          value: "\"*\" -exec netstat -an \\;"
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - source_enum: 3
+          stage_enum: 0
+          source: file_content_input
+          stage: pre_process
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/temp/file.txt
+  benigns:
+    - inputs:
+        - stage: pre_process
+          source: env_var_input
+          ordinal: 1
+          name: OVERRESPOND_WAYNETOWN
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/argyranthous_dolorousness/wishek_makars.txt
+        - stage: pre_process
+          source_enum: 3
+          value: "\"file.*\""
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/argyranthous_dolorousness/wishek_makars.txt
+          stage_enum: 0
+          source: file_content_input
+          value_type_enum: 0
+          ordinal: 2
+          id: source
+    - inputs:
+        - source_enum: 2
+          stage_enum: 0
+          source: env_var_input
+          stage: pre_process
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/argyranthous_dolorousness/wishek_makars.txt
+          name: OVERRESPOND_WAYNETOWN
+          ordinal: 1
+          value_type_enum: 0
+        - stage: pre_process
+          name: /opt/stonesoup/workspace/testData/argyranthous_dolorousness/wishek_makars.txt
+          id: source
+          source: file_content_input
+          value_encoding: none
+          stage_enum: 0
+          value: filename.txt
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          source_enum: 3
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          name: OVERRESPOND_WAYNETOWN
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/argyranthous_dolorousness/wishek_makars.txt
+          stage_enum: 0
+        - id: source
+          source: file_content_input
+          value_encoding: none
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/argyranthous_dolorousness/wishek_makars.txt
+          ordinal: 2
+          value: "\"*\""
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/argyranthous_dolorousness/wishek_makars.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: OVERRESPOND_WAYNETOWN
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/argyranthous_dolorousness/wishek_makars.txt

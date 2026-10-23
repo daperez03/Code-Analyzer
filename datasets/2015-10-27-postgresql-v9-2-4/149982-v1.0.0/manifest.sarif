@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 149982,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case implements a time of check time of use vulnerability that allows a DOS due to the input file being deleted before opening. The test case takes in a control file and an input file. The input file is checked to see if it is in the current working directory and exists. If both of these conditions are true, the test case opens and reads the control file and opens, reads, and prints the data in the input file. Since there is a delay between checking the validity of the file and opening it, the input file can be deleted before opening causing a DOS: Uncontrolled Exit. The control file is used as a method to delay execution long enough for this vulnerability to occur. \nMetadata\n - Base program: PostgreSQL\n - Source Taint: SOCKET\n - Data Type: STRUCT\n - Data Flow: INDEX_ALIAS_10\n - Control Flow: INFINITE_LOOP",
+        "state": "bad",
+        "application": "cpe:2.3:a:postgresql:postgresql:9.2.4:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "postgresql-v9.2.4"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C367A-PSQL-01-ST03-DT05-DF09-CF03-01.xml"
+          },
+          "length": 98241,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "40b437859144995cc49c2bec0fe4f21bf7f10ac384251c81ed2bffa45a207934"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/src/backend/storage/ipc/pmsignal.c"
+          },
+          "length": 19165,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "c665aaea7a043907ea6ca11eea64fe3015e0c1bc56be36958b5331eef3b29dd8"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "367",
+              "name": "Time-of-check Time-of-use (TOCTOU) Race Condition"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-367",
+          "message": {
+            "text": "Time-of-check Time-of-use (TOCTOU) Race Condition."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/src/backend/storage/ipc/pmsignal.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 519,
+                  "endLine": 530
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "367",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 150749,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case squares a positive number. If the number is large enough, the square will wrap around and become a negative number. The test case then uses the number as a decrementing counter in a while loop. If the number is negative when entering the loop, the loop will never terminate.\nMetadata\n - Base program: PostgreSQL\n - Source Taint: SOCKET\n - Data Type: SIMPLE\n - Data Flow: ADDRESS_AS_NONLINEAR_EXPRESSION\n - Control Flow: SET_JUMP_LONG_JUMP",
+        "state": "bad",
+        "application": "cpe:2.3:a:postgresql:postgresql:9.2.4:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "postgresql-v9.2.4"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C190A-PSQL-06-ST03-DT02-DF14-CF23-01.xml"
+          },
+          "length": 71804,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "6607b98a12ed2c90e7ff02f0bce443ff2d67b21bd7e3f83ac2dda7ddc6643fa6"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/src/backend/utils/hash/hashfn.c"
+          },
+          "length": 7373,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "895c047c5959b6a655dcf1c1a617537bc8a4e20a639779a6a4d2cb4f4b716b56"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "190",
+              "name": "Integer Overflow or Wraparound"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-190",
+          "message": {
+            "text": "Integer Overflow or Wraparound."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/src/backend/utils/hash/hashfn.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 179,
+                  "endLine": 197
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "190",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

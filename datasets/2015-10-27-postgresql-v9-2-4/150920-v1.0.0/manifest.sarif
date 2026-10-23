@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 150920,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case takes an unsigned long value and uses it in an initialization function for a struct. Within the initialization function, the long gets converted to an unsigned short when a struct uses the unsigned long as an initialization value for an unsigned short member. If the unsigned long number is large enough, it will result in a numerical truncation. The test case then uses the short value to malloc memory for a char * buffer. It then memset's the char * member of the struct to ascii value 98 ('b') for the size of the unsigned long value. If the numerical truncation took place, then the char * buffer won't have enough memory allocated to it for this to properly work. Which will result in writing 'garbage' data into memory somewhere, potentially corrupting the program.\nMetadata\n - Base program: PostgreSQL\n - Source Taint: SOCKET\n - Data Type: VOID_POINTER\n - Data Flow: ADDRESS_AS_LINEAR_EXPRESSION\n - Control Flow: CALLBACK",
+        "state": "bad",
+        "application": "cpe:2.3:a:postgresql:postgresql:9.2.4:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "postgresql-v9.2.4"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C197A-PSQL-08-ST03-DT03-DF13-CF01-01.xml"
+          },
+          "length": 82434,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "42e40a7473819585ce3dcb52b437322d724c71b74d7d9435a0b3519be1634a69"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/src/backend/access/transam/subtrans.c"
+          },
+          "length": 16261,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "33c4465187c1c1cbd1bde857910d44fd21942336edd3a1a1931db9b9315d8e38"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "197",
+              "name": "Numeric Truncation Error"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-197",
+          "message": {
+            "text": "Numeric Truncation Error."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/src/backend/access/transam/subtrans.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 424,
+                  "endLine": 425
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "197",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

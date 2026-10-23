@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - feature: callback
+    file_name: /tmp/tmpgGSNWA_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    feature_group: control_flow
+    line_number: 0
+  - file_name: /tmp/tmpgGSNWA_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: cumin_museography
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpgGSNWA_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: cumin_museography
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpgGSNWA_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: ingresses_uprootal
+    line_number: 0
+    feature: index_alias_1
+    feature_group: data_flow
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: TOXICODERMA_STRONGYLIDOSIS
+  description: "Read a string from the input.  If the string contains any spaces, a thread isspawned that attempts to decrements a semaphore twice causing a deadlock.\n\n"
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          name: TOXICODERMA_STRONGYLIDOSIS
+          id: source
+          value_encoding: none
+          ordinal: 1
+          value: This is a bad test.
+          source_enum: 2
+    - inputs:
+        - stage_enum: 0
+          value_type_enum: 0
+          ordinal: 1
+          id: source
+          name: TOXICODERMA_STRONGYLIDOSIS
+          source_enum: 2
+          value_encoding: none
+          value: A NEW TEST
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source: env_var_input
+  benigns:
+    - inputs:
+        - stage: pre_process
+          id: source
+          name: TOXICODERMA_STRONGYLIDOSIS
+          value_encoding: none
+          value_type_enum: 0
+          stage_enum: 0
+          ordinal: 1
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value: aTest
+          source_enum: 2
+    - inputs:
+        - id: source
+          ordinal: 1
+          source: env_var_input
+          name: TOXICODERMA_STRONGYLIDOSIS
+          stage: pre_process
+          value: abigwordwithoutspaces
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage_enum: 0
+          source_enum: 2
+    - inputs:
+        - stage_enum: 0
+          source: env_var_input
+          source_enum: 2
+          value: anotherTestWithoutSpace
+          id: source
+          value_type_enum: 0
+          value_encoding: none
+          ordinal: 1
+          name: TOXICODERMA_STRONGYLIDOSIS
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY

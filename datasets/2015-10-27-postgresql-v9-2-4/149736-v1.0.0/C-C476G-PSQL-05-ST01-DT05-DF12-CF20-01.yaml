@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - name: NONFANATICALLY_ORRHOID
+          value_encoding: none
+          value: brah
+          stage: pre_process
+          stage_enum: 0
+          source: env_var_input
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_type_enum: 0
+          source_enum: 2
+    - inputs:
+        - stage_enum: 0
+          value_type_enum: 0
+          stage: pre_process
+          value_encoding: none
+          value: dude
+          id: source
+          name: NONFANATICALLY_ORRHOID
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          source_enum: 2
+          ordinal: 1
+    - inputs:
+        - source_enum: 2
+          name: NONFANATICALLY_ORRHOID
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          value: bromigo
+          stage: pre_process
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+  exploits:
+    - inputs:
+        - value: TmFoIG5haCBuYWggbmFoIG5haCBuYWgsIG5haCBuYWggbmFoLCBoZXkgSnVkZQpOYWggbmFoIG5haCBuYWggbmFoIG5haCwgbmFoIG5haCBuYWgsIGhleSBKdWRl
+          value_encoding: base64
+          source: env_var_input
+          ordinal: 1
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source_enum: 2
+          id: source
+          stage_enum: 0
+          name: NONFANATICALLY_ORRHOID
+    - inputs:
+        - ordinal: 1
+          source: env_var_input
+          value: this string is more than sixty four characters long, so it should mess some stuff up
+          value_encoding: none
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          name: NONFANATICALLY_ORRHOID
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: NONFANATICALLY_ORRHOID
+  description: "Good inputs: 1) taintvar is less than 64 characters long.Bad input: 1) taintvar is greater than or equal to 64 characters long.\n\n"
+code_complexity_features:
+  - line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmpu8LI9A_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+  - file_name: /tmp/tmpu8LI9A_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpu8LI9A_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - line_number: 0
+    feature_group: control_flow
+    feature: sequence
+    function_name: anapaests_overlooseness
+    file_name: /tmp/tmpu8LI9A_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c

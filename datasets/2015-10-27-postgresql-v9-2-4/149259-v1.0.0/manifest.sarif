@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 149259,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case reads the taint source. If the length of the taint source is 63 bytes or less, it allocates a buffer to copy the taint source into. It then copies the taint source into the buffer, regardless of whether it actually allocated any memory or not. If it did not allocate memory, the buffer pointer is still NULL, and this causes a NULL pointer dereference.\nMetadata\n - Base program: PostgreSQL\n - Source Taint: SOCKET\n - Data Type: HEAP_POINTER\n - Data Flow: ADDRESS_AS_FUNCTION_RETURN_VALUE\n - Control Flow: UNCONDITIONAL_JUMP",
+        "state": "bad",
+        "application": "cpe:2.3:a:postgresql:postgresql:9.2.4:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "postgresql-v9.2.4"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C476G-PSQL-10-ST03-DT04-DF06-CF24-01.xml"
+          },
+          "length": 75396,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "d4f1727ebcb78ca6fac2b4f6d0ba3f6fc8d0128a3a860a9f6a43d70ef4a62f16"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/src/backend/storage/buffer/bufmgr.c"
+          },
+          "length": 98314,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "aef62542952994a0281f15e7f93f2b6ff71ce66c2de02daac611483bda151b2b"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "476",
+              "name": "NULL Pointer Dereference"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-476",
+          "message": {
+            "text": "NULL Pointer Dereference."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/src/backend/storage/buffer/bufmgr.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 2711,
+                  "endLine": 2714
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "476",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

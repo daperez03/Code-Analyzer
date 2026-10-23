@@ -1,0 +1,106 @@
+code_complexity_features:
+  - function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+    file_name: /tmp/tmpgaO8Ns_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+  - file_name: /tmp/tmpgaO8Ns_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpgaO8Ns_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - file_name: /tmp/tmpgaO8Ns_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence
+io_pair:
+  description: "This weakness expects a string in the form: '<qsize> <data>' where qsize is the size of the quick sort (used to delay execution), and data is a string containing no spaces.  It creates two threads which both enter a non-reentrant function and increment a static counter. This causes a buffer overflow which will overwrite the free() struct causing an error when free() is called. In order to overwrite the free() struct, qsize >= 500000 and the input string must be 14+ char long.\n\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 2007
+      size: 51
+      flags: 950
+  benigns:
+    - inputs:
+        - key: 2007
+          source: shared_memory_input
+          value_encoding: none
+          value_type_enum: 0
+          value: 3 hephalump
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          ordinal: 1
+          id: source
+          size: 51
+          source_enum: 6
+          stage_enum: 0
+          stage: pre_process
+    - inputs:
+        - source_enum: 6
+          stage: pre_process
+          stage_enum: 0
+          size: 51
+          id: source
+          value: 1 Sniffles_and_whiffles,_yo.
+          ordinal: 1
+          source: shared_memory_input
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          key: 2007
+          flags: 950
+    - inputs:
+        - value: 5 Silly_rabbit,_tricks_are_for_kids!
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          stage_enum: 0
+          value_type_enum: 0
+          flags: 950
+          key: 2007
+          stage: pre_process
+          value_encoding: none
+          source_enum: 6
+          source: shared_memory_input
+          ordinal: 1
+          size: 51
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          key: 2007
+          source: shared_memory_input
+          size: 51
+          ordinal: 1
+          value: 5000000 I'm_a_poet_and_I_didn't_even_know_it.
+          flags: 950
+          source_enum: 6
+          stage: pre_process
+          id: source
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - flags: 950
+          ordinal: 1
+          source: shared_memory_input
+          source_enum: 6
+          id: source
+          stage_enum: 0
+          size: 51
+          key: 2007
+          value: 6000000 But_my_toes_showed_it._Theyre_long_fellows
+          stage: pre_process
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

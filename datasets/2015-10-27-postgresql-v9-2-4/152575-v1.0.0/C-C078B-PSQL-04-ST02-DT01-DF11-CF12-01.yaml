@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - feature: FILE_CONTENTS
+    file_name: /tmp/tmpA127GJ_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: source_taint
+  - feature_group: data_type
+    function_name: PortalDrop
+    line_number: 0
+    feature: array
+    file_name: /tmp/tmpA127GJ_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+  - feature: basic
+    file_name: /tmp/tmpA127GJ_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: data_flow
+  - file_name: /tmp/tmpA127GJ_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: control_flow
+    feature: interprocedural_1
+io_pair:
+  benigns:
+    - inputs:
+        - source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/caryville_errors/scansions_hopi.txt
+          stage_enum: 0
+          value_encoding: none
+          name: MISAUTHORIZING_SQUIRAGE
+          ordinal: 1
+          value_type_enum: 0
+        - source: file_content_input
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          source_enum: 3
+          value_type_enum: 0
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/caryville_errors/scansions_hopi.txt
+          ordinal: 2
+          value: 10
+          value_encoding: none
+    - inputs:
+        - source_enum: 2
+          value: /opt/stonesoup/workspace/testData/caryville_errors/scansions_hopi.txt
+          name: MISAUTHORIZING_SQUIRAGE
+          stage_enum: 0
+          stage: pre_process
+          source: env_var_input
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+        - source: file_content_input
+          value_encoding: none
+          stage: pre_process
+          source_enum: 3
+          stage_enum: 0
+          ordinal: 2
+          id: source
+          name: /opt/stonesoup/workspace/testData/caryville_errors/scansions_hopi.txt
+          value_type: USE_TEXT_DIRECTLY
+          value: google.com
+          value_type_enum: 0
+    - inputs:
+        - value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/caryville_errors/scansions_hopi.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: MISAUTHORIZING_SQUIRAGE
+          ordinal: 1
+          stage_enum: 0
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+        - name: /opt/stonesoup/workspace/testData/caryville_errors/scansions_hopi.txt
+          value: localhost
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          id: source
+          source_enum: 3
+          value_encoding: none
+          value_type_enum: 0
+          stage: pre_process
+          ordinal: 2
+  exploits:
+    - inputs:
+        - stage: pre_process
+          value_encoding: none
+          source: env_var_input
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/caryville_errors/scansions_hopi.txt
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: MISAUTHORIZING_SQUIRAGE
+          value_type_enum: 0
+          ordinal: 1
+        - source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/caryville_errors/scansions_hopi.txt
+          value: 10%20%3B%20ls -la
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: file_content_input
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/caryville_errors/scansions_hopi.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: MISAUTHORIZING_SQUIRAGE
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/caryville_errors/scansions_hopi.txt
+          value: localhost%20%26%20echo Hello world
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  description: "Read a string from the input.  Check first if it has any command separators and then run it though a URL decoding algorithm.  Then use this string to perform an nslookup by appending it to the end of the command. This allows the user to run arbitrary commands by suplying command separators encoded in url encoding.\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/caryville_errors/scansions_hopi.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: MISAUTHORIZING_SQUIRAGE
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/caryville_errors/scansions_hopi.txt

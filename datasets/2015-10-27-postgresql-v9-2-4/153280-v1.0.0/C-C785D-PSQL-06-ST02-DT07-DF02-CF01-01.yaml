@@ -1,0 +1,154 @@
+code_complexity_features:
+  - file_name: /tmp/tmpLJ0bwL_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: oid_hash
+    line_number: 0
+    feature_group: control_flow
+    feature: callback
+  - feature_group: source_taint
+    line_number: 0
+    file_name: /tmp/tmpLJ0bwL_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: modern_cambric
+    feature: FILE_CONTENTS
+  - line_number: 0
+    feature_group: data_type
+    file_name: /tmp/tmpLJ0bwL_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    function_name: modern_cambric
+    feature: union
+  - line_number: 0
+    feature: address_alias_2
+    function_name: chronomastix_gleesomely
+    file_name: /tmp/tmpLJ0bwL_ss_testcase/src-rose/src/backend/utils/hash/hashfn.c
+    feature_group: data_flow
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - stage_enum: 0
+      ordinal: 1
+      name: IMBATHE_VIVER
+      value: /opt/stonesoup/workspace/testData/ubiquitary_wernerian/slightly_rodmun.txt
+      value_type_enum: 0
+      stage: pre_process
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      source: env_var_input
+      source_enum: 2
+    - stage_enum: 0
+      ordinal: 2
+      id: source
+      source_enum: 3
+      stage: pre_process
+      name: /opt/stonesoup/workspace/testData/ubiquitary_wernerian/slightly_rodmun.txt
+      source: file_content_input
+  benigns:
+    - inputs:
+        - stage: pre_process
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: IMBATHE_VIVER
+          value_encoding: none
+          source: env_var_input
+          stage_enum: 0
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/ubiquitary_wernerian/slightly_rodmun.txt
+        - stage: pre_process
+          stage_enum: 0
+          source_enum: 3
+          source: file_content_input
+          ordinal: 2
+          value: /etc/passwd
+          name: /opt/stonesoup/workspace/testData/ubiquitary_wernerian/slightly_rodmun.txt
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+    - inputs:
+        - name: IMBATHE_VIVER
+          stage: pre_process
+          source_enum: 2
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/ubiquitary_wernerian/slightly_rodmun.txt
+          source: env_var_input
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - value: /etc/ssh/ssh_config
+          value_type_enum: 0
+          source_enum: 3
+          id: source
+          value_encoding: none
+          stage_enum: 0
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/ubiquitary_wernerian/slightly_rodmun.txt
+          stage: pre_process
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/ubiquitary_wernerian/slightly_rodmun.txt
+          source_enum: 2
+          value_encoding: none
+          source: env_var_input
+          name: IMBATHE_VIVER
+          ordinal: 1
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+        - stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source_enum: 3
+          value: /usr/bin/gcc
+          value_type_enum: 0
+          ordinal: 2
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/ubiquitary_wernerian/slightly_rodmun.txt
+          source: file_content_input
+          id: source
+  description: "Has a buffer declared on the stack in a struct. char[20]) If input is resolved to more  than 20 chars it will overflow\n\n"
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/ubiquitary_wernerian/slightly_rodmun.txt
+          source: env_var_input
+          value_encoding: none
+          stage: pre_process
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          name: IMBATHE_VIVER
+        - name: /opt/stonesoup/workspace/testData/ubiquitary_wernerian/slightly_rodmun.txt
+          source: file_content_input
+          value: ../testData
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          ordinal: 2
+          id: source
+          source_enum: 3
+          stage: pre_process
+    - inputs:
+        - stage: pre_process
+          name: IMBATHE_VIVER
+          value: /opt/stonesoup/workspace/testData/ubiquitary_wernerian/slightly_rodmun.txt
+          source_enum: 2
+          value_type_enum: 0
+          value_encoding: none
+          ordinal: 1
+          stage_enum: 0
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+        - value_encoding: none
+          value_type_enum: 0
+          source_enum: 3
+          stage: pre_process
+          ordinal: 2
+          id: source
+          name: /opt/stonesoup/workspace/testData/ubiquitary_wernerian/slightly_rodmun.txt
+          value: ../testOutput
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input

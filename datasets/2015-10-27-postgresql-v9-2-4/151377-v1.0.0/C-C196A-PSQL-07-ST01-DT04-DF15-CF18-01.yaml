@@ -1,0 +1,144 @@
+code_complexity_features:
+  - file_name: /tmp/tmpLH51xi_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpLH51xi_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpLH51xi_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - file_name: /tmp/tmpLH51xi_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: control_flow
+    feature: pointer_to_function
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          name: WAYAO_UNMISTAKING
+          id: source
+          source: env_var_input
+          stage_enum: 0
+          ordinal: 1
+          value_encoding: none
+          source_enum: 2
+          value: 4294967291
+          value_type_enum: 0
+          stage: pre_process
+        - source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          name: SS_BUFF
+          stage_enum: 0
+          ordinal: 2
+          value_type_enum: 0
+          value: Good_Bye_World
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+    - inputs:
+        - source_enum: 2
+          ordinal: 1
+          stage_enum: 0
+          name: WAYAO_UNMISTAKING
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          source: env_var_input
+          stage: pre_process
+          value_encoding: none
+          value_type_enum: 0
+          value: 2147483650
+        - value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          stage_enum: 0
+          value_encoding: none
+          source: env_var_input
+          value: aaaaaaaaaaaaaaaaa
+          value_type_enum: 0
+          name: SS_BUFF
+          source_enum: 2
+          stage: pre_process
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: WAYAO_UNMISTAKING
+  benigns:
+    - inputs:
+        - value_encoding: none
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          ordinal: 1
+          value: 15
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: WAYAO_UNMISTAKING
+          source_enum: 2
+        - stage_enum: 0
+          ordinal: 2
+          value: hello
+          value_encoding: none
+          stage: pre_process
+          source_enum: 2
+          name: SS_BUFF
+          value_type_enum: 0
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_type_enum: 0
+          value: 8
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          name: WAYAO_UNMISTAKING
+          stage: pre_process
+          stage_enum: 0
+          source: env_var_input
+          ordinal: 1
+          id: source
+          value_encoding: none
+        - value_encoding: none
+          value: abcdefghiklmnopqrstuvwxyz
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          ordinal: 2
+          stage: pre_process
+          value_type_enum: 0
+          stage_enum: 0
+          name: SS_BUFF
+          source_enum: 2
+    - inputs:
+        - name: WAYAO_UNMISTAKING
+          value: 1000
+          source_enum: 2
+          stage_enum: 0
+          ordinal: 1
+          source: env_var_input
+          value_encoding: none
+          stage: pre_process
+          id: source
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+        - ordinal: 2
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          value: Heeellllloooooo_Wooooorrrrrllllldddddd!!!!!!
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: SS_BUFF
+          stage_enum: 0
+  description: "This weakness reads a number to be used as a loop counter. The loop counter is initially read as an unsigned long, then converted to an int.  If the number read in is larger than MAX_UINT, it is silently converted to a negative number.  This breaks the loop counter logic, resulting in an infinite loop. Good inputs:  taint source is 2147483647 or less Bad inputs: taint source is 2147483648 or greater\n\n"

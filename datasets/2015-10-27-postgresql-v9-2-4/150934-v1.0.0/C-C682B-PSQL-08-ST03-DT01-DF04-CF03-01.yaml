@@ -1,0 +1,100 @@
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - feature_group: source_taint
+    feature: SOCKET
+    line_number: 0
+    file_name: /tmp/tmpq0Wifj_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    function_name: stonesoup_handle_taint
+  - file_name: /tmp/tmpq0Wifj_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    feature_group: data_type
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: array
+  - file_name: /tmp/tmpq0Wifj_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_alias_50
+  - feature: infinite_loop
+    feature_group: control_flow
+    line_number: 0
+    function_name: stonesoup_handle_taint
+    file_name: /tmp/tmpq0Wifj_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+io_pair:
+  exploits:
+    - inputs:
+        - stage_enum: 1
+          id: source
+          source_enum: 5
+          ordinal: 1
+          source: socket_input
+          stage: co_process
+          port: 8887
+          value_encoding: none
+          value_type_enum: 0
+          value: 10000
+          value_type: USE_TEXT_DIRECTLY
+          address: ss-localhost
+    - inputs:
+        - stage: co_process
+          port: 8887
+          value_type: USE_TEXT_DIRECTLY
+          address: ss-localhost
+          ordinal: 1
+          value: FFFFFF
+          value_type_enum: 0
+          stage_enum: 1
+          source_enum: 5
+          source: socket_input
+          id: source
+          value_encoding: none
+  description: "Read a hex integer from the input.  If hexinteger is negative, ignore.  If hexinteger < 0x0000FFFF, do nothing.  If hexinteger >= 0x0000FFFF try to zero-out the upper two bytes using char pointers.  Perform an incorrect calculation, and rather than zero-ing out the upper two bytes, zero out two different bytes, which corrupts pointers on the stack and results in a seg fault.\n\n"
+  benigns:
+    - inputs:
+        - port: 8887
+          address: ss-localhost
+          value_type_enum: 0
+          value: 10
+          value_encoding: none
+          id: source
+          stage: co_process
+          source_enum: 5
+          source: socket_input
+          stage_enum: 1
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_type_enum: 0
+          source_enum: 5
+          value_encoding: none
+          address: ss-localhost
+          ordinal: 1
+          port: 8887
+          value: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: co_process
+          stage_enum: 1
+          id: source
+          source: socket_input
+    - inputs:
+        - source: socket_input
+          source_enum: 5
+          stage: co_process
+          stage_enum: 1
+          value_type_enum: 0
+          value: FFFF
+          port: 8887
+          value_type: USE_TEXT_DIRECTLY
+          address: ss-localhost
+          value_encoding: none
+          ordinal: 1
+          id: source
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887

@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpa5BkYs_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpa5BkYs_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmpa5BkYs_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+  - file_name: /tmp/tmpa5BkYs_ss_testcase/src-rose/src/backend/access/heap/heapam.c
+    function_name: heapgettup
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence
+io_pair:
+  exploits:
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/wrestled_charterless/mamey_potassiums.txt
+          ordinal: 1
+          name: CAMPO_COPROSE
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          value_encoding: none
+          stage: pre_process
+        - stage: pre_process
+          source_enum: 3
+          source: file_content_input
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/wrestled_charterless/mamey_potassiums.txt
+          value: ../testData
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/wrestled_charterless/mamey_potassiums.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: CAMPO_COPROSE
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/wrestled_charterless/mamey_potassiums.txt
+          value: ../testOutput
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/wrestled_charterless/mamey_potassiums.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: CAMPO_COPROSE
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/wrestled_charterless/mamey_potassiums.txt
+  description: "Has a buffer declared on the stack in a struct. char[20]) If input is resolved to more  than 20 chars it will overflow\n\n"
+  benigns:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/wrestled_charterless/mamey_potassiums.txt
+          source_enum: 2
+          value_type_enum: 0
+          stage: pre_process
+          value_encoding: none
+          ordinal: 1
+          name: CAMPO_COPROSE
+        - source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          value: /etc/passwd
+          name: /opt/stonesoup/workspace/testData/wrestled_charterless/mamey_potassiums.txt
+          source: file_content_input
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 2
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/wrestled_charterless/mamey_potassiums.txt
+          value_encoding: none
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_type_enum: 0
+          name: CAMPO_COPROSE
+          ordinal: 1
+        - stage_enum: 0
+          stage: pre_process
+          value: /etc/ssh/ssh_config
+          source: file_content_input
+          id: source
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/wrestled_charterless/mamey_potassiums.txt
+          ordinal: 2
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 2
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/wrestled_charterless/mamey_potassiums.txt
+          value_type_enum: 0
+          name: CAMPO_COPROSE
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/wrestled_charterless/mamey_potassiums.txt
+          source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          value: /usr/bin/gcc
+          value_encoding: none

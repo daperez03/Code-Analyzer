@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmpjgRzFh_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpjgRzFh_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpjgRzFh_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - feature: indirectly_recursive
+    file_name: /tmp/tmpjgRzFh_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: control_flow
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          id: source
+          ordinal: 1
+          value: "\"file.*\""
+          name: HEMATOZZOA_HONORARILY
+          value_type_enum: 0
+          value_encoding: none
+          source_enum: 2
+          stage_enum: 0
+          source: env_var_input
+    - inputs:
+        - value_type_enum: 0
+          source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: HEMATOZZOA_HONORARILY
+          id: source
+          value_encoding: none
+          ordinal: 1
+          value: filename.txt
+    - inputs:
+        - ordinal: 1
+          name: HEMATOZZOA_HONORARILY
+          source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          value_encoding: none
+          value: "\"*\""
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+  description: "Read a string from the input.  Perform a find path -iname input.If input contains arguments such as -exec with a \\; ending the command, a user can insert other commands instead of just find\n\n"
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          name: HEMATOZZOA_HONORARILY
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+          value_encoding: none
+          value: "\"*\" -exec cat /etc/passwd \\;"
+        - name: /opt/stonesoup/workspace/testData/temp/file.txt
+          stage: pre_process
+          source: file_content_input
+          ordinal: 2
+          stage_enum: 0
+          source_enum: 3
+    - inputs:
+        - value_type_enum: 0
+          ordinal: 1
+          id: source
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          value: "\"*\" -exec netstat -an \\;"
+          stage: pre_process
+          name: HEMATOZZOA_HONORARILY
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+        - stage_enum: 0
+          source: file_content_input
+          ordinal: 2
+          source_enum: 3
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/temp/file.txt
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: HEMATOZZOA_HONORARILY

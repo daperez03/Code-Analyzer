@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmpLmc21g_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    function_name: StartupSUBTRANS
+    line_number: 0
+    feature_group: source_taint
+  - file_name: /tmp/tmpLmc21g_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    feature_group: data_type
+    function_name: StartupSUBTRANS
+    line_number: 0
+    feature: array
+  - file_name: /tmp/tmpLmc21g_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+    function_name: StartupSUBTRANS
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - function_name: debatter_lawproof
+    line_number: 0
+    feature_group: control_flow
+    feature: interprocedural_1
+    file_name: /tmp/tmpLmc21g_ss_testcase/src-rose/src/backend/access/transam/subtrans.c
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: CARBOLXYLOL_NONPACIFICATORY
+  exploits:
+    - inputs:
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage_enum: 0
+          ordinal: 1
+          stage: pre_process
+          name: CARBOLXYLOL_NONPACIFICATORY
+          source: env_var_input
+          id: source
+          value_type_enum: 0
+          value: starting with an s is bad
+    - inputs:
+        - source_enum: 2
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: zebras have stripes
+          value_type_enum: 0
+          source: env_var_input
+          name: CARBOLXYLOL_NONPACIFICATORY
+          stage_enum: 0
+          ordinal: 1
+          stage: pre_process
+  benigns:
+    - inputs:
+        - name: CARBOLXYLOL_NONPACIFICATORY
+          ordinal: 1
+          value: AAAAAAAAAAAAAAAAAAAAAAA
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          value_encoding: none
+    - inputs:
+        - source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          id: source
+          name: CARBOLXYLOL_NONPACIFICATORY
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 1
+          value: Hello World!
+    - inputs:
+        - stage: pre_process
+          value_encoding: none
+          id: source
+          name: CARBOLXYLOL_NONPACIFICATORY
+          source: env_var_input
+          value: many characters are good, but most are bad
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source_enum: 2
+          value_type_enum: 0
+          ordinal: 1
+  description: "Has a buffer declared on the stack and populated from input data via strncpy.  If input begins with a lower case letter oor a higher ascii value, it will crash\n\n"

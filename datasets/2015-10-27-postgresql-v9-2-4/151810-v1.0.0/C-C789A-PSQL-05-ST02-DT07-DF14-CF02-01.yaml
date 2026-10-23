@@ -1,0 +1,154 @@
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/jeeing_coaxy/lysigenic_rigby.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: POLYCHROMATIZE_REVOTES
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/jeeing_coaxy/lysigenic_rigby.txt
+  exploits:
+    - inputs:
+        - stage: pre_process
+          name: POLYCHROMATIZE_REVOTES
+          ordinal: 1
+          source_enum: 2
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/jeeing_coaxy/lysigenic_rigby.txt
+          source: env_var_input
+          value_encoding: none
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/jeeing_coaxy/lysigenic_rigby.txt
+          value: 123451234567
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/jeeing_coaxy/lysigenic_rigby.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: POLYCHROMATIZE_REVOTES
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/jeeing_coaxy/lysigenic_rigby.txt
+          value: 845633125678
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  description: "Reads in a integer and uses the value to allocate memory for a string on the stack. Because the input value is unchecked can allocate arbitrarily large value, resulting in a resource drain\n\n"
+  benigns:
+    - inputs:
+        - name: POLYCHROMATIZE_REVOTES
+          stage: pre_process
+          source: env_var_input
+          source_enum: 2
+          ordinal: 1
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/jeeing_coaxy/lysigenic_rigby.txt
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+        - source_enum: 3
+          value_type_enum: 0
+          value_encoding: none
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/jeeing_coaxy/lysigenic_rigby.txt
+          ordinal: 2
+          value: 80
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source: file_content_input
+          id: source
+    - inputs:
+        - value_type_enum: 0
+          source: env_var_input
+          name: POLYCHROMATIZE_REVOTES
+          stage: pre_process
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/jeeing_coaxy/lysigenic_rigby.txt
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_encoding: none
+        - value_encoding: none
+          value: 3643
+          value_type_enum: 0
+          source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          ordinal: 2
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/jeeing_coaxy/lysigenic_rigby.txt
+          stage: pre_process
+    - inputs:
+        - ordinal: 1
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/jeeing_coaxy/lysigenic_rigby.txt
+          stage_enum: 0
+          value_encoding: none
+          value_type_enum: 0
+          name: POLYCHROMATIZE_REVOTES
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          source: env_var_input
+        - value: 10
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/jeeing_coaxy/lysigenic_rigby.txt
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          stage_enum: 0
+          ordinal: 2
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          value_type_enum: 0
+code_complexity_features:
+  - feature: FILE_CONTENTS
+    feature_group: source_taint
+    file_name: /tmp/tmpdkYSim_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+  - file_name: /tmp/tmpdkYSim_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmpdkYSim_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_nonlinear_expression
+  - file_name: /tmp/tmpdkYSim_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: ResourceOwnerForgetCatCacheRef
+    line_number: 0
+    feature_group: control_flow
+    feature: indirectly_recursive
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

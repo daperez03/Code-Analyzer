@@ -1,0 +1,100 @@
+code_complexity_features:
+  - file_name: /tmp/tmppQSob5_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: SOCKET
+    feature_group: source_taint
+  - function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+    file_name: /tmp/tmppQSob5_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+  - file_name: /tmp/tmppQSob5_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - feature: indirectly_recursive
+    file_name: /tmp/tmppQSob5_ss_testcase/src-rose/src/backend/utils/resowner/resowner.c
+    feature_group: control_flow
+    function_name: felicities_virion
+    line_number: 0
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+io_pair:
+  description: "Takes an input integer and creates temporary files, filling them with a large string. It then attempts cleanup, but if more than 50 files were created, then only the last 50 will be cleaned up. Given a large enough input the program will use up a significant ammount of disk space creating temporary files and not cleaning them up.\n\n"
+  benigns:
+    - inputs:
+        - stage_enum: 1
+          value_encoding: none
+          address: ss-localhost
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          ordinal: 1
+          value: 10
+          source_enum: 5
+          id: source
+          stage: co_process
+          source: socket_input
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: socket_input
+          id: source
+          stage_enum: 1
+          source_enum: 5
+          ordinal: 1
+          stage: co_process
+          port: 8887
+          address: ss-localhost
+          value: 42
+          value_encoding: none
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value: 37
+          value_type_enum: 0
+          value_encoding: none
+          stage_enum: 1
+          address: ss-localhost
+          port: 8887
+          ordinal: 1
+          id: source
+          source_enum: 5
+          source: socket_input
+          stage: co_process
+  exploits:
+    - inputs:
+        - stage: co_process
+          id: source
+          address: ss-localhost
+          source_enum: 5
+          ordinal: 1
+          source: socket_input
+          value_encoding: none
+          value: 20000
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          value_type_enum: 0
+          stage_enum: 1
+    - inputs:
+        - source: socket_input
+          stage_enum: 1
+          source_enum: 5
+          stage: co_process
+          id: source
+          address: ss-localhost
+          value: 6000
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          value_encoding: none
+          value_type_enum: 0
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887

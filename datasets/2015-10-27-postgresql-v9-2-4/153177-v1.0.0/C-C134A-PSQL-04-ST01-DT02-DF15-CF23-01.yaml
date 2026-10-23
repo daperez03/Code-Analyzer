@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  description: "Good inputs:1) environment variable is a string value with no formatting2) environement variable is a format string that doesn't expose application\tdataBad inputs:1) environment variable is a format string that exposes application data\n\n"
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          name: PROCUMBENT_OXBRAKE
+          stage: pre_process
+          value: "%0500d"
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+    - inputs:
+        - ordinal: 1
+          value: "%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x"
+          source: env_var_input
+          name: PROCUMBENT_OXBRAKE
+          value_encoding: none
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+  benigns:
+    - inputs:
+        - id: source
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value: this is a string to be printed
+          source: env_var_input
+          ordinal: 1
+          source_enum: 2
+          stage_enum: 0
+          value_encoding: none
+          name: PROCUMBENT_OXBRAKE
+    - inputs:
+        - stage_enum: 0
+          id: source
+          source: env_var_input
+          ordinal: 1
+          stage: pre_process
+          value: c29tZSBiZW5pZ24gZm9ybWF0dGluZyBmb3IgY2hhciBzdHJpbmcgCg==
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: base64
+          source_enum: 2
+          name: PROCUMBENT_OXBRAKE
+          value_type_enum: 0
+    - inputs:
+        - stage_enum: 0
+          ordinal: 1
+          source_enum: 2
+          value_type_enum: 0
+          value: Cg==
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source: env_var_input
+          value_encoding: base64
+          name: PROCUMBENT_OXBRAKE
+          id: source
+  base_inputs:
+    - stage_enum: 0
+      id: source
+      ordinal: 1
+      name: PROCUMBENT_OXBRAKE
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+code_complexity_features:
+  - function_name: PortalDrop
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmpU3dew9_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+  - file_name: /tmp/tmpU3dew9_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - feature: address_as_variable
+    file_name: /tmp/tmpU3dew9_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: data_flow
+  - file_name: /tmp/tmpU3dew9_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    feature_group: control_flow
+    function_name: PortalDrop
+    line_number: 0
+    feature: set_jump_long_jump

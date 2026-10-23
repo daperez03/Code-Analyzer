@@ -1,0 +1,106 @@
+io_pair:
+  description: "Good inputs: 1) environment variable contains any number <= 511,2) Environment variable contains string that is not a number Bad input: 1) environment variable not set 2) environment variable contains any number >= 512\n\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 6375
+      size: 5
+      flags: 950
+  benigns:
+    - inputs:
+        - value_encoding: none
+          stage_enum: 0
+          value_type_enum: 0
+          source_enum: 6
+          value: 20
+          flags: 950
+          size: 5
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          stage: pre_process
+          id: source
+          ordinal: 1
+          key: 6375
+    - inputs:
+        - size: 5
+          source_enum: 6
+          value_encoding: none
+          value_type_enum: 0
+          value: 511
+          source: shared_memory_input
+          stage_enum: 0
+          ordinal: 1
+          stage: pre_process
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          key: 6375
+    - inputs:
+        - size: 5
+          key: 6375
+          stage_enum: 0
+          id: source
+          source: shared_memory_input
+          stage: pre_process
+          source_enum: 6
+          ordinal: 1
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value: 1
+          value_type_enum: 0
+  exploits:
+    - inputs:
+        - ordinal: 1
+          source: shared_memory_input
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+          value: 1000
+          id: source
+          key: 6375
+          size: 5
+          flags: 950
+          value_encoding: none
+          value_type_enum: 0
+          stage_enum: 0
+    - inputs:
+        - size: 5
+          value: 5000
+          source: shared_memory_input
+          key: 6375
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          id: source
+          flags: 950
+          value_type_enum: 0
+          value_encoding: none
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmp0svW14_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmp0svW14_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    feature_group: data_type
+    function_name: calc_bucket
+    line_number: 0
+    feature: array
+  - file_name: /tmp/tmp0svW14_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - file_name: /tmp/tmp0svW14_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: calc_bucket
+    line_number: 0
+    feature_group: control_flow
+    feature: interprocedural_10

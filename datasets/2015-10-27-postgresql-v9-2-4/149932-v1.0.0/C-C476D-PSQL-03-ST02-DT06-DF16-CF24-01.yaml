@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  description: "If a non alphanumeric value is seen, the taint buffer gets set to null and the a strcpy is called, causing a null pointer dereference\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/unenticing_stunter/tito_regrets.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: DOSCHER_WEDEKIND
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/unenticing_stunter/tito_regrets.txt
+  benigns:
+    - inputs:
+        - value_encoding: none
+          name: DOSCHER_WEDEKIND
+          value: /opt/stonesoup/workspace/testData/unenticing_stunter/tito_regrets.txt
+          stage_enum: 0
+          ordinal: 1
+          source_enum: 2
+          value_type_enum: 0
+          stage: pre_process
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+        - ordinal: 2
+          source_enum: 3
+          source: file_content_input
+          stage: pre_process
+          value: AAAAA
+          stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+          name: /opt/stonesoup/workspace/testData/unenticing_stunter/tito_regrets.txt
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/unenticing_stunter/tito_regrets.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 1
+          name: DOSCHER_WEDEKIND
+          stage: pre_process
+          stage_enum: 0
+        - source: file_content_input
+          name: /opt/stonesoup/workspace/testData/unenticing_stunter/tito_regrets.txt
+          value_type_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value: ABCD123
+          value_encoding: none
+          id: source
+          ordinal: 2
+          source_enum: 3
+    - inputs:
+        - value_encoding: none
+          name: DOSCHER_WEDEKIND
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          ordinal: 1
+          value_type_enum: 0
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/unenticing_stunter/tito_regrets.txt
+        - source: file_content_input
+          ordinal: 2
+          source_enum: 3
+          stage: pre_process
+          value: 1234564760ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+          stage_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/unenticing_stunter/tito_regrets.txt
+          value_type_enum: 0
+  exploits:
+    - inputs:
+        - name: DOSCHER_WEDEKIND
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/unenticing_stunter/tito_regrets.txt
+          value_encoding: none
+          stage_enum: 0
+          ordinal: 1
+          stage: pre_process
+          source_enum: 2
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/unenticing_stunter/tito_regrets.txt
+          value: A.A
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/unenticing_stunter/tito_regrets.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: DOSCHER_WEDEKIND
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/unenticing_stunter/tito_regrets.txt
+          value: AAAAAAAHHHHHHHHHHHH!
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+code_complexity_features:
+  - file_name: /tmp/tmp337igX_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmp337igX_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmp337igX_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmp337igX_ss_testcase/src-rose/src/backend/access/transam/xact.c
+    function_name: AtStart_Cache
+    line_number: 0
+    feature_group: control_flow
+    feature: unconditional_jump

@@ -1,0 +1,134 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - name: EXGORGITATION_TORBAY
+          stage_enum: 0
+          ordinal: 1
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: 10 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 hephalump
+          value_encoding: none
+          source: env_var_input
+          id: source
+          source_enum: 2
+        - source: script_input
+          stage_enum: 0
+          source_enum: 7
+          id: background
+          stage: pre_process
+          ordinal: 2
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+    - inputs:
+        - stage_enum: 0
+          source: env_var_input
+          id: source
+          ordinal: 1
+          value: 1 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 Sniffles_and_whiffles
+          value_type: USE_TEXT_DIRECTLY
+          name: EXGORGITATION_TORBAY
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 2
+          stage: pre_process
+        - id: background
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          stage_enum: 0
+          source: script_input
+          ordinal: 2
+          source_enum: 7
+          stage: pre_process
+    - inputs:
+        - name: EXGORGITATION_TORBAY
+          value_encoding: none
+          id: source
+          source: env_var_input
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: 5000000 /opt/stonesoup/workspace/testData/file1 /opt/stonesoup/workspace/testData/file2 sIlly_rabbit,_tricks_are_for_kids.
+          ordinal: 1
+          stage: pre_process
+          source_enum: 2
+          stage_enum: 0
+        - stage: pre_process
+          stage_enum: 0
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/file1
+          source: file_content_input
+          ordinal: 2
+        - stage: pre_process
+          stage_enum: 0
+          ordinal: 3
+          name: /opt/stonesoup/workspace/testData/file2
+          source_enum: 3
+          source: file_content_input
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: EXGORGITATION_TORBAY
+  exploits:
+    - inputs:
+        - source_enum: 2
+          stage_enum: 0
+          value_encoding: none
+          value: 1 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 May_the_force_be_with_you.
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source: env_var_input
+          value_type_enum: 0
+          id: source
+          name: EXGORGITATION_TORBAY
+          ordinal: 1
+        - ordinal: 2
+          stage_enum: 0
+          source: script_input
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          id: background
+          stage: pre_process
+          source_enum: 7
+    - inputs:
+        - name: EXGORGITATION_TORBAY
+          value: 72 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 What_is_the_answer_to_life,_the_universe,_and_everything?
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          source: env_var_input
+          ordinal: 1
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+        - ordinal: 2
+          stage: pre_process
+          source: script_input
+          id: background
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          stage_enum: 0
+          source_enum: 7
+  description: "This weakness expects a string in the form: '<qsize> <file1> <file2> <data>' where qsize is the size of the quick sort (used to delay execution on certain benign cases), file1 and file2 are files to be read (also used to delay execution) and data is a string containing no spaces.  The string is used for processing, but the contents of the string are unimportant. Two threads are created, and they fail to check for a mutex lock on a critical section, possibly causing a null pointer dereference.\n\n"
+code_complexity_features:
+  - function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmpfMWT9f_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+  - file_name: /tmp/tmpfMWT9f_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    feature_group: data_type
+    line_number: 0
+    feature: struct
+  - file_name: /tmp/tmpfMWT9f_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature: address_as_variable
+    feature_group: data_flow
+  - file_name: /tmp/tmpfMWT9f_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    feature_group: control_flow
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature: infinite_loop

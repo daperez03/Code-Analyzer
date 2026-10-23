@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 151810,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "Metadata\n - Base program: PostgreSQL\n - Source Taint: FILE_CONTENTS\n - Data Type: UNION\n - Data Flow: ADDRESS_AS_NONLINEAR_EXPRESSION\n - Control Flow: INDIRECTLY_RECURSIVE",
+        "state": "bad",
+        "application": "cpe:2.3:a:postgresql:postgresql:9.2.4:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "postgresql-v9.2.4"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C789A-PSQL-05-ST02-DT07-DF14-CF02-01.xml"
+          },
+          "length": 75800,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "7c59ee10792654d355b880efd0ad79cc42123489a540ddf9e84becb9384dd215"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/src/backend/utils/resowner/resowner.c"
+          },
+          "length": 36980,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "aa31df38b4bd646d034f3750d61e92c9bc011351d6d4f51a5b7fc81f69b3e001"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "789",
+              "name": "Memory Allocation with Excessive Size Value"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-789",
+          "message": {
+            "text": "Memory Allocation with Excessive Size Value."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/src/backend/utils/resowner/resowner.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 1133,
+                  "endLine": 1136
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "789",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

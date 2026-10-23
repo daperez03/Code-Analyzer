@@ -1,0 +1,94 @@
+code_complexity_features:
+  - function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmpIXeDQh_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+  - function_name: PMSignalShmemSize
+    feature_group: data_type
+    line_number: 0
+    feature: union
+    file_name: /tmp/tmpIXeDQh_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+  - file_name: /tmp/tmpIXeDQh_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - file_name: /tmp/tmpIXeDQh_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: mushes_olonetsish
+    line_number: 0
+    feature: sequence
+    feature_group: control_flow
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage_enum: 0
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          id: source
+          value_encoding: none
+          name: PLUMPNESSES_PARTAKES
+          source: env_var_input
+          stage: pre_process
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          name: PLUMPNESSES_PARTAKES
+          id: source
+          stage: pre_process
+          stage_enum: 0
+          value: This is probably going to overflow a buffer of some sort.  Let's run it anyway and see what happens.  I hope that everything turns out ok, because I would love to see what this looks like in all CAPS.  Converting ASCII characters to upper case is easy, you can either call a system function, or just add the standard difference between the start of the two character sets.  But, I am sure there is a reason that system functions exist for this sort of functionality.
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+  description: "Has a fixed heap buffer of size 64, allocated within a struct When input has a larger size, the heap buffer will be over read\n\n"
+  benigns:
+    - inputs:
+        - id: source
+          stage_enum: 0
+          ordinal: 1
+          name: PLUMPNESSES_PARTAKES
+          value: AAAAAAAAAAAAAAAAAAAAAAA
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - value_type_enum: 0
+          source_enum: 2
+          name: PLUMPNESSES_PARTAKES
+          value: Hello World!
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage_enum: 0
+          ordinal: 1
+          id: source
+          stage: pre_process
+          source: env_var_input
+    - inputs:
+        - stage: pre_process
+          value_encoding: none
+          source_enum: 2
+          source: env_var_input
+          id: source
+          name: PLUMPNESSES_PARTAKES
+          stage_enum: 0
+          ordinal: 1
+          value: Short is good
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: PLUMPNESSES_PARTAKES

@@ -1,0 +1,194 @@
+code_complexity_features:
+  - file_name: /tmp/tmpY29nWv_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpY29nWv_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpY29nWv_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - file_name: /tmp/tmpY29nWv_ss_testcase/src-rose/src/backend/utils/mmgr/portalmem.c
+    function_name: PortalDrop
+    line_number: 0
+    feature: indirectly_recursive
+    feature_group: control_flow
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          name: SHARRAG_LOCKERBIE
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/wiggery_almondlike/bro_genitourinary.txt
+          ordinal: 1
+          value_encoding: none
+        - ordinal: 2
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          value: 5 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 Another_test_case
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          source: file_content_input
+          id: source
+          name: /opt/stonesoup/workspace/testData/wiggery_almondlike/bro_genitourinary.txt
+        - name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          ordinal: 2
+          stage_enum: 0
+          source: script_input
+          stage: pre_process
+          source_enum: 7
+          id: background
+    - inputs:
+        - stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/wiggery_almondlike/bro_genitourinary.txt
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          ordinal: 1
+          value_type_enum: 0
+          value_encoding: none
+          source: env_var_input
+          name: SHARRAG_LOCKERBIE
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/wiggery_almondlike/bro_genitourinary.txt
+          value: 1 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 hello_world
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage: pre_process
+          ordinal: 2
+          id: background
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          stage_enum: 0
+          source: script_input
+          source_enum: 7
+    - inputs:
+        - source_enum: 2
+          ordinal: 1
+          stage_enum: 0
+          name: SHARRAG_LOCKERBIE
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/wiggery_almondlike/bro_genitourinary.txt
+          source: env_var_input
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+        - source_enum: 3
+          id: source
+          value_encoding: none
+          value: 6000000 /opt/stonesoup/workspace/testData/file1 /opt/stonesoup/workspace/testData/file2 1,_2,_skip_to_my_lou
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/wiggery_almondlike/bro_genitourinary.txt
+          stage_enum: 0
+          value_type_enum: 0
+          source: file_content_input
+        - name: /opt/stonesoup/workspace/testData/file1
+          ordinal: 2
+          source_enum: 3
+          stage_enum: 0
+          source: file_content_input
+          stage: pre_process
+        - source: file_content_input
+          stage_enum: 0
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/file2
+          ordinal: 3
+          source_enum: 3
+  description: "This weakness expects a string in the form: '<qsize> <file1> <file2> <data>' where qsize is the size of the quick sort (used to delay execution in certan benign cases), file1 and file2 are files used to dealy execution and data is a string containing no spaces. If the input starts with an A and is greater than 50 characters in length, and the qsize is large enough, incorrect syncronization (two separate locks) will lead to division by zero.  For the weakness to occur, the input must begin with an 'A', be greater than 50 characters in length, and file1 and file2 must be FIFO files controlled by runFifo.py fifo1 fifo2.\n\n"
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          value_type_enum: 0
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/wiggery_almondlike/bro_genitourinary.txt
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          name: SHARRAG_LOCKERBIE
+        - source: file_content_input
+          stage_enum: 0
+          value_type_enum: 0
+          source_enum: 3
+          stage: pre_process
+          id: source
+          value_encoding: none
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/wiggery_almondlike/bro_genitourinary.txt
+          value_type: USE_TEXT_DIRECTLY
+          value: 508 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 As_he_lay_watching_the_fireflies_over_head,_he_couldn't_shake_the_feeling_that_maybe_it_was_they_who_were_watching_him.
+        - source_enum: 7
+          source: script_input
+          id: background
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          stage_enum: 0
+          ordinal: 2
+          stage: pre_process
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/wiggery_almondlike/bro_genitourinary.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: SHARRAG_LOCKERBIE
+          value_encoding: none
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/wiggery_almondlike/bro_genitourinary.txt
+          value: 99 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 Answering_question_after_question,_our_unlikely_hero_was_finally_winning_the_scholastic_challenge_for_us.
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source_enum: 7
+          id: background
+          source: script_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 2
+  base_inputs:
+    - value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: SHARRAG_LOCKERBIE
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/wiggery_almondlike/bro_genitourinary.txt
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/wiggery_almondlike/bro_genitourinary.txt

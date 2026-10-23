@@ -1,0 +1,118 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - function_name: calc_bucket
+    line_number: 0
+    feature_group: control_flow
+    feature: callback
+    file_name: /tmp/tmp_ycJXu_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+  - file_name: /tmp/tmp_ycJXu_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    feature_group: source_taint
+    function_name: superarbiter_fraising
+    line_number: 0
+    feature: SHARED_MEMORY
+  - feature_group: data_flow
+    file_name: /tmp/tmp_ycJXu_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: curio_misreckoning
+    line_number: 0
+    feature: buffer_address_array_index
+  - feature_group: data_type
+    file_name: /tmp/tmp_ycJXu_ss_testcase/src-rose/src/backend/utils/hash/dynahash.c
+    function_name: curio_misreckoning
+    line_number: 0
+    feature: array
+io_pair:
+  exploits:
+    - inputs:
+        - value_encoding: none
+          value_type_enum: 0
+          stage_enum: 0
+          flags: 950
+          source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+          ordinal: 1
+          id: source
+          size: 29
+          value: "\"*\" -exec cat /etc/passwd \\;"
+          key: 6284
+          value_type: USE_TEXT_DIRECTLY
+        - name: /opt/stonesoup/workspace/testData/temp/file.txt
+          stage: pre_process
+          source: file_content_input
+          ordinal: 2
+          source_enum: 3
+          stage_enum: 0
+    - inputs:
+        - id: source
+          stage: pre_process
+          ordinal: 1
+          source: shared_memory_input
+          size: 29
+          value_type_enum: 0
+          source_enum: 6
+          stage_enum: 0
+          key: 6284
+          flags: 950
+          value: "\"*\" -exec netstat -an \\;"
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+        - source: file_content_input
+          source_enum: 3
+          ordinal: 2
+          stage_enum: 0
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/temp/file.txt
+  description: "Read a string from the input.  Perform a find path -iname input.If input contains arguments such as -exec with a \\; ending the command, a user can insert other commands instead of just find\n\n"
+  benigns:
+    - inputs:
+        - stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value: "\"file.*\""
+          ordinal: 1
+          stage_enum: 0
+          key: 6284
+          flags: 950
+          id: source
+          size: 29
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 6
+          source: shared_memory_input
+    - inputs:
+        - flags: 950
+          size: 29
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+          source: shared_memory_input
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          ordinal: 1
+          key: 6284
+          value_type_enum: 0
+          value_encoding: none
+          value: filename.txt
+    - inputs:
+        - stage_enum: 0
+          size: 29
+          stage: pre_process
+          flags: 950
+          source: shared_memory_input
+          source_enum: 6
+          id: source
+          key: 6284
+          ordinal: 1
+          value_encoding: none
+          value: "\"*\""
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 6284
+      size: 29
+      flags: 950

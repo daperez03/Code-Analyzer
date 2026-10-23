@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - feature_group: source_taint
+    feature: FILE_CONTENTS
+    file_name: /tmp/tmp_n8E4S_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+  - file_name: /tmp/tmp_n8E4S_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmp_n8E4S_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: PMSignalShmemSize
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - feature: sequence
+    file_name: /tmp/tmp_n8E4S_ss_testcase/src-rose/src/backend/storage/ipc/pmsignal.c
+    function_name: diaphysis_porismatic
+    line_number: 0
+    feature_group: control_flow
+io_pair:
+  exploits:
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/instanding_corpuscularian/spolium_buckshee.txt
+          stage_enum: 0
+          source_enum: 2
+          value_type_enum: 0
+          source: env_var_input
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          ordinal: 1
+          name: THROATBOLL_BUSHWAH
+        - source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/instanding_corpuscularian/spolium_buckshee.txt
+          value: 2 a
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: file_content_input
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/instanding_corpuscularian/spolium_buckshee.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: THROATBOLL_BUSHWAH
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/instanding_corpuscularian/spolium_buckshee.txt
+          value: 10 a b c
+  description: "Read a space-delimited string from the input.  The first element in the string is the number of elements following it.  Then read in the following elements, and output them to stderr.  If there are fewer elements than expected, a seg fault occurs.\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/instanding_corpuscularian/spolium_buckshee.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: THROATBOLL_BUSHWAH
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/instanding_corpuscularian/spolium_buckshee.txt
+  benigns:
+    - inputs:
+        - stage: pre_process
+          name: THROATBOLL_BUSHWAH
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_type_enum: 0
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/instanding_corpuscularian/spolium_buckshee.txt
+          value_encoding: none
+        - value_type_enum: 0
+          source: file_content_input
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/instanding_corpuscularian/spolium_buckshee.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source_enum: 3
+          id: source
+          value: 1 foo
+          stage_enum: 0
+          ordinal: 2
+    - inputs:
+        - value_type_enum: 0
+          ordinal: 1
+          name: THROATBOLL_BUSHWAH
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/instanding_corpuscularian/spolium_buckshee.txt
+          source: env_var_input
+          value_encoding: none
+          stage: pre_process
+          source_enum: 2
+        - stage: pre_process
+          value: 2 a b
+          ordinal: 2
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+          name: /opt/stonesoup/workspace/testData/instanding_corpuscularian/spolium_buckshee.txt
+          source_enum: 3
+          stage_enum: 0
+          source: file_content_input
+    - inputs:
+        - value_encoding: none
+          source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/instanding_corpuscularian/spolium_buckshee.txt
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: THROATBOLL_BUSHWAH
+        - source: file_content_input
+          value_encoding: none
+          ordinal: 2
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/instanding_corpuscularian/spolium_buckshee.txt
+          stage: pre_process
+          id: source
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: 3 alpha bravo charlie
