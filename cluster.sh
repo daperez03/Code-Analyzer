@@ -12,5 +12,4 @@
 
 module load miniconda3 cuda11.4
 conda activate python3.9 
-python -m pip install -r requirements.txt
 srun python src/main.py
