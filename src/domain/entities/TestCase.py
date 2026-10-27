@@ -1,12 +1,15 @@
 from domain.entities import File, Weakness
 from collections import defaultdict
+from pydantic import BaseModel
 from typing import List, Dict
 
-class TestCase:
+class TestCase(BaseModel):
+    name: str
+    weaknesses: Dict[File, List[Weakness]] = defaultdict(list)
+    files: List[File] = []
+
     def __init__(self, name: str):
         self.name = name
-        self.weaknesses: Dict[File, List[Weakness]] = defaultdict(list)
-        self.files: List[File] = []
 
     def __str__(self):
         test_case_str = f"Test Case: {self.name}\n"

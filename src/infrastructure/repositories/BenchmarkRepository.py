@@ -148,7 +148,7 @@ class BenchmarkRepository(IBenchmarkRepository):
             result_path = os.path.join(save_path, f"{id}.json")
             os.makedirs(save_path, exist_ok=True)
             with open(result_path, "w") as f:
-                dataset_json = json.dumps(dataset.to_dict(), indent=2)
+                dataset_json = dataset.model_dump_json(indent=2)
                 f.write(dataset_json)
                 self.logger.info(
                     f"Saved results for run {run+1}/{runs} to {result_path}")

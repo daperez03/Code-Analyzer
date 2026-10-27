@@ -1,11 +1,13 @@
 from domain.entities import TestCase
+from pydantic import BaseModel
 from typing import List
 
-class Dataset:
+class Dataset(BaseModel):
+    name: str
+    test_cases: List[TestCase] = []
+
     def __init__(self, name: str):
         self.name = name
-        self.test_cases: List[TestCase] = []
-
 
     def __str__(self):
         dataset_str = f"Dataset: {self.name}\n"

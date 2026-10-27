@@ -1,8 +1,14 @@
 from domain.constants import EVALUATOR_SUPPORTED_EXTENSIONS
 from domain.entities.Weakness import Weakness
+from pydantic import BaseModel
 from typing import List
 
-class File:
+
+class File(BaseModel):
+    file_path: str
+    content: str
+    weaknesses: List[Weakness] = []
+
     def __init__(self, file_path: str, content: str):
         extension = file_path.split(".")[-1]
         if extension not in EVALUATOR_SUPPORTED_EXTENSIONS:

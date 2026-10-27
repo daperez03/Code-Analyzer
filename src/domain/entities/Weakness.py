@@ -1,6 +1,14 @@
 from domain.constants import EVALUATOR_TYPES, EVALUATOR_CWES, EVALUATOR_SEVERITIES
+from pydantic import BaseModel
 
-class Weakness:
+class Weakness(BaseModel):
+    type: str
+    weakness: str
+    description: str
+    severity: str
+    code: str
+    justification: str
+
     def __init__(
         self, 
         type: str, 
