@@ -125,7 +125,7 @@ class BenchmarkRepository(IBenchmarkRepository):
                 '%(asctime)s - %(levelname)s - %(name)s - %(message)s'))
             root_logger.addHandler(handler)
             self.logger.info(f"Starting run {id}")
-            dataset = datasets[run]
+            dataset: Dataset = datasets[run]
             self.logger.info(f"Selected dataset is {dataset.name}")
             model = models[run]
             self.logger.info(f"Selected model is {model}")
@@ -148,7 +148,7 @@ class BenchmarkRepository(IBenchmarkRepository):
             result_path = os.path.join(save_path, f"{id}.json")
             os.makedirs(save_path, exist_ok=True)
             with open(result_path, "w") as f:
-                dataset_json = json.dumps(dataset, indent=2)
+                dataset_json = json.dumps(dataset.to_dict(), indent=2)
                 f.write(dataset_json)
                 self.logger.info(
                     f"Saved results for run {run+1}/{runs} to {result_path}")
