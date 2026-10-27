@@ -27,13 +27,14 @@ class Weakness(BaseModel):
             raise ValueError("Code cannot be empty.")
         if not justification:
             raise ValueError("Justification cannot be empty.")
-        self.type = type
-        self.weakness = weakness
-        self.description = description
-        self.severity = severity
-        self.code = code
-        self.justification = justification
-
+        super().__init__(
+            type=type, 
+            weakness=weakness, 
+            description=description, 
+            severity=severity, 
+            code=code, 
+            justification=justification)
+        
     def __str__(self):
         weakness_str = f"Type: {self.type}\n"
         weakness_str += f"Weakness: {self.weakness}\n"

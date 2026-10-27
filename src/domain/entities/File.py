@@ -6,6 +6,7 @@ from typing import List
 
 class File(BaseModel):
     file_path: str
+    extension: str
     content: str
     weaknesses: List[Weakness] = []
 
@@ -13,10 +14,11 @@ class File(BaseModel):
         extension = file_path.split(".")[-1]
         if extension not in EVALUATOR_SUPPORTED_EXTENSIONS:
             raise ValueError(f"Extension {extension} is not supported.")
-        self.file_path = file_path
-        self.content = content
-        self.weaknesses: List[Weakness] = []
-
+        super().__init__(
+            file_path=file_path, 
+            extension=extension, 
+            content=content)
+        
     def __eq__(self, other):
         if not isinstance(other, File):
             return NotImplemented

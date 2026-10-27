@@ -8,9 +8,6 @@ class TestCase(BaseModel):
     weaknesses: Dict[File, List[Weakness]] = defaultdict(list)
     files: List[File] = []
 
-    def __init__(self, name: str):
-        self.name = name
-
     def __str__(self):
         test_case_str = f"Test Case: {self.name}\n"
         test_case_str += f"Files:\n"
