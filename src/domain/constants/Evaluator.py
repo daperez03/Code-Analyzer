@@ -29,7 +29,14 @@ with open("resources/prompts/user_prompt.md", "r", encoding="utf-8") as file:
 with open("resources/prompts/system_prompt.md", "r", encoding="utf-8") as file:
   EVALUATOR_SYSTEM_PROMPT = file.read()
 
-EVALUATOR_SUPPORTED_EXTENSIONS = [
-  "py", "cs", "c", "h", "cpp", "hpp", "cc", "hh", "java", "js",
-  "ts", "go", "rs", "kt", "kts", "swift", "php", "rb"]
-
+EVALUATOR_SUPPORTED_EXTENSIONS = {
+  "py": "python",
+  "php": "php",
+  "c": "c",
+  "h": "c",
+  "cpp": "cpp",
+  "hpp": "cpp",
+  "cc": "cpp",
+  "cxx": "cpp",
+  "java": "java",
+}

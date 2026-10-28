@@ -19,8 +19,8 @@ class Weakness(BaseModel):
         justification: str):
         if type not in EVALUATOR_TYPES:
             raise ValueError(f"Type {type} is not valid.")
-        if weakness not in EVALUATOR_CWES:
-            raise ValueError(f"Weakness {weakness} is not valid.")
+        # if weakness not in EVALUATOR_CWES:
+        #     raise ValueError(f"Weakness {weakness} is not valid.")
         if severity not in EVALUATOR_SEVERITIES:
             raise ValueError(f"Severity {severity} is not valid.")
         if not code:

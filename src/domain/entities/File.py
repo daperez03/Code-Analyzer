@@ -11,9 +11,9 @@ class File(BaseModel):
     weaknesses: List[Weakness] = []
 
     def __init__(self, file_path: str, content: str):
-        extension = file_path.split(".")[-1]
-        if extension not in EVALUATOR_SUPPORTED_EXTENSIONS:
-            raise ValueError(f"Extension {extension} is not supported.")
+        extension = file_path.split(".")[-1].lower()
+        # if extension not in EVALUATOR_SUPPORTED_EXTENSIONS:
+        #     raise ValueError(f"Extension {extension} is not supported.")
         super().__init__(
             file_path=file_path, 
             extension=extension, 
