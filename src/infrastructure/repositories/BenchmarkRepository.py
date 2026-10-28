@@ -4,12 +4,14 @@ from infrastructure.repositories import EvaluatorRepository
 from domain.entities import TestCase, Dataset, File, Weakness
 from domain.constants import EVALUATOR_SUPPORTED_EXTENSIONS, EVALUATOR_CWES
 from domain.constants.LLM import LOCAL_LLM_SUPPORTED_MODELS, GOOGLE_LLM_SUPPORTED_MODELS
+from tree_sitter_language_pack import get_parser
 from collections import defaultdict
 from typing import List, Dict
 from tqdm import tqdm
 import logging
 import json
 import copy
+import re
 import os
 
 class BenchmarkRepository(IBenchmarkRepository):
@@ -41,6 +43,37 @@ class BenchmarkRepository(IBenchmarkRepository):
             parameters=parameters,
             llm_repository=llm_repository)
 
+    def _remove_comments(self, file: File) -> File:
+        language = EVALUATOR_SUPPORTED_EXTENSIONS.get(file.extension)
+
+        if language is None:
+            raise ValueError(f"Unsupported extension: {file.extension}")
+
+        parser = get_parser(language)
+        source_bytes = file.content.encode("utf-8")
+        tree = parser.parse(source_bytes)
+
+        ranges = []
+
+        def visit(node):
+            if node.type in {"comment", "line_comment", "block_comment"}:
+                ranges.append((node.start_byte, node.end_byte))
+
+            for child in node.children:
+                visit(child)
+
+        visit(tree.root_node)
+
+        result = bytearray(source_bytes)
+
+        for start, end in ranges:
+            for i in range(start, end):
+                if result[i] not in (10, 13):  # Preserve LF and CR
+                    result[i] = 32
+
+        file.content = result.decode("utf-8")
+        return file
+
     def _read_test_case(self, test_case_metadata: dict, dataset_name: str) -> TestCase:
         test_case = TestCase(name = test_case_metadata["identifier"])
         weaknesses: Dict[File, List[Weakness]] = defaultdict(list)
@@ -65,6 +98,8 @@ class BenchmarkRepository(IBenchmarkRepository):
                     with open(file_path, "r") as f:
                         content = f.read()
                     file = File(file_path=file_path,content=content)
+                    file = self._remove_comments(file)
+                    content = file.content
 
                     code = (content.splitlines(keepends=True)[start_line:end_line])
                     if not code: continue
