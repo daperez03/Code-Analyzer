@@ -17,11 +17,13 @@ class Weakness(BaseModel):
         severity: str, 
         code: str, 
         justification: str):
-        if type not in EVALUATOR_TYPES:
+        selected_type = next((t for t in EVALUATOR_TYPES if t in type.capitalize()), None)
+        selected_severity = next((s for s in EVALUATOR_SEVERITIES if s in severity.capitalize()), None)
+        if not selected_type:
             raise ValueError(f"Type {type} is not valid.")
         # if weakness not in EVALUATOR_CWES:
         #     raise ValueError(f"Weakness {weakness} is not valid.")
-        if severity not in EVALUATOR_SEVERITIES:
+        if not selected_severity:
             raise ValueError(f"Severity {severity} is not valid.")
         if not code:
             raise ValueError("Code cannot be empty.")

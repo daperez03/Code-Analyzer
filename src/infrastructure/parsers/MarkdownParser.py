@@ -17,8 +17,7 @@ class MarkdownParser:
         if not markdown or not markdown.strip():
             return []
 
-        if re.search(r"^# Weaknesses\s*\[\s*\]\s*$",
-                     markdown.strip(), re.DOTALL):
+        if re.search(r"^# Weaknesses\s*\[\s*\]\s*$", markdown.strip(), re.DOTALL):
             return []
 
         # Find each weakness section identified by its CWE ID.

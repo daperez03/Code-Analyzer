@@ -24,28 +24,34 @@ class EvaluatorRepository(IEvaluatorRepository):
 
     def evaluate(self, file: File) -> File:
         self.logger.info(f"Evaluating file {file.file_path}")
-        user_prompt = self.user_prompt.format(code=file.content)
-        response = self.llm_repository.create_message(
-            model=self.model,
-            user_prompt=user_prompt,
-            system_prompt=self.system_prompt,
-            parameters=self.parameters,
-        )
-        weaknesses = self.markdown_parser.parse(response)
-        for weakness_dict in weaknesses:
-            weakness = Weakness(
-                type=weakness_dict.get("type"),
-                weakness=weakness_dict.get("weakness"),
-                description=weakness_dict.get("description"),
-                severity=weakness_dict.get("severity"),
-                code=weakness_dict.get("code"),
-                justification=weakness_dict.get("justification")
-            )
-            file.weaknesses.append(weakness)
-            self.logger.info(f"{weakness.weakness} weakness found")
-            self.logger.info(f"Weakness type is {weakness.type}")
-            self.logger.info(f"Weakness severity is {weakness.severity}")
-            self.logger.info(f"Weakness description is {weakness.description}")
-            self.logger.info(f"Weakness justification is {weakness.justification}")
-            self.logger.info(f"The weakness is in the following code: {weakness.code}")
-        return file
+        for _ in range(5):
+            try:
+                user_prompt = self.user_prompt.format(code=file.content)
+                response = self.llm_repository.create_message(
+                    model=self.model,
+                    user_prompt=user_prompt,
+                    system_prompt=self.system_prompt,
+                    parameters=self.parameters,
+                    )
+                weaknesses = self.markdown_parser.parse(response)
+                for weakness_dict in weaknesses:
+                    weakness = Weakness(
+                        type=weakness_dict.get("type"),
+                        weakness=weakness_dict.get("weakness"),
+                        description=weakness_dict.get("description"),
+                        severity=weakness_dict.get("severity"),
+                        code=weakness_dict.get("code"),
+                        justification=weakness_dict.get("justification")
+                    )
+                    file.weaknesses.append(weakness)
+                    self.logger.info(f"{weakness.weakness} weakness found")
+                    self.logger.info(f"Weakness type is {weakness.type}")
+                    self.logger.info(f"Weakness severity is {weakness.severity}")
+                    self.logger.info(f"Weakness description is {weakness.description}")
+                    self.logger.info(f"Weakness justification is {weakness.justification}")
+                    self.logger.info(f"The weakness is in the following code: {weakness.code}")
+                    return file
+            except Exception as e:
+                self.logger.error(f"Error evaluating file {file.file_path}: {e}")
+                self.logger.error("Trying to evaluate the file again...")
+        raise Exception(f"Failed to evaluate file {file.file_path} after 5 attempts")
