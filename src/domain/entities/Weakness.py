@@ -17,8 +17,10 @@ class Weakness(BaseModel):
         severity: str, 
         code: str, 
         justification: str):
-        selected_type = next((t for t in EVALUATOR_TYPES if t.lower() in type.lower), None)
-        selected_severity = next((s for s in EVALUATOR_SEVERITIES if s.lower() in severity.lower), None)
+        selected_type = next((t for t in EVALUATOR_TYPES 
+            if t.lower() in type.lower()), None)
+        selected_severity = next((s for s in EVALUATOR_SEVERITIES
+            if s.lower() in severity.lower()), None)
         if not selected_type:
             raise ValueError(f"Type {type} is not valid.")
         # if weakness not in EVALUATOR_CWES:
