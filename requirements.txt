@@ -5,3 +5,4 @@ python-dotenv
 torch
 tqdm
 transformers
+tree-sitter-language-pack
