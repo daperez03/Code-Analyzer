@@ -7,3 +7,6 @@
 [submodule "models/Qwen3-0.6B"]
 	path = models/Qwen3-0.6B
 	url = https://huggingface.co/Qwen/Qwen3-0.6B
+[submodule "models/Qwen3-Coder-Next"]
+	path = models/Qwen3-Coder-Next
+	url = https://huggingface.co/Qwen/Qwen3-Coder-Next
