@@ -10,3 +10,6 @@
 [submodule "models/Qwen3-Coder-Next"]
 	path = models/Qwen3-Coder-Next
 	url = https://huggingface.co/Qwen/Qwen3-Coder-Next
+[submodule "models/Foundation-Sec-1.1-8B-Instruct"]
+	path = models/Foundation-Sec-1.1-8B-Instruct
+	url = https://huggingface.co/fdtn-ai/Foundation-Sec-1.1-8B-Instruct
