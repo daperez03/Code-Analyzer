@@ -6,9 +6,9 @@
 #SBATCH --output=code-analyzer.out
 #
 #SBATCH --nodes=1
-#SBATCH --mem=45gb
-#SBATCH --partition=gpu-wide
-#SBATCH --gres=gpu:1
+#SBATCH --mem=100gb
+#SBATCH --partition=gpu-extended
+#SBATCH --gres=gpu:2
 
 module load miniconda3 cuda11.4
 conda activate python3.14.4
