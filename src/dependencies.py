@@ -36,6 +36,7 @@ evaluator_repository: IEvaluatorRepository = EvaluatorRepository(
 evaluator_use_case: IEvaluatorUseCase = EvaluatorUseCase(
     evaluator_repository=evaluator_repository)
 
-benchmark_repository: IBenchmarkRepository = BenchmarkRepository()
+benchmark_repository: IBenchmarkRepository = BenchmarkRepository(
+    code_service=code_service)
 benchmark_use_case: IBenchmarkUseCase = BenchmarkUseCase(
     benchmark_repository=benchmark_repository)
