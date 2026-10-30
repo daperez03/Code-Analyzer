@@ -12,7 +12,7 @@ class TestCase(BaseModel):
         test_case_str = f"Test Case: {self.name}\n"
         test_case_str += f"Files:\n"
         for file in self.files:
-            test_case_str += f"File Path: {file.file_path}\n"
+            test_case_str += f"Path: {file.path}\n"
             test_case_str += f"Weaknesses:\n"
             for weakness in self.weaknesses[file]:
                 test_case_str += f"{str(weakness)}\n"
@@ -24,4 +24,4 @@ class TestCase(BaseModel):
             self.weaknesses[file].extend(weaknesses)
         else:
             raise ValueError(
-                f"File {file.file_path} already exists in the test case.")
+                f"File {file.path} already exists in the test case.")

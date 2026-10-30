@@ -2,9 +2,9 @@ from infrastructure.repositories import IBenchmarkRepository, IEvaluatorReposito
 from infrastructure.repositories import LocalLLMRepository, GoogleLLMRepository
 from infrastructure.repositories import EvaluatorRepository
 from domain.entities import TestCase, Dataset, File, Weakness
-from domain.constants import EVALUATOR_SUPPORTED_EXTENSIONS, EVALUATOR_CWES
-from domain.constants.LLM import LOCAL_LLM_SUPPORTED_MODELS, GOOGLE_LLM_SUPPORTED_MODELS
-from tree_sitter_language_pack import get_parser
+from domain.services import ICodeService
+from domain.constants import EVALUATOR_CWES, LOCAL_LLM_SUPPORTED_MODELS
+from domain.constants import GOOGLE_LLM_SUPPORTED_MODELS
 from collections import defaultdict
 from typing import List, Dict
 from tqdm import tqdm
@@ -15,9 +15,10 @@ import re
 import os
 
 class BenchmarkRepository(IBenchmarkRepository):
-    def __init__(self):
+    def __init__(self, code_service: ICodeService):
         self.llm_repositories = {}
         self.logger = logging.getLogger(__name__)
+        self.code_service = code_service
 
     def _get_evaluator(
         self, 
@@ -41,38 +42,8 @@ class BenchmarkRepository(IBenchmarkRepository):
             user_prompt=user_prompt,
             system_prompt=system_prompt,
             parameters=parameters,
-            llm_repository=llm_repository)
-
-    def _remove_comments(self, file: File) -> File:
-        language = EVALUATOR_SUPPORTED_EXTENSIONS.get(file.extension)
-
-        if language is None:
-            raise ValueError(f"Unsupported extension: {file.extension}")
-
-        parser = get_parser(language)
-        source_bytes = file.content.encode("utf-8")
-        tree = parser.parse(source_bytes)
-
-        ranges = []
-
-        def visit(node):
-            if node.type in {"comment", "line_comment", "block_comment"}:
-                ranges.append((node.start_byte, node.end_byte))
-
-            for child in node.children:
-                visit(child)
-
-        visit(tree.root_node)
-
-        result = bytearray(source_bytes)
-
-        for start, end in ranges:
-            for i in range(start, end):
-                if result[i] not in (10, 13):  # Preserve LF and CR
-                    result[i] = 32
-
-        file.content = result.decode("utf-8")
-        return file
+            llm_repository=llm_repository,
+            code_service=self.code_service)
 
     def _read_test_case(self, test_case_metadata: dict, dataset_name: str) -> TestCase:
         test_case = TestCase(name = test_case_metadata["identifier"])
@@ -84,7 +55,7 @@ class BenchmarkRepository(IBenchmarkRepository):
                 description = result["message"]["text"]
                 if not weakness_id in EVALUATOR_CWES: continue
                 for location in result["locations"]:
-                    file_path = os.path.join(
+                    path = os.path.join(
                         "datasets", 
                         dataset_name,
                         location["physicalLocation"]["artifactLocation"]["uri"]
@@ -95,12 +66,11 @@ class BenchmarkRepository(IBenchmarkRepository):
                         end_line = location["physicalLocation"]["region"]["endLine"] + 1
 
                     content = ""
-                    with open(file_path, "r") as f:
+                    with open(path, "r") as f:
                         content = f.read()
-                    file = File(file_path=file_path,content=content)
-                    file = self._remove_comments(file)
+                    file = File(path=path,content=content)
+                    file = self.code_service.remove_comments(file)
                     content = file.content
-
                     code = (content.splitlines(keepends=True)[start_line:end_line])
                     if not code: continue
                     code = "".join(code)
@@ -177,7 +147,7 @@ class BenchmarkRepository(IBenchmarkRepository):
             for test_case in dataset.test_cases:
                 self.logger.info(f"Executing test case {test_case.name}")
                 for file in test_case.files:
-                    self.logger.info(f"Executing file {file.file_path}")
+                    self.logger.info(f"Executing file {file.path}")
                     progress_bar.update(1)
                     evaluator.evaluate(file)
             result_path = os.path.join(save_path, f"{id}.json")
