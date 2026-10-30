@@ -54,42 +54,69 @@ class CodeService(ICodeService):
             raise ValueError(f"Could not parse file: {file.path}")
 
         root = tree.root_node
-
         function_types = TREE_SITTER_FUNCTION_TYPES.get(language, set())
         class_types = TREE_SITTER_CLASS_TYPES.get(language, set())
 
-        imports = []
-        globals_ = []
         units = []
 
         def get_text(node):
             return code[node.start_byte:node.end_byte].decode("utf-8")
 
         for node in root.named_children:
-
-            if node.type in TREE_SITTER_IMPORT_TYPES:
-                imports.append(get_text(node))
-
-            elif node.type in function_types or node.type in class_types:
+            if node.type in function_types or node.type in class_types:
                 units.append(node)
-
-            elif node.type in TREE_SITTER_GLOBAL_TYPES:
-                globals_.append(get_text(node))
-
-        imports = "\n".join(imports)
-        imports = re.sub(r"\n+", "\n", imports)
-        global_variables = "\n".join(globals_)
-        global_variables += re.sub(r"\n+", "\n", global_variables)
-        context = f"{imports}\n\n{global_variables}"
 
         results = []
 
         for node in units:
             unit = get_text(node)
-
-            if context:
-                results.append(f"{context}\n\n{unit}")
-            else:
-                results.append(unit)
-
+            results.append(unit)
         return results
+
+    def extract_imports(self, file: File) -> list[str]:
+        language = TREE_SITTER_SUPPORTED_EXTENSIONS.get(file.extension)
+        if language is None:
+            raise ValueError(f"Unsupported extension: {file.extension}")
+
+        code = file.content.encode("utf-8")
+        parser = get_parser(language)
+        tree = parser.parse(code)
+
+        if tree is None:
+            raise ValueError(f"Could not parse file: {file.path}")
+
+        root = tree.root_node
+        imports = []
+
+        def get_text(node):
+            return code[node.start_byte:node.end_byte].decode("utf-8")
+
+        for node in root.named_children:
+            if node.type in TREE_SITTER_IMPORT_TYPES:
+                imports.append(get_text(node))
+
+        return imports
+
+    def extract_global_variables(self, file: File) -> list[str]:
+        language = TREE_SITTER_SUPPORTED_EXTENSIONS.get(file.extension)
+        if language is None:
+            raise ValueError(f"Unsupported extension: {file.extension}")
+
+        code = file.content.encode("utf-8")
+        parser = get_parser(language)
+        tree = parser.parse(code)
+
+        if tree is None:
+            raise ValueError(f"Could not parse file: {file.path}")
+
+        root = tree.root_node
+        globals_ = []
+
+        def get_text(node):
+            return code[node.start_byte:node.end_byte].decode("utf-8")
+
+        for node in root.named_children:
+            if node.type in TREE_SITTER_GLOBAL_TYPES:
+                globals_.append(get_text(node))
+
+        return globals_
