@@ -6,7 +6,7 @@
 #SBATCH --output=code-analyzer.out
 #
 #SBATCH --nodes=1
-#SBATCH --mem=100gb
+#SBATCH --mem=50gb
 #SBATCH --partition=gpu-extended
 #SBATCH --gres=gpu:2
 
